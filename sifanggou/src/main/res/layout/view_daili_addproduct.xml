@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl_daili_add"
+            android:layout_width="match_parent"
+            android:layout_height="154dp">
+
+            <ImageView
+                android:id="@+id/iv_daili_camera_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/icon_camera_add"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="添加商品照片"
+                android:textSize="19dp"
+                android:textColor="#555555"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/iv_daili_camera_icon"
+                android:layout_marginTop="13dp"/>
+
+        </RelativeLayout>
+
+        <!-- 图片展示  -->
+        <RelativeLayout
+            android:id="@+id/rl_daili_pic"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="375dp">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager_daili"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/tv_daili_page"
+                android:layout_width="45dp"
+                android:layout_height="15dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="15dp"
+                android:background="@color/black"
+                android:textSize="11sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="1/5"/>
+
+            <ImageView
+                android:id="@+id/iv_daili_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:src="@drawable/icon_camera"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl_hetong_add"
+            android:layout_width="match_parent"
+            android:layout_height="154dp">
+
+            <ImageView
+                android:id="@+id/iv_hetong_camera_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/icon_camera_add"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="上传代理合同"
+                android:textSize="19dp"
+                android:textColor="#555555"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/iv_hetong_camera_icon"
+                android:layout_marginTop="13dp"/>
+
+        </RelativeLayout>
+
+        <!-- 图片展示  -->
+        <RelativeLayout
+            android:id="@+id/rl_hetong_pic"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="375dp">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager_hetong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:id="@+id/tv_h_page"
+                android:layout_width="45dp"
+                android:layout_height="15dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="15dp"
+                android:background="@color/black"
+                android:textSize="11sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="1/5"/>
+
+            <ImageView
+                android:id="@+id/iv_hetong_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:src="@drawable/icon_camera"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/edt_dec_daili"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:background="@color/white"
+        android:hint="请填写商品描述"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:textColorHint="#DDDDDD"
+        android:gravity="left|top"
+        android:padding="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginTop="13dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:textSize="19sp"
+                android:textColor="#222222"
+                android:gravity="center"
+                android:text="商品名称"/>
+
+            <EditText
+                android:id="@+id/edt_name_daili"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:hint="请填写商品名称"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="#DDDDDD"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E2E4E5"
+            android:layout_marginLeft="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:textSize="19sp"
+                android:textColor="#222222"
+                android:gravity="center"
+                android:text="商品品牌"/>
+
+            <EditText
+                android:id="@+id/edt_pinpai_daili"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:hint="请填写商品品牌"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="#DDDDDD"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E2E4E5"
+            android:layout_marginLeft="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:textSize="19sp"
+                android:textColor="#222222"
+                android:gravity="center"
+                android:text="同级商家调货价"/>
+
+            <EditText
+                android:id="@+id/edt_price_tongji_daili"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:hint="请填写商品价格"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="#DDDDDD"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:inputType="numberDecimal"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E2E4E5"
+            android:layout_marginLeft="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:textSize="19sp"
+                android:textColor="#222222"
+                android:gravity="center"
+                android:text="下级商家批发价"/>
+
+            <EditText
+                android:id="@+id/edt_price_xiaji_daili"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:hint="请填写商品价格"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="#DDDDDD"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:inputType="numberDecimal"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E2E4E5"
+            android:layout_marginLeft="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:textSize="19sp"
+                android:textColor="#222222"
+                android:gravity="center"
+                android:text="库存"/>
+
+            <EditText
+                android:id="@+id/edt_kucun_daili"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:hint="请填写库存"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="#DDDDDD"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:inputType="numberDecimal"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E2E4E5"
+            android:layout_marginLeft="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:textSize="19sp"
+                android:textColor="#222222"
+                android:gravity="center"
+                android:text="产地"/>
+
+            <EditText
+                android:id="@+id/edt_chandi_daili"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:hint="请填写产地"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="#DDDDDD"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E2E4E5"
+            android:layout_marginLeft="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:textSize="19sp"
+                android:textColor="#222222"
+                android:gravity="center"
+                android:text="规格"/>
+
+            <EditText
+                android:id="@+id/edt_guige_daili"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:hint="请填写规格"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="#DDDDDD"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E2E4E5"
+            android:layout_marginLeft="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:textSize="19sp"
+                android:textColor="#222222"
+                android:gravity="center"
+                android:text="质量等级"/>
+
+            <EditText
+                android:id="@+id/edt_dengji_daili"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@null"
+                android:hint="请填写质量等级"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="#DDDDDD"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E2E4E5"
+            android:layout_marginLeft="15dp"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_fenlei_daili"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <TextView
+                android:id="@+id/tv_fenlei_title_daili"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textSize="19sp"
+                android:textColor="#222222"
+                android:gravity="center"
+                android:text="分类"/>
+
+            <ImageView
+                android:id="@+id/iv_select_fenlei_daili"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_select"/>
+
+            <EditText
+                android:id="@+id/edt_fenlei_daili"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/iv_select_fenlei_daili"
+                android:layout_toRightOf="@+id/tv_fenlei_title_daili"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:hint="选择分类"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="#DDDDDD"
+                android:background="@null" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E2E4E5"
+            android:layout_marginLeft="15dp"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_jiebie_daili"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <TextView
+                android:id="@+id/tv_jibie_title_daili"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textSize="19sp"
+                android:textColor="#222222"
+                android:gravity="center"
+                android:text="代理级别"/>
+
+            <ImageView
+                android:id="@+id/iv_select_market_daili"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_select"/>
+
+            <EditText
+                android:id="@+id/edt_jiebie_daili"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/iv_select_market_daili"
+                android:layout_toRightOf="@+id/tv_jibie_title_daili"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:hint="选择代理级别"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textColorHint="#DDDDDD"
+                android:background="@null" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"></View>
+</LinearLayout>

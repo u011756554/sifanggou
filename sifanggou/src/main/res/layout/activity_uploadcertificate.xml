@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_main">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        
+        <RelativeLayout
+            android:id="@+id/rl_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_delete"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/rl_login"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="登录"
+                android:singleLine="true"
+                android:textSize="16sp"
+                android:textColor="@color/color_text_gray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+        </RelativeLayout>        
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_market"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        
+        <ImageView
+            android:id="@+id/iv_select_market"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_select"/>
+        
+        <EditText
+            android:id="@+id/edt_market"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/iv_select_market"
+            android:hint="市场选择"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textColorHint="@color/color_text_hint"
+            android:background="@null"
+			android:clickable="false"/>
+        
+    </RelativeLayout>  
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_divider"/> 
+        
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        
+        <EditText
+            android:id="@+id/edt_market_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:hint="店铺名称"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textColorHint="@color/color_text_hint"
+            android:background="@null"/>
+    </RelativeLayout> 
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_divider"/> 
+        
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        
+	    <RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_weight="1">
+	        <EditText
+	            android:id="@+id/edt_menpaihao"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_centerVertical="true"
+	            android:hint="门牌号"
+	            android:textColor="@color/black"
+	            android:textSize="16sp"
+	            android:textColorHint="@color/color_text_hint"
+	            android:background="@null"/>
+	        
+		    <View
+		        android:layout_width="match_parent"
+		        android:layout_height="1dp"
+		        android:background="@color/color_divider"
+		        android:layout_alignParentBottom="true"/> 	        
+	    </RelativeLayout> 
+	    
+	    <View
+	        android:layout_width="10dp"
+	        android:layout_height="match_parent"/>
+	    
+	    <RelativeLayout
+			android:id="@+id/rl_dali"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_weight="1">
+	        
+	        <ImageView
+	            android:id="@+id/iv_select_daili"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:layout_centerVertical="true"
+	            android:src="@drawable/icon_select"/>	
+	                    
+	        <EditText
+	            android:id="@+id/edt_daili"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_centerVertical="true"
+	            android:layout_toLeftOf="@id/iv_select_daili"
+	            android:hint="代理级别"
+	            android:textColor="@color/black"
+	            android:textSize="16sp"
+	            android:textColorHint="@color/color_text_hint"
+	            android:background="@null"
+				android:clickable="false"/>
+	        
+		    <View
+		        android:layout_width="match_parent"
+		        android:layout_height="1dp"
+		        android:background="@color/color_divider"
+		        android:layout_alignParentBottom="true"/>	        
+	    </RelativeLayout> 	    
+    </LinearLayout> 
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp">
+	    
+	    <RelativeLayout
+	        android:id="@+id/rl_yingyezhizhao"
+	        android:layout_width="match_parent"
+	        android:layout_height="93dp"
+	        android:background="@color/white"
+	        android:layout_weight="1">
+		    
+	        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="必填"
+	            android:textSize="11sp"
+	            android:textColor="#FF0000"
+	            android:layout_marginLeft="4dp"
+	            android:layout_marginTop="4dp"/>
+	        
+	        <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:orientation="vertical">
+	            
+		        <TextView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="营业执照"
+		            android:textSize="10sp"
+		            android:textColor="#999999"
+		            android:layout_gravity="center_horizontal"/>
+		        
+		        <ImageView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center_horizontal"
+		            android:layout_marginTop="4dp"
+		            android:src="@drawable/icon_register_add"/>	            
+	            
+	        </LinearLayout>
+
+			<ImageView
+				android:id="@+id/iv_yingyepic"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="centerCrop"
+				android:visibility="gone"/>
+	    </RelativeLayout>
+	    
+	    <View
+	        android:layout_width="4dp"
+	        android:layout_height="93dp"/>
+	    
+	    <RelativeLayout
+	        android:id="@+id/rl_dailishang"
+	        android:layout_width="match_parent"
+			android:layout_height="93dp"
+	        android:background="@color/white"
+	        android:layout_weight="1">
+	        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="代理商选填"
+	            android:textSize="11sp"
+	            android:textColor="#FF0000"
+	            android:layout_marginLeft="4dp"
+	            android:layout_marginTop="4dp"/>
+	        
+	        <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:orientation="vertical">
+	            
+		        <TextView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="最高代理级别合同"
+		            android:textSize="10sp"
+		            android:textColor="#999999"
+		            android:layout_gravity="center_horizontal"/>
+		        
+		        <ImageView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center_horizontal"
+		            android:layout_marginTop="4dp"
+		            android:src="@drawable/icon_register_add"/>	            
+	        </LinearLayout>
+
+			<ImageView
+				android:id="@+id/iv_dailishang"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="centerCrop"
+				android:visibility="gone"/>
+	    </RelativeLayout> 	    
+    </LinearLayout> 
+    
+    <Button 
+        android:id="@+id/btn_finish"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="完成"
+        android:textColor="#FFAA97"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="54dp"
+        android:background="@drawable/shape_btn_login"/>
+    
+    <LinearLayout
+        android:id="@+id/ll_xieyi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+	    
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注册即阅读并同意"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:layout_gravity="center_vertical"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《四方购注册协议》"
+            android:textSize="12sp"
+            android:textColor="#FF552E"
+            android:layout_gravity="center_vertical"/>        
+	</LinearLayout>            
+</LinearLayout>

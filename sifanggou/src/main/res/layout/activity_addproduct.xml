@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_main">
+
+    <include layout="@layout/mode_header"></include>
+
+    <LinearLayout
+        android:id="@+id/ll_huojia_tab"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/ll_putong"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_putonghuojia"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:text="新增普通商品货架"
+                android:textSize="15sp"
+                android:textColor="@color/color_huojia_tab"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_putonghuojia_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/selector_huojia_tab"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_daili"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_dailihuojia"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:text="新增代理权商品货架"
+                android:textSize="15sp"
+                android:textColor="@color/color_huojia_tab"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_dailihuojia_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/selector_huojia_tab"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/sv_putong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/view_putong_addproduct"></include>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/sv_daili"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/view_daili_addproduct"></include>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

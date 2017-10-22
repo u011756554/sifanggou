@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="aliyun-oss-sdk-android-2.4.3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/sifanggou/libs/aliyun-oss-sdk-android-2.4.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

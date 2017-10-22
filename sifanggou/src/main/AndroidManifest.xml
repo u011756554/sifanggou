@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.app.sifanggou"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--往sdcard中写入数据的权限 -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+ 	<!--在sdcard中创建/删除文件的权限 -->
+	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
+    <!--连接网络权限，用于执行云端语音能力 -->  
+    <uses-permission android:name="android.permission.INTERNET"/> 
+    
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	    
+    <application
+		android:name="com.app.sifanggou.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/login_logo"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+         	android:name="com.app.sifanggou.activity.StartActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+         	android:name="com.app.sifanggou.activity.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" >
+        </activity> 
+        
+        <activity
+         	android:name="com.app.sifanggou.activity.RegisterActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" >
+        </activity>      
+        
+        <activity
+         	android:name="com.app.sifanggou.activity.UploadCertificateActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" >
+        </activity>            
+        
+        <activity
+         	android:name="com.app.sifanggou.activity.ForGetPwdActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" >
+        </activity>          
+        
+        <activity
+         	android:name="com.app.sifanggou.activity.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" >
+        </activity>
+        
+        <activity
+         	android:name="com.app.sifanggou.activity.UrlWebClientActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" >
+        </activity>
+
+        <activity
+            android:name="com.app.sifanggou.activity.ShangPinGuanLiActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" >
+        </activity>
+
+        <activity
+            android:name="com.app.sifanggou.activity.AddHuoJiaActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" >
+        </activity>
+
+        <activity
+            android:name="com.app.sifanggou.activity.AddProductActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" >
+        </activity>
+
+        <activity
+            android:name="com.app.sifanggou.activity.PiLiangGuanLiActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask" >
+        </activity>
+
+        <!-- 友盟 设置开始-->
+        <meta-data android:value="593dd2dbbbea832c1500150c" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="yanggecaipiao" android:name="UMENG_CHANNEL"/>
+        <!-- 友盟 设置结束-->
+    </application>
+
+</manifest>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\libs\xUtils-2.6.14.jar"
+        revision="25.0.0"
+        sha1="17313c700b1c1682fc9491d7a8aa65f0c84e0204">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\xUtils-2.6.14-e0bc3ae90aa64e73bbe6c2e84278ebe4b08f3684.jar" />
+    </item>
+    <item
+        jar="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\libs\okio-1.10.0.jar"
+        revision="25.0.0"
+        sha1="c4b316c469df09d8b5b173def1dfd79881a38310">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\okio-1.10.0-d56a248af9366f97b6ead48e0ba78c24d4ee1ba9.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.android\build-cache\4500e248cb03b7d8a27bccb17f38382b4f97246a\output\jars\classes.jar"
+        revision="25.0.0"
+        sha1="ac301f9645a25aac48ee4e1fe4b22d4d1447c4f8">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\classes-f4740d4ff35aa5aca77415b30fbd68e5ce2b4881.jar" />
+    </item>
+    <item
+        jar="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\libs\okhttp-3.4.1.jar"
+        revision="25.0.0"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\okhttp-3.4.1-7026159cedcce847e7eaa8f4719dde4bd92ce998.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3\5fc52c41ef0239d1093a1eb7c3697036183677ce\gson-2.3.jar"
+        revision="25.0.0"
+        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\gson-2.3-a3d3cdd10d85735a8d7a5cfab1077c376e3d9a30.jar" />
+    </item>
+    <item
+        jar="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\libs\umeng-analytics-v6.1.1.jar"
+        revision="25.0.0"
+        sha1="4bff754fc05336940a8cb348e455c01515b5d883">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\umeng-analytics-v6.1.1-41d5a39cc49bf3e209927500b6883a3c2a0ae9b1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.9.0\f824591a0016efbaeddb8300bee54832a1398cfa\okio-1.9.0.jar"
+        revision="25.0.0"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\okio-1.9.0-db0545b090bbd931e1cf6e43202e038727277a7d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.android\build-cache\ac66b8c68ac86a4ce09097a349baa4edb04336c5\output\jars\classes.jar"
+        revision="25.0.0"
+        sha1="6d7d803871e3203465f71a163e7af104f807b446">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\classes-206bb880f1929f930b61c796422a98460d80bc28.jar" />
+    </item>
+    <item
+        jar="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\libs\aliyun-oss-sdk-android-2.4.3.jar"
+        revision="25.0.0"
+        sha1="fb1ad30bac6aec80920b85b103a30e0c9905d140">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\aliyun-oss-sdk-android-2.4.3-949472595d995f1c8538670e8f44fb900777765c.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.android\build-cache\0ca506786fd5fd36aa34a81a03457aafb7338b12\output\jars\classes.jar"
+        revision="25.0.0"
+        sha1="1256c10604bb098490eab070d76754ac5ceab35c">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\classes-97069babc47427cb7a501501e0480f08ff622502.jar" />
+    </item>
+    <item
+        jar="E:\eclipse\adt-bundle-windows-x86_64-20140702\sdk\extras\android\m2repository\com\android\support\support-annotations\24.1.1\support-annotations-24.1.1.jar"
+        revision="25.0.0"
+        sha1="3af19f153122737b372622fa6c81dd11a1c6b999">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\support-annotations-24.1.1-dfc8a0618f16a6d2b4e7f45f2191e1f1044d90b1.jar" />
+    </item>
+    <item
+        jar="E:\eclipse\adt-bundle-windows-x86_64-20140702\sdk\platforms\android-25\optional\org.apache.http.legacy.jar"
+        revision="25.0.0"
+        sha1="5f0541a4298daa0590b22cfbde43f85e2a675545">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackRuntimeLibraries\debug\jars\8000\40\org.apache.http.legacy-f39fc7cd3dfa94aaf220a1929c12b5aaa5e91a95.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.android\build-cache\ac66b8c68ac86a4ce09097a349baa4edb04336c5\output\jars\libs\internal_impl-24.1.1.jar"
+        revision="25.0.0"
+        sha1="f78c2f395cb096f9dc1dc07e729922b8fcd3c4f5">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\internal_impl-24.1.1-56d52bbe70745919eb1b09d036c71c64c25aa5e8.jar" />
+    </item>
+    <item
+        jar="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\libs\universal-image-loader-1.9.2-with-sources.jar"
+        revision="25.0.0"
+        sha1="111169c43b8a601f571585f75d998e6027e48ff4">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\universal-image-loader-1.9.2-with-sources-818fc64fed36506ac7a0b6c0866365117125e15a.jar" />
+    </item>
+    <item
+        jar="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\libs\utdid4all-1.0.4.jar"
+        revision="25.0.0"
+        sha1="4345fa0a5a7768f2f9c86aaab7db9e2906765193">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\utdid4all-1.0.4-9559f1005cc2c412a6cc068028d46d4e17271b6c.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.4.1\c7c4f9e35c2fd5900da24f9872e3971801f08ce0\okhttp-3.4.1.jar"
+        revision="25.0.0"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\okhttp-3.4.1-a3a718343956c6e4d917a53a4fdd4a4dc134cda5.jar" />
+    </item>
+    <item
+        jar="E:\eclipse\adt-bundle-windows-x86_64-20140702\sdk\platforms\android-25\android.jar"
+        revision="25.0.0"
+        sha1="712a0312fe844a21a1b3812fa960c363a1578984">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackRuntimeLibraries\debug\jars\8000\40\android-53f92be9c2e93c638198cecadfb201747f99922f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.android\build-cache\8a95eab5c5dc4fcdc93ef58477afdf7f444ecc4f\output\jars\classes.jar"
+        revision="25.0.0"
+        sha1="c936c1bd42f0c018c18920c7bec619ef056b24f8">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\classes-1367d0fca3ae087ae7ed261603cd625bb6405162.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.android\build-cache\83532cb5596177276ff77404ed046c2e038bf786\output\jars\classes.jar"
+        revision="25.0.0"
+        sha1="f62e763609f65e47dc6c498760a4accf02776788">
+        <dex dex="D:\androidstudio\wrok\sifanggounew\sifanggou\sifanggou\build\intermediates\transforms\preJackPackagedLibraries\debug\jars\8000\1f\classes-e36d3a1c4eb2aa51288342dde346a65755e952c5.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_main">
+
+    <include layout="@layout/mode_header"></include>
+
+    <LinearLayout
+        android:id="@+id/ll_huojia_tab"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/ll_putong"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_putonghuojia"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:text="新增普通商品货架"
+                android:textSize="15sp"
+                android:textColor="@color/color_huojia_tab"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_putonghuojia_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/selector_huojia_tab"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_daili"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_dailihuojia"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:text="新增代理权商品货架"
+                android:textSize="15sp"
+                android:textColor="@color/color_huojia_tab"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_dailihuojia_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/selector_huojia_tab"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您剩余货架为"
+            android:textSize="13sp"
+            android:textColor="#999999"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="(0)"
+            android:textSize="13sp"
+            android:textColor="#C30114"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="请填写下面信息增加货架"
+            android:textSize="13sp"
+            android:textColor="#999999"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="数量"
+            android:textSize="15sp"
+            android:textColor="#222222"
+            android:layout_marginLeft="20dp"/>
+
+        <EditText
+            android:id="@+id/edt_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:hint="请输入要开通货架的数量"
+            android:textSize="12sp"
+            android:textColor="#222222"
+            android:textColorHint="#999999"
+            android:layout_marginLeft="30dp"
+            android:inputType="number"
+            android:background="@null"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_year"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_year_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="年限"
+            android:textSize="15sp"
+            android:textColor="#222222"
+            android:layout_marginLeft="20dp"/>
+
+        <EditText
+            android:id="@+id/edt_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_year_title"
+            android:hint="请选择货架的试用年限"
+            android:textSize="12sp"
+            android:textColor="#222222"
+            android:textColorHint="#999999"
+            android:layout_marginLeft="30dp"
+            android:background="@null"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_select"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="107dp"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="14dp"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="货架金额为"
+                    android:textSize="15sp"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="￥0"
+                    android:textSize="15sp"
+                    android:textColor="#F23030"
+                    android:layout_marginLeft="5dp"/>
+             </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_kaitong"
+                android:layout_width="350dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="13dp"
+                android:text="确认开通"
+                android:textColor="@color/white"
+                android:textSize="19sp"
+                android:background="@drawable/shape_btn_kaitong"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

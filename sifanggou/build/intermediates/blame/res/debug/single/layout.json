@@ -1,0 +1,278 @@
+[
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\adapter_shangpin_piliang.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\adapter_shangpin_piliang.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_changhead.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\dialog_changhead.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\mode_empty_shangpin.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\mode_empty_shangpin.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_marketselect.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\dialog_marketselect.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_main.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\fragment_main.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_addproduct.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_addproduct.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_search_view.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\mode_more.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\mode_more.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_addhuojia.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_addhuojia.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_message.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\fragment_message.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_start.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_start.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\mode_footer.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\mode_footer.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media_narrow.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_yingyecard.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_yingyecard.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_forgetpwd.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_forgetpwd.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\notification_template_media.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_year.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\dialog_year.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_uploadcertificate.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_uploadcertificate.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_agentlevel.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\dialog_agentlevel.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_dipai.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\fragment_dipai.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_login.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_piliangguanli.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_piliangguanli.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\adapter_dipai.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\adapter_dipai.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\notification_template_lines.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_register.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_action.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\notification_media_action.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_big_media.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\notification_template_big_media.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\mode_header.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\mode_header.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\view_daili_addproduct.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\view_daili_addproduct.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\adapter_shangpin.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\adapter_shangpin.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_myself.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\fragment_myself.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\progressbar.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\progressbar.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_urlwebclient.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_urlwebclient.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\view_putong_addproduct.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\view_putong_addproduct.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_time.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\fragment_time.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\activity_shangpinguanli.xml",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\layout\\activity_shangpinguanli.xml"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "C:\\Users\\Administrator\\.android\\build-cache\\0ca506786fd5fd36aa34a81a03457aafb7338b12\\output\\res\\layout\\abc_dialog_title_material.xml"
+    }
+]

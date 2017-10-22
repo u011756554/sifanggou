@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_main" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_text_yellow">
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginLeft="9dp">
+            
+            <TextView
+                android:id="@+id/tv_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成都"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"/>
+            
+        </LinearLayout> 
+        
+    </RelativeLayout>    
+ 
+	<!-- 广告  -->
+	<RelativeLayout
+	    android:id="@+id/rl_guanggao"
+	    android:layout_width="match_parent"
+	    android:layout_height="200dp"
+	    android:background="@color/white">
+	    
+		<android.support.v4.view.ViewPager
+	    	android:id="@+id/viewpager_guanggao"
+	        android:layout_width="match_parent"
+	        android:layout_height="200dp"/>	    
+	    
+	    <LinearLayout
+	        android:id="@+id/ly_dot"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginBottom="5dip"
+	        android:orientation="horizontal">
+    	</LinearLayout>		
+	    
+	</RelativeLayout>  	    
+ 
+</LinearLayout>    

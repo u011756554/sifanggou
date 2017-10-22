@@ -1,0 +1,49 @@
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/white">
+        
+    <RadioGroup
+        android:id="@+id/rg_btn"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:orientation="horizontal" >
+        <RadioButton
+            android:id="@+id/main_icon"
+            style="@style/navigation_bottom_radio"
+            android:drawableTop="@drawable/selector_main_radio"
+            android:text="首页" 
+            android:gravity="center"/>
+
+        <RadioButton
+			android:id="@+id/category_icon"
+            style="@style/navigation_bottom_radio"
+            android:drawableTop="@drawable/selector_category_radio"
+            android:text="分类"
+            android:gravity="center" />
+        
+        <RadioButton
+			android:id="@+id/dianpu_icon"
+            style="@style/navigation_bottom_radio"
+            android:drawableTop="@drawable/selector_dianpu_radio"
+            android:text="店铺"
+            android:gravity="center" />   
+            
+        <RadioButton
+			android:id="@+id/car_icon"
+            style="@style/navigation_bottom_radio"
+            android:drawableTop="@drawable/selector_car_radio"
+            android:text="购物车"
+            android:gravity="center" />          
+        
+        <RadioButton
+			android:id="@+id/me_icon"
+            style="@style/navigation_bottom_radio"
+            android:drawableTop="@drawable/selector_myself_radio"
+			android:text="我的"
+			android:gravity="center"/>
+    </RadioGroup>
+</RelativeLayout>

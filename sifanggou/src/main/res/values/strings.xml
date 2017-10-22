@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">四方购</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="loginpage_seepd_login">快捷登录</string>
+    <string name="loginpage_pwd_login">密码登录</string>
+    <string name="loginpage_phone">手机号</string>
+    <string name="loginpage_code">验证码</string>
+    <string name="loginpage_send_code">发送验证码</string>
+    <string name="loginpage_resend_conde">重新发送</string>
+    <string name="loginpage_login">登录</string>
+    <string name="loginpage_forgot_pwd">忘记密码</string>
+    <string name="loginpage_register">立即注册</string>
+    
+    <string name="dipai_search_hint">搜索地点、时间或类型</string>
+    <string name="dipai_recommand">推荐</string>
+    <string name="dipai_lvpai">旅拍</string>
+    <string name="dipai_partment">机构</string>
+    <string name="dipai_service">搜寻</string>
+    <string name="dipai_hot">热门旅拍</string>
+    <string name="dipai_all">查看全部</string>
+    <string name="dipai_local">当地热门摄影</string>
+    <string name="dipai_gloable">全球热门旅拍</string>
+    <string name="dipai_gloable_partment">全球热门机构</string>
+    <string name="dipai_businiss">商业宣传摄影</string>           
+</resources>

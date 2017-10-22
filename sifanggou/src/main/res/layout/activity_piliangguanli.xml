@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:orientation="vertical"
+    android:background="@color/color_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_banner">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/margin_normal"
+            android:paddingRight="@dimen/margin_normal">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_back_white"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_height="35dp"
+            android:layout_width="225dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:background="@drawable/shape_shangpin_tab">
+            <TextView
+                android:id="@+id/tv_saleing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="出售中"
+                android:textSize="15sp"
+                android:textColor="@color/color_product_tab"
+                android:gravity="center"
+                android:background="@drawable/selector_shangpin_text"
+                android:layout_margin="1dp"/>
+
+            <TextView
+                android:id="@+id/tv_saled"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="已下架"
+                android:textSize="15sp"
+                android:textColor="@color/color_product_tab"
+                android:gravity="center"
+                android:background="@drawable/selector_shangpin_text"
+                android:layout_margin="1dp"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/right_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/margin_normal"
+            android:paddingRight="@dimen/margin_normal" >
+
+            <ImageView
+                android:id="@+id/right_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_delete_shangpin"
+                android:scaleType="centerCrop"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rl_huojia_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:id="@+id/ll_chushou"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_all"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="全选"
+                        android:textSize="16sp"
+                        android:textColor="#555555"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="29dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#DDDDDD"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_xiajia"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="下架"
+                        android:textSize="16sp"
+                        android:textColor="#555555"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="29dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#DDDDDD"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_updateprice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="更新价格"
+                        android:textSize="16sp"
+                        android:textColor="#555555"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="29dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#DDDDDD"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_jixuchucang"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="继续出仓"
+                        android:textSize="16sp"
+                        android:textColor="#555555"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_xiajia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_all_xiajia"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="全选"
+                        android:textSize="16sp"
+                        android:textColor="#555555"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="29dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#DDDDDD"/>
+
+                <RelativeLayout
+                    android:id="@+id/rl_shangjia"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="上架"
+                        android:textSize="16sp"
+                        android:textColor="#555555"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_huojia_tab"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:id="@+id/ll_putong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_putonghuojia"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:text="普通商品货架"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_huojia_tab"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tv_putonghuojia_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/selector_huojia_tab"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_daili"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_dailihuojia"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:text="代理权商品货架"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_huojia_tab"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tv_dailihuojia_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/selector_huojia_tab"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srl_splist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:layout_below="@id/ll_huojia_tab"
+            android:layout_above="@id/rl_huojia_bottom"
+            android:background="@color/color_main">
+
+            <ListView
+                android:id="@+id/ll_sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:divider="@null"/>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </RelativeLayout>
+</LinearLayout>

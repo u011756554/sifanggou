@@ -1,0 +1,120 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Manifest Merging:
+-----------------
+Your project uses libraries that provide manifests, and your Eclipse
+project did not explicitly turn on manifest merging. In Android Gradle
+projects, manifests are always merged (meaning that contents from your
+libraries' manifests will be merged into the app manifest. If you had
+manually copied contents from library manifests into your app manifest
+you may need to remove these for the app to build correctly.
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+From IMLib:
+* build.gradle
+From RongIMKit:
+* java\
+* java\io\
+* java\io\rong\
+* java\io\rong\imkit\
+* java\io\rong\imkit\MainActivity.java
+* readme
+From sifanggou:
+* ic_launcher-web.png
+* proguard-project.txt
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:20.0.0
+android-support-v7-appcompat.jar => com.android.support:appcompat-v7:20.0.0
+gson-2.3.jar => com.google.code.gson:gson:2.3
+
+Potentially Missing Dependency:
+-------------------------------
+When we replaced the following .jar files with a Gradle dependency, we
+inferred the dependency version number from the filename. This
+specific version may not actually be available from the repository.
+If you get a build error stating that the dependency is missing, edit
+the version number to for example "+" to pick up the latest version
+instead. (This may require you to update your code if the library APIs
+have changed.)
+
+gson-2.3.jar => version 2.3 in com.google.code.gson:gson:2.3
+
+Replaced Libraries with Dependencies:
+-------------------------------------
+The importer recognized the following library projects as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the source files in your project were of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the library replacement in the import wizard and try
+again:
+
+android-support-v7-appcompat => [com.android.support:appcompat-v7:20.0.0]
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+In IMLib:
+* AndroidManifest.xml => iMLib\src\main\AndroidManifest.xml
+* assets\ => iMLib\src\main\assets
+* libs\arm64-v8a\libRongIMLib.so => iMLib\src\main\jniLibs\arm64-v8a\libRongIMLib.so
+* libs\armeabi-v7a\libRongIMLib.so => iMLib\src\main\jniLibs\armeabi-v7a\libRongIMLib.so
+* libs\armeabi\libRongIMLib.so => iMLib\src\main\jniLibs\armeabi\libRongIMLib.so
+* libs\Rong_IMLib.jar => iMLib\libs\Rong_IMLib.jar
+* libs\x86\libRongIMLib.so => iMLib\src\main\jniLibs\x86\libRongIMLib.so
+* res\ => iMLib\src\main\res\
+* src\ => iMLib\src\main\java
+In RongIMKit:
+* AndroidManifest.xml => rongIMKit\src\main\AndroidManifest.xml
+* assets\ => rongIMKit\src\main\assets
+* libs\Rong_IMKit.jar => rongIMKit\libs\Rong_IMKit.jar
+* res\ => rongIMKit\src\main\res\
+* src\ => rongIMKit\src\main\java
+In sifanggou:
+* AndroidManifest.xml => sifanggou\src\main\AndroidManifest.xml
+* assets\ => sifanggou\src\main\assets\
+* libs\arm64-v8a\libpush.so => sifanggou\src\main\jniLibs\arm64-v8a\libpush.so
+* libs\armeabi-v7a\libpush.so => sifanggou\src\main\jniLibs\armeabi-v7a\libpush.so
+* libs\armeabi\libpush.so => sifanggou\src\main\jniLibs\armeabi\libpush.so
+* libs\MiPush_SDK_Client_3_2_2.jar => sifanggou\libs\MiPush_SDK_Client_3_2_2.jar
+* libs\umeng-analytics-v6.1.1.jar => sifanggou\libs\umeng-analytics-v6.1.1.jar
+* libs\universal-image-loader-1.9.2-with-sources.jar => sifanggou\libs\universal-image-loader-1.9.2-with-sources.jar
+* libs\utdid4all-1.0.4.jar => sifanggou\libs\utdid4all-1.0.4.jar
+* libs\x86\libpush.so => sifanggou\src\main\jniLibs\x86\libpush.so
+* libs\xUtils-2.6.14.jar => sifanggou\libs\xUtils-2.6.14.jar
+* res\ => sifanggou\src\main\res\
+* src\ => sifanggou\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

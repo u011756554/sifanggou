@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\ic_launcher.png",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\drawable-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\icon_set_white.png",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\drawable-xxhdpi\\icon_set_white.png"
+    },
+    {
+        "merged": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\icon_back_white.png",
+        "source": "D:\\androidstudio\\wrok\\sifanggounew\\sifanggou\\sifanggou\\src\\main\\res\\drawable-xxhdpi\\icon_back_white.png"
+    }
+]

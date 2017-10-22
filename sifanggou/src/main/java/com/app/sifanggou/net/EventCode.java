@@ -1,0 +1,38 @@
+package com.app.sifanggou.net;
+
+public class EventCode {
+	private static int BASECODE = 0;
+	
+	public static final int HTTP_GETVERIFYCODE = ++BASECODE;
+	
+	public static final int HTTP_GETPROVINCECITYZONE = ++BASECODE;
+	
+	public static final int HTTP_GETCITYMARKET = ++BASECODE;
+
+	public static final int HTTP_GETALIYUNSTSTOKEN = ++BASECODE;
+
+	public static final int HTTP_BUSINESSREGIST = ++BASECODE;
+
+	public static final int HTTP_GETAGENTLEVELINFO = ++BASECODE;
+
+	public static final int HTTP_BUSINESSLOGIN = ++BASECODE;
+
+	public static final int HTTP_BUSINESSCHANGEPASSWORD = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSCANALLOCATESHELFNUM = ++BASECODE;
+
+	public static final int HTTP_GETSHELFAMOUNT = ++BASECODE;
+
+	public static final int HTTP_ADDBUSINESSBUYSHELFNUM = ++BASECODE;
+
+	public static final int HTTP_GETCOMMODITYTYPELIST = ++BASECODE;
+
+	public static final int HTTP_ADDBUSINESSCOMMODITY = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSCOMMODITYINFO = ++BASECODE;
+
+	public static final int HTTP_BATCHUPDATECOMMODITYSHELFSTATUS = ++BASECODE;
+
+	public static final int HTTP_UPDATECOMMODITYPRICE = ++BASECODE;
+}
+

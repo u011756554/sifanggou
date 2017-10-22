@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:orientation="vertical"
+    android:background="@color/color_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_banner">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/margin_normal"
+            android:paddingRight="@dimen/margin_normal">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_back_white"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_height="35dp"
+            android:layout_width="225dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:background="@drawable/shape_shangpin_tab">
+            <TextView
+                android:id="@+id/tv_saleing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="出售中"
+                android:textSize="15sp"
+                android:textColor="@color/color_product_tab"
+                android:gravity="center"
+                android:background="@drawable/selector_shangpin_text"
+                android:layout_margin="1dp"/>
+
+            <TextView
+                android:id="@+id/tv_saled"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="已下架"
+                android:textSize="15sp"
+                android:textColor="@color/color_product_tab"
+                android:gravity="center"
+                android:background="@drawable/selector_shangpin_text"
+                android:layout_margin="1dp"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/right_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/margin_normal"
+            android:paddingRight="@dimen/margin_normal" >
+
+            <ImageView
+                android:id="@+id/right_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_product_edt"
+                android:scaleType="centerCrop"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_huojia_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/rl_addproduct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/icon_addproduct"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:text="添加商品"
+                        android:textSize="17sp"
+                        android:textColor="#555555"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="29dp"
+                android:layout_gravity="center_vertical"
+                android:background="#DDDDDD"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_product_piliang"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/icon_guanlipiliang"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:text="批量管理"
+                        android:textSize="17sp"
+                        android:textColor="#555555"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_huojia_tab"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:id="@+id/ll_putong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_putonghuojia"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:text="普通商品货架"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_huojia_tab"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tv_putonghuojia_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/selector_huojia_tab"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_daili"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_dailihuojia"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:text="代理权商品货架"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_huojia_tab"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tv_dailihuojia_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/selector_huojia_tab"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_huojia_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_above="@id/ll_huojia_bottom"
+            android:layout_below="@id/ll_huojia_tab">
+
+            <LinearLayout
+                android:id="@+id/ll_shengyu_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="免费剩余货架"
+                    android:textColor="#555555"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/tv_free_huojia_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#C30114"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/srl_splist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:layout_above="@+id/ll_shengyu_count">
+
+                <ListView
+                    android:id="@+id/ll_sp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:divider="@null"/>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="1256c10604bb098490eab070d76754ac5ceab35c">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-24.1.1_b5454b71ec313430a7d99e279f7081a85e6c7c07.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="6d7d803871e3203465f71a163e7af104f807b446">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\com.android.support-support-v4-24.1.1_dca15ab5a58a7ce417c5b6736d8bb5a82b5d1213.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.9.0\f824591a0016efbaeddb8300bee54832a1398cfa\okio-1.9.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\okio-1.9.0_db0545b090bbd931e1cf6e43202e038727277a7d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="f62e763609f65e47dc6c498760a4accf02776788">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-24.1.1_984ce027f94e2b3d96f4fc1c137cb8a36501017f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\exploded-aar\com.aliyun.dpa\oss-android-sdk\2.4.3\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="ac301f9645a25aac48ee4e1fe4b22d4d1447c4f8">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\com.aliyun.dpa-oss-android-sdk-2.4.3_3dddbcc51523e2829bad31c211d386f1bcdef2b5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\androidstudio\wrok\sifanggou\sifanggou\libs\umeng-analytics-v6.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="4bff754fc05336940a8cb348e455c01515b5d883">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\umeng-analytics-v6.1.1_e5a8e6f6e23853930b562c6fc1c2e3aeca193ac6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\androidstudio\wrok\sifanggou\sifanggou\libs\xUtils-2.6.14.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="17313c700b1c1682fc9491d7a8aa65f0c84e0204">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\xUtils-2.6.14_376d5ad3998392f6a5b83f47ca41eaec5fad6c9b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\androidstudio\wrok\sifanggou\sifanggou\libs\utdid4all-1.0.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="4345fa0a5a7768f2f9c86aaab7db9e2906765193">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\utdid4all-1.0.4_228558635bb8647904ae9c96dee18ef11791ed73.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\eclipse\adt-bundle-windows-x86_64-20140702\sdk\extras\android\m2repository\com\android\support\support-annotations\24.1.1\support-annotations-24.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="3af19f153122737b372622fa6c81dd11a1c6b999">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\support-annotations-24.1.1_dfc8a0618f16a6d2b4e7f45f2191e1f1044d90b1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="c936c1bd42f0c018c18920c7bec619ef056b24f8">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-24.1.1_c66e3ef10951875b521065bc93c34303cf047624.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.3\5fc52c41ef0239d1093a1eb7c3697036183677ce\gson-2.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="5fc52c41ef0239d1093a1eb7c3697036183677ce">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\gson-2.3_a3d3cdd10d85735a8d7a5cfab1077c376e3d9a30.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.4.1\c7c4f9e35c2fd5900da24f9872e3971801f08ce0\okhttp-3.4.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\okhttp-3.4.1_a3a718343956c6e4d917a53a4fdd4a4dc134cda5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\libs\internal_impl-24.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="f78c2f395cb096f9dc1dc07e729922b8fcd3c4f5">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\internal_impl-24.1.1_e4691f57508b32210a7d55bd401f884fa0d02284.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\androidstudio\wrok\sifanggou\sifanggou\libs\universal-image-loader-1.9.2-with-sources.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="111169c43b8a601f571585f75d998e6027e48ff4">
+        <dex dex="D:\androidstudio\wrok\sifanggou\sifanggou\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.2-with-sources_c89aad2663c2840cb41f1acadb348401c2c06636.jar" />
+    </item>
+
+</items>

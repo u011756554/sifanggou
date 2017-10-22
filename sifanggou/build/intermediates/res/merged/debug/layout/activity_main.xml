@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_main">
+
+	<!-- 底部导航 -->
+	<include
+	    android:id="@+id/rl_footer" 
+	    layout="@layout/mode_footer"/>
+	
+	<!-- 页面内容 -->
+    <FrameLayout 
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+	    android:layout_above="@id/rl_footer"/>	
+	    
+</RelativeLayout>

@@ -65,4 +65,10 @@
 	<color name="number8">#ff0000</color>
 	<color name="number9">#800040</color>
 	<color name="number10">#009b00</color>
+
+	<color name="colorPrimaryDark">#f57257</color>
+	<color name="colorPrimary">#f46444</color>
+	<color name="navigationBarColor">#f46444</color>
+
+	<color name="colorPrimaryDarkTrans">#CCf57257</color>
 </resources>

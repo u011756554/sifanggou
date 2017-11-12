@@ -100,6 +100,9 @@ public class UploadCertificateActivity extends PicBaseActivity {
 	private AgentLevelBean agentLevelBean;
 
 	private ChangeHeadDialog yingYeDialog;
+	private ChangeHeadDialog heTongDialog;
+	private String business_license; //商家营业执照图片URL
+	private String highest_agency_contract_pic_url;//商家最高代理级别的代理合同url
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -143,6 +146,14 @@ public class UploadCertificateActivity extends PicBaseActivity {
 					showToast("输入门牌号");
 					return;
 				}
+				if (TextUtils.isEmpty(business_license)) {
+					showToast("请上传营业执照");
+					return;
+				}
+				if (TextUtils.isEmpty(highest_agency_contract_pic_url)) {
+					showToast("请上传代理合同");
+					return;
+				}
 				if (agentLevelBean == null) {
 					showToast("选择代理级别");
 					return;
@@ -156,7 +167,6 @@ public class UploadCertificateActivity extends PicBaseActivity {
 				String lat = "0";
 				String market_code = cityMarketBean.getMarket_code();
 				String head_pic_url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505414876514&di=e986ebb63011ff3b5abc5c3048317050&imgtype=0&src=http%3A%2F%2Fimg.jdzj.com%2FUserDocument%2F2015b%2Fzhonglongky%2FPicture%2F20151023111322.jpg";
-				String business_license = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505414876514&di=e986ebb63011ff3b5abc5c3048317050&imgtype=0&src=http%3A%2F%2Fimg.jdzj.com%2FUserDocument%2F2015b%2Fzhonglongky%2FPicture%2F20151023111322.jpg";
 				String legal_person_id = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505414876514&di=e986ebb63011ff3b5abc5c3048317050&imgtype=0&src=http%3A%2F%2Fimg.jdzj.com%2FUserDocument%2F2015b%2Fzhonglongky%2FPicture%2F20151023111322.jpg";
 				String agent_level = "";
 				for(AgentLevelType alvt : AgentLevelType.values()) {
@@ -165,7 +175,6 @@ public class UploadCertificateActivity extends PicBaseActivity {
 						break;
 					}
 				}
-				String highest_agency_contract_pic_url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505414876514&di=e986ebb63011ff3b5abc5c3048317050&imgtype=0&src=http%3A%2F%2Fimg.jdzj.com%2FUserDocument%2F2015b%2Fzhonglongky%2FPicture%2F20151023111322.jpg";
 				String integrate_distribute_type = "province";
 				String invite_code = invteCode;
 				String mobile = phone;
@@ -249,15 +258,37 @@ public class UploadCertificateActivity extends PicBaseActivity {
 
 					@Override
 					public void pic() {
-						selectPicFromLocal(ivYingYePic);
+						selectPicFromLocal(TAG_YINGYEPIC);
 					}
 
 					@Override
 					public void capture() {
-						selectPicFromCamera(ivYingYePic);
+						selectPicFromCamera(TAG_YINGYEPIC);
 					}
 				});
 				yingYeDialog.show();
+			}
+		});
+
+		rlDailiShang.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (heTongDialog == null) {
+					heTongDialog = new ChangeHeadDialog(UploadCertificateActivity.this);
+				}
+				heTongDialog.setListener(new ChangeHeadDialog.ChangeHeadDialogListener() {
+
+					@Override
+					public void pic() {
+						selectPicFromLocal("");
+					}
+
+					@Override
+					public void capture() {
+						selectPicFromCamera("");
+					}
+				});
+				heTongDialog.show();
 			}
 		});
 	}
@@ -381,18 +412,22 @@ public class UploadCertificateActivity extends PicBaseActivity {
 		}
 	}
 
+	private static final String TAG_YINGYEPIC = "TAG_YingYePic";
 	@Override
-	public void onSuccess(PutObjectRequest putObjectRequest, PutObjectResult putObjectResult,View view) {
-		String url = null;
-		try {
-			url = oss.presignConstrainedObjectURL(AppContext.OSS_BUCKET, putObjectRequest.getObjectKey(),30 * 60);
-		} catch (ClientException e) {
-			e.printStackTrace();
-		}
+	public void onSuccess(PutObjectRequest putObjectRequest, PutObjectResult putObjectResult,String tag) {
+		String url = oss.presignPublicObjectURL(AppContext.OSS_BUCKET,putObjectRequest.getObjectKey());
 		System.out.println("上传图片："+url);
-		if (!TextUtils.isEmpty(url) && view.getId() == ivYingYePic.getId()) {
-			ivYingYePic.setVisibility(View.VISIBLE);
-			ImageLoaderUtil.display(url,ivYingYePic);
+		if (!TextUtils.isEmpty(url)) {
+			if (TAG_YINGYEPIC.equals(tag)) {
+				business_license = url;
+				ivYingYePic.setVisibility(View.VISIBLE);
+				ImageLoaderUtil.display(url,ivYingYePic);
+			} else {
+				highest_agency_contract_pic_url = url;
+				ivDailiShang.setVisibility(View.VISIBLE);
+				ImageLoaderUtil.display(url,ivDailiShang);
+			}
+
 		}
 	}
 }

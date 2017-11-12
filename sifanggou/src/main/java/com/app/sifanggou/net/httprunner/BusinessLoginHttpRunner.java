@@ -1,5 +1,6 @@
 package com.app.sifanggou.net.httprunner;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.app.sifanggou.AppContext;
@@ -43,8 +44,9 @@ public class BusinessLoginHttpRunner extends HttpRunner {
             event.setSuccess(true);
             event.addReturnParam(param);
         } else {
-            Exception e = new Exception(param.getMessage());
-            event.setFailException(e);
+            if (!TextUtils.isEmpty(param.getMessage())) {
+                event.setFailException(new Exception(param.getMessage()));
+            }
             event.setSuccess(false);
         }
     }

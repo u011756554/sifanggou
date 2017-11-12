@@ -103,12 +103,24 @@ public class PiLiangGuanLiActivity extends BaseActivity {
     private HuoJiaType huoJiaType = HuoJiaType.PUTONG;
     private ChuShouType chushouType = ChuShouType.ONSALE;
 
+    public static final String KEY_CHUSHOUTYPE = "key_PiLiangGuanLiActivity_chushoutype";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initIntentData();
         initView();
         initListener();
         initData();
+    }
+
+    private void initIntentData() {
+        String type = getIntent().getStringExtra(KEY_CHUSHOUTYPE);
+        if (ChuShouType.OFFSALE.getType().equals(type)) {
+            chushouType = ChuShouType.OFFSALE;
+        } else {
+            chushouType = ChuShouType.ONSALE;
+        }
     }
 
     private void initView() {
@@ -337,7 +349,8 @@ public class PiLiangGuanLiActivity extends BaseActivity {
         rlJiXuChuCang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(PiLiangGuanLiActivity.this,JiXuChuCangActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -372,7 +385,6 @@ public class PiLiangGuanLiActivity extends BaseActivity {
             } else if(chushouType == ChuShouType.OFFSALE && huoJiaType == HuoJiaType.DAILI) {
                 saleType = SaleType.OFF_SALE_AGENCY.getType();
             }
-            page = 0;
             pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),saleType,AppContext.ITEM_NUM+"",page + "",KEY_MORE);
         }
     }

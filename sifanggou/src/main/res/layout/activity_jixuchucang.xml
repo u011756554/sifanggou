@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:orientation="vertical"
+    android:background="@color/color_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_banner">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/margin_normal"
+            android:paddingRight="@dimen/margin_normal">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_back_white"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="急需出仓"
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_huojia_tab"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:id="@+id/ll_putong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_putonghuojia"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:text="普通商品货架"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_huojia_tab"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tv_putonghuojia_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/selector_huojia_tab"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_daili"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_dailihuojia"
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:text="代理权商品货架"
+                    android:textSize="15sp"
+                    android:textColor="@color/color_huojia_tab"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tv_dailihuojia_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/selector_huojia_tab"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_chucang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_chucang"
+                android:layout_width="336dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:text="出仓历史"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:background="@drawable/shape_btn_kaitong"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_marginLeft="15dp"/>
+        </LinearLayout>
+    <!--
+            <LinearLayout
+                android:id="@+id/ll_chucang"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_all"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="全选"
+                        android:textSize="16sp"
+                        android:textColor="#555555"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="29dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="#DDDDDD"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_chucang"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/red"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="出仓历史"
+                    android:textSize="16sp"
+                    android:textColor="#555555"/>
+            </RelativeLayout>
+        </LinearLayout>
+-->
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srl_splist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_above="@id/ll_chucang"
+            android:layout_below="@id/ll_huojia_tab"
+            android:clickable="false">
+
+            <ListView
+                android:id="@+id/ll_sp"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:divider="@null"/>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
+</LinearLayout>

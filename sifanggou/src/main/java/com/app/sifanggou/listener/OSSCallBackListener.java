@@ -12,6 +12,6 @@ import com.alibaba.sdk.android.oss.model.PutObjectResult;
  */
 
 public interface OSSCallBackListener {
-    void onSuccess(PutObjectRequest request, PutObjectResult result,View view);
+    void onSuccess(PutObjectRequest request, PutObjectResult result,String tag);
     void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException);
 }

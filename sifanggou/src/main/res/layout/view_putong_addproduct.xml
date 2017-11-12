@@ -400,21 +400,22 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/icon_select"/>
 
-            <EditText
-                android:id="@+id/edt_fenlei"
+            <TextView
+                android:id="@+id/tv_fenlei"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/iv_select_market"
                 android:layout_toRightOf="@+id/tv_fenlei_title"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:gravity="right"
+                android:gravity="left|center_vertical"
                 android:hint="选择商品分类"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:textColorHint="#DDDDDD"
-                android:background="@null" />
+                android:background="@null"
+                android:clickable="false"/>
         </RelativeLayout>
     </LinearLayout>
 

@@ -49,7 +49,8 @@ public class ShangPinPiLiangAdapter extends SetBaseAdapter<CommodityInfoBean> {
             holder.ivSelect.setSelected(false);
         }
         if (!TextUtils.isEmpty(bean.getCommodity_pic_url())) {
-            ImageLoaderUtil.display(bean.getCommodity_pic_url(),holder.ivPic);
+            String[] urlList = bean.getCommodity_pic_url().split(",");
+            ImageLoaderUtil.display(urlList[0],holder.ivPic);
         }
         if (!TextUtils.isEmpty(bean.getCommodity_name())) {
             holder.tvName.setText(bean.getCommodity_name());

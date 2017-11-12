@@ -452,6 +452,14 @@ public class CommonUtils {
     public static String getSaveDir() {
     	return getSdcardDir()+File.separator+AppContext.APP_NAME;
     }
+
+	public static File getImageFile() {
+		File file = new File(getSaveDir());
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+		return file;
+	}
     
     private static final String DATE_FORMAT = "ddMM月";
     /** 

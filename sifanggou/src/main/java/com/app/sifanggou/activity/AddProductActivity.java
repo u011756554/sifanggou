@@ -1,38 +1,63 @@
 package com.app.sifanggou.activity;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
+import com.app.sifanggou.adapter.GuangGaoPagerAdapter;
+import com.app.sifanggou.bean.AgentLevelBean;
+import com.app.sifanggou.bean.AgentLevelType;
 import com.app.sifanggou.bean.HuoJiaType;
 import com.app.sifanggou.bean.ProductType;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
-import com.app.sifanggou.net.bean.BaseResponseBean;
+import com.app.sifanggou.net.bean.AgentLevelResponseBean;
 import com.app.sifanggou.net.bean.GetBusinessCanAllocateShelfNumResponseBean;
 import com.app.sifanggou.net.bean.GetCommodityTypeListResponseBean;
-import com.app.sifanggou.net.bean.GetShelfAmountResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
+import com.app.sifanggou.utils.ImageLoaderUtil;
 import com.app.sifanggou.utils.PreManager;
+import com.app.sifanggou.view.AgentLevelDialog;
 import com.app.sifanggou.view.BaseDialog;
-import com.app.sifanggou.view.YearDialog;
+import com.app.sifanggou.view.tree.Node;
+import com.app.sifanggou.view.tree.NodeResource;
+import com.app.sifanggou.view.tree.TreeListView;
+import com.app.sifanggou.view.tree.TreeUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bingoogolapple.photopicker.activity.BGAPhotoPreviewActivity;
+import pub.devrel.easypermissions.EasyPermissions;
+
+import static com.app.sifanggou.utils.CommonUtils.showToast;
 
 /**
  * Created by Administrator on 2017/10/6.
  */
 
-public class AddProductActivity extends BaseActivity {
+public class AddProductActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks{
 
     @ViewInject(R.id.ll_putong)
     private LinearLayout llPuTong;
@@ -55,7 +80,7 @@ public class AddProductActivity extends BaseActivity {
     private HuoJiaType huoJiaType = HuoJiaType.PUTONG;
 
     //普通商品属性
-    private List<String> puTongUrlList = new ArrayList<String>();
+    private ArrayList<String> puTongUrlList = new ArrayList<String>();
     @ViewInject(R.id.edt_dec)
     private EditText edtDec;
     @ViewInject(R.id.edt_name)
@@ -74,12 +99,22 @@ public class AddProductActivity extends BaseActivity {
     private EditText edtGuiGe;
     @ViewInject(R.id.edt_dengji)
     private EditText edtZhiLiangDengJi;
-    @ViewInject(R.id.edt_fenlei)
-    private EditText edtFenLei;
+    @ViewInject(R.id.tv_fenlei)
+    private TextView tvFenLei;
+    @ViewInject(R.id.rl_putong_add)
+    private RelativeLayout rlPuTongAdd;
+    @ViewInject(R.id.rl_fenlei)
+    private RelativeLayout rlFenLei;
+    @ViewInject(R.id.rl_putong_pic)
+    private RelativeLayout rlPutongPic;
+    @ViewInject(R.id.viewpager_putong)
+    private ViewPager putongViewPager;
+    @ViewInject(R.id.iv_putong_camera)
+    private ImageView ivPutongCamera;
 
     //代理商品属性
-    private List<String> daiLiUrlList = new ArrayList<String>();
-    private List<String> daiLiHeTongList = new ArrayList<String>();
+    private ArrayList<String> daiLiUrlList = new ArrayList<String>();
+    private ArrayList<String> hetongUrlList = new ArrayList<String>();
     @ViewInject(R.id.edt_dec_daili)
     private EditText edtDecDaiLi;
     @ViewInject(R.id.edt_name_daili)
@@ -98,10 +133,56 @@ public class AddProductActivity extends BaseActivity {
     private EditText edtGuiGeDaiLi;
     @ViewInject(R.id.edt_dengji_daili)
     private EditText edtZhiLiangDengJiDaiLi;
-    @ViewInject(R.id.edt_fenlei_daili)
-    private EditText edtFenLeiDaiLi;
-    @ViewInject(R.id.edt_jiebie_daili)
-    private EditText edtJieBieDaiLi;
+    @ViewInject(R.id.tv_fenlei_daili)
+    private TextView tvFenLeiDaiLi;
+    @ViewInject(R.id.tv_jiebie_daili)
+    private TextView tvJieBieDaiLi;
+    @ViewInject(R.id.rl_fenlei_daili)
+    private RelativeLayout rlFenLeiDaiLi;
+    @ViewInject(R.id.rl_jiebie_daili)
+    private RelativeLayout rlJiBieDaiLi;
+    @ViewInject(R.id.viewpager_daili)
+    private ViewPager dailiViewPager;
+    @ViewInject(R.id.rl_daili_pic)
+    private RelativeLayout rlDaiLiPic;
+    @ViewInject(R.id.rl_daili_add)
+    private RelativeLayout rlDaiLiAdd;
+    @ViewInject(R.id.iv_daili_camera)
+    private ImageView ivDaiLiCamera;
+
+    @ViewInject(R.id.viewpager_hetong)
+    private ViewPager heTongViewPager;
+    @ViewInject(R.id.rl_hetong_pic)
+    private RelativeLayout rlHeTongPic;
+    @ViewInject(R.id.rl_hetong_add)
+    private RelativeLayout rlHeTongAdd;
+    @ViewInject(R.id.iv_hetong_camera)
+    private ImageView ivHeTongCamera;
+
+    private List<NodeResource> nodeList;
+    private Node firstNode = new Node();
+    private Node secondNode = new Node();
+    private Node thirdNode = new Node();
+    private Node firstDaiLiNode = new Node();
+    private Node secondDaiLiNode = new Node();
+    private Node thirdDaiLiNode = new Node();
+
+    private AgentLevelDialog agentLevelDialog;
+    private List<AgentLevelBean> agentLevelDataList = new ArrayList<AgentLevelBean>();
+    private List<String> agentLevelList = new ArrayList<String>();
+    private AgentLevelBean agentLevelBean;
+    //普通货架 viewpager
+    private GuangGaoPagerAdapter putongAdapter;
+    private List<View> putongViewList = new ArrayList<View>();
+    private int putongCurrentIndex = 0;
+    //代理货架 viewpager
+    private GuangGaoPagerAdapter dailiAdapter;
+    private List<View> dailiViewList = new ArrayList<View>();
+    private int dailiCurrentIndex = 0;
+    //代理货架合同 viewpager
+    private GuangGaoPagerAdapter hetongAdapter;
+    private List<View> hetongViewList = new ArrayList<View>();
+    private int hetongCurrentIndex = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,19 +195,155 @@ public class AddProductActivity extends BaseActivity {
         addBack(R.id.rl_back);
         setTitle("添加商品");
 
-        edtFenLei.setEnabled(false);
-        edtFenLeiDaiLi.setEnabled(false);
-        edtJieBieDaiLi.setEnabled(false);
+        agentLevelDialog = new AgentLevelDialog(AddProductActivity.this);
+        //定义普通货架图片
+        putongAdapter = new GuangGaoPagerAdapter(putongViewList);
+        putongViewPager.setAdapter(putongAdapter);
+        //定义代理货架图片
+        dailiAdapter = new GuangGaoPagerAdapter(dailiViewList);
+        dailiViewPager.setAdapter(dailiAdapter);
+        //定义代理货架合同图片
+        hetongAdapter = new GuangGaoPagerAdapter(hetongViewList);
+        heTongViewPager.setAdapter(hetongAdapter);
     }
 
     private void initData() {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
         refreshHuoJiaType();
         pushEventNoProgress(EventCode.HTTP_GETCOMMODITYTYPELIST);
+        pushEventNoProgress(EventCode.HTTP_GETAGENTLEVELINFO);
+    }
 
-        puTongUrlList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507355751461&di=200277a27339c9ae465b11b985369813&imgtype=0&src=http%3A%2F%2Fwww.114nba.com%2Fuploadfile%2F2013%2F0107%2F20130107044213902.jpg");
-        daiLiUrlList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507355751459&di=22c6e5e8f213128402a070873d0c6eea&imgtype=0&src=http%3A%2F%2Fwww.114nba.com%2Fuploadfile%2F2013%2F0107%2F20130107044212827.jpg");
-        daiLiHeTongList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507355751459&di=466ef52d4c1672841acdfae7b36f4ddb&imgtype=0&src=http%3A%2F%2Fwww.114nba.com%2Fuploadfile%2F2013%2F0107%2F20130107044213926.jpg");
+    /**
+     * 刷新普通货架界面
+     */
+    private void refreshPuTongView() {
+        if (puTongUrlList.size() > 0) {
+            rlPutongPic.setVisibility(View.VISIBLE);
+            rlPuTongAdd.setVisibility(View.GONE);
+        } else {
+            rlPutongPic.setVisibility(View.GONE);
+            rlPuTongAdd.setVisibility(View.VISIBLE);
+        }
+        putongViewList.clear();
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        for(String path : puTongUrlList) {
+            ImageView iv = new ImageView(AddProductActivity.this);
+            iv.setLayoutParams(param);
+            iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            if (path.startsWith(File.separator)) {
+                ImageLoaderUtil.displayWithCache("file://"+path,iv);
+            } else {
+                ImageLoaderUtil.displayWithCache(path,iv);
+            }
+
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+                    if (EasyPermissions.hasPermissions(AddProductActivity.this, perms)) {
+                        // 拍照后照片的存放目录，改成你自己拍照后要存放照片的目录。如果不传递该参数的话就没有拍照功能
+                        File takePhotoDir = new File(Environment.getExternalStorageDirectory(), "BGAPhotoPickerTakePhoto");
+
+                        startActivity(BGAPhotoPreviewActivity.newIntent(AddProductActivity.this, takePhotoDir,puTongUrlList , putongCurrentIndex));
+                    } else {
+                        EasyPermissions.requestPermissions(this, "图片选择需要以下权限:\n\n1.访问设备上的照片\n\n2.拍照", REQUEST_CODE_PERMISSION_PHOTO_PICKER, perms);
+                    }
+                }
+            });
+            putongViewList.add(iv);
+        }
+        putongAdapter.notifyDataSetChanged();
+        putongViewPager.setCurrentItem(0);
+        putongCurrentIndex = 0;
+    }
+
+    /**
+     * 刷新代理货架有关界面
+     */
+    private void refreshDaiLiView() {
+        if (daiLiUrlList.size() > 0) {
+            rlDaiLiPic.setVisibility(View.VISIBLE);
+            rlDaiLiAdd.setVisibility(View.GONE);
+        } else {
+            rlDaiLiPic.setVisibility(View.GONE);
+            rlDaiLiAdd.setVisibility(View.VISIBLE);
+        }
+        dailiViewList.clear();
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        for(String path : daiLiUrlList) {
+            ImageView iv = new ImageView(AddProductActivity.this);
+            iv.setLayoutParams(param);
+            iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            if (path.startsWith(File.separator)) {
+                ImageLoaderUtil.displayWithCache("file://"+path,iv);
+            } else {
+                ImageLoaderUtil.displayWithCache(path,iv);
+            }
+
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+                    if (EasyPermissions.hasPermissions(AddProductActivity.this, perms)) {
+                        // 拍照后照片的存放目录，改成你自己拍照后要存放照片的目录。如果不传递该参数的话就没有拍照功能
+                        File takePhotoDir = new File(Environment.getExternalStorageDirectory(), "BGAPhotoPickerTakePhoto");
+
+                        startActivity(BGAPhotoPreviewActivity.newIntent(AddProductActivity.this, takePhotoDir,daiLiUrlList , dailiCurrentIndex));
+                    } else {
+                        EasyPermissions.requestPermissions(this, "图片选择需要以下权限:\n\n1.访问设备上的照片\n\n2.拍照", REQUEST_CODE_PERMISSION_PHOTO_PICKER, perms);
+                    }
+                }
+            });
+            dailiViewList.add(iv);
+        }
+        dailiAdapter.notifyDataSetChanged();
+        dailiViewPager.setCurrentItem(0);
+        dailiCurrentIndex = 0;
+    }
+
+    /**
+     * 刷新代理货架合同有关界面
+     */
+    private void refreshHeTongView() {
+        if (hetongUrlList.size() > 0) {
+            rlHeTongPic.setVisibility(View.VISIBLE);
+            rlHeTongAdd.setVisibility(View.GONE);
+        } else {
+            rlHeTongPic.setVisibility(View.GONE);
+            rlHeTongAdd.setVisibility(View.VISIBLE);
+        }
+        hetongViewList.clear();
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        for(String path : hetongUrlList) {
+            ImageView iv = new ImageView(AddProductActivity.this);
+            iv.setLayoutParams(param);
+            iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            if (path.startsWith(File.separator)) {
+                ImageLoaderUtil.displayWithCache("file://"+path,iv);
+            } else {
+                ImageLoaderUtil.displayWithCache(path,iv);
+            }
+
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+                    if (EasyPermissions.hasPermissions(AddProductActivity.this, perms)) {
+                        // 拍照后照片的存放目录，改成你自己拍照后要存放照片的目录。如果不传递该参数的话就没有拍照功能
+                        File takePhotoDir = new File(Environment.getExternalStorageDirectory(), "BGAPhotoPickerTakePhoto");
+
+                        startActivity(BGAPhotoPreviewActivity.newIntent(AddProductActivity.this, takePhotoDir,hetongUrlList , hetongCurrentIndex));
+                    } else {
+                        EasyPermissions.requestPermissions(this, "图片选择需要以下权限:\n\n1.访问设备上的照片\n\n2.拍照", REQUEST_CODE_PERMISSION_PHOTO_PICKER, perms);
+                    }
+                }
+            });
+            hetongViewList.add(iv);
+        }
+        hetongAdapter.notifyDataSetChanged();
+        heTongViewPager.setCurrentItem(0);
+        hetongCurrentIndex = 0;
     }
 
     private void refreshHuoJiaType() {
@@ -161,6 +378,152 @@ public class AddProductActivity extends BaseActivity {
             public void onClick(View v) {
                 huoJiaType = HuoJiaType.DAILI;
                 refreshHuoJiaType();
+            }
+        });
+
+        rlPuTongAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddProductActivity.this,ProductPicActivity.class);
+                startActivityForResult(intent,REQUEST_PIC_CODE);
+            }
+        });
+
+        rlDaiLiAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddProductActivity.this,ProductPicActivity.class);
+                startActivityForResult(intent,REQUEST_PIC_DAILI_CODE);
+            }
+        });
+
+        rlHeTongAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddProductActivity.this,ProductPicActivity.class);
+                startActivityForResult(intent,REQUEST_PIC_HETONG_CODE);
+            }
+        });
+
+        rlFenLei.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (nodeList != null) {
+                    showPopWindow(nodeList);
+                }
+            }
+        });
+
+        rlFenLeiDaiLi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (nodeList != null) {
+                    showPopWindow(nodeList);
+                }
+            }
+        });
+
+        rlJiBieDaiLi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                agentLevelDialog.setListener(new BaseDialog.DialogListener() {
+                    @Override
+                    public void update(Object object) {
+                        String daili = (String) object;
+                        for(AgentLevelBean alb : agentLevelDataList) {
+                            if (alb.getLevel_name().equals(daili)) {
+                                agentLevelBean = alb;
+                                tvJieBieDaiLi.setText(daili);
+                                break;
+                            }
+                        }
+                    }
+                });
+                agentLevelDialog.show();
+            }
+        });
+
+        ivPutongCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (puTongUrlList != null && puTongUrlList.size() > 0) {
+                    Intent intent = new Intent(AddProductActivity.this,ProductPicActivity.class);
+                    intent.putExtra(ProductPicActivity.KEY_DATA,puTongUrlList);
+                    startActivityForResult(intent,REQUEST_PIC_CODE);
+                }
+            }
+        });
+
+        ivDaiLiCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (daiLiUrlList != null && daiLiUrlList.size() > 0) {
+                    Intent intent = new Intent(AddProductActivity.this,ProductPicActivity.class);
+                    intent.putExtra(ProductPicActivity.KEY_DATA,daiLiUrlList);
+                    startActivityForResult(intent,REQUEST_PIC_DAILI_CODE);
+                }
+            }
+        });
+
+        ivHeTongCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hetongUrlList != null && hetongUrlList.size() > 0) {
+                    Intent intent = new Intent(AddProductActivity.this,ProductPicActivity.class);
+                    intent.putExtra(ProductPicActivity.KEY_DATA,hetongUrlList);
+                    startActivityForResult(intent,REQUEST_PIC_HETONG_CODE);
+                }
+            }
+        });
+
+        putongViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                putongCurrentIndex = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        dailiViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                dailiCurrentIndex = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        heTongViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                hetongCurrentIndex = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
 
@@ -208,10 +571,12 @@ public class AddProductActivity extends BaseActivity {
                         CommonUtils.showToast("请输入商品质量等级");
                         return;
                     }
-//                    if (TextUtils.isEmpty(edtFenLei.getText().toString())) {
-//                        CommonUtils.showToast("请选择商品分类");
-//                        return;
-//                    }
+                    if (TextUtils.isEmpty(firstNode.getCurId())
+                            && TextUtils.isEmpty(secondNode.getCurId())
+                            && TextUtils.isEmpty(thirdNode.getCurId())) {
+                        CommonUtils.showToast("请选择商品分类");
+                        return;
+                    }
 
                     String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
                     String mobile = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
@@ -225,9 +590,18 @@ public class AddProductActivity extends BaseActivity {
                         type = ProductType.AGENCY.getType();
                     }
                     String brand_name = edtPinPai.getText().toString();
-                    String first_level_category_code = "1";
-                    String second_level_category_code = "49";
-                    String third_level_category_code = "50";
+                    String first_level_category_code = "";
+                    String second_level_category_code = "";
+                    String third_level_category_code = "";
+                    if (!TextUtils.isEmpty(firstNode.getCurId())) {
+                        first_level_category_code = firstNode.getCurId();
+                    }
+                    if (!TextUtils.isEmpty(secondNode.getCurId())) {
+                        second_level_category_code = secondNode.getCurId();
+                    }
+                    if (!TextUtils.isEmpty(thirdNode.getCurId())) {
+                        third_level_category_code = thirdNode.getCurId();
+                    }
                     StringBuffer sbf = new StringBuffer();
                     for(String url : puTongUrlList) {
                         sbf.append(url).append(",");
@@ -253,7 +627,7 @@ public class AddProductActivity extends BaseActivity {
                         CommonUtils.showToast("请添加商品图片");
                         return;
                     }
-                    if (daiLiHeTongList.size() <= 0) {
+                    if (hetongUrlList.size() <= 0) {
                         CommonUtils.showToast("请添加合同图片");
                         return;
                     }
@@ -289,14 +663,16 @@ public class AddProductActivity extends BaseActivity {
                         CommonUtils.showToast("请输入商品质量等级");
                         return;
                     }
-//                    if (TextUtils.isEmpty(edtFenLeiDaiLi.getText().toString())) {
-//                        CommonUtils.showToast("请选择商品分类");
-//                        return;
-//                    }
-//                    if (TextUtils.isEmpty(edtJieBieDaiLi.getText().toString())) {
-//                        CommonUtils.showToast("请选择代理级别");
-//                        return;
-//                    }
+                    if (TextUtils.isEmpty(firstDaiLiNode.getCurId())
+                            && TextUtils.isEmpty(secondDaiLiNode.getCurId())
+                            && TextUtils.isEmpty(thirdDaiLiNode.getCurId())) {
+                        CommonUtils.showToast("请选择商品分类");
+                        return;
+                    }
+                    if (agentLevelBean == null) {
+                        showToast("选择代理级别");
+                        return;
+                    }
 
                     String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
                     String mobile = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
@@ -310,20 +686,35 @@ public class AddProductActivity extends BaseActivity {
                         type = ProductType.AGENCY.getType();
                     }
                     String brand_name = edtPinPaiDaiLi.getText().toString();
-                    String first_level_category_code = "1";
-                    String second_level_category_code = "49";
-                    String third_level_category_code = "50";
+                    String first_level_category_code = "";
+                    String second_level_category_code = "";
+                    String third_level_category_code = "";
+                    if (!TextUtils.isEmpty(firstDaiLiNode.getCurId())) {
+                        first_level_category_code = firstDaiLiNode.getCurId();
+                    }
+                    if (!TextUtils.isEmpty(secondDaiLiNode.getCurId())) {
+                        second_level_category_code = secondDaiLiNode.getCurId();
+                    }
+                    if (!TextUtils.isEmpty(thirdDaiLiNode.getCurId())) {
+                        third_level_category_code = thirdDaiLiNode.getCurId();
+                    }
                     StringBuffer sbf = new StringBuffer();
                     for(String url : daiLiUrlList) {
                         sbf.append(url).append(",");
                     }
                     String commodity_pic_url = sbf.toString().substring(0,sbf.toString().length() - 1);
                     StringBuffer sbfHetong = new StringBuffer();
-                    for(String url : daiLiHeTongList) {
+                    for(String url : hetongUrlList) {
                         sbfHetong.append(url).append(",");
                     }
                     String agency_contract_pic_url = sbfHetong.toString().substring(0,sbfHetong.toString().length() - 1);
-                    String agent_level = "factory_direct";
+                    String agent_level = "";
+                    for(AgentLevelType alvt : AgentLevelType.values()) {
+                        if (alvt.getCode().equals(agentLevelBean.getLevel_num())) {
+                            agent_level = alvt.getType();
+                            break;
+                        }
+                    }
                     String quality_grade = edtZhiLiangDengJiDaiLi.getText().toString();
                     String production_place = edtChanDiDaiLi.getText().toString();
                     String specification = edtGuiGeDaiLi.getText().toString();
@@ -336,6 +727,47 @@ public class AddProductActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private static final int REQUEST_PIC_CODE = 0x123;
+    private static final int REQUEST_PIC_DAILI_CODE = 0x124;
+    private static final int REQUEST_PIC_HETONG_CODE = 0x125;
+    public static final String KEY_PIC = "key_AddProductActivity_key";
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if(requestCode == REQUEST_PIC_CODE) {
+                if (data != null) {
+                    ArrayList<String> dataList = (ArrayList<String>) data.getSerializableExtra(KEY_PIC);
+                    if (dataList != null && dataList.size() > 0) {
+                        puTongUrlList.clear();
+                        puTongUrlList.addAll(dataList);
+                        refreshPuTongView();
+                    }
+                }
+            }
+            if (requestCode == REQUEST_PIC_DAILI_CODE) {
+                if (data != null) {
+                    ArrayList<String> dataList = (ArrayList<String>) data.getSerializableExtra(KEY_PIC);
+                    if (dataList != null && dataList.size() > 0) {
+                        daiLiUrlList.clear();
+                        daiLiUrlList.addAll(dataList);
+                        refreshDaiLiView();
+                    }
+                }
+            }
+            if (requestCode == REQUEST_PIC_HETONG_CODE) {
+                if (data != null) {
+                    ArrayList<String> dataList = (ArrayList<String>) data.getSerializableExtra(KEY_PIC);
+                    if (dataList != null && dataList.size() > 0) {
+                        hetongUrlList.clear();
+                        hetongUrlList.addAll(dataList);
+                        refreshHeTongView();
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -360,8 +792,11 @@ public class AddProductActivity extends BaseActivity {
             if (event.isSuccess()) {
                 GetCommodityTypeListResponseBean bean = (GetCommodityTypeListResponseBean) event.getReturnParamAtIndex(0);
                 System.out.print(bean.getData());
-                if (bean != null) {
-
+                if (bean != null && bean.getData() != null && bean.getData().getCommodity_type_list() != null && bean.getData().getCommodity_type_list().size() > 0) {
+                    if (nodeList != null) {
+                        nodeList.clear();
+                    }
+                    nodeList = TreeUtils.commodityTypeBeanToNodeResource(bean.getData().getCommodity_type_list());
                 }
             } else {
                 CommonUtils.showToast(event.getFailMessage());
@@ -373,6 +808,152 @@ public class AddProductActivity extends BaseActivity {
             } else {
                 CommonUtils.showToast(event.getFailMessage());
             }
+        }
+
+        if (event.getEventCode() == EventCode.HTTP_GETAGENTLEVELINFO) {
+            AgentLevelResponseBean dataBean = (AgentLevelResponseBean) event.getReturnParamAtIndex(0);
+            if (dataBean != null && dataBean.getData() != null) {
+                agentLevelDataList = dataBean.getData().getAgent_level_list();
+                agentLevelList.clear();
+                for(AgentLevelBean mlb : agentLevelDataList) {
+                    agentLevelList.add(mlb.getLevel_name());
+                }
+                agentLevelDialog.setData(agentLevelList,0);
+            }
+        } else {
+            showToast(event.getFailMessage());
+        }
+    }
+
+    private static final int REQUEST_CODE_PERMISSION_PHOTO_PICKER = 1;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        if (requestCode == REQUEST_CODE_PERMISSION_PHOTO_PICKER) {
+            Toast.makeText(this, "您拒绝了「图片选择」所需要的相关权限!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private PopupWindow popupWindow;
+    private void showPopWindow(final List<NodeResource> list){
+        if(popupWindow != null && popupWindow.isShowing()){
+            return;
+        }
+        View view = getLayoutInflater().inflate(R.layout.popwindow_company, null);
+        RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.rl_content);
+        TreeListView treeListView = new TreeListView(AddProductActivity.this, list,0);
+        treeListView.setListener(new TreeListView.UpdateListener() {
+
+            @Override
+            public void update(Node node) {
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                }
+                if (huoJiaType == HuoJiaType.PUTONG) {
+                    getFenLei(node);
+                } else {
+                    getFenLeiDaiLi(node);
+                }
+
+            }
+
+        });
+        rl.addView(treeListView);
+        popupWindow = new PopupWindow(view,CommonUtils.dip2px(AddProductActivity.this, 200), CommonUtils.dip2px(AddProductActivity.this, 320), true);
+        popupWindow.setFocusable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.showAtLocation(getWindow().getDecorView().getRootView(),Gravity.CENTER,0,0);
+    }
+
+    private void getFenLei(Node node) {
+        if (node == null || nodeList == null) {
+            return;
+        }
+        Node firstNodeThis = new Node();
+        Node secondNodeThis = new Node();
+        Node thirdNodeThis = new Node();
+
+        thirdNodeThis = node;
+        for (NodeResource sNode : nodeList) {
+            if (sNode.getCurId().equals(thirdNodeThis.getParentId())) {
+                secondNodeThis.setValue(sNode.getValue());
+                secondNodeThis.setCurId(sNode.getCurId());
+                secondNodeThis.setParentId(sNode.getParentId());
+                break;
+            }
+        }
+        for (NodeResource fNode : nodeList) {
+            if (fNode.getCurId().equals(secondNodeThis.getParentId())) {
+                firstNodeThis.setValue(fNode.getValue());
+                firstNodeThis.setCurId(fNode.getCurId());
+                firstNodeThis.setParentId(fNode.getParentId());
+                break;
+            }
+        }
+        if (!TextUtils.isEmpty(firstNodeThis.getCurId())) {
+            firstNode = firstNodeThis;
+            secondNode = secondNodeThis;
+            thirdNode = thirdNodeThis;
+            tvFenLei.setText(firstNode.getValue()+"  "+secondNode.getValue()+"  "+thirdNode.getValue());
+        } else if (!TextUtils.isEmpty(secondNodeThis.getCurId())) {
+            firstNode = secondNodeThis;
+            secondNode = thirdNodeThis;
+            tvFenLei.setText(firstNode.getValue()+"  "+secondNode.getValue());
+        } else if (!TextUtils.isEmpty(thirdNodeThis.getCurId())){
+            firstNode = thirdNodeThis;
+            tvFenLei.setText(firstNode.getValue());
+        }
+
+    }
+
+    private void getFenLeiDaiLi(Node node) {
+        if (node == null || nodeList == null) {
+            return;
+        }
+        Node firstNodeThis = new Node();
+        Node secondNodeThis = new Node();
+        Node thirdNodeThis = new Node();
+
+        thirdNodeThis = node;
+        for (NodeResource sNode : nodeList) {
+            if (sNode.getCurId().equals(thirdNodeThis.getParentId())) {
+                secondNodeThis.setValue(sNode.getValue());
+                secondNodeThis.setCurId(sNode.getCurId());
+                secondNodeThis.setParentId(sNode.getParentId());
+                break;
+            }
+        }
+        for (NodeResource fNode : nodeList) {
+            if (fNode.getCurId().equals(secondNodeThis.getParentId())) {
+                firstNodeThis.setValue(fNode.getValue());
+                firstNodeThis.setCurId(fNode.getCurId());
+                firstNodeThis.setParentId(fNode.getParentId());
+                break;
+            }
+        }
+        if (!TextUtils.isEmpty(firstNodeThis.getCurId())) {
+            firstDaiLiNode = firstNodeThis;
+            secondDaiLiNode = secondNodeThis;
+            thirdDaiLiNode = thirdNodeThis;
+            tvFenLeiDaiLi.setText(firstDaiLiNode.getValue()+"  "+secondDaiLiNode.getValue()+"  "+thirdDaiLiNode.getValue());
+        } else if (!TextUtils.isEmpty(secondNodeThis.getCurId())) {
+            firstDaiLiNode = secondNodeThis;
+            secondDaiLiNode = thirdNodeThis;
+            tvFenLeiDaiLi.setText(firstDaiLiNode.getValue()+"  "+secondDaiLiNode.getValue());
+        } else if (!TextUtils.isEmpty(thirdNodeThis.getCurId())){
+            firstDaiLiNode = thirdNodeThis;
+            tvFenLeiDaiLi.setText(firstDaiLiNode.getValue());
         }
     }
 }

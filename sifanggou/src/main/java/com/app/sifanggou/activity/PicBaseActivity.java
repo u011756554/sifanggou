@@ -43,7 +43,7 @@ public abstract class PicBaseActivity extends BaseActivity implements OSSCallBac
     private static final int SELECT_PIC = 0x13;
     private static final int HANDLER_CODE1 = 0x12;
     private static final int HANDLER_CODE2 = 0x14;
-    private View contentView;
+    private String tag;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -55,8 +55,7 @@ public abstract class PicBaseActivity extends BaseActivity implements OSSCallBac
                     break;
                 case HANDLER_CODE2:
                     OssData data = (OssData) msg.obj;
-                    final View backView = contentView;
-                    PicBaseActivity.this.onSuccess(data.getRequest(),data.getResult(),backView);
+                    PicBaseActivity.this.onSuccess(data.getRequest(),data.getResult(),tag);
                     break;
             }
         }
@@ -85,7 +84,8 @@ public abstract class PicBaseActivity extends BaseActivity implements OSSCallBac
         oss = new OSSClient(getApplicationContext(), AppContext.OSS_ENDPOINT, credentialProvider, configuration);
     }
 
-    protected void uploadFile(String filePath) {
+    protected void uploadFile(String filePath,String tag) {
+        this.tag = tag;
         showProgressDialog(null,"正在上传");
         PutObjectRequest put = new PutObjectRequest(AppContext.OSS_BUCKET, CommonUtils.getAndroidId(this) + System.currentTimeMillis(), filePath);
         OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
@@ -131,8 +131,8 @@ public abstract class PicBaseActivity extends BaseActivity implements OSSCallBac
     /**
      * 照相获取图片
      */
-    protected void selectPicFromCamera(View imageView) {
-        this.contentView = imageView;
+    protected void selectPicFromCamera(String tag) {
+        this.tag = tag;
         Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         Uri uri = CommonUtils.getTempUri(PictureUtils.instance().getUriPath(), this);
         if (uri != null) {
@@ -146,8 +146,8 @@ public abstract class PicBaseActivity extends BaseActivity implements OSSCallBac
     /**
      * 从图库获取图片
      */
-    protected void selectPicFromLocal(View imageView) {
-        this.contentView = imageView;
+    protected void selectPicFromLocal(String tag) {
+        this.tag = tag;
         Intent intent2 =new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent2, SELECT_PIC);
     }
@@ -169,7 +169,7 @@ public abstract class PicBaseActivity extends BaseActivity implements OSSCallBac
                 c.moveToFirst();
                 int columnIndex = c.getColumnIndex(filePathColumns[0]);
                 String picturePath = c.getString(columnIndex);
-                uploadFile(picturePath);
+                uploadFile(picturePath,tag);
                 break;
 
             case CODE_IMAGE_CAPTURE:
@@ -178,7 +178,7 @@ public abstract class PicBaseActivity extends BaseActivity implements OSSCallBac
                         String caputrePicturePath = PictureUtils.instance().getUriPath();
                         System.out.println("path:"+caputrePicturePath);
                         String resultpath = PictureUtils.instance().compressFileToFile(caputrePicturePath);
-                        uploadFile(resultpath);
+                        uploadFile(resultpath,tag);
                     } catch (Exception e) {
                         // TODO: handle exception
                         showToast("获取头像失败");
@@ -193,7 +193,7 @@ public abstract class PicBaseActivity extends BaseActivity implements OSSCallBac
                         if (bundle != null) {
                             Bitmap photo = (Bitmap) bundle.get("data");
                             String path = PictureUtils.instance().compressBitmapToFile(photo);
-                            uploadFile(path);
+                            uploadFile(path,tag);
                         }
                     }else{
                         System.out.println(uri.toString());
@@ -206,7 +206,7 @@ public abstract class PicBaseActivity extends BaseActivity implements OSSCallBac
                         String path = PictureUtils.instance().compressFileToFile(filePath);
                         System.out.println("最终路径："+path);
                         cur.close();
-                        uploadFile(path);
+                        uploadFile(path,tag);
                     }
                 }
                 break;

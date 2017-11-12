@@ -85,6 +85,9 @@ public class AddBusinessCommodityHttpRunner extends HttpRunner {
                 event.addReturnParam(param);
             } else {
                 event.setSuccess(false);
+                if (!TextUtils.isEmpty(param.getMessage())) {
+                    event.setFailException(new Exception(param.getMessage()));
+                }
             }
         }
     }

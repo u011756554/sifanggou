@@ -38,4 +38,21 @@ public class GuangGaoPagerAdapter extends PagerAdapter {
 		container.removeView(viewList.get(position));//删除页卡  
 	}
 
+	private int mChildCount;
+	@Override
+	public void notifyDataSetChanged() {
+		mChildCount = getCount();
+		super.notifyDataSetChanged();
+	}
+
+	@Override
+	public int getItemPosition(Object object) {
+		// 重写getItemPosition,保证每次获取时都强制重绘UI
+		if (mChildCount > 0) {
+			mChildCount--;
+			return POSITION_NONE;
+		}
+		return super.getItemPosition(object);
+	}
+
 }

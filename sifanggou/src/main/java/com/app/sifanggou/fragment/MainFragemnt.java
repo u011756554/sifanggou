@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
+import com.app.sifanggou.activity.JiXuChuCangActivity;
+import com.app.sifanggou.activity.ShangPinGuanLiActivity;
 import com.app.sifanggou.activity.UrlWebClientActivity;
 import com.app.sifanggou.adapter.GuangGaoPagerAdapter;
 import com.app.sifanggou.adapter.HotAdapter;
@@ -39,7 +41,16 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MainFragemnt extends BaseFragment {
-	
+	@ViewInject(R.id.ll_niming)
+	private LinearLayout llNiMing;
+	@ViewInject(R.id.ll_jixuchucang)
+	private LinearLayout llJiXu;
+	@ViewInject(R.id.ll_product_center)
+	private LinearLayout llProductCenter;
+	@ViewInject(R.id.ll_myorder)
+	private LinearLayout llMyOrder;
+
+
 	private ViewPager mViewPager;
 	private GuangGaoPagerAdapter adapter;
 	private List<View> viewList = new ArrayList<View>();
@@ -150,6 +161,22 @@ public class MainFragemnt extends BaseFragment {
 					break;
 				}
 				return false;
+			}
+		});
+
+		llJiXu.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), JiXuChuCangActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		llProductCenter.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), ShangPinGuanLiActivity.class);
+				startActivity(intent);
 			}
 		});
 	}

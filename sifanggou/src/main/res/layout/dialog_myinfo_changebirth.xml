@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ly_myinfo_changebirth"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#44000000"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ly_myinfo_changebirth_child"
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_share_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dip"
+            android:layout_marginLeft="18dip"
+            android:layout_marginTop="18dip"
+            android:gravity="center_vertical"
+            android:text="选择日期"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+		<LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="160dip"
+	        android:orientation="horizontal"
+	        android:layout_marginLeft="20dip"
+	        android:layout_marginRight="20dip"
+	        android:gravity="center_vertical">
+	        <com.app.sifanggou.view.date.WheelView
+	            android:id="@+id/wv_birth_year"
+	            android:layout_width="0dip"
+	            android:layout_weight="2"
+	            android:layout_height="match_parent"
+	            android:layout_gravity="center_vertical"
+	            />
+	        <com.app.sifanggou.view.date.WheelView
+	            android:id="@+id/wv_birth_month"
+	            android:layout_width="0dip"
+	            android:layout_weight="1"
+	            android:layout_height="match_parent"
+	            android:layout_gravity="center_vertical"
+	            />
+	        <com.app.sifanggou.view.date.WheelView
+	            android:id="@+id/wv_birth_day"
+	            android:layout_width="0dip"
+	            android:layout_weight="1"
+	            android:layout_height="match_parent"
+	            android:layout_gravity="center_vertical"
+	            />
+	    </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:paddingTop="24dp" 
+            android:paddingBottom="8dip">
+
+            <RelativeLayout
+                android:id="@+id/mrl_myinfo_sure"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:minWidth="64dp">
+                <TextView
+                    android:id="@+id/btn_myinfo_sure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="确认"
+                    android:textColor="@color/color_banner"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/mrl_myinfo_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_toLeftOf="@id/mrl_myinfo_sure"
+                android:minWidth="64dp" >
+
+                <TextView
+                    android:id="@+id/btn_myinfo_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="取消"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

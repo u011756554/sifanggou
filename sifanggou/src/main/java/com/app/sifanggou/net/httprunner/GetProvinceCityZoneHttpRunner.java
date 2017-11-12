@@ -57,7 +57,10 @@ public class GetProvinceCityZoneHttpRunner extends HttpRunner {
 				event.addReturnParam(param);
 				event.addReturnParam(province_code);
 			} else {
-				event.setSuccess(false);			
+				event.setSuccess(false);
+				if (!TextUtils.isEmpty(param.getMessage())) {
+					event.setFailException(new Exception(param.getMessage()));
+				}
 			}
 		}
 	

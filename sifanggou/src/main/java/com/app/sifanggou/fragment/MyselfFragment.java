@@ -7,12 +7,15 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.app.sifanggou.R;
+import com.app.sifanggou.activity.ChuCangHistoryActivity;
 import com.app.sifanggou.activity.ShangPinGuanLiActivity;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 public class MyselfFragment extends BaseFragment{
 	@ViewInject(R.id.rl_shangpinguanli)
 	private RelativeLayout rlShangPinGuanLi;
+	@ViewInject(R.id.rl_chucanghistory)
+	private RelativeLayout rlChuCangHistory;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,14 @@ public class MyselfFragment extends BaseFragment{
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), ShangPinGuanLiActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		rlChuCangHistory.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), ChuCangHistoryActivity.class);
 				startActivity(intent);
 			}
 		});

@@ -1,5 +1,6 @@
 package com.app.sifanggou.net.httprunner;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.app.sifanggou.AppContext;
@@ -57,6 +58,9 @@ public class BatchUpdateCommodityShelfStatusHttpRunner extends HttpRunner {
             event.addReturnParam(enable);
         } else {
             event.setSuccess(false);
+            if (!TextUtils.isEmpty(param.getMessage())) {
+                event.setFailException(new Exception(param.getMessage()));
+            }
         }
     }
 }

@@ -35,5 +35,9 @@ public class URLUtils {
 	public static final String BATCHUPDATECOMMODITYSHELFSTATUS = SERVER + "business/BatchUpdateCommodityShelfStatus";
 
 	public static final String UPDATECOMMODITYPRICE = SERVER + "business/UpdateCommodityPrice";
+
+	public static final String GETBUSINESSURGENTSELLCOMMODIT = SERVER + "business/GetBusinessUrgentSellCommodity";
+
+	public static final String ADDBUSINESSURGENTSELLCOMMODITY = SERVER + "business/AddBusinessUrgentSellCommodity";
 }
 

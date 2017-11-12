@@ -2,6 +2,7 @@ package com.app.sifanggou.net;
 
 import com.app.sifanggou.net.httprunner.AddBusinessBuyShelfNumHttpRunner;
 import com.app.sifanggou.net.httprunner.AddBusinessCommodityHttpRunner;
+import com.app.sifanggou.net.httprunner.AddBusinessUrgentSellCommodityHttpRunner;
 import com.app.sifanggou.net.httprunner.BatchUpdateCommodityShelfStatusHttpRunner;
 import com.app.sifanggou.net.httprunner.BusinessChangePasswordHttpRunner;
 import com.app.sifanggou.net.httprunner.BusinessLoginHttpRunner;
@@ -10,6 +11,7 @@ import com.app.sifanggou.net.httprunner.GetAgentLevelInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetAliyunstsTokenHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCanAllocateShelfNumHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCommodityInfoHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinessUrgentSellCommoditHttpRunner;
 import com.app.sifanggou.net.httprunner.GetCityMarketHttpRunner;
 import com.app.sifanggou.net.httprunner.GetCommodityTypeListHttpRunner;
 import com.app.sifanggou.net.httprunner.GetProvinceCityZoneHttpRunner;
@@ -37,6 +39,8 @@ public class NetUtils {
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSCOMMODITYINFO, new GetBusinessCommodityInfoHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_BATCHUPDATECOMMODITYSHELFSTATUS, new BatchUpdateCommodityShelfStatusHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_UPDATECOMMODITYPRICE, new UpdateCommodityPriceHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSURGENTSELLCOMMODIT, new GetBusinessUrgentSellCommoditHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_ADDBUSINESSURGENTSELLCOMMODITY, new AddBusinessUrgentSellCommodityHttpRunner());
 	}
 }
 

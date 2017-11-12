@@ -28,30 +28,201 @@
             
         </LinearLayout> 
         
-    </RelativeLayout>    
- 
-	<!-- 广告  -->
-	<RelativeLayout
-	    android:id="@+id/rl_guanggao"
-	    android:layout_width="match_parent"
-	    android:layout_height="200dp"
-	    android:background="@color/white">
-	    
-		<android.support.v4.view.ViewPager
-	    	android:id="@+id/viewpager_guanggao"
-	        android:layout_width="match_parent"
-	        android:layout_height="200dp"/>	    
-	    
-	    <LinearLayout
-	        android:id="@+id/ly_dot"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentBottom="true"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginBottom="5dip"
-	        android:orientation="horizontal">
-    	</LinearLayout>		
-	    
-	</RelativeLayout>  	    
- 
+    </RelativeLayout>
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/white">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<!-- 广告  -->
+			<RelativeLayout
+				android:id="@+id/rl_guanggao"
+				android:layout_width="match_parent"
+				android:layout_height="200dp"
+				android:background="@color/white">
+
+				<android.support.v4.view.ViewPager
+					android:id="@+id/viewpager_guanggao"
+					android:layout_width="match_parent"
+					android:layout_height="200dp"/>
+
+				<LinearLayout
+					android:id="@+id/ly_dot"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentBottom="true"
+					android:layout_centerHorizontal="true"
+					android:layout_marginBottom="5dip"
+					android:orientation="horizontal">
+				</LinearLayout>
+			</RelativeLayout>
+
+			<!-- 快捷操作模块 -->
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="100dp"
+				android:orientation="horizontal">
+
+				<LinearLayout
+					android:id="@+id/ll_niming"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:gravity="center_horizontal"
+					android:orientation="vertical"
+					android:background="@drawable/selector_bg_click">
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/icon_niming"
+						android:layout_marginTop="15dp"/>
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="匿名抢单"
+						android:textSize="16sp"
+						android:textColor="@color/black"
+						android:layout_marginTop="5dp"/>
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/ll_jixuchucang"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:gravity="center_horizontal"
+					android:orientation="vertical"
+					android:background="@drawable/selector_bg_click">
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/icon_jixuchucang"
+						android:layout_marginTop="15dp"/>
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="急需出仓"
+						android:textSize="16sp"
+						android:textColor="@color/black"
+						android:layout_marginTop="5dp"/>
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/ll_product_center"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:gravity="center_horizontal"
+					android:orientation="vertical"
+					android:background="@drawable/selector_bg_click">
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/icon_product_center"
+						android:layout_marginTop="15dp"/>
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="商品管理"
+						android:textSize="16sp"
+						android:textColor="@color/black"
+						android:layout_marginTop="5dp"/>
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/ll_myorder"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:gravity="center_horizontal"
+					android:orientation="vertical"
+					android:background="@drawable/selector_bg_click">
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:src="@drawable/icon_myorder"
+						android:layout_marginTop="15dp"/>
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="我的订单"
+						android:textSize="16sp"
+						android:textColor="@color/black"
+						android:layout_marginTop="5dp"/>
+				</LinearLayout>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="80dp"
+				android:layout_marginLeft="@dimen/margin_normal"
+				android:layout_marginRight="@dimen/margin_normal"
+				android:orientation="horizontal">
+
+				<ImageView
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:src="@drawable/icon_main_1"
+					android:scaleType="centerCrop"/>
+
+				<View
+					android:layout_width="@dimen/margin_normal"
+					android:layout_height="match_parent"/>
+
+				<ImageView
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:src="@drawable/icon_main_2"
+					android:scaleType="centerCrop"/>
+			</LinearLayout>
+
+			<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="100dp"
+				android:layout_marginTop="@dimen/margin_normal"
+				android:padding="@dimen/margin_normal"
+				android:src="@drawable/icon_main_3"
+				android:scaleType="centerCrop"/>
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="10dp"
+				android:background="@color/color_main"/>
+
+			<!-- 补货通道 -->
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:paddingTop="10dp"
+				android:paddingBottom="10dp"
+				android:gravity="center"
+				android:textColor="@color/black"
+				android:text="补货通道"
+				android:textSize="@dimen/textsize_small"/>
+
+			<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="120dp"
+				android:padding="@dimen/margin_normal"
+				android:src="@drawable/icon_main_4"
+				android:scaleType="centerCrop"/>
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>    

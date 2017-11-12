@@ -34,5 +34,9 @@ public class EventCode {
 	public static final int HTTP_BATCHUPDATECOMMODITYSHELFSTATUS = ++BASECODE;
 
 	public static final int HTTP_UPDATECOMMODITYPRICE = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSURGENTSELLCOMMODIT = ++BASECODE;
+
+	public static final int HTTP_ADDBUSINESSURGENTSELLCOMMODITY = ++BASECODE;
 }
 

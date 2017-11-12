@@ -87,7 +87,7 @@
             android:id="@+id/rl_huojia_bottom"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/white"
+            android:background="@color/color_main"
             android:layout_alignParentBottom="true">
 
             <LinearLayout
@@ -169,7 +169,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="继续出仓"
+                        android:text="急需出仓"
                         android:textSize="16sp"
                         android:textColor="#555555"/>
                 </RelativeLayout>

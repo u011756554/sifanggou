@@ -15,8 +15,10 @@ import android.widget.TextView;
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.adapter.ShangPinAdapter;
+import com.app.sifanggou.bean.ChuShouType;
 import com.app.sifanggou.bean.CommodityInfoBean;
 import com.app.sifanggou.bean.HuoJiaType;
+import com.app.sifanggou.bean.ProductType;
 import com.app.sifanggou.bean.SaleType;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
@@ -39,6 +41,8 @@ public class ShangPinGuanLiActivity extends BaseActivity {
     //tab切换
     @ViewInject(R.id.tv_saleing)
     private TextView tvSaleing;
+    @ViewInject(R.id.tv_saled)
+    private TextView tvSaleed;
     @ViewInject(R.id.ll_putong)
     private LinearLayout llPuTong;
     @ViewInject(R.id.ll_daili)
@@ -155,6 +159,14 @@ public class ShangPinGuanLiActivity extends BaseActivity {
     }
 
     private void initListener() {
+        tvSaleed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShangPinGuanLiActivity.this,PiLiangGuanLiActivity.class);
+                intent.putExtra(PiLiangGuanLiActivity.KEY_CHUSHOUTYPE, ChuShouType.OFFSALE.getType());
+                startActivity(intent);
+            }
+        });
         llPuTong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,6 +225,11 @@ public class ShangPinGuanLiActivity extends BaseActivity {
             } else {
                 saleType = SaleType.ON_SALE_AGENCY.getType();
             }
+//            if (huoJiaType == HuoJiaType.PUTONG) {
+//                saleType = ProductType.COMMON.getType();
+//            } else {
+//                saleType = ProductType.AGENCY.getType();
+//            }
             page = 0;
             pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),saleType,AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
         }

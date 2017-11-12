@@ -27,7 +27,7 @@
                 android:id="@+id/tv_putonghuojia"
                 android:layout_width="match_parent"
                 android:layout_height="39dp"
-                android:text="新增普通商品货架"
+                android:text="普通商品货架"
                 android:textSize="15sp"
                 android:textColor="@color/color_huojia_tab"
                 android:gravity="center"/>
@@ -50,7 +50,7 @@
                 android:id="@+id/tv_dailihuojia"
                 android:layout_width="match_parent"
                 android:layout_height="39dp"
-                android:text="新增代理权商品货架"
+                android:text="代理权商品货架"
                 android:textSize="15sp"
                 android:textColor="@color/color_huojia_tab"
                 android:gravity="center"/>

@@ -47,22 +47,37 @@
             android:textColor="@color/black"
             android:maxLines="1"/>
 
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id = "@+id/rl_price"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_name"
-            android:layout_marginTop="12dp"
-            android:textSize="14sp"
-            android:textColor="#C30114"
-            android:maxLines="1"/>
+            android:layout_below="@id/tv_name">
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="12dp"
+                android:textSize="14sp"
+                android:textColor="#C30114"
+                android:maxLines="1"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/icon_price_edit"/>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/ll_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:layout_below="@id/tv_price"
+            android:layout_below="@id/rl_price"
             android:orientation="horizontal">
 
             <TextView

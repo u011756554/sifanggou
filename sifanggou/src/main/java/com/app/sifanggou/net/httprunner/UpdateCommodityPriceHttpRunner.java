@@ -26,7 +26,7 @@ public class UpdateCommodityPriceHttpRunner extends HttpRunner {
         String user_name = (String) event.getParamAtIndex(1);
         String commodity_id = (String) event.getParamAtIndex(2);
         String a_price = (String) event.getParamAtIndex(3);
-        String b_price = (String) event.getParamAtIndex(3);
+        String b_price = (String) event.getParamAtIndex(4);
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("business_code", business_code);

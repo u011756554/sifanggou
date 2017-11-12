@@ -50,9 +50,15 @@ public class AddBusinessCommodityHttpRunner extends HttpRunner {
             map.put("commodity_name", commodity_name);
             map.put("type", type);
             map.put("brand_name", brand_name);
-            map.put("first_level_category_code", first_level_category_code);
-            map.put("second_level_category_code", second_level_category_code);
-            map.put("third_level_category_code", third_level_category_code);
+            if(!TextUtils.isEmpty(first_level_category_code)) {
+                map.put("first_level_category_code", first_level_category_code);
+            }
+            if(!TextUtils.isEmpty(second_level_category_code)) {
+                map.put("second_level_category_code", second_level_category_code);
+            }
+            if(!TextUtils.isEmpty(third_level_category_code)) {
+                map.put("third_level_category_code", third_level_category_code);
+            }
             map.put("commodity_pic_url", commodity_pic_url);
             map.put("quality_grade", quality_grade);
             map.put("production_place", production_place);

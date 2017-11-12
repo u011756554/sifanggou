@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.R;
@@ -38,11 +39,12 @@ public class ShangPinPiLiangAdapter extends SetBaseAdapter<CommodityInfoBean> {
             holder.tvShouCang = (TextView) convertView.findViewById(R.id.tv_shoucang);
             holder.tvHuoJia = (TextView) convertView.findViewById(R.id.tv_huojia);
             holder.tvGengXin = (TextView) convertView.findViewById(R.id.tv_gengxin);
+            holder.rlPriceEdit = (RelativeLayout) convertView.findViewById(R.id.rl_price);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        CommodityInfoBean bean = mList.get(position);
+        final CommodityInfoBean bean = mList.get(position);
         if (bean.isSelect()) {
             holder.ivSelect.setSelected(true);
         } else {
@@ -75,6 +77,14 @@ public class ShangPinPiLiangAdapter extends SetBaseAdapter<CommodityInfoBean> {
         if (!TextUtils.isEmpty(bean.getAdd_time())) {
             holder.tvGengXin.setText("最近更新  "+ bean.getAdd_time());
         }
+        holder.rlPriceEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (priceEditListener != null ) {
+                    priceEditListener.updatePrice(bean.getCommodity_id(),bean.getA_price(),bean.getB_price());
+                }
+            }
+        });
         return convertView;
     }
 
@@ -87,5 +97,16 @@ public class ShangPinPiLiangAdapter extends SetBaseAdapter<CommodityInfoBean> {
         private TextView tvShouCang;
         private TextView tvHuoJia;
         private TextView tvGengXin;
+        private RelativeLayout rlPriceEdit;
+    }
+
+    public interface PriceEditListener {
+        void updatePrice(String commodity_id,String a_price,String b_price);
+    }
+
+    private PriceEditListener priceEditListener;
+
+    public void setPriceEditListener(PriceEditListener listener) {
+        this.priceEditListener = listener;
     }
 }

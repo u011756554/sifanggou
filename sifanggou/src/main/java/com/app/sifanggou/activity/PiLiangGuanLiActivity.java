@@ -29,6 +29,7 @@ import com.app.sifanggou.net.bean.GetBusinessCommodityInfoResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.PreManager;
+import com.app.sifanggou.view.EditPriceDialog;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
@@ -63,8 +64,8 @@ public class PiLiangGuanLiActivity extends BaseActivity {
     private RelativeLayout rlAll;
     @ViewInject(R.id.rl_xiajia)
     private RelativeLayout rlXiaJia;
-    @ViewInject(R.id.rl_updateprice)
-    private RelativeLayout rlUpdatePrice;
+//    @ViewInject(R.id.rl_updateprice)
+//    private RelativeLayout rlUpdatePrice;
     @ViewInject(R.id.rl_jixuchucang)
     private RelativeLayout rlJiXuChuCang;
     @ViewInject(R.id.ll_xiajia)
@@ -104,7 +105,7 @@ public class PiLiangGuanLiActivity extends BaseActivity {
     private ChuShouType chushouType = ChuShouType.ONSALE;
 
     public static final String KEY_CHUSHOUTYPE = "key_PiLiangGuanLiActivity_chushoutype";
-
+    private EditPriceDialog editPriceDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,6 +156,27 @@ public class PiLiangGuanLiActivity extends BaseActivity {
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 // TODO Auto-generated method stub
 
+            }
+        });
+
+        adapter.setPriceEditListener(new ShangPinPiLiangAdapter.PriceEditListener() {
+            @Override
+            public void updatePrice(final String commodity_id, final String a_price, final String b_price) {
+                if (editPriceDialog == null) {
+                    editPriceDialog = new EditPriceDialog(PiLiangGuanLiActivity.this);
+                }
+                editPriceDialog.setData(a_price,b_price);
+                editPriceDialog.setUpdatePriceListener(new EditPriceDialog.UpdatePriceListener() {
+                    @Override
+                    public void update(String aPrice, String bPrice) {
+                        if (loginBean == null || loginBean.getData() == null || loginBean.getData().getLogin_info() == null || loginBean.getData().getLogin_info().getBusiness_info() == null) {
+                            return;
+                        }
+                        pushEventBlock(EventCode.HTTP_UPDATECOMMODITYPRICE,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+                                loginBean.getData().getLogin_info().getBusiness_info().getMobile(),commodity_id, aPrice,bPrice);
+                    }
+                });
+                editPriceDialog.show();
             }
         });
 
@@ -320,31 +342,31 @@ public class PiLiangGuanLiActivity extends BaseActivity {
             }
         });
 
-        rlUpdatePrice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (loginBean == null || loginBean.getData() == null || loginBean.getData().getLogin_info() == null || loginBean.getData().getLogin_info().getBusiness_info() == null) {
-                    return;
-                }
-                List<CommodityInfoBean> tmpList = new ArrayList<CommodityInfoBean>();
-                for(CommodityInfoBean bean : list) {
-                    if (bean.isSelect()) {
-                        tmpList.add(bean);
-                    }
-                }
-                if (tmpList.size() == 0) {
-                    CommonUtils.showToast("请选择商品");
-                    return;
-                }
-                if (tmpList.size() != 1) {
-                    CommonUtils.showToast("最多修改一款商品价格");
-                    return;
-                }
-                CommodityInfoBean bean = tmpList.get(0);
-                pushEventBlock(EventCode.HTTP_UPDATECOMMODITYPRICE,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
-                        loginBean.getData().getLogin_info().getBusiness_info().getMobile(),bean.getCommodity_id(), "111","111");
-            }
-        });
+//        rlUpdatePrice.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (loginBean == null || loginBean.getData() == null || loginBean.getData().getLogin_info() == null || loginBean.getData().getLogin_info().getBusiness_info() == null) {
+//                    return;
+//                }
+//                List<CommodityInfoBean> tmpList = new ArrayList<CommodityInfoBean>();
+//                for(CommodityInfoBean bean : list) {
+//                    if (bean.isSelect()) {
+//                        tmpList.add(bean);
+//                    }
+//                }
+//                if (tmpList.size() == 0) {
+//                    CommonUtils.showToast("请选择商品");
+//                    return;
+//                }
+//                if (tmpList.size() != 1) {
+//                    CommonUtils.showToast("最多修改一款商品价格");
+//                    return;
+//                }
+//                CommodityInfoBean bean = tmpList.get(0);
+//                pushEventBlock(EventCode.HTTP_UPDATECOMMODITYPRICE,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+//                        loginBean.getData().getLogin_info().getBusiness_info().getMobile(),bean.getCommodity_id(), "111","111");
+//            }
+//        });
 
         rlJiXuChuCang.setOnClickListener(new View.OnClickListener() {
             @Override

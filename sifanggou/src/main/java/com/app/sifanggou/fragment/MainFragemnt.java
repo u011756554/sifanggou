@@ -6,6 +6,7 @@ import java.util.List;
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.activity.JiXuChuCangActivity;
+import com.app.sifanggou.activity.SearchActivity;
 import com.app.sifanggou.activity.ShangPinGuanLiActivity;
 import com.app.sifanggou.activity.UrlWebClientActivity;
 import com.app.sifanggou.adapter.GuangGaoPagerAdapter;
@@ -37,6 +38,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -49,7 +51,8 @@ public class MainFragemnt extends BaseFragment {
 	private LinearLayout llProductCenter;
 	@ViewInject(R.id.ll_myorder)
 	private LinearLayout llMyOrder;
-
+	@ViewInject(R.id.rl_search)
+	private RelativeLayout rlSearch;
 
 	private ViewPager mViewPager;
 	private GuangGaoPagerAdapter adapter;
@@ -176,6 +179,14 @@ public class MainFragemnt extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), ShangPinGuanLiActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		rlSearch.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), SearchActivity.class);
 				startActivity(intent);
 			}
 		});

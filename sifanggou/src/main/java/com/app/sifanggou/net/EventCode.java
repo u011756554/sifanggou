@@ -38,5 +38,19 @@ public class EventCode {
 	public static final int HTTP_GETBUSINESSURGENTSELLCOMMODIT = ++BASECODE;
 
 	public static final int HTTP_ADDBUSINESSURGENTSELLCOMMODITY = ++BASECODE;
+
+	public static final int HTTP_SERACHBUSINESSONNAME = ++BASECODE;
+
+	public static final int HTTP_SEARCHBUSINESSCOMMODITYONNAME = ++BASECODE;
+
+	public static final int HTTP_UPDATEBUSINESSSHOPPINGCARTCOMMODITYNUM = ++BASECODE;
+
+	public static final int HTTP_ADDBUSINESSSHOPPINGCART = ++BASECODE;
+
+	public static final int HTTP_DELBUSINESSSHOPPINGCART = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSSHOPPINGCARTLIST = ++BASECODE;
+
+	public static final int HTTP_BUSINESSSUBMITORDER = ++BASECODE;
 }
 

@@ -39,5 +39,19 @@ public class URLUtils {
 	public static final String GETBUSINESSURGENTSELLCOMMODIT = SERVER + "business/GetBusinessUrgentSellCommodity";
 
 	public static final String ADDBUSINESSURGENTSELLCOMMODITY = SERVER + "business/AddBusinessUrgentSellCommodity";
+
+	public static final String SERACHBUSINESSONNAME = SERVER + "business/SerachBusinessOnName";
+
+	public static final String SEARCHBUSINESSCOMMODITYONNAME = SERVER + "business/SearchBusinessCommodityOnName";
+
+	public static final String UPDATEBUSINESSSHOPPINGCARTCOMMODITYNUM = SERVER + "business/UpdateBusinessShoppingCartCommodityNum";
+
+	public static final String ADDBUSINESSSHOPPINGCART = SERVER + "business/AddBusinessShoppingCart";
+
+	public static final String DELBUSINESSSHOPPINGCART = SERVER + "business/DelBusinessShoppingCart";
+
+	public static final String GETBUSINESSSHOPPINGCARTLIST = SERVER + "business/GetBusinessShoppingCartList";
+
+	public static final String BUSINESSSUBMITORDER = SERVER + "business/BusinessSubmitOrder";
 }
 

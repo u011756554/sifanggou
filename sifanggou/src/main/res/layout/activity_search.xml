@@ -20,7 +20,7 @@
             android:layout_marginLeft="9dp">
 
             <TextView
-                android:id="@+id/tv_city"
+                android:id="@+id/tv_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="商品"
@@ -28,13 +28,20 @@
                 android:textColor="@color/black"
                 android:layout_gravity="center_vertical"/>
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_mini"
+                android:src="@drawable/icon_down"/>
+
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_cancel"
+            android:id="@+id/tv_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="取消"
+            android:text="搜索"
             android:textSize="14sp"
             android:textColor="@color/orange"
             android:layout_alignParentRight="true"
@@ -48,7 +55,7 @@
             android:background="@drawable/shape_bg_search_gray"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/ll_city"
-            android:layout_toLeftOf="@id/tv_cancel"
+            android:layout_toLeftOf="@id/tv_search"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal">
 
@@ -60,16 +67,14 @@
                 android:layout_marginLeft="@dimen/margin_small"
                 android:background="@drawable/icon_search"/>
 
-            <TextView
-                android:id="@+id/tv_search"
+            <ImageView
+                android:id="@+id/iv_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/margin_small"
-                android:text="搜索"
-                android:textSize="14sp"
-                android:textColor="@color/blue"/>
+                android:src="@drawable/icon_search_clear"/>
 
             <EditText
                 android:id="@+id/edt_search"
@@ -79,7 +84,7 @@
                 android:textSize="@dimen/textsize_small"
                 android:textColor="@color/black"
                 android:layout_toRightOf="@id/iv_search"
-                android:layout_toLeftOf="@id/tv_search"
+                android:layout_toLeftOf="@id/iv_delete"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/margin_small"
                 android:layout_marginRight="@dimen/margin_small"
@@ -90,5 +95,15 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/view_search_product"></include>
+        <include
+            layout="@layout/view_search_market"></include>
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -43,4 +43,7 @@ public class AppContext {
 	public static final String OSS_SECURITYTOKEN = "OSS_SecurityToken"; //阿里云OSS域名
 
 	public static final String OSS_BUCKET = "sifanggou-oss"; //阿里云BUCKET
+
+	public static final int PAGE = 0; //页码
+	public static final int PAGE_SIZE= 10; //分页数据
 }

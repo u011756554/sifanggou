@@ -26,6 +26,7 @@ public class SerachBusinessOnNameHttpRunner extends HttpRunner {
         String business_name = (String) event.getParamAtIndex(0);
         String item_num = (String) event.getParamAtIndex(1);
         String page_no = (String) event.getParamAtIndex(2);
+        String tag = (String) event.getParamAtIndex(3);
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("business_name", business_name);
@@ -49,6 +50,7 @@ public class SerachBusinessOnNameHttpRunner extends HttpRunner {
         if (checkParams(event, param)) {
             event.setSuccess(true);
             event.addReturnParam(param);
+            event.addReturnParam(tag);
         } else {
             event.setSuccess(false);
             if (!TextUtils.isEmpty(param.getMessage())) {

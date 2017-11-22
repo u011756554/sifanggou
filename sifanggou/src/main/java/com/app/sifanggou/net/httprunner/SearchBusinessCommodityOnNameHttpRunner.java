@@ -9,6 +9,7 @@ import com.app.sifanggou.net.HttpUtils;
 import com.app.sifanggou.net.URLUtils;
 import com.app.sifanggou.net.bean.BaseResponseBean;
 import com.app.sifanggou.net.bean.GetBusinessCommodityInfoResponseBean;
+import com.app.sifanggou.net.bean.SearchBusinessCommodityOnNameResponseBean;
 import com.app.sifanggou.net.bean.SerachBusinessOnNameResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 
@@ -24,6 +25,7 @@ public class SearchBusinessCommodityOnNameHttpRunner extends HttpRunner {
         String commodity_name = (String) event.getParamAtIndex(0);
         String item_num = (String) event.getParamAtIndex(1);
         String page_no = (String) event.getParamAtIndex(2);
+        String tag = (String) event.getParamAtIndex(3);
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("commodity_name", commodity_name);
@@ -39,7 +41,7 @@ public class SearchBusinessCommodityOnNameHttpRunner extends HttpRunner {
             return;
         }
 
-        GetBusinessCommodityInfoResponseBean param = gson.fromJson(result, GetBusinessCommodityInfoResponseBean.class);
+        SearchBusinessCommodityOnNameResponseBean param = gson.fromJson(result, SearchBusinessCommodityOnNameResponseBean.class);
         if (param == null) {
             event.setSuccess(false);
             return;
@@ -47,6 +49,7 @@ public class SearchBusinessCommodityOnNameHttpRunner extends HttpRunner {
         if (checkParams(event, param)) {
             event.setSuccess(true);
             event.addReturnParam(param);
+            event.addReturnParam(tag);
         } else {
             event.setSuccess(false);
             if (!TextUtils.isEmpty(param.getMessage())) {

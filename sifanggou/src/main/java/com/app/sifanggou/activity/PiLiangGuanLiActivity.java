@@ -90,8 +90,8 @@ public class PiLiangGuanLiActivity extends BaseActivity {
     private boolean isOver = false;
     private boolean isRefreshing = false;
     private boolean isFirst = true;
-    private int pageSize = 10;
-    private int page = 1;
+    private int pageSize = AppContext.PAGE_SIZE;
+    private int page = AppContext.PAGE;
     private int headHeight;
     private static final String KEY_REFRESH = "refresh";
     private static final String KEY_MORE = "more";

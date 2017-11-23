@@ -34,7 +34,16 @@ public class CommodityInfoBean extends BaseBean {
     private String commodity_id;
     private String add_time;
     private String first_level_category_code;
+    private int selectCount;
     private boolean isSelect = false;
+
+    public int getSelectCount() {
+        return selectCount;
+    }
+
+    public void setSelectCount(int selectCount) {
+        this.selectCount = selectCount;
+    }
 
     public boolean isSelect() {
         return isSelect;

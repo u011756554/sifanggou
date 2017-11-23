@@ -20,9 +20,15 @@ public class GetBusinessShoppingCartListHttpRunner extends HttpRunner {
     @Override
     public void onEventRun(Event event) throws Exception {
         String business_code = (String) event.getParamAtIndex(0);
+        String item_num = (String) event.getParamAtIndex(1);
+        String page_no = (String) event.getParamAtIndex(2);
+        String tag = (String) event.getParamAtIndex(3);
+
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("business_code", business_code);
+        map.put("item_num", item_num);
+        map.put("page_no", page_no);
 
         String result = HttpUtils.doPost(URLUtils.GETBUSINESSSHOPPINGCARTLIST, map);
 
@@ -41,6 +47,7 @@ public class GetBusinessShoppingCartListHttpRunner extends HttpRunner {
         if (checkParams(event, param)) {
             event.setSuccess(true);
             event.addReturnParam(param);
+            event.addReturnParam(tag);
         } else {
             event.setSuccess(false);
             if (!TextUtils.isEmpty(param.getMessage())) {

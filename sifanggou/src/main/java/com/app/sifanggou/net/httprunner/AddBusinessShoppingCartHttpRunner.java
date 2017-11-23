@@ -45,6 +45,7 @@ public class AddBusinessShoppingCartHttpRunner extends HttpRunner {
         if (checkParams(event, param)) {
             event.setSuccess(true);
             event.addReturnParam(param);
+            event.addReturnParam(commodity_num);
         } else {
             event.setSuccess(false);
             if (!TextUtils.isEmpty(param.getMessage())) {

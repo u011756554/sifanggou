@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,11 +40,14 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
             holder.tvNum = (TextView) convertView.findViewById(R.id.tv_num);
             holder.tvHuoJia = (TextView) convertView.findViewById(R.id.tv_huojia);
             holder.tvGengXin = (TextView) convertView.findViewById(R.id.tv_gengxin);
+            holder.edtCount = (EditText) convertView.findViewById(R.id.edt_count);
+            holder.tvAdd = (TextView) convertView.findViewById(R.id.tv_add);
+            holder.tvJian = (TextView) convertView.findViewById(R.id.tv_jian);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        CommodityInfoBean bean = mList.get(position);
+        final CommodityInfoBean bean = mList.get(position);
         if (!TextUtils.isEmpty(bean.getCommodity_pic_url())) {
             String[] urlList = bean.getCommodity_pic_url().split(",");
             ImageLoaderUtil.display(urlList[0],holder.ivPic);
@@ -71,6 +75,39 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
         if (!TextUtils.isEmpty(bean.getAdd_time())) {
             holder.tvGengXin.setText("最近更新  "+ bean.getAdd_time());
         }
+        holder.edtCount.setText(bean.getSelectCount()+"");
+
+        final EditText editCount = holder.edtCount;
+        holder.tvAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = Integer.valueOf(bean.getSelectCount());
+                count = count + 1;
+                bean.setSelectCount(count);
+                editCount.setText(count + "");
+            }
+        });
+
+        holder.tvJian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = Integer.valueOf(bean.getSelectCount());
+                if (count != 0) {
+                    count = count - 1;
+                }
+                bean.setSelectCount(count);
+                editCount.setText(count + "");
+            }
+        });
+
+        holder.ivAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (addListener != null && bean.getSelectCount() > 0) {
+                    addListener.add(bean);
+                }
+            }
+        });
         return convertView;
     }
 
@@ -83,5 +120,18 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
         private TextView tvNum;
         private TextView tvHuoJia;
         private TextView tvGengXin;
+        private TextView tvJian;
+        private TextView tvAdd;
+        private EditText edtCount;
+    }
+
+    public interface AddListener {
+        void add(CommodityInfoBean bean);
+    }
+
+    private AddListener addListener;
+
+    public void setListener(AddListener listener) {
+        this.addListener = listener;
     }
 }

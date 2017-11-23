@@ -254,7 +254,6 @@ public class ShangPinGuanLiActivity extends BaseActivity {
             } else {
                 saleType = SaleType.ON_SALE_AGENCY.getType();
             }
-            page = 0;
             pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),saleType,AppContext.ITEM_NUM+"",page + "",KEY_MORE);
         }
     }

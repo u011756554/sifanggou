@@ -1,5 +1,6 @@
 package com.app.sifanggou.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
@@ -68,6 +69,10 @@ public class SearchActivity extends BaseActivity {
     private SwipeRefreshLayout swipeRefreshLayoutProduct;
     @ViewInject(R.id.ll_product)
     private ListView listViewProduct;
+    @ViewInject(R.id.tv_mount)
+    private TextView tvCarMount;
+    @ViewInject(R.id.rl_car)
+    private RelativeLayout rlCar;
     private View listViewFooterViewProduct;
     private View emptyViewViewProduct;
     private TextView noMoreTextProduct;
@@ -104,7 +109,7 @@ public class SearchActivity extends BaseActivity {
     private static final String KEY_REFRESH = "refresh";
     private static final String KEY_MORE = "more";
 
-
+    private int carCount = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,8 +167,8 @@ public class SearchActivity extends BaseActivity {
         adapterMarket = new BusinessInfoBeanAdapter(SearchActivity.this,dataListMarket);
         swipeRefreshLayoutMarket.setColorSchemeResources(R.color.color_banner,R.color.color_banner,R.color.color_banner,R.color.color_banner);
         listViewFooterViewMarket = LayoutInflater.from(SearchActivity.this).inflate(R.layout.mode_more, null);
-        noMoreTextMarket = (TextView) listViewFooterViewProduct.findViewById(R.id.no_more);
-        loadingTextMarket = (TextView) listViewFooterViewProduct.findViewById(R.id.load_more);
+        noMoreTextMarket = (TextView) listViewFooterViewMarket.findViewById(R.id.no_more);
+        loadingTextMarket = (TextView) listViewFooterViewMarket.findViewById(R.id.load_more);
         emptyViewViewMarket = LayoutInflater.from(SearchActivity.this).inflate(R.layout.mode_empty, null);
 
         listViewMarket.addHeaderView(emptyViewViewMarket);
@@ -180,7 +185,7 @@ public class SearchActivity extends BaseActivity {
                         && listViewMarket.getLastVisiblePosition() == listViewMarket.getCount() - 1)
                 {
                     if(dataListMarket.size() != 0)
-                        loadProduct();
+                        loadMarket();
                 }
             }
 
@@ -259,6 +264,21 @@ public class SearchActivity extends BaseActivity {
                 typeWindow.showAsDropDown(llCity);
             }
         });
+
+        adapterProduct.setListener(new CommodityInfoBeanAdapter.AddListener() {
+            @Override
+            public void add(CommodityInfoBean bean) {
+                carAdd(bean);
+            }
+        });
+
+        rlCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchActivity.this,CarActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initPopupWindow() {
@@ -292,11 +312,11 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void searchBusiness(String search,int item_num,int page_no,String tag) {
-        pushEvent(EventCode.HTTP_SERACHBUSINESSONNAME,search,item_num+"",page_no+"",tag);
+        pushEventNoProgress(EventCode.HTTP_SERACHBUSINESSONNAME,search,item_num+"",page_no+"",tag);
     }
 
     private void searchCommodity(String search,int item_num,int page_no,String tag) {
-        pushEvent(EventCode.HTTP_SEARCHBUSINESSCOMMODITYONNAME,search,item_num+"",page_no+"",tag);
+        pushEventNoProgress(EventCode.HTTP_SEARCHBUSINESSCOMMODITYONNAME,search,item_num+"",page_no+"",tag);
     }
 
     private void car() {
@@ -305,9 +325,9 @@ public class SearchActivity extends BaseActivity {
         }
     }
 
-    private void carAdd() {
+    private void carAdd(CommodityInfoBean bean) {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
-            pushEvent(EventCode.HTTP_ADDBUSINESSSHOPPINGCART,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),20+"",1+"");
+            pushEventNoProgress(EventCode.HTTP_ADDBUSINESSSHOPPINGCART,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),bean.getCommodity_id(),bean.getSelectCount()+"");
         }
     }
 
@@ -317,15 +337,24 @@ public class SearchActivity extends BaseActivity {
         }
     }
 
-    private void carget() {
+    private void getCar() {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
-            pushEvent(EventCode.HTTP_GETBUSINESSSHOPPINGCARTLIST,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code());
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSSHOPPINGCARTLIST,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code());
         }
     }
 
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
+        if (event.getEventCode() == EventCode.HTTP_ADDBUSINESSSHOPPINGCART) {
+            if (event.isSuccess()) {
+                String commodity_num = (String) event.getReturnParamAtIndex(1);
+                carCount =  carCount + Integer.valueOf(commodity_num);
+                tvCarMount.setText(carCount+"");
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
         if (event.getEventCode() == EventCode.HTTP_SERACHBUSINESSONNAME) {
             if (event.isSuccess()) {
                 String type = (String) event.getReturnParamAtIndex(1);

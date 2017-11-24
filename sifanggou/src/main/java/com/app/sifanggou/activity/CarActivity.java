@@ -14,6 +14,7 @@ import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.adapter.CarAdapter;
 import com.app.sifanggou.adapter.ShangPinAdapter;
+import com.app.sifanggou.bean.CarBean;
 import com.app.sifanggou.bean.CommodityInfoBean;
 import com.app.sifanggou.bean.HuoJiaType;
 import com.app.sifanggou.bean.SaleType;
@@ -21,9 +22,11 @@ import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
 import com.app.sifanggou.net.bean.BaseResponseBean;
 import com.app.sifanggou.net.bean.GetBusinessCommodityInfoResponseBean;
+import com.app.sifanggou.net.bean.GetBusinessShoppingCartListResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.PreManager;
+import com.app.sifanggou.view.MyListView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
@@ -43,7 +46,7 @@ public class CarActivity extends BaseActivity {
     @ViewInject(R.id.srl_splist)
     private SwipeRefreshLayout swipeRefreshLayout;
     @ViewInject(R.id.ll_sp)
-    ListView listView;
+    private MyListView listView;
     private View listViewFooterView;
     private View emptyViewView;
     private TextView noMoreText;
@@ -59,7 +62,7 @@ public class CarActivity extends BaseActivity {
     private static final String KEY_MORE = "more";
 
     private CarAdapter adapter;
-    private List<BaseResponseBean> list = new ArrayList<BaseResponseBean>();
+    private List<CarBean> list = new ArrayList<CarBean>();
     private LoginResponseBean loginBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,76 +167,73 @@ public class CarActivity extends BaseActivity {
             if (event.isSuccess()) {
                 String type = (String) event.getReturnParamAtIndex(1);
                 if (type.equals(KEY_REFRESH)) {
-//                    if (event.isSuccess()) {
-//                        GetBusinessCommodityInfoResponseBean bean = (GetBusinessCommodityInfoResponseBean) event.getReturnParamAtIndex(0);
-//                        if (bean == null || bean.getData() == null || bean.getData().getBusiness_commodity_info() == null) {
-//                            return;
-//                        }
-//                        List<CommodityInfoBean> tmpList = bean.getData().getBusiness_commodity_info();
-//                        if (tmpList != null) {
-//                            page++;
-//                            list.clear();
-//                            adapter.updateData(tmpList);
-//                            if (list.size() <= 0) {
-//                                setNoData(true);
-//                            } else {
-//                                setNoData(false);
-//                                if (tmpList.size() < pageSize) {
-//                                    isOver = true;
-//                                    listViewFooterView.setVisibility(View.VISIBLE);
-//                                    noMoreText.setVisibility(View.VISIBLE);
-//                                    loadingText.setVisibility(View.GONE);
-//                                }
-//                            }
-//                        } else {
-//                            if (list.size() <= 0) {
-//                                setNoData(true);
-//                            } else {
-//                                setNoData(false);
-//                            }
-//                        }
-//                        swipeRefreshLayout.setRefreshing(false);
-//                        adapter.notifyDataSetChanged();
-//                        isRefreshing = false;
-//                    } else {
-//                        CommonUtils.showToast(event.getFailMessage());
-//                    }
-                } else {
-                    if (event.isSuccess()) {
-//                        GetBusinessCommodityInfoResponseBean bean = (GetBusinessCommodityInfoResponseBean) event.getReturnParamAtIndex(0);
-//                        if (bean == null || bean.getData() == null || bean.getData().getBusiness_commodity_info() == null) {
-//                            return;
-//                        }
-//                        List<CommodityInfoBean> tmpList = bean.getData().getBusiness_commodity_info();
-//                        isLoading = false;
-//                        if (tmpList != null) {
-//                            page++;
-//                            adapter.addAll(tmpList);
-//                            if (list.size() <= 0) {
-//                                setNoData(true);
-//                            } else {
-//                                setNoData(false);
-//                                if (tmpList.size() < pageSize) {
-//                                    isOver = true;
-//                                    listViewFooterView.setVisibility(View.VISIBLE);
-//                                    noMoreText.setVisibility(View.VISIBLE);
-//                                    loadingText.setVisibility(View.GONE);
-//                                } else {
-//                                    listViewFooterView.setVisibility(View.GONE);
-//                                }
-//                            }
-//                        } else {
-//                            if (list.size() <= 0) {
-//                                setNoData(true);
-//                            } else {
-//                                setNoData(false);
-//                            }
-//                        }
+                    GetBusinessShoppingCartListResponseBean bean = (GetBusinessShoppingCartListResponseBean) event.getReturnParamAtIndex(0);
+                    if (bean == null || bean.getData() == null || bean.getData().getBusiness_shoppingcart_list() == null) {
+                            return;
+                    }
+                    List<CarBean> tmpList = new ArrayList<CarBean>();
+                    for(CarBean carBean : bean.getData().getBusiness_shoppingcart_list().values()) {
+                        tmpList.add(carBean);
+                    }
+                    if (tmpList != null) {
+                        page++;
+                        list.clear();
+                        adapter.updateData(tmpList);
+                        if (list.size() <= 0) {
+                            setNoData(true);
+                        } else {
+                            setNoData(false);
+                            if (tmpList.size() < pageSize) {
+                                isOver = true;
+                                listViewFooterView.setVisibility(View.VISIBLE);
+                                noMoreText.setVisibility(View.VISIBLE);
+                                loadingText.setVisibility(View.GONE);
+                            }
+                        }
                     } else {
-                        CommonUtils.showToast(event.getFailMessage());
+                        if (list.size() <= 0) {
+                            setNoData(true);
+                        } else {
+                            setNoData(false);
+                        }
+                    }
+                    swipeRefreshLayout.setRefreshing(false);
+                    adapter.notifyDataSetChanged();
+                    isRefreshing = false;
+                } else {
+                    GetBusinessShoppingCartListResponseBean bean = (GetBusinessShoppingCartListResponseBean) event.getReturnParamAtIndex(0);
+                    if (bean == null || bean.getData() == null || bean.getData().getBusiness_shoppingcart_list() == null) {
+                        return;
+                    }
+                    List<CarBean> tmpList = new ArrayList<CarBean>();
+                    for(CarBean carBean : bean.getData().getBusiness_shoppingcart_list().values()) {
+                        tmpList.add(carBean);
+                    }
+                    isLoading = false;
+                    if (tmpList != null) {
+                        page++;
+                        adapter.addAll(tmpList);
+                        if (list.size() <= 0) {
+                            setNoData(true);
+                        } else {
+                            setNoData(false);
+                            if (tmpList.size() < pageSize) {
+                                isOver = true;
+                                listViewFooterView.setVisibility(View.VISIBLE);
+                                noMoreText.setVisibility(View.VISIBLE);
+                                loadingText.setVisibility(View.GONE);
+                            } else {
+                                listViewFooterView.setVisibility(View.GONE);
+                            }
+                        }
+                    } else {
+                        if (list.size() <= 0) {
+                            setNoData(true);
+                        } else {
+                            setNoData(false);
+                        }
                     }
                 }
-
             } else {
                 CommonUtils.showToast(event.getFailMessage());
             }

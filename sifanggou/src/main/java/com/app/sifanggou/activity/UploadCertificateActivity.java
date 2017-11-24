@@ -28,6 +28,7 @@ import com.app.sifanggou.utils.PictureUtils;
 import com.app.sifanggou.view.AgentLevelDialog;
 import com.app.sifanggou.view.BaseDialog;
 import com.app.sifanggou.view.ChangeHeadDialog;
+import com.app.sifanggou.view.ConfirmDialog;
 import com.app.sifanggou.view.MarketSelectDialog;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -103,6 +104,8 @@ public class UploadCertificateActivity extends PicBaseActivity {
 	private ChangeHeadDialog heTongDialog;
 	private String business_license; //商家营业执照图片URL
 	private String highest_agency_contract_pic_url;//商家最高代理级别的代理合同url
+
+	private ConfirmDialog confirmDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -339,76 +342,99 @@ public class UploadCertificateActivity extends PicBaseActivity {
 		// TODO Auto-generated method stub
 		super.onEventRunEnd(event);
 		if (event.getEventCode() == EventCode.HTTP_GETPROVINCECITYZONE) {
-			String province_code = (String) event.getReturnParamAtIndex(1);
-			if (TextUtils.isEmpty(province_code)) {
-				ProvinceResponseBean data = (ProvinceResponseBean) event.getReturnParamAtIndex(0);
-				if (data != null && data.getData() != null) {
-					provinceDataList = data.getData().getProvince_info();
-					cityDataList.clear();
-					provinceList.clear();
-					cityList.clear();
-					for(ProvinceDataBean pdata : provinceDataList) {
-						provinceList.add(pdata.getName());
+			if (event.isSuccess()) {
+				String province_code = (String) event.getReturnParamAtIndex(1);
+				if (TextUtils.isEmpty(province_code)) {
+					ProvinceResponseBean data = (ProvinceResponseBean) event.getReturnParamAtIndex(0);
+					if (data != null && data.getData() != null) {
+						provinceDataList = data.getData().getProvince_info();
+						cityDataList.clear();
+						provinceList.clear();
+						cityList.clear();
+						for(ProvinceDataBean pdata : provinceDataList) {
+							provinceList.add(pdata.getName());
+						}
+						marketDialog.setProvince(provinceList, 0);
+						if (provinceList.size() > 0) {
+							selectMyProvice(provinceList.get(0));
+						}
 					}
-					marketDialog.setProvince(provinceList, 0);
-					if (provinceList.size() > 0) {
-						selectMyProvice(provinceList.get(0));
+				} else {
+					CityResponseBean data = (CityResponseBean) event.getReturnParamAtIndex(0);
+					if (data != null && data.getData() != null) {
+						cityDataList = data.getData().getCity_info();
+						cityList.clear();
+						for(CityDataBean pdata : cityDataList) {
+							cityList.add(pdata.getName());
+						}
+						marketDialog.setCity(cityList, 0);
+						if (cityList.size() > 0) {
+							selectMyCity(cityList.get(0));
+						}
 					}
 				}
 			} else {
-				CityResponseBean data = (CityResponseBean) event.getReturnParamAtIndex(0);
-				if (data != null && data.getData() != null) {
-					cityDataList = data.getData().getCity_info();
-					cityList.clear();
-					for(CityDataBean pdata : cityDataList) {
-						cityList.add(pdata.getName());
-					}
-					marketDialog.setCity(cityList, 0);
-					if (cityList.size() > 0) {
-						selectMyCity(cityList.get(0));
-					}
-				}
+				showToast(event.getFailMessage());
 			}
-		} else {
-			showToast(event.getFailMessage());
 		}
 		
 		if (event.getEventCode() == EventCode.HTTP_GETCITYMARKET) {
-			CityMarketResponseBean dataBean = (CityMarketResponseBean) event.getReturnParamAtIndex(0);
-			if (dataBean != null && dataBean.getData() != null) {
-				marketDataList = dataBean.getData().getCity_market();
-				marketList.clear();
-				for(CityMarketBean cmb : marketDataList) {
-					marketList.add(cmb.getName());
+			if (event.isSuccess()) {
+				CityMarketResponseBean dataBean = (CityMarketResponseBean) event.getReturnParamAtIndex(0);
+				if (dataBean != null && dataBean.getData() != null) {
+					marketDataList = dataBean.getData().getCity_market();
+					marketList.clear();
+					for(CityMarketBean cmb : marketDataList) {
+						marketList.add(cmb.getName());
+					}
+					marketDialog.setMarket(marketList, 0);
 				}
-				marketDialog.setMarket(marketList, 0);
+			} else {
+				showToast(event.getFailMessage());
 			}
-		} else {
-			showToast(event.getFailMessage());
 		}
 
 		if (event.getEventCode() == EventCode.HTTP_GETAGENTLEVELINFO) {
-			AgentLevelResponseBean dataBean = (AgentLevelResponseBean) event.getReturnParamAtIndex(0);
-			if (dataBean != null && dataBean.getData() != null) {
-				agentLevelDataList = dataBean.getData().getAgent_level_list();
-				agentLevelList.clear();
-				for(AgentLevelBean mlb : agentLevelDataList) {
-					agentLevelList.add(mlb.getLevel_name());
+			if (event.isSuccess()) {
+				AgentLevelResponseBean dataBean = (AgentLevelResponseBean) event.getReturnParamAtIndex(0);
+				if (dataBean != null && dataBean.getData() != null) {
+					agentLevelDataList = dataBean.getData().getAgent_level_list();
+					agentLevelList.clear();
+					for(AgentLevelBean mlb : agentLevelDataList) {
+						agentLevelList.add(mlb.getLevel_name());
+					}
+					agentLevelDialog.setData(agentLevelList,0);
 				}
-				agentLevelDialog.setData(agentLevelList,0);
+			} else {
+				showToast(event.getFailMessage());
 			}
-		} else {
-			showToast(event.getFailMessage());
 		}
 
 		if (event.getEventCode() == EventCode.HTTP_BUSINESSREGIST) {
-			BaseResponseBean bean = (BaseResponseBean) event.getReturnParamAtIndex(0);
-			if (bean != null && TextUtils.isEmpty(bean.getMessage())) {
-				showToast(bean.getMessage());
-				finish();
+			if (event.isSuccess()) {
+				BaseResponseBean bean = (BaseResponseBean) event.getReturnParamAtIndex(0);
+				if (bean != null && !TextUtils.isEmpty(bean.getMessage())) {
+					if (confirmDialog == null) {
+						confirmDialog = new ConfirmDialog(UploadCertificateActivity.this);
+					}
+					if (confirmDialog.isShowing()) {
+						return;
+					}
+					confirmDialog.setContent(bean.getMessage());
+					confirmDialog.setListener(new BaseDialog.DialogListener() {
+						@Override
+						public void update(Object object) {
+							String result = (String) object;
+							if ("ok".equals(result)) {
+								finish();
+							}
+						}
+					});
+					confirmDialog.show();
+				}
+			} else {
+				showToast(event.getFailMessage());
 			}
-		} else {
-			showToast(event.getFailMessage());
 		}
 	}
 

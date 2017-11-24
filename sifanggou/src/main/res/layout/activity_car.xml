@@ -66,7 +66,7 @@
             android:layout_above="@id/ll_bottom"
             android:background="@color/color_main">
 
-            <ListView
+            <com.app.sifanggou.view.MyListView
                 android:id="@+id/ll_sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -8,6 +8,7 @@ import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.HttpUtils;
 import com.app.sifanggou.net.URLUtils;
 import com.app.sifanggou.net.bean.BaseResponseBean;
+import com.app.sifanggou.net.bean.GetBusinessShoppingCartListResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class GetBusinessShoppingCartListHttpRunner extends HttpRunner {
             return;
         }
 
-        BaseResponseBean param = gson.fromJson(result, BaseResponseBean.class);
+        GetBusinessShoppingCartListResponseBean param = gson.fromJson(result, GetBusinessShoppingCartListResponseBean.class);
         if (param == null) {
             event.setSuccess(false);
             return;

@@ -13,33 +13,34 @@ import com.app.sifanggou.utils.CommonUtils;
 import java.util.HashMap;
 
 /**
- * Created by Administrator on 2017/11/19.
+ * Created by Administrator on 2017/12/2.
  */
 
-public class BusinessSubmitOrderHttpRunner extends HttpRunner {
-
+public class UpdateBusinessDeliverAddressHttpRunner extends HttpRunner {
     @Override
     public void onEventRun(Event event) throws Exception {
         String business_code = (String) event.getParamAtIndex(0);
         String user_name = (String) event.getParamAtIndex(1);
         String trans_no = (String) event.getParamAtIndex(2);
         String sign = (String) event.getParamAtIndex(3);
-        String amount = (String) event.getParamAtIndex(4);
-        String express_fee = (String) event.getParamAtIndex(5);
-        String pay_mode = (String) event.getParamAtIndex(6);
-        String delivery_id = (String) event.getParamAtIndex(7);
+        String id = (String) event.getParamAtIndex(4);
+        String receiver_name = (String) event.getParamAtIndex(5);
+        String mobile = (String) event.getParamAtIndex(6);
+        String address = (String) event.getParamAtIndex(7);
+        String delivery_time = (String) event.getParamAtIndex(8);
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("business_code", business_code);
         map.put("user_name", user_name);
         map.put("trans_no", trans_no);
         map.put("sign", sign);
-        map.put("amount", amount);
-        map.put("express_fee", express_fee);
-        map.put("pay_mode", pay_mode);
-        map.put("delivery_id", delivery_id);
+        map.put("id", id);
+        map.put("receiver_name", receiver_name);
+        map.put("mobile", mobile);
+        map.put("address", address);
+        map.put("delivery_time", delivery_time);
 
-        String result = HttpUtils.doPost(URLUtils.BUSINESSSUBMITORDER, map);
+        String result = HttpUtils.doPost(URLUtils.UPDATEBUSINESSDELIVERADDRESS, map);
 
         Log.i(AppContext.LOG_NET, result);
         if (CommonUtils.isEmpty(result)) {

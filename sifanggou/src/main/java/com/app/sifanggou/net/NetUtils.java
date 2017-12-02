@@ -9,9 +9,12 @@ import com.app.sifanggou.net.httprunner.BatchUpdateCommodityShelfStatusHttpRunne
 import com.app.sifanggou.net.httprunner.BusinessChangePasswordHttpRunner;
 import com.app.sifanggou.net.httprunner.BusinessLoginHttpRunner;
 import com.app.sifanggou.net.httprunner.BusinessRegistHttpRunner;
+import com.app.sifanggou.net.httprunner.BusinessSubmitOrderHttpRunner;
+import com.app.sifanggou.net.httprunner.DelBusinessDeliverAddressHttpRunner;
 import com.app.sifanggou.net.httprunner.DelBusinessShoppingCartHttpRunner;
 import com.app.sifanggou.net.httprunner.GetAgentLevelInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetAliyunstsTokenHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinenessOrderInfoSpecialStatusHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCanAllocateShelfNumHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCommodityInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessDeliverAddressHttpRunner;
@@ -24,6 +27,7 @@ import com.app.sifanggou.net.httprunner.GetShelfAmountHttpRunner;
 import com.app.sifanggou.net.httprunner.GetVerifyCodeHttpRunner;
 import com.app.sifanggou.net.httprunner.SearchBusinessCommodityOnNameHttpRunner;
 import com.app.sifanggou.net.httprunner.SerachBusinessOnNameHttpRunner;
+import com.app.sifanggou.net.httprunner.UpdateBusinessDeliverAddressHttpRunner;
 import com.app.sifanggou.net.httprunner.UpdateBusinessShoppingCartCommodityNumHttpRunner;
 import com.app.sifanggou.net.httprunner.UpdateCommodityPriceHttpRunner;
 
@@ -57,6 +61,10 @@ public class NetUtils {
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSSHOPPINGCARTLIST, new GetBusinessShoppingCartListHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSDELIVERADDRESS, new GetBusinessDeliverAddressHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_ADDBUSINESSDELIVERADDRESS, new AddBusinessDeliverAddressHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_DELBUSINESSDELIVERADDRESS, new DelBusinessDeliverAddressHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_UPDATEBUSINESSDELIVERADDRESS, new UpdateBusinessDeliverAddressHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_BUSINESSSUBMITORDER, new BusinessSubmitOrderHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINENESSORDERINFOSPECIALSTATUS, new GetBusinenessOrderInfoSpecialStatusHttpRunner());
 	}
 }
 

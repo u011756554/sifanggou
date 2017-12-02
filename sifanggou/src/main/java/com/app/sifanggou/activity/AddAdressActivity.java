@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.bean.AddressTimeType;
+import com.app.sifanggou.bean.AdressBean;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
 import com.app.sifanggou.net.bean.LoginResponseBean;
@@ -46,9 +47,21 @@ public class AddAdressActivity extends BaseActivity {
     private String timeType = AddressTimeType.WORKDAY.getType();
     private String area = "";
     private LoginResponseBean loginBean;
+
+    public static final String KEY_TYPE = "key_AddAdressActivity_type";
+    public static final String KEY_DATA = "key_AddAdressActivity_data";
+    public static final String TYPE_EDIT = "edit";
+    private String type = "";
+    private AdressBean adressBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        type = getIntent().getStringExtra(KEY_TYPE);
+        if (type == null) {
+            type = "";
+        }
+        adressBean = (AdressBean) getIntent().getSerializableExtra(KEY_DATA);
+
         initView();
         initData();
         initListener();
@@ -56,9 +69,20 @@ public class AddAdressActivity extends BaseActivity {
 
     private void initView() {
         addBack(R.id.rl_back);
-        setTitle("添加收货地址");
+        if (type.equals(TYPE_EDIT)) {
+            setTitle("编辑收货地址");
+        } else {
+            setTitle("添加收货地址");
+        }
 
         addressTypeDialog = new AddressTypeDialog(AddAdressActivity.this);
+
+        if (adressBean != null) {
+            edtShouHuo.setText(adressBean.getReceiver_name());
+            edtPhone.setText(adressBean.getMobile());
+            edtAddress.setText(adressBean.getAddress());
+            tvTime.setText(adressBean.getDelivery_time());
+        }
     }
 
     private void initData() {
@@ -66,7 +90,7 @@ public class AddAdressActivity extends BaseActivity {
         for(int i = 0 ;i< AddressTimeType.values().length ; i++) {
             typeList.add(AddressTimeType.values()[i].getType());
         }
-        addressTypeDialog.setData(typeList,0);
+        addressTypeDialog.setData(typeList,1);
         area = tvArea.getText().toString();
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
     }
@@ -87,7 +111,7 @@ public class AddAdressActivity extends BaseActivity {
             }
         });
 
-        setRightTextClickListener("保存", new View.OnClickListener() {
+        setRightTextClickListener("提交", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (loginBean == null || loginBean.getData() == null || loginBean.getData().getLogin_info() == null || loginBean.getData().getLogin_info().getBusiness_info() == null) {
@@ -111,8 +135,12 @@ public class AddAdressActivity extends BaseActivity {
                 String sign = CommonUtils.getSign(business_code,user_name,trans_no, PreManager.getString(getApplicationContext(), AppContext.USER_PWD));
                 String receiver_name = edtShouHuo.getText().toString();
                 String mobile = edtPhone.getText().toString();
-                String address = area + edtAddress.getText().toString();
-                pushEventBlock(EventCode.HTTP_ADDBUSINESSDELIVERADDRESS,business_code,user_name,trans_no,sign,receiver_name,mobile,address,timeType);
+                String address = edtAddress.getText().toString();
+                if (type.equals(TYPE_EDIT)) {
+                    pushEventBlock(EventCode.HTTP_UPDATEBUSINESSDELIVERADDRESS,business_code,user_name,trans_no,sign,adressBean.getDelivery_id(),receiver_name,mobile,address,timeType);
+                } else {
+                    pushEventBlock(EventCode.HTTP_ADDBUSINESSDELIVERADDRESS,business_code,user_name,trans_no,sign,receiver_name,mobile,address,timeType);
+                }
             }
         });
     }
@@ -121,6 +149,14 @@ public class AddAdressActivity extends BaseActivity {
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
         if (event.getEventCode() == EventCode.HTTP_ADDBUSINESSDELIVERADDRESS) {
+            if (event.isSuccess()) {
+                setResult(Activity.RESULT_OK);
+                finish();
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
+        if (event.getEventCode() == EventCode.HTTP_UPDATEBUSINESSDELIVERADDRESS) {
             if (event.isSuccess()) {
                 setResult(Activity.RESULT_OK);
                 finish();

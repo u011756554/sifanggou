@@ -1,5 +1,6 @@
 package com.app.sifanggou.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
@@ -66,6 +67,7 @@ public class CarActivity extends BaseActivity {
     private CarAdapter adapter;
     private List<CarBean> list = new ArrayList<CarBean>();
     private LoginResponseBean loginBean;
+    private GetBusinessShoppingCartListResponseBean orderBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,7 +140,18 @@ public class CarActivity extends BaseActivity {
     }
 
     private void initListener() {
-
+        btnXiaDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (orderBean == null) {
+                    CommonUtils.showToast("没有数据");
+                    return;
+                }
+                Intent intent = new Intent(CarActivity.this,ConfirmOrderActivity.class);
+                intent.putExtra(ConfirmOrderActivity.KEY_DATA,orderBean);
+                startActivity(intent);
+            }
+        });
     }
 
     private void load() {
@@ -180,6 +193,7 @@ public class CarActivity extends BaseActivity {
                 && !TextUtils.isEmpty(bean.getData().getBusiness_shoppingcart_list().getCommodity_total_amount())) {
                 float price = Float.valueOf(bean.getData().getBusiness_shoppingcart_list().getCommodity_total_amount()) / 100;
                 tvPrice.setText(price+"");
+                orderBean = bean;
         }
     }
 

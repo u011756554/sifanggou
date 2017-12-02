@@ -13,33 +13,25 @@ import com.app.sifanggou.utils.CommonUtils;
 import java.util.HashMap;
 
 /**
- * Created by Administrator on 2017/11/19.
+ * Created by Administrator on 2017/12/2.
  */
 
-public class BusinessSubmitOrderHttpRunner extends HttpRunner {
-
+public class GetBusinenessOrderInfoSpecialStatusHttpRunner extends HttpRunner {
     @Override
     public void onEventRun(Event event) throws Exception {
         String business_code = (String) event.getParamAtIndex(0);
-        String user_name = (String) event.getParamAtIndex(1);
-        String trans_no = (String) event.getParamAtIndex(2);
-        String sign = (String) event.getParamAtIndex(3);
-        String amount = (String) event.getParamAtIndex(4);
-        String express_fee = (String) event.getParamAtIndex(5);
-        String pay_mode = (String) event.getParamAtIndex(6);
-        String delivery_id = (String) event.getParamAtIndex(7);
+        String type = (String) event.getParamAtIndex(1);
+        String item_num = (String) event.getParamAtIndex(2);
+        String page_no = (String) event.getParamAtIndex(3);
+        String tag = (String) event.getParamAtIndex(4);
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("business_code", business_code);
-        map.put("user_name", user_name);
-        map.put("trans_no", trans_no);
-        map.put("sign", sign);
-        map.put("amount", amount);
-        map.put("express_fee", express_fee);
-        map.put("pay_mode", pay_mode);
-        map.put("delivery_id", delivery_id);
+        map.put("type", type);
+        map.put("item_num", item_num);
+        map.put("page_no", page_no);
 
-        String result = HttpUtils.doPost(URLUtils.BUSINESSSUBMITORDER, map);
+        String result = HttpUtils.doPost(URLUtils.GETBUSINENESSORDERINFOSPECIALSTATUS, map);
 
         Log.i(AppContext.LOG_NET, result);
         if (CommonUtils.isEmpty(result)) {
@@ -56,6 +48,7 @@ public class BusinessSubmitOrderHttpRunner extends HttpRunner {
         if (checkParams(event, param)) {
             event.setSuccess(true);
             event.addReturnParam(param);
+            event.addReturnParam(tag);
         } else {
             event.setSuccess(false);
             if (!TextUtils.isEmpty(param.getMessage())) {

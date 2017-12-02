@@ -50,7 +50,7 @@ public class CarItemAdapter extends SetBaseAdapter<CarItemBean> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        CarItemBean bean = mList.get(position);
+        final CarItemBean bean = mList.get(position);
         if (!TextUtils.isEmpty(bean.getCommodity_pic_url())) {
             ImageLoaderUtil.display(bean.getCommodity_pic_url(),holder.ivPic);
         }

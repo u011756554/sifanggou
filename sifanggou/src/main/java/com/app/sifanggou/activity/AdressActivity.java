@@ -57,8 +57,10 @@ public class AdressActivity extends BaseActivity {
     private List<AdressBean> list = new ArrayList<AdressBean>();
     private LoginResponseBean loginBean;
     public static final String KEY_SELECT = "key_AdressActivity_select";
-    public static final String TYPE = "select";
+    public static final String TYPE_SELECT = "select";
     private String type = "";
+    public static final String KEY_DATA = "key_AdressActivity_data";
+    private AdressBean dataBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +106,29 @@ public class AdressActivity extends BaseActivity {
             }
         });
 
+        adapter.setListener(new AddressAdapter.UpdateListener() {
+            @Override
+            public void delete(AdressBean bean) {
+                if (bean != null) {
+                    if (loginBean == null || loginBean.getData() == null || loginBean.getData().getLogin_info() == null || loginBean.getData().getLogin_info().getBusiness_info() == null) {
+                        return;
+                    }
+                    String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
+                    String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
+                    String trans_no = System.currentTimeMillis() + "";
+                    String sign = CommonUtils.getSign(business_code,user_name,trans_no, PreManager.getString(getApplicationContext(), AppContext.USER_PWD));
+                    pushEventBlock(EventCode.HTTP_DELBUSINESSDELIVERADDRESS,business_code,user_name,trans_no,sign,bean.getDelivery_id());
+                }
+            }
+
+            @Override
+            public void edit(AdressBean bean) {
+                Intent intent = new Intent(AdressActivity.this,AddAdressActivity.class);
+                intent.putExtra(AddAdressActivity.KEY_TYPE,AddAdressActivity.TYPE_EDIT);
+                intent.putExtra(AddAdressActivity.KEY_DATA,bean);
+                startActivityForResult(intent,REQUESTCODE_EDIT);
+            }
+        });
         listView.setAdapter(adapter);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -119,6 +144,7 @@ public class AdressActivity extends BaseActivity {
         if (type == null) {
             type = "";
         }
+        dataBean = (AdressBean) getIntent().getSerializableExtra(KEY_DATA);
         refreshData();
     }
 
@@ -130,6 +156,36 @@ public class AdressActivity extends BaseActivity {
                 startActivityForResult(intent,REQUESTCODE_ADD);
             }
         });
+
+        if (TYPE_SELECT.equals(type)) {
+            setRightTextClickListener("提交", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AdressBean resultBean = null;
+                    for(AdressBean bean : list) {
+                        if (bean.isSelect()) {
+                            resultBean = bean;
+                            break;
+                        }
+                    }
+                    if (dataBean == null && resultBean == null) {
+                        CommonUtils.showToast("请选择地址");
+                        return;
+                    }
+                    if (resultBean != null) {
+                        Intent intent = new Intent();
+                        intent.putExtra(ConfirmOrderActivity.RESULT_ADDRESS,resultBean);
+                        setResult(Activity.RESULT_OK,intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent();
+                        intent.putExtra(ConfirmOrderActivity.RESULT_ADDRESS,dataBean);
+                        setResult(Activity.RESULT_OK,intent);
+                        finish();
+                    }
+                }
+            });
+        }
     }
 
     private void load() {
@@ -168,6 +224,13 @@ public class AdressActivity extends BaseActivity {
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
+        if (event.getEventCode() == EventCode.HTTP_DELBUSINESSDELIVERADDRESS) {
+            if (event.isSuccess()) {
+                refresh();
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
         if (event.getEventCode() == EventCode.HTTP_GETBUSINESSDELIVERADDRESS) {
             String type = (String) event.getReturnParamAtIndex(1);
             if (type.equals(KEY_REFRESH)) {
@@ -270,11 +333,15 @@ public class AdressActivity extends BaseActivity {
     }
 
     private static final int REQUESTCODE_ADD = 0x1;
+    private static final int REQUESTCODE_EDIT = 0x2;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if(requestCode == REQUESTCODE_ADD) {
+                refresh();
+            }
+            if(requestCode == REQUESTCODE_EDIT) {
                 refresh();
             }
         }

@@ -56,5 +56,11 @@ public class EventCode {
 	public static final int HTTP_GETBUSINESSDELIVERADDRESS = ++BASECODE;
 
 	public static final int HTTP_ADDBUSINESSDELIVERADDRESS = ++BASECODE;
+
+	public static final int HTTP_DELBUSINESSDELIVERADDRESS = ++BASECODE;
+
+	public static final int HTTP_UPDATEBUSINESSDELIVERADDRESS = ++BASECODE;
+
+	public static final int HTTP_GETBUSINENESSORDERINFOSPECIALSTATUS = ++BASECODE;
 }
 

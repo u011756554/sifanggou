@@ -1,5 +1,6 @@
 package com.app.sifanggou.net.bean;
 
+import com.app.sifanggou.bean.BaseBean;
 import com.app.sifanggou.bean.CarBean;
 import com.app.sifanggou.bean.ShopingCartListBean;
 
@@ -22,7 +23,7 @@ public class GetBusinessShoppingCartListResponseBean extends BaseResponseBean {
         this.data = data;
     }
 
-    public class Data {
+    public class Data extends BaseBean{
         private ShopingCartListBean business_shoppingcart_list;
 
         public ShopingCartListBean getBusiness_shoppingcart_list() {

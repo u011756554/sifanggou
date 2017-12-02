@@ -44,14 +44,30 @@ public class AddressAdapter extends SetBaseAdapter<AdressBean> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        AdressBean bean = mList.get(position);
-        if (type.equals(AdressActivity.KEY_SELECT)) {
+        final AdressBean bean = mList.get(position);
+        if (type.equals(AdressActivity.TYPE_SELECT)) {
             holder.ivSelect.setVisibility(View.VISIBLE);
             if (bean.isSelect()) {
                 holder.ivSelect.setSelected(true);
             } else {
                 holder.ivSelect.setSelected(false);
             }
+            holder.ivSelect.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (bean.isSelect()) {
+                        bean.setSelect(false);
+                    } else {
+                        bean.setSelect(true);
+                        for(AdressBean adBean : mList) {
+                            if (!adBean.getDelivery_id().equals(bean.getDelivery_id())) {
+                                adBean.setSelect(false);
+                            }
+                        }
+                    }
+                    notifyDataSetChanged();
+                }
+            });
         } else {
             holder.ivSelect.setVisibility(View.GONE);
         }
@@ -67,6 +83,23 @@ public class AddressAdapter extends SetBaseAdapter<AdressBean> {
         if (!TextUtils.isEmpty(bean.getDelivery_time())) {
             holder.tvTimes.setText(bean.getDelivery_time());
         }
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.delete(bean);
+                }
+            }
+        });
+
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.edit(bean);
+                }
+            }
+        });
         return convertView;
     }
 
@@ -78,5 +111,16 @@ public class AddressAdapter extends SetBaseAdapter<AdressBean> {
         private TextView tvTimes;
         private Button btnDelete;
         private Button btnEdit;
+    }
+
+    public interface UpdateListener{
+        void delete(AdressBean bean);
+        void edit(AdressBean bean);
+    }
+
+    private UpdateListener mListener;
+
+    public void setListener(UpdateListener listener) {
+        this.mListener = listener;
     }
 }

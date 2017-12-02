@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:orientation="vertical"
+    android:background="@color/color_main">
+
+    <include layout="@layout/mode_header"></include>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_orderlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_add"
+        android:layout_marginBottom="10dp"
+        android:clickable="false">
+
+        <ListView
+            android:id="@+id/ll_order"
+            android:background="@color/color_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:divider="@null" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

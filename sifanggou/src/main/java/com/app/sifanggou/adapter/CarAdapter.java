@@ -44,7 +44,7 @@ public class CarAdapter extends SetBaseAdapter<CarBean> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        CarBean bean = mList.get(position);
+        final CarBean bean = mList.get(position);
         if (bean.isSelect()) {
             holder.ivSelect.setSelected(true);
         } else {

@@ -13,6 +13,24 @@ public class CarBean extends BaseBean {
     private String total_num;
     private List<CarItemBean> commodity_info_list;
     private String business_code;
+    private boolean isSelect = true;
+    private boolean isShow = true;
+
+    public boolean isShow() {
+        return isShow;
+    }
+
+    public void setShow(boolean show) {
+        isShow = show;
+    }
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 
     public String getBusiness_name() {
         return business_name;

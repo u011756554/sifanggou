@@ -1,5 +1,7 @@
 package com.app.sifanggou.bean;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/9/17 0017.
  */
@@ -34,6 +36,9 @@ public class BusinessInfoBean extends BaseBean {
     private String shop_number;
     private String invite_code;
     private String agency_contract_num;
+    private String scope;
+    private List<String> first_show_commodity_list;
+
 
     public String getCity() {
         return city;
@@ -265,5 +270,21 @@ public class BusinessInfoBean extends BaseBean {
 
     public void setAgency_contract_num(String agency_contract_num) {
         this.agency_contract_num = agency_contract_num;
+    }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
+    public List<String> getFirst_show_commodity_list() {
+        return first_show_commodity_list;
+    }
+
+    public void setFirst_show_commodity_list(List<String> first_show_commodity_list) {
+        this.first_show_commodity_list = first_show_commodity_list;
     }
 }

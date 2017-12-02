@@ -2,6 +2,7 @@ package com.app.sifanggou.net;
 
 import com.app.sifanggou.net.httprunner.AddBusinessBuyShelfNumHttpRunner;
 import com.app.sifanggou.net.httprunner.AddBusinessCommodityHttpRunner;
+import com.app.sifanggou.net.httprunner.AddBusinessDeliverAddressHttpRunner;
 import com.app.sifanggou.net.httprunner.AddBusinessShoppingCartHttpRunner;
 import com.app.sifanggou.net.httprunner.AddBusinessUrgentSellCommodityHttpRunner;
 import com.app.sifanggou.net.httprunner.BatchUpdateCommodityShelfStatusHttpRunner;
@@ -13,6 +14,7 @@ import com.app.sifanggou.net.httprunner.GetAgentLevelInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetAliyunstsTokenHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCanAllocateShelfNumHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCommodityInfoHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinessDeliverAddressHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessShoppingCartListHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessUrgentSellCommoditHttpRunner;
 import com.app.sifanggou.net.httprunner.GetCityMarketHttpRunner;
@@ -53,6 +55,8 @@ public class NetUtils {
 		eventManager.registerEventRunner(EventCode.HTTP_ADDBUSINESSSHOPPINGCART, new AddBusinessShoppingCartHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_DELBUSINESSSHOPPINGCART, new DelBusinessShoppingCartHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSSHOPPINGCARTLIST, new GetBusinessShoppingCartListHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSDELIVERADDRESS, new GetBusinessDeliverAddressHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_ADDBUSINESSDELIVERADDRESS, new AddBusinessDeliverAddressHttpRunner());
 	}
 }
 

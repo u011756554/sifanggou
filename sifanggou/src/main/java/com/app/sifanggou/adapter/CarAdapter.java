@@ -45,8 +45,44 @@ public class CarAdapter extends SetBaseAdapter<CarBean> {
             holder = (ViewHolder) convertView.getTag();
         }
         CarBean bean = mList.get(position);
+        if (bean.isSelect()) {
+            holder.ivSelect.setSelected(true);
+        } else {
+            holder.ivSelect.setSelected(false);
+        }
+        holder.ivSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bean.isSelect()) {
+                    bean.setSelect(false);
+                } else {
+                    bean.setSelect(true);
+                }
+                notifyDataSetChanged();
+            }
+        });
+
+        if (bean.isShow()) {
+            holder.lvItem.setVisibility(View.VISIBLE);
+        } else {
+            holder.lvItem.setVisibility(View.GONE);
+        }
+        holder.rlSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bean.isShow()) {
+                    bean.setShow(false);
+                } else {
+                    bean.setShow(true);
+                }
+                notifyDataSetChanged();
+            }
+        });
         if (bean.getCommodity_info_list() != null) {
             CarItemAdapter itemAdapter = new CarItemAdapter(mContext,bean.getCommodity_info_list());
+            if (mListener != null) {
+                itemAdapter.setListener(mListener);
+            }
             holder.lvItem.setAdapter(itemAdapter);
 
             Float totalPrice = 0f;
@@ -71,5 +107,11 @@ public class CarAdapter extends SetBaseAdapter<CarBean> {
         private ImageView ivChat;
         private MyListView lvItem;
         private TextView tvPrice;
+    }
+
+    private CarItemAdapter.DataUpdateListener mListener;
+
+    public void setListener(CarItemAdapter.DataUpdateListener listener) {
+        this.mListener = listener;
     }
 }

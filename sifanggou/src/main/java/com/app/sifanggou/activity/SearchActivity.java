@@ -331,18 +331,6 @@ public class SearchActivity extends BaseActivity {
         }
     }
 
-    private void cardel() {
-        if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
-            pushEvent(EventCode.HTTP_DELBUSINESSSHOPPINGCART,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),20+"");
-        }
-    }
-
-    private void getCar() {
-        if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSSHOPPINGCARTLIST,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code());
-        }
-    }
-
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);

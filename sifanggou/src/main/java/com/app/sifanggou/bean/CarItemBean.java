@@ -10,6 +10,15 @@ public class CarItemBean extends BaseBean {
     private String business_code;
     private String commodity_num;
     private String commodity_name;
+    private String commodity_pic_url;
+
+    public String getCommodity_pic_url() {
+        return commodity_pic_url;
+    }
+
+    public void setCommodity_pic_url(String commodity_pic_url) {
+        this.commodity_pic_url = commodity_pic_url;
+    }
 
     public String getCommodity_id() {
         return commodity_id;

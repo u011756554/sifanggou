@@ -1,6 +1,7 @@
 package com.app.sifanggou.net.bean;
 
 import com.app.sifanggou.bean.CarBean;
+import com.app.sifanggou.bean.ShopingCartListBean;
 
 import java.util.List;
 import java.util.Map;
@@ -22,13 +23,13 @@ public class GetBusinessShoppingCartListResponseBean extends BaseResponseBean {
     }
 
     public class Data {
-        private Map<String,CarBean> business_shoppingcart_list;
+        private ShopingCartListBean business_shoppingcart_list;
 
-        public Map<String, CarBean> getBusiness_shoppingcart_list() {
+        public ShopingCartListBean getBusiness_shoppingcart_list() {
             return business_shoppingcart_list;
         }
 
-        public void setBusiness_shoppingcart_list(Map<String, CarBean> business_shoppingcart_list) {
+        public void setBusiness_shoppingcart_list(ShopingCartListBean business_shoppingcart_list) {
             this.business_shoppingcart_list = business_shoppingcart_list;
         }
     }

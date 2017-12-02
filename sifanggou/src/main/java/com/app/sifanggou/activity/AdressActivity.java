@@ -1,54 +1,44 @@
 package com.app.sifanggou.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
-import com.app.sifanggou.adapter.CarAdapter;
-import com.app.sifanggou.adapter.CarItemAdapter;
-import com.app.sifanggou.adapter.ShangPinAdapter;
-import com.app.sifanggou.bean.CarBean;
-import com.app.sifanggou.bean.CommodityInfoBean;
-import com.app.sifanggou.bean.HuoJiaType;
-import com.app.sifanggou.bean.SaleType;
+import com.app.sifanggou.adapter.AddressAdapter;
+import com.app.sifanggou.bean.AdressBean;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
-import com.app.sifanggou.net.bean.BaseResponseBean;
-import com.app.sifanggou.net.bean.GetBusinessCommodityInfoResponseBean;
-import com.app.sifanggou.net.bean.GetBusinessShoppingCartListResponseBean;
+import com.app.sifanggou.net.bean.GetBusinessDeliverAddressResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.PreManager;
-import com.app.sifanggou.view.MyListView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/11/23.
+ * Created by Administrator on 2017/11/30.
  */
 
-public class CarActivity extends BaseActivity {
-    @ViewInject(R.id.tv_price)
-    private TextView tvPrice;
-    @ViewInject(R.id.btn_xiadan)
-    private Button btnXiaDan;
+public class AdressActivity extends BaseActivity {
+    @ViewInject(R.id.rl_add)
+    private RelativeLayout rlAdd;
 
     //列表数据展示
-    @ViewInject(R.id.srl_splist)
+    @ViewInject(R.id.srl_adresslist)
     private SwipeRefreshLayout swipeRefreshLayout;
-    @ViewInject(R.id.ll_sp)
-    private MyListView listView;
+    @ViewInject(R.id.ll_adress)
+    ListView listView;
     private View listViewFooterView;
     private View emptyViewView;
     private TextView noMoreText;
@@ -57,46 +47,37 @@ public class CarActivity extends BaseActivity {
     private boolean isOver = false;
     private boolean isRefreshing = false;
     private boolean isFirst = true;
-    private int pageSize = 10;
-    private int page = 1;
+    private int pageSize = AppContext.PAGE_SIZE;
+    private int page = AppContext.PAGE;
     private int headHeight;
     private static final String KEY_REFRESH = "refresh";
     private static final String KEY_MORE = "more";
 
-    private CarAdapter adapter;
-    private List<CarBean> list = new ArrayList<CarBean>();
+    private AddressAdapter adapter;
+    private List<AdressBean> list = new ArrayList<AdressBean>();
     private LoginResponseBean loginBean;
+    public static final String KEY_SELECT = "key_AdressActivity_select";
+    public static final String TYPE = "select";
+    private String type = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initData();
         initView();
         initListener();
-        initData();
     }
 
     private void initView() {
-        setTitle("购物车");
         addBack(R.id.rl_back);
+        setTitle("地址管理");
 
         //处理分页
-        adapter = new CarAdapter(CarActivity.this,list);
-        adapter.setListener(new CarItemAdapter.DataUpdateListener() {
-            @Override
-            public void updateNum(String business_code, String commodity_id, String commodity_num) {
-                pushEventNoProgress(EventCode.HTTP_UPDATEBUSINESSSHOPPINGCARTCOMMODITYNUM,business_code,commodity_id,commodity_num);
-            }
-
-            @Override
-            public void delete(String business_code, String commodity_id) {
-                pushEventNoProgress(EventCode.HTTP_DELBUSINESSSHOPPINGCART,business_code,commodity_id);
-            }
-        });
-
+        adapter = new AddressAdapter(AdressActivity.this,list,type);
         swipeRefreshLayout.setColorSchemeResources(R.color.color_banner,R.color.color_banner,R.color.color_banner,R.color.color_banner);
-        listViewFooterView = LayoutInflater.from(CarActivity.this).inflate(R.layout.mode_more, null);
+        listViewFooterView = LayoutInflater.from(AdressActivity.this).inflate(R.layout.mode_more, null);
         noMoreText = (TextView) listViewFooterView.findViewById(R.id.no_more);
         loadingText = (TextView) listViewFooterView.findViewById(R.id.load_more);
-        emptyViewView = LayoutInflater.from(CarActivity.this).inflate(R.layout.mode_empty, null);
+        emptyViewView = LayoutInflater.from(AdressActivity.this).inflate(R.layout.mode_empty, null);
 
         listView.addHeaderView(emptyViewView);
         listView.addFooterView(listViewFooterView);
@@ -134,11 +115,21 @@ public class CarActivity extends BaseActivity {
 
     private void initData() {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
+        type = getIntent().getStringExtra(KEY_SELECT);
+        if (type == null) {
+            type = "";
+        }
         refreshData();
     }
 
     private void initListener() {
-
+        rlAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdressActivity.this,AddAdressActivity.class);
+                startActivityForResult(intent,REQUESTCODE_ADD);
+            }
+        });
     }
 
     private void load() {
@@ -164,55 +155,29 @@ public class CarActivity extends BaseActivity {
     private void refreshData() {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
             page = 0;
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSSHOPPINGCARTLIST,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSDELIVERADDRESS,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
         }
     }
 
     private void getData() {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSSHOPPINGCARTLIST,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),AppContext.ITEM_NUM+"",page + "",KEY_MORE);
-        }
-    }
-
-    private void refreshView( GetBusinessShoppingCartListResponseBean bean) {
-        if (bean != null && bean.getData() != null
-                && bean.getData().getBusiness_shoppingcart_list() != null
-                && !TextUtils.isEmpty(bean.getData().getBusiness_shoppingcart_list().getCommodity_total_amount())) {
-                float price = Float.valueOf(bean.getData().getBusiness_shoppingcart_list().getCommodity_total_amount()) / 100;
-                tvPrice.setText(price+"");
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSDELIVERADDRESS,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),AppContext.ITEM_NUM+"",page + "",KEY_MORE);
         }
     }
 
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
-        if (event.getEventCode() == EventCode.HTTP_DELBUSINESSSHOPPINGCART) {
-            if (event.isSuccess()) {
-                refresh();
-            } else {
-                CommonUtils.showToast(event.getFailMessage());
-            }
-        }
-        if (event.getEventCode() == EventCode.HTTP_UPDATEBUSINESSSHOPPINGCARTCOMMODITYNUM) {
-            if (event.isSuccess()) {
-                refresh();
-            } else {
-                CommonUtils.showToast(event.getFailMessage());
-            }
-        }
-        if (event.getEventCode() == EventCode.HTTP_GETBUSINESSSHOPPINGCARTLIST) {
-            if (event.isSuccess()) {
-                String type = (String) event.getReturnParamAtIndex(1);
-                if (type.equals(KEY_REFRESH)) {
-                    GetBusinessShoppingCartListResponseBean bean = (GetBusinessShoppingCartListResponseBean) event.getReturnParamAtIndex(0);
-                    if (bean == null || bean.getData() == null || bean.getData().getBusiness_shoppingcart_list() == null) {
-                            return;
+        if (event.getEventCode() == EventCode.HTTP_GETBUSINESSDELIVERADDRESS) {
+            String type = (String) event.getReturnParamAtIndex(1);
+            if (type.equals(KEY_REFRESH)) {
+                CommonUtils.showToast(KEY_REFRESH);
+                if (event.isSuccess()) {
+                    GetBusinessDeliverAddressResponseBean bean = (GetBusinessDeliverAddressResponseBean) event.getReturnParamAtIndex(0);
+                    if (bean == null || bean.getData() == null || bean.getData().getDeliver_address_list() == null) {
+                        return;
                     }
-                    refreshView(bean);
-                    List<CarBean> tmpList = new ArrayList<CarBean>();
-                    for(CarBean carBean : bean.getData().getBusiness_shoppingcart_list().getBusiness_commodity_info().values()) {
-                        tmpList.add(carBean);
-                    }
+                    List<AdressBean> tmpList = bean.getData().getDeliver_address_list();
                     if (tmpList != null) {
                         page++;
                         list.clear();
@@ -239,15 +204,16 @@ public class CarActivity extends BaseActivity {
                     adapter.notifyDataSetChanged();
                     isRefreshing = false;
                 } else {
-                    GetBusinessShoppingCartListResponseBean bean = (GetBusinessShoppingCartListResponseBean) event.getReturnParamAtIndex(0);
-                    if (bean == null || bean.getData() == null || bean.getData().getBusiness_shoppingcart_list() == null) {
+                    CommonUtils.showToast(event.getFailMessage());
+                }
+            } else {
+                CommonUtils.showToast(KEY_MORE);
+                if (event.isSuccess()) {
+                    GetBusinessDeliverAddressResponseBean bean = (GetBusinessDeliverAddressResponseBean) event.getReturnParamAtIndex(0);
+                    if (bean == null || bean.getData() == null || bean.getData().getDeliver_address_list() == null) {
                         return;
                     }
-                    refreshView(bean);
-                    List<CarBean> tmpList = new ArrayList<CarBean>();
-                    for(CarBean carBean : bean.getData().getBusiness_shoppingcart_list().getBusiness_commodity_info().values()) {
-                        tmpList.add(carBean);
-                    }
+                    List<AdressBean> tmpList = bean.getData().getDeliver_address_list();
                     isLoading = false;
                     if (tmpList != null) {
                         page++;
@@ -272,12 +238,13 @@ public class CarActivity extends BaseActivity {
                             setNoData(false);
                         }
                     }
+                } else {
+                    CommonUtils.showToast(event.getFailMessage());
                 }
-            } else {
-                CommonUtils.showToast(event.getFailMessage());
             }
         }
     }
+
 
     public void setNoData(boolean show) {
         if (isFirst) {
@@ -299,6 +266,17 @@ public class CarActivity extends BaseActivity {
             emptyViewView.setVisibility(View.GONE);
             emptyViewView.setPadding(0, - headHeight, 0, 0);
             emptyViewView.setClickable(false);
+        }
+    }
+
+    private static final int REQUESTCODE_ADD = 0x1;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if(requestCode == REQUESTCODE_ADD) {
+                refresh();
+            }
         }
     }
 }

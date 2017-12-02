@@ -52,5 +52,9 @@ public class EventCode {
 	public static final int HTTP_GETBUSINESSSHOPPINGCARTLIST = ++BASECODE;
 
 	public static final int HTTP_BUSINESSSUBMITORDER = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSDELIVERADDRESS = ++BASECODE;
+
+	public static final int HTTP_ADDBUSINESSDELIVERADDRESS = ++BASECODE;
 }
 

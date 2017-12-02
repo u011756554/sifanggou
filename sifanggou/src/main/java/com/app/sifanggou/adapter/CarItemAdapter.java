@@ -13,6 +13,12 @@ import android.widget.TextView;
 import com.app.sifanggou.R;
 import com.app.sifanggou.bean.BaseBean;
 import com.app.sifanggou.bean.CarItemBean;
+import com.app.sifanggou.net.AndroidEventManager;
+import com.app.sifanggou.net.Event;
+import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.EventManager;
+import com.app.sifanggou.utils.CommonUtils;
+import com.app.sifanggou.utils.ImageLoaderUtil;
 import com.app.sifanggou.view.MyListView;
 
 import java.util.List;
@@ -45,6 +51,9 @@ public class CarItemAdapter extends SetBaseAdapter<CarItemBean> {
             holder = (ViewHolder) convertView.getTag();
         }
         CarItemBean bean = mList.get(position);
+        if (!TextUtils.isEmpty(bean.getCommodity_pic_url())) {
+            ImageLoaderUtil.display(bean.getCommodity_pic_url(),holder.ivPic);
+        }
         if (!TextUtils.isEmpty(bean.getPrice())) {
             holder.tvPrice.setText("￥"+ Float.valueOf(bean.getPrice())/100);
         }
@@ -54,6 +63,42 @@ public class CarItemAdapter extends SetBaseAdapter<CarItemBean> {
         if (!TextUtils.isEmpty(bean.getCommodity_num())) {
             holder.edtCount.setText(bean.getCommodity_num());
         }
+        holder.edtCount.setEnabled(false);
+        holder.tvAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(bean.getCommodity_num())) {
+                    return;
+                }
+                if (mListener != null) {
+                    mListener.updateNum(bean.getBusiness_code(),bean.getCommodity_id(),(Integer.valueOf(bean.getCommodity_num()) + 1)+"");
+                }
+            }
+        });
+        holder.tvJian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(bean.getCommodity_num())) {
+                    return;
+                }
+                if ("0".equals(bean.getCommodity_num())) {
+                    if (mListener != null) {
+                        mListener.delete(bean.getBusiness_code(),bean.getCommodity_id());
+                    }
+                }
+                if (mListener != null) {
+                    mListener.updateNum(bean.getBusiness_code(),bean.getCommodity_id(),(Integer.valueOf(bean.getCommodity_num()) - 1)+"");
+                }
+            }
+        });
+        holder.ivDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.delete(bean.getBusiness_code(),bean.getCommodity_id());
+                }
+            }
+        });
         return convertView;
     }
 
@@ -65,5 +110,16 @@ public class CarItemAdapter extends SetBaseAdapter<CarItemBean> {
         private EditText edtCount;
         private TextView tvAdd;
         private ImageView ivDelete;
+    }
+
+    public interface DataUpdateListener {
+        void updateNum(String business_code,String commodity_id,String commodity_num);
+        void delete(String business_code,String commodity_id);
+    }
+
+    private DataUpdateListener mListener;
+
+    public void setListener(DataUpdateListener listener) {
+        this.mListener = listener;
     }
 }

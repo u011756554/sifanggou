@@ -25,6 +25,7 @@
     <color name="color_hint_gray">#CACAD0</color>
     <color name="color_divider_gray">#CCCBCC</color>
     <color name="color_text_yellow">#F1AF3E</color>
+	<color name="color_edit">#666666</color>
 
     <color name="red">#de3842</color>
     <color name="redofrecord">#ec5051</color>

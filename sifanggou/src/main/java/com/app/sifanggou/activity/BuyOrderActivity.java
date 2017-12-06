@@ -56,9 +56,8 @@ public class BuyOrderActivity extends BaseActivity {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
             page = 0;
-            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSORDERINFOSPECIALSTATUS,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.WAITING_PAY.getType(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.WAITING_PAY.getType(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH,"2017","12");
         }
     }
-
 
 }

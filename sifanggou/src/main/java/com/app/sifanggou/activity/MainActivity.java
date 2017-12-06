@@ -155,6 +155,9 @@ public class MainActivity extends BaseActivity {
 	        	rbDianPu.setSelected(false);
 	        	rbCar.setSelected(true);
 	        	rbMyself.setSelected(false);
+				if (carFragment != null) {
+					carFragment.clickRefresh();
+				}
 	            break;	 
 	        case 4:
 	        	rbMain.setSelected(false);

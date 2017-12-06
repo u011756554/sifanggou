@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_main" >
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_splist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:layout_below="@id/ll_huojia_tab"
+        android:layout_above="@id/rl_huojia_bottom"
+        android:background="@color/color_main">
+
+        <ListView
+            android:id="@+id/ll_sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:divider="@null"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

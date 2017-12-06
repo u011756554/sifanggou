@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -110,6 +111,9 @@ public class SearchActivity extends BaseActivity {
     private static final String KEY_MORE = "more";
 
     private int carCount = 0;
+
+    public static final String KEY_TYPE = "key_SearchActivity_type";
+    public static final String VULE_MARKET = "markert";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -228,6 +232,10 @@ public class SearchActivity extends BaseActivity {
 
     private void initData() {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
+        String type = getIntent().getStringExtra(KEY_TYPE);
+        if (VULE_MARKET.equals(type)) {
+            searchType = SearchType.MARKET;
+        }
     }
 
     private void initListener() {
@@ -276,6 +284,17 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SearchActivity.this,CarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        listViewMarket.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == dataListMarket.size() + 1 || position == 0) {
+                    return;
+                }
+                Intent intent = new Intent(SearchActivity.this, DianPuDetailActivity.class);
                 startActivity(intent);
             }
         });

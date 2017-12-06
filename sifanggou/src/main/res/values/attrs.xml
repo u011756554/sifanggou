@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="visibal_tab_count" format="integer"></attr>
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="visibal_tab_count"></attr>
+    </declare-styleable>
+
     <declare-styleable name="WheelView">
         <attr name="itemVisibleNum" format="integer"/>
 

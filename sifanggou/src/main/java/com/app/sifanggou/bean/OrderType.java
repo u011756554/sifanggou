@@ -5,7 +5,7 @@ package com.app.sifanggou.bean;
  */
 
 public enum OrderType {
-    WAITING_PAY ("waiting_pay"),WAITING_PAYEE("waiting_payee"),WAITING_RECEIPT ("waiting_receipt"),WAITING_DELIVER("waiting_deliver");
+    WAITING_PAY ("waiting_pay"),PAID("paid"),WAITING_PAYEE ("waiting_payee"),RECEIPTED("receipted");
 
     private String type;
     OrderType(String type) {

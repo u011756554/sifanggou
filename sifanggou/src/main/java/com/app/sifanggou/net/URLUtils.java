@@ -63,5 +63,7 @@ public class URLUtils {
 	public static final String UPDATEBUSINESSDELIVERADDRESS = SERVER + "business/UpdateBusinessDeliverAddress";
 
 	public static final String GETBUSINENESSORDERINFOSPECIALSTATUS = SERVER + "business/GetBusinenessOrderInfoSpecialStatus";
+
+	public static final String GETBUSINENESSINOUTORDERINFO = SERVER + "business/GetBusinenessInOutOrderInfo";
 }
 

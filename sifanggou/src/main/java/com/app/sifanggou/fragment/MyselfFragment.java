@@ -9,8 +9,10 @@ import android.widget.RelativeLayout;
 
 import com.app.sifanggou.R;
 import com.app.sifanggou.activity.AdressActivity;
+import com.app.sifanggou.activity.BurOrderTabActivity;
 import com.app.sifanggou.activity.BuyOrderActivity;
 import com.app.sifanggou.activity.ChuCangHistoryActivity;
+import com.app.sifanggou.activity.SaleOrderTabActivity;
 import com.app.sifanggou.activity.ShangPinGuanLiActivity;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -23,6 +25,12 @@ public class MyselfFragment extends BaseFragment{
 	private RelativeLayout rlDiZhi;
 	@ViewInject(R.id.ll_dfk)
 	private LinearLayout llDFK;
+	@ViewInject(R.id.ll_jkrecord)
+	private LinearLayout llJKRecord;
+	@ViewInject(R.id.ll_dsk)
+	private LinearLayout llDSK;
+	@ViewInject(R.id.ll_dskrecord)
+	private LinearLayout llDSKRecord;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +78,33 @@ public class MyselfFragment extends BaseFragment{
 		llDFK.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), BuyOrderActivity.class);
+				Intent intent = new Intent(getActivity(), BurOrderTabActivity.class);
+				intent.putExtra(BurOrderTabActivity.KEY_TYPE,BurOrderTabActivity.VALUE_TYPE_DAIJIE);
+				startActivity(intent);
+			}
+		});
+
+		llJKRecord.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), BurOrderTabActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		llDSK.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), SaleOrderTabActivity.class);
+				intent.putExtra(SaleOrderTabActivity.KEY_TYPE,SaleOrderTabActivity.VALUE_TYPE_DAISHOU);
+				startActivity(intent);
+			}
+		});
+
+		llDSKRecord.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), SaleOrderTabActivity.class);
 				startActivity(intent);
 			}
 		});

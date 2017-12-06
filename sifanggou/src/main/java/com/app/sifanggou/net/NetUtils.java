@@ -14,6 +14,7 @@ import com.app.sifanggou.net.httprunner.DelBusinessDeliverAddressHttpRunner;
 import com.app.sifanggou.net.httprunner.DelBusinessShoppingCartHttpRunner;
 import com.app.sifanggou.net.httprunner.GetAgentLevelInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetAliyunstsTokenHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinenessInOutOrderInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinenessOrderInfoSpecialStatusHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCanAllocateShelfNumHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCommodityInfoHttpRunner;
@@ -65,6 +66,7 @@ public class NetUtils {
 		eventManager.registerEventRunner(EventCode.HTTP_UPDATEBUSINESSDELIVERADDRESS, new UpdateBusinessDeliverAddressHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_BUSINESSSUBMITORDER, new BusinessSubmitOrderHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINENESSORDERINFOSPECIALSTATUS, new GetBusinenessOrderInfoSpecialStatusHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO, new GetBusinenessInOutOrderInfoHttpRunner());
 	}
 }
 

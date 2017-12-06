@@ -116,7 +116,13 @@ import android.widget.TextView;
 	
 	protected void setRightResource(int resId) {
 		ImageView ivRight = (ImageView) findViewById(R.id.right_image);
+		ivRight.setVisibility(View.VISIBLE);
 		ivRight.setImageResource(resId);
+	}
+
+	protected void setRightImageGone() {
+		ImageView ivRight = (ImageView) findViewById(R.id.right_image);
+		ivRight.setVisibility(View.GONE);
 	}
 	
 	protected void setRightClickListener(OnClickListener listener) {

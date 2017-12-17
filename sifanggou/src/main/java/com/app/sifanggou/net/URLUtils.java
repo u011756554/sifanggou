@@ -2,8 +2,10 @@ package com.app.sifanggou.net;
 
 public class URLUtils {
 
-	private static final String SERVER = "http://119.23.9.134:8080/SiFangGou/api/"; 
-	
+	private static final String SERVER = "http://119.23.9.134:8080/SiFangGou/api/";
+
+//	private static final String SERVER = "http://192.168.31.117:8080/SiFangGou/api/";
+
 	public static final String GETVERIFYCODE = SERVER + "business/GetVerifyCode";
 		
 	public static final String GETPROVINCECITYZONE = SERVER + "business/GetProvinceCityZone";

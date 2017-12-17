@@ -135,15 +135,16 @@ public class CommonUtils {
 	}
 
 	public static String toUtf8(String str) {
-		String result = null;
-		try {
-			System.out.println("缺省编码："+Charset.defaultCharset());
-			result = new String(str.getBytes(Charset.defaultCharset()), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
+//		String result = null;
+//		try {
+//			System.out.println("缺省编码："+Charset.defaultCharset());
+//			result = new String(str.getBytes(Charset.defaultCharset()), "UTF-8");
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return result;
+		return str;
 	}
 	
 	public static String getVersion() {

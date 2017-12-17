@@ -14,6 +14,7 @@ import com.app.sifanggou.R;
 import com.app.sifanggou.adapter.CarAdapter;
 import com.app.sifanggou.adapter.CarItemAdapter;
 import com.app.sifanggou.bean.CarBean;
+import com.app.sifanggou.bean.OrderType;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
 import com.app.sifanggou.net.bean.GetBusinessShoppingCartListResponseBean;
@@ -158,13 +159,13 @@ public class DaiJieFragment extends BaseFragment {
     private void refreshData() {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
             page = 0;
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSSHOPPINGCARTLIST,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.WAITING_PAY.getType(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
         }
     }
 
     private void getData() {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSSHOPPINGCARTLIST,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),AppContext.ITEM_NUM+"",page + "",KEY_MORE);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.WAITING_PAY.getType(),AppContext.ITEM_NUM+"",page + "",KEY_MORE);
         }
     }
 

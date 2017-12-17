@@ -205,7 +205,7 @@ public class ViewPagerIndicator extends LinearLayout{
      * @param viewPager
      * @param position
      */
-    public void setViewPager(ViewPager viewPager, int position, PageSelectListener listener)
+    public void setViewPager(ViewPager viewPager, int position, final PageSelectListener listener)
     {
         mViewPager=viewPager;
         //监听面板移动变化

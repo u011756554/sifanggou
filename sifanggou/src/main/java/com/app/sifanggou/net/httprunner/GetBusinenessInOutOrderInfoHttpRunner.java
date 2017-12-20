@@ -8,6 +8,7 @@ import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.HttpUtils;
 import com.app.sifanggou.net.URLUtils;
 import com.app.sifanggou.net.bean.BaseResponseBean;
+import com.app.sifanggou.net.bean.GetBusinenessInOutOrderInfoResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 
 import java.util.HashMap;
@@ -48,7 +49,7 @@ public class GetBusinenessInOutOrderInfoHttpRunner extends HttpRunner {
             return;
         }
 
-        BaseResponseBean param = gson.fromJson(result, BaseResponseBean.class);
+        GetBusinenessInOutOrderInfoResponseBean param = gson.fromJson(result, GetBusinenessInOutOrderInfoResponseBean.class);
         if (param == null) {
             event.setSuccess(false);
             return;

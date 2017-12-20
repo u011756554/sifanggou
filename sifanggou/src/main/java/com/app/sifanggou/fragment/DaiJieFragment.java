@@ -13,10 +13,13 @@ import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.adapter.CarAdapter;
 import com.app.sifanggou.adapter.CarItemAdapter;
+import com.app.sifanggou.adapter.InOutOrderInfoAdapter;
 import com.app.sifanggou.bean.CarBean;
+import com.app.sifanggou.bean.OrderNoBaseBean;
 import com.app.sifanggou.bean.OrderType;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.GetBusinenessInOutOrderInfoResponseBean;
 import com.app.sifanggou.net.bean.GetBusinessShoppingCartListResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
@@ -52,8 +55,8 @@ public class DaiJieFragment extends BaseFragment {
     private static final String KEY_REFRESH = "refresh";
     private static final String KEY_MORE = "more";
 
-    private CarAdapter adapter;
-    private List<CarBean> list = new ArrayList<CarBean>();
+    private InOutOrderInfoAdapter adapter;
+    private List<OrderNoBaseBean> list = new ArrayList<OrderNoBaseBean>();
     private LoginResponseBean loginBean;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,18 +77,8 @@ public class DaiJieFragment extends BaseFragment {
 
     private void initView() {
         //处理分页
-        adapter = new CarAdapter(getActivity(),list);
-        adapter.setListener(new CarItemAdapter.DataUpdateListener() {
-            @Override
-            public void updateNum(String business_code, String commodity_id, String commodity_num) {
-                pushEventNoProgress(EventCode.HTTP_UPDATEBUSINESSSHOPPINGCARTCOMMODITYNUM,business_code,commodity_id,commodity_num);
-            }
+        adapter = new InOutOrderInfoAdapter(getActivity(),list,InOutOrderInfoAdapter.TYPE_JIEKUAN);
 
-            @Override
-            public void delete(String business_code, String commodity_id) {
-                pushEventNoProgress(EventCode.HTTP_DELBUSINESSSHOPPINGCART,business_code,commodity_id);
-            }
-        });
 
         swipeRefreshLayout.setColorSchemeResources(R.color.color_banner,R.color.color_banner,R.color.color_banner,R.color.color_banner);
         listViewFooterView = LayoutInflater.from(getActivity()).inflate(R.layout.mode_more, null);
@@ -172,30 +165,16 @@ public class DaiJieFragment extends BaseFragment {
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
-        if (event.getEventCode() == EventCode.HTTP_DELBUSINESSSHOPPINGCART) {
-            if (event.isSuccess()) {
-                refresh();
-            } else {
-                CommonUtils.showToast(event.getFailMessage());
-            }
-        }
-        if (event.getEventCode() == EventCode.HTTP_UPDATEBUSINESSSHOPPINGCARTCOMMODITYNUM) {
-            if (event.isSuccess()) {
-                refresh();
-            } else {
-                CommonUtils.showToast(event.getFailMessage());
-            }
-        }
-        if (event.getEventCode() == EventCode.HTTP_GETBUSINESSSHOPPINGCARTLIST) {
+        if (event.getEventCode() == EventCode.HTTP_GETBUSINENESSINOUTORDERINFO) {
             if (event.isSuccess()) {
                 String type = (String) event.getReturnParamAtIndex(1);
                 if (type.equals(KEY_REFRESH)) {
-                    GetBusinessShoppingCartListResponseBean bean = (GetBusinessShoppingCartListResponseBean) event.getReturnParamAtIndex(0);
-                    if (bean == null || bean.getData() == null || bean.getData().getBusiness_shoppingcart_list() == null) {
+                    GetBusinenessInOutOrderInfoResponseBean bean = (GetBusinenessInOutOrderInfoResponseBean) event.getReturnParamAtIndex(0);
+                    if (bean == null || bean.getData() == null || bean.getData().getBusiness_order_info() == null) {
                         return;
                     }
-                    List<CarBean> tmpList = new ArrayList<CarBean>();
-                    for(CarBean carBean : bean.getData().getBusiness_shoppingcart_list().getBusiness_commodity_info().values()) {
+                    List<OrderNoBaseBean> tmpList = new ArrayList<OrderNoBaseBean>();
+                    for(OrderNoBaseBean carBean : bean.getData().getBusiness_order_info()) {
                         tmpList.add(carBean);
                     }
                     if (tmpList != null) {
@@ -224,12 +203,12 @@ public class DaiJieFragment extends BaseFragment {
                     adapter.notifyDataSetChanged();
                     isRefreshing = false;
                 } else {
-                    GetBusinessShoppingCartListResponseBean bean = (GetBusinessShoppingCartListResponseBean) event.getReturnParamAtIndex(0);
-                    if (bean == null || bean.getData() == null || bean.getData().getBusiness_shoppingcart_list() == null) {
+                    GetBusinenessInOutOrderInfoResponseBean bean = (GetBusinenessInOutOrderInfoResponseBean) event.getReturnParamAtIndex(0);
+                    if (bean == null || bean.getData() == null || bean.getData().getBusiness_order_info() == null) {
                         return;
                     }
-                    List<CarBean> tmpList = new ArrayList<CarBean>();
-                    for(CarBean carBean : bean.getData().getBusiness_shoppingcart_list().getBusiness_commodity_info().values()) {
+                    List<OrderNoBaseBean> tmpList = new ArrayList<OrderNoBaseBean>();
+                    for(OrderNoBaseBean carBean : bean.getData().getBusiness_order_info()) {
                         tmpList.add(carBean);
                     }
                     isLoading = false;

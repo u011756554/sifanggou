@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_main"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_select"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/iv_extend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/selector_select_extend"
+            android:layout_marginRight="@dimen/margin_normal"/>
+
+    </RelativeLayout>
+
+    <com.app.sifanggou.view.MyListView
+        android:id="@+id/lv_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/tv_price_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_chat"
+            android:layout_marginLeft="@dimen/margin_mini"
+            android:text="合计："
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_price_title"
+            android:layout_marginRight="@dimen/margin_mini"
+            android:text="￥1990"
+            android:textSize="15sp"
+            android:textColor="@color/red"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_price"
+            android:layout_marginRight="@dimen/margin_mini"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/btn_order"
+            android:layout_width="73dp"
+            android:layout_height="26dp"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:background="@color/color_banner"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

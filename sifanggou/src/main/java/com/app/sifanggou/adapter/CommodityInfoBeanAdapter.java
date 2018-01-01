@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.R;
@@ -43,6 +44,7 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
             holder.edtCount = (EditText) convertView.findViewById(R.id.edt_count);
             holder.tvAdd = (TextView) convertView.findViewById(R.id.tv_add);
             holder.tvJian = (TextView) convertView.findViewById(R.id.tv_jian);
+            holder.rlContent = (RelativeLayout) convertView.findViewById(R.id.rl_content);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -108,6 +110,15 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
                 }
             }
         });
+
+        holder.rlContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (addListener != null) {
+                    addListener.click(bean);
+                }
+            }
+        });
         return convertView;
     }
 
@@ -123,10 +134,12 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
         private TextView tvJian;
         private TextView tvAdd;
         private EditText edtCount;
+        private RelativeLayout rlContent;
     }
 
     public interface AddListener {
         void add(CommodityInfoBean bean);
+        void click(CommodityInfoBean bean);
     }
 
     private AddListener addListener;

@@ -71,5 +71,7 @@ public class URLUtils {
 	public static final String UPDATEBUSINESSORDERSTATUS = SERVER + "business/UpdateBusinessOrderStatus";
 
 	public static final String GETFIRSTPAGEAD = SERVER + "business/GetFirstPageAd";
+
+	public static final String GETBUSINESSCOMMODITYBYCATEGORYCODE = SERVER + "business/GetBusinessCommodityByCategoryCode";
 }
 

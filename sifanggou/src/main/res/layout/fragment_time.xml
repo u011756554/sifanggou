@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ditpo_icon_search"
+                android:src="@drawable/icon_search_dianpu"
                 android:scaleType="centerCrop"/>
         </RelativeLayout>
 
@@ -69,14 +69,18 @@
                 android:layout_height="100dp"
                 android:layout_margin="@dimen/margin_small"
                 android:scaleType="centerCrop"
-                android:src="@color/white"/>
+                android:src="@drawable/icon_my_bg"/>
 
-            <com.app.sifanggou.view.MyListView
+            <ListView
                 android:id="@+id/lv_type_two"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:divider="@null"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
         </LinearLayout>
 
     </LinearLayout>

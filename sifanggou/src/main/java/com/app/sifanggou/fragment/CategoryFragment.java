@@ -1,12 +1,17 @@
 package com.app.sifanggou.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.app.sifanggou.R;
+import com.app.sifanggou.activity.CategoryProductActivity;
+import com.app.sifanggou.activity.SearchActivity;
 import com.app.sifanggou.adapter.CategorySecondTypeAdapter;
 import com.app.sifanggou.adapter.CategoryTypeAdapter;
 import com.app.sifanggou.bean.CommodityTypeBean;
@@ -26,7 +31,11 @@ public class CategoryFragment extends BaseFragment {
 	@ViewInject(R.id.lv_type_one)
 	private ListView lvTypeOne;
 	@ViewInject(R.id.lv_type_two)
-	private MyListView lvTypeTwo;
+	private ListView lvTypeTwo;
+	@ViewInject(R.id.tv_title)
+	private TextView tvTitle;
+	@ViewInject(R.id.right_layout)
+	private RelativeLayout rlRight;
 
 	private List<CommodityTypeBean> commodity_type_list = new ArrayList<CommodityTypeBean>();
     private CategoryTypeAdapter adapter;
@@ -48,6 +57,14 @@ public class CategoryFragment extends BaseFragment {
 	}
 
 	private void initView() {
+		tvTitle.setText("四方购分类");
+		rlRight.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(),SearchActivity.class);
+				startActivity(intent);
+			}
+		});
         adapter = new CategoryTypeAdapter(getActivity(),commodity_type_list);
 		adapter.setListener(new CategoryTypeAdapter.CheckListener() {
 			@Override
@@ -80,6 +97,15 @@ public class CategoryFragment extends BaseFragment {
 
 
 		secondTypeAdapter = new CategorySecondTypeAdapter(getActivity(),child_node_list);
+		secondTypeAdapter.setListener(new CategorySecondTypeAdapter.SecondListener() {
+			@Override
+			public void check(FirstChildNodeTypeBean bean) {
+				Intent intent = new Intent(getActivity(), CategoryProductActivity.class);
+				intent.putExtra(CategoryProductActivity.KEY_FIRSTTYPE,bean.getParent_category_code());
+				intent.putExtra(CategoryProductActivity.KEY_SECOND,bean.getCategory_code());
+				getActivity().startActivity(intent);
+			}
+		});
 		lvTypeTwo.setAdapter(secondTypeAdapter);
 	}
 

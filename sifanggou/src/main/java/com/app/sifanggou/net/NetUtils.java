@@ -17,6 +17,7 @@ import com.app.sifanggou.net.httprunner.GetAliyunstsTokenHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinenessInOutOrderInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinenessOrderInfoSpecialStatusHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCanAllocateShelfNumHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinessCommodityByCategoryCodeHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCommodityInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessDeliverAddressHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessShoppingCartListHttpRunner;
@@ -73,6 +74,7 @@ public class NetUtils {
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO_DAISHOU, new GetBusinenessInOutOrderInfoHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_UPDATEBUSINESSORDERSTATUS, new UpdateBusinessOrderStatusHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETFIRSTPAGEAD, new GetFirstPageAdHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE, new GetBusinessCommodityByCategoryCodeHttpRunner());
 	}
 }
 

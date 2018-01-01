@@ -72,5 +72,7 @@ public class EventCode {
 	public static final int HTTP_UPDATEBUSINESSORDERSTATUS = ++BASECODE;
 
 	public static final int HTTP_GETFIRSTPAGEAD = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE = ++BASECODE;
 }
 

@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_main" >
+
+    <RelativeLayout
+        android:id="@id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/ll_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_jiarugouwuche"
+                android:layout_width="94dp"
+                android:layout_height="match_parent"
+                android:background="#FEE818"
+                android:text="加入购物车"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize_normal"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_xiadan"
+                android:layout_width="94dp"
+                android:layout_height="match_parent"
+                android:background="#FF3366"
+                android:text="下单"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_normal"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_toLeftOf="@id/ll_right">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/icon_product_chat"
+                    android:layout_marginTop="@dimen/margin_small"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="聊天"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="13sp"
+                    android:layout_marginTop="@dimen/margin_mini"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/icon_product_dianpu"
+                    android:layout_marginTop="@dimen/margin_small"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="店铺"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="13sp"
+                    android:layout_marginTop="@dimen/margin_mini"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/icon_product_shoucang"
+                    android:layout_marginTop="@dimen/margin_small"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收藏"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="13sp"
+                    android:layout_marginTop="@dimen/margin_mini"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rl_bottom"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 广告  -->
+            <RelativeLayout
+                android:id="@+id/rl_guanggao"
+                android:layout_width="match_parent"
+                android:layout_height="375dp"
+                android:background="@color/white">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager_guanggao"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"/>
+
+                <LinearLayout
+                    android:id="@+id/ly_dot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="5dip"
+                    android:orientation="horizontal">
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 其它模块 -->
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/textsize_normal"
+                android:textColor="@color/black"
+                android:layout_marginTop="19dp"
+                android:layout_marginRight="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:singleLine="true"/>
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="上海广东湖北山东发货"
+                android:textSize="@dimen/textsize_normal"
+                android:textColor="@color/color_text_radio_unselected"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginRight="@dimen/margin_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:singleLine="true"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/textsize_normal"
+                    android:textColor="@color/red"
+                    android:text="￥24.2"
+                    android:singleLine="true"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_jian"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/shape_bg_orental_gray"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:text="—"
+                        android:textColor="#4d4a47"
+                        android:textSize="11sp"
+                        android:gravity="center"/>
+
+                    <EditText
+                        android:id="@+id/edt_count"
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/shape_bg_orental_gray"
+                        android:text="0"
+                        android:textColor="#4d4a47"
+                        android:textSize="11sp"
+                        android:gravity="center"
+                        android:inputType="number"/>
+
+                    <TextView
+                        android:id="@+id/tv_add"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/shape_bg_orental_gray"
+                        android:text="+"
+                        android:textColor="#4d4a47"
+                        android:textSize="11sp"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp">
+
+                <TextView
+                    android:id="@+id/tv_xiaoliang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="销量 1234"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="12sp"
+                    android:gravity="center"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@color/color_text_radio_unselected"/>
+
+                <TextView
+                    android:id="@+id/tv_shoucang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="收藏1234人"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="12sp"
+                    android:gravity="center"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@color/color_text_radio_unselected"/>
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="价格更新2017-12-22"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="12sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_main"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="@dimen/margin_normal">
+
+                <ImageView
+                    android:id="@+id/iv_pic"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:scaleType="centerCrop"
+                    android:src="@color/gray"/>
+
+                <Button
+                    android:id="@+id/btn_dianpu"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/shape_bg_orental_gray"
+                    android:text="进店逛逛"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_toRightOf="@id/iv_pic"
+                    android:layout_toLeftOf="@id/btn_dianpu"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp">
+
+                    <TextView
+                        android:id="@+id/tv_dianpu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="巧厨食品专卖店"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/textsize_normal"
+                        android:singleLine="true"/>
+
+                    <TextView
+                        android:id="@+id/tv_dianpu_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总销量 123 全部产品 44"
+                        android:textColor="@color/color_text_radio_unselected"
+                        android:textSize="12sp"
+                        android:singleLine="true"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_main"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="产品参数"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_normal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="库存"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/tv_kucun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9999件"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="64dp"
+                    android:singleLine="true"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDDDDD"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="产地"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/tv_chandi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="四川成都"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="64dp"
+                    android:singleLine="true"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDDDDD"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="规格"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/tv_guige"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="205"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="64dp"
+                    android:singleLine="true"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDDDDD"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="质量等级"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/tv_qualitylevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3级"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="64dp"
+                    android:singleLine="true"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDDDDD"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分类"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="液体"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="64dp"
+                    android:singleLine="true"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDDDDD"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="代理级别"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:singleLine="true"/>
+
+                <TextView
+                    android:id="@+id/tv_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="区域代理"
+                    android:textColor="@color/color_text_radio_unselected"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="64dp"
+                    android:singleLine="true"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_main"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商品描述"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize_normal"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_normal"/>
+
+            <TextView
+                android:id="@+id/tv_dec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="花椒(学名:Zanthoxylum bungeanum Maxim.)，别名:檓、大椒、秦椒、蜀椒、川椒或山椒。为芸香科、花椒属落叶灌木或小乔木，可孤植又可作防护刺篱。其果皮可作为调味料，并可提取芳香油，又可入药，种子可食用，也可加工制作肥皂。 花椒可除各种肉类的腥气;促进唾液分泌，增加食欲;使血管扩张，从而起到降低血压的作用。一般人群均能食用，孕妇，阴虚火旺者忌食。果实呈圆形，绿豆大小，其外皮是一种常用香料。果实成熟时红色或紫红色果皮叫椒红，种子叫椒目，都是中药材，家庭常用调味品，多见于海拔2500米的坡地，也有栽种。耐旱、喜阳光，各地多栽种。"
+                android:textColor="#555555"
+                android:textSize="10sp"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginRight="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_small"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/white"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/color_main"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -188,6 +188,18 @@
             android:screenOrientation="portrait" >
         </activity>
 
+        <activity
+            android:name="com.app.sifanggou.activity.CategoryProductActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name="com.app.sifanggou.activity.ProductDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+
         <!-- 友盟 设置开始-->
         <meta-data android:value="593dd2dbbbea832c1500150c" android:name="UMENG_APPKEY"/>
         <meta-data android:value="yanggecaipiao" android:name="UMENG_CHANNEL"/>

@@ -278,6 +278,12 @@ public class SearchActivity extends BaseActivity {
             public void add(CommodityInfoBean bean) {
                 carAdd(bean);
             }
+
+            @Override
+            public void click(CommodityInfoBean bean) {
+                Intent intent = new Intent(SearchActivity.this,ProductDetailActivity.class);
+                startActivity(intent);
+            }
         });
 
         rlCar.setOnClickListener(new View.OnClickListener() {

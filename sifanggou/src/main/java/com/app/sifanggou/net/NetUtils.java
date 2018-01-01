@@ -23,12 +23,14 @@ import com.app.sifanggou.net.httprunner.GetBusinessShoppingCartListHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessUrgentSellCommoditHttpRunner;
 import com.app.sifanggou.net.httprunner.GetCityMarketHttpRunner;
 import com.app.sifanggou.net.httprunner.GetCommodityTypeListHttpRunner;
+import com.app.sifanggou.net.httprunner.GetFirstPageAdHttpRunner;
 import com.app.sifanggou.net.httprunner.GetProvinceCityZoneHttpRunner;
 import com.app.sifanggou.net.httprunner.GetShelfAmountHttpRunner;
 import com.app.sifanggou.net.httprunner.GetVerifyCodeHttpRunner;
 import com.app.sifanggou.net.httprunner.SearchBusinessCommodityOnNameHttpRunner;
 import com.app.sifanggou.net.httprunner.SerachBusinessOnNameHttpRunner;
 import com.app.sifanggou.net.httprunner.UpdateBusinessDeliverAddressHttpRunner;
+import com.app.sifanggou.net.httprunner.UpdateBusinessOrderStatusHttpRunner;
 import com.app.sifanggou.net.httprunner.UpdateBusinessShoppingCartCommodityNumHttpRunner;
 import com.app.sifanggou.net.httprunner.UpdateCommodityPriceHttpRunner;
 
@@ -67,6 +69,10 @@ public class NetUtils {
 		eventManager.registerEventRunner(EventCode.HTTP_BUSINESSSUBMITORDER, new BusinessSubmitOrderHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINENESSORDERINFOSPECIALSTATUS, new GetBusinenessOrderInfoSpecialStatusHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO, new GetBusinenessInOutOrderInfoHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO_DAJIE, new GetBusinenessInOutOrderInfoHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO_DAISHOU, new GetBusinenessInOutOrderInfoHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_UPDATEBUSINESSORDERSTATUS, new UpdateBusinessOrderStatusHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETFIRSTPAGEAD, new GetFirstPageAdHttpRunner());
 	}
 }
 

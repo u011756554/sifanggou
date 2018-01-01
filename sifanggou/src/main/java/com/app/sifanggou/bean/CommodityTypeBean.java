@@ -9,11 +9,21 @@ import java.util.List;
 public class CommodityTypeBean extends NodeBaseBean {
     private List<FirstChildNodeTypeBean> child_node_list;
 
+    private boolean isSelected = false;
+
     public List<FirstChildNodeTypeBean> getChild_node_list() {
         return child_node_list;
     }
 
     public void setChild_node_list(List<FirstChildNodeTypeBean> child_node_list) {
         this.child_node_list = child_node_list;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

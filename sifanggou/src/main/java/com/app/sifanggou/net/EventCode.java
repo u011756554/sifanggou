@@ -64,5 +64,13 @@ public class EventCode {
 	public static final int HTTP_GETBUSINENESSORDERINFOSPECIALSTATUS = ++BASECODE;
 
 	public static final int HTTP_GETBUSINENESSINOUTORDERINFO = ++BASECODE;
+
+	public static final int HTTP_GETBUSINENESSINOUTORDERINFO_DAJIE = ++BASECODE;
+
+	public static final int HTTP_GETBUSINENESSINOUTORDERINFO_DAISHOU = ++BASECODE;
+
+	public static final int HTTP_UPDATEBUSINESSORDERSTATUS = ++BASECODE;
+
+	public static final int HTTP_GETFIRSTPAGEAD = ++BASECODE;
 }
 

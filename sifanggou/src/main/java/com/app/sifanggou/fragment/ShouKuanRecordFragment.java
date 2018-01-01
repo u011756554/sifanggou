@@ -150,13 +150,13 @@ public class ShouKuanRecordFragment extends BaseFragment {
     private void refreshData() {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
             page = 0;
-            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.WAITING_PAY.getType(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.RECEIPTED.getType(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
         }
     }
 
     private void getData() {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
-            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.WAITING_PAY.getType(),AppContext.ITEM_NUM+"",page + "",KEY_MORE);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.RECEIPTED.getType(),AppContext.ITEM_NUM+"",page + "",KEY_MORE);
         }
     }
 

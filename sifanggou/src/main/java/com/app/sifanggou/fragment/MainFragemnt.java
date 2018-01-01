@@ -12,6 +12,9 @@ import com.app.sifanggou.activity.UrlWebClientActivity;
 import com.app.sifanggou.adapter.GuangGaoPagerAdapter;
 import com.app.sifanggou.adapter.HotAdapter;
 import com.app.sifanggou.bean.DiPaiBean;
+import com.app.sifanggou.net.Event;
+import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.GetFirstPageAdResponseBean;
 import com.app.sifanggou.net.bean.GuangGaoBean;
 import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.ImageLoaderUtil;
@@ -43,8 +46,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MainFragemnt extends BaseFragment {
-	@ViewInject(R.id.ll_niming)
-	private LinearLayout llNiMing;
 	@ViewInject(R.id.ll_jixuchucang)
 	private LinearLayout llJiXu;
 	@ViewInject(R.id.ll_product_center)
@@ -105,7 +106,7 @@ public class MainFragemnt extends BaseFragment {
 		// TODO Auto-generated method stub
 		initView();
 		initListener();
-		getData();
+		getAd();
 		startLoopViewPager();
 		mViewPager.setCurrentItem(0);
 		super.onActivityCreated(savedInstanceState);
@@ -191,15 +192,18 @@ public class MainFragemnt extends BaseFragment {
 			}
 		});
 	}
-	
-	private  void getData() {
-		for(int i = 0 ; i < 4 ; i++) {
-			GuangGaoBean bean = new GuangGaoBean();
-			bean.setPicUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1503629114699&di=3fc297a764fd880ea4f00b0c6d650fc7&imgtype=0&src=http%3A%2F%2Fimg2.ph.126.net%2FWwlJJcNx0_uwcfap6Pooxw%3D%3D%2F3771201738069550196.jpg");
-			bean.setOutUrl("www.baidu.com");
-			bean.setTitle("四方购");
-			list.add(bean);
+
+	private void getAd() {
+		pushEventNoProgress(EventCode.HTTP_GETFIRSTPAGEAD);
+	}
+
+	private  void refreshAd(List<GuangGaoBean> adList) {
+		if (adList == null) {
+			return;
 		}
+		list.clear();
+		list.addAll(adList);
+
 		imgsize = list.size();
 		initDots(dotLayout, list);
 		LayoutParams param = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -209,15 +213,15 @@ public class MainFragemnt extends BaseFragment {
 			ImageView iv = new ImageView(getActivity());
 			iv.setLayoutParams(param);
 			iv.setScaleType(ScaleType.CENTER_CROP);
-			ImageLoaderUtil.displayWithCache(bean.getPicUrl(), iv);
+			ImageLoaderUtil.displayWithCache(bean.getAd_pic_url(), iv);
 			viewList.add(iv);
 			iv.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
 					Intent intent = new Intent(getActivity(),UrlWebClientActivity.class);
-					intent.putExtra(UrlWebClientActivity.KEY_TITILE, bean.getTitle());
-					intent.putExtra(UrlWebClientActivity.KEY_URL, bean.getOutUrl());
+					intent.putExtra(UrlWebClientActivity.KEY_TITILE, bean.getAd_txt());
+					intent.putExtra(UrlWebClientActivity.KEY_URL, bean.getAd_pic_url());
 					getActivity().startActivity(intent);
 				}
 			});
@@ -254,6 +258,21 @@ public class MainFragemnt extends BaseFragment {
 		super.onDestroy();
 		if (handler != null && runnable != null) {
 			handler.removeCallbacks(runnable);
+		}
+	}
+
+	@Override
+	public void onEventRunEnd(Event event) {
+		super.onEventRunEnd(event);
+		if (event.getEventCode() == EventCode.HTTP_GETFIRSTPAGEAD) {
+			if (event.isSuccess()) {
+				GetFirstPageAdResponseBean bean = (GetFirstPageAdResponseBean) event.getReturnParamAtIndex(0);
+				if (bean != null && bean.getData() != null) {
+					refreshAd(bean.getData().getFirst_page_ad());
+				}
+			} else {
+				CommonUtils.showToast(event.getFailMessage());
+			}
 		}
 	}
 }

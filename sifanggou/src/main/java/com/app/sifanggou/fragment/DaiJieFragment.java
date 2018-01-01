@@ -16,9 +16,11 @@ import com.app.sifanggou.adapter.CarItemAdapter;
 import com.app.sifanggou.adapter.InOutOrderInfoAdapter;
 import com.app.sifanggou.bean.CarBean;
 import com.app.sifanggou.bean.OrderNoBaseBean;
+import com.app.sifanggou.bean.OrderStatusType;
 import com.app.sifanggou.bean.OrderType;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.BaseResponseBean;
 import com.app.sifanggou.net.bean.GetBusinenessInOutOrderInfoResponseBean;
 import com.app.sifanggou.net.bean.GetBusinessShoppingCartListResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
@@ -79,6 +81,22 @@ public class DaiJieFragment extends BaseFragment {
         //处理分页
         adapter = new InOutOrderInfoAdapter(getActivity(),list,InOutOrderInfoAdapter.TYPE_JIEKUAN);
 
+        adapter.setDaiJieListener(new InOutOrderInfoAdapter.DaiJieListener() {
+            @Override
+            public void jieKuan(OrderNoBaseBean bean) {
+                if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null) {
+                    String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
+                    String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
+                    String trans_no = System.currentTimeMillis() + "";
+                    String sign = CommonUtils.getSign(business_code,user_name,trans_no, PreManager.getString(getActivity().getApplicationContext(), AppContext.USER_PWD));
+                    String order_no = bean.getOrder_no();
+                    String sub_order_no = bean.getSub_order_no();
+                    String order_status = OrderStatusType.PAID.getType();
+
+                    pushEventBlock(EventCode.HTTP_UPDATEBUSINESSORDERSTATUS,business_code,user_name,trans_no,sign,order_no,sub_order_no,order_status);
+                }
+            }
+        });
 
         swipeRefreshLayout.setColorSchemeResources(R.color.color_banner,R.color.color_banner,R.color.color_banner,R.color.color_banner);
         listViewFooterView = LayoutInflater.from(getActivity()).inflate(R.layout.mode_more, null);
@@ -152,20 +170,20 @@ public class DaiJieFragment extends BaseFragment {
     private void refreshData() {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
             page = 0;
-            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.WAITING_PAY.getType(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO_DAJIE,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.WAITING_PAY.getType(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
         }
     }
 
     private void getData() {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
-            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.WAITING_PAY.getType(),AppContext.ITEM_NUM+"",page + "",KEY_MORE);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO_DAJIE,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.WAITING_PAY.getType(),AppContext.ITEM_NUM+"",page + "",KEY_MORE);
         }
     }
 
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
-        if (event.getEventCode() == EventCode.HTTP_GETBUSINENESSINOUTORDERINFO) {
+        if (event.getEventCode() == EventCode.HTTP_GETBUSINENESSINOUTORDERINFO_DAJIE) {
             if (event.isSuccess()) {
                 String type = (String) event.getReturnParamAtIndex(1);
                 if (type.equals(KEY_REFRESH)) {
@@ -236,6 +254,14 @@ public class DaiJieFragment extends BaseFragment {
                         }
                     }
                 }
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
+
+        if (event.getEventCode() == EventCode.HTTP_UPDATEBUSINESSORDERSTATUS) {
+            if (event.isSuccess()) {
+                refresh();
             } else {
                 CommonUtils.showToast(event.getFailMessage());
             }

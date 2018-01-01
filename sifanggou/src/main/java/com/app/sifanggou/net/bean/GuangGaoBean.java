@@ -2,60 +2,49 @@ package com.app.sifanggou.net.bean;
 
 public class GuangGaoBean extends BaseResponseBean {
 
-	private String id;
-	private String createDate;
-	private String lastUpdateDate;
-	private String outUrl;
-	private String picUrl;
-	private String publish;
-	private String title;
-	private String type;
-	public String getId() {
-		return id;
+	private String ad_txt;
+	private String ad_id;
+	private String business_code;
+	private String ad_pic_url;
+	private String add_time;
+
+	public String getAd_txt() {
+		return ad_txt;
 	}
-	public void setId(String id) {
-		this.id = id;
+
+	public void setAd_txt(String ad_txt) {
+		this.ad_txt = ad_txt;
 	}
-	public String getTitle() {
-		return title;
+
+	public String getAd_id() {
+		return ad_id;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setAd_id(String ad_id) {
+		this.ad_id = ad_id;
 	}
-	public String getPicUrl() {
-		return picUrl;
+
+	public String getBusiness_code() {
+		return business_code;
 	}
-	public void setPicUrl(String picUrl) {
-		this.picUrl = picUrl;
+
+	public void setBusiness_code(String business_code) {
+		this.business_code = business_code;
 	}
-	public String getOutUrl() {
-		return outUrl;
+
+	public String getAd_pic_url() {
+		return ad_pic_url;
 	}
-	public void setOutUrl(String outUrl) {
-		this.outUrl = outUrl;
+
+	public void setAd_pic_url(String ad_pic_url) {
+		this.ad_pic_url = ad_pic_url;
 	}
-	public String getPublish() {
-		return publish;
+
+	public String getAdd_time() {
+		return add_time;
 	}
-	public void setPublish(String publish) {
-		this.publish = publish;
-	}
-	public String getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
-	public String getLastUpdateDate() {
-		return lastUpdateDate;
-	}
-	public void setLastUpdateDate(String lastUpdateDate) {
-		this.lastUpdateDate = lastUpdateDate;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
+
+	public void setAdd_time(String add_time) {
+		this.add_time = add_time;
 	}
 }

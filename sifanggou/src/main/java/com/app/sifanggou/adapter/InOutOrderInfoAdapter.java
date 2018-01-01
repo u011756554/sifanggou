@@ -110,9 +110,25 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
         if (type.equals(TYPE_JIEKUAN)) {
             holder.btnOrder.setVisibility(View.VISIBLE);
             holder.btnOrder.setText("已结款");
+            holder.btnOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (daiJieListener != null) {
+                        daiJieListener.jieKuan(orderNoBaseBean);
+                    }
+                }
+            });
         } else if(type.equals(TYPE_SHOUKUAN)) {
             holder.btnOrder.setVisibility(View.VISIBLE);
             holder.btnOrder.setText("已收款");
+            holder.btnOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (daiShouListener != null) {
+                        daiShouListener.shouKuan(orderNoBaseBean);
+                    }
+                }
+            });
         } else {
             holder.btnOrder.setVisibility(View.GONE);
         }
@@ -128,4 +144,25 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
         private TextView tvPrice;
         private Button btnOrder;
     }
+
+    public interface DaiShouListener {
+        void shouKuan(OrderNoBaseBean bean);
+    }
+
+    private DaiShouListener daiShouListener;
+
+    public void setDaiShouListener(DaiShouListener listener) {
+        this.daiShouListener = listener;
+    }
+
+    public interface DaiJieListener {
+        void jieKuan(OrderNoBaseBean bean);
+    }
+
+    private DaiJieListener daiJieListener;
+
+    public void setDaiJieListener(DaiJieListener listener) {
+        this.daiJieListener = listener;
+    }
+
 }

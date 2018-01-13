@@ -1,1 +1,1 @@
-include ':sifanggou'
+include ':sifanggou', ':IMLib', ':IMKit'

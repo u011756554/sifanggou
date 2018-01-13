@@ -42,7 +42,7 @@ public class URLUtils {
 
 	public static final String ADDBUSINESSURGENTSELLCOMMODITY = SERVER + "business/AddBusinessUrgentSellCommodity";
 
-	public static final String SERACHBUSINESSONNAME = SERVER + "business/SerachBusinessOnName";
+	public static final String SERACHBUSINESSONNAME = SERVER + "business/SerachBusiness";
 
 	public static final String SEARCHBUSINESSCOMMODITYONNAME = SERVER + "business/SearchBusinessCommodityOnName";
 
@@ -73,5 +73,25 @@ public class URLUtils {
 	public static final String GETFIRSTPAGEAD = SERVER + "business/GetFirstPageAd";
 
 	public static final String GETBUSINESSCOMMODITYBYCATEGORYCODE = SERVER + "business/GetBusinessCommodityByCategoryCode";
+
+	public static final String ADDBUSINESSCOMMODITYCOLLECT = SERVER + "business/AddBusinessCommodityCollect";
+
+	public static final String ADDBUSINESSPARTNER = SERVER + "business/AddBusinessPartner";
+
+	public static final String GETBUSINESSCOMMODITYCOLLECT = SERVER + "business/GetBusinessCommodityCollect";
+
+	public static final String GETBUSINESSPARTNER = SERVER + "business/GetBusinessPartner";
+
+	public static final String GETBUSINESSINVITECODE = SERVER + "business/GetBusinessInviteCode";
+
+	public static final String ADDBUSINESSSTAFF = SERVER + "business/AddBusinessStaff";
+
+	public static final String GETBUSINESSSTAFFINFO = SERVER + "business/GetBusinessStaffInfo";
+
+	public static final String ADDBUSINESSPRINTCONFIG = SERVER + "business/AddBusinessPrintConfig";
+
+	public static final String GETBUSINESSRONGYUNTOKEN = SERVER + "business/GetBusinessRongYunToken";
+
+	public static final String GETBUSINESSINFO = SERVER + "business/GetBusinessInfo";
 }
 

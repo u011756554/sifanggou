@@ -74,5 +74,25 @@ public class EventCode {
 	public static final int HTTP_GETFIRSTPAGEAD = ++BASECODE;
 
 	public static final int HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE = ++BASECODE;
+
+	public static final int HTTP_ADDBUSINESSCOMMODITYCOLLECT = ++BASECODE;
+
+	public static final int HTTP_ADDBUSINESSPARTNER = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSCOMMODITYCOLLECT = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSPARTNER = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSINVITECODE = ++BASECODE;
+
+	public static final int HTTP_ADDBUSINESSSTAFF = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSSTAFFINFO = ++BASECODE;
+
+	public static final int HTTP_ADDBUSINESSPRINTCONFIG = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSRONGYUNTOKEN = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSINFO = ++BASECODE;
 }
 

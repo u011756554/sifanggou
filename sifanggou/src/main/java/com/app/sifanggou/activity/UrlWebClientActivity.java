@@ -24,6 +24,7 @@ public class UrlWebClientActivity extends BaseActivity {
 	private RelativeLayout rlBack;
 	@ViewInject(R.id.tv_title)
 	private TextView tvTitle;
+
 	public static final String KEY_URL = "url";
 	public static final String KEY_TITILE = "key_UrlWebClientActivity_title";
 	private static final String KEY_PRE = "http://";

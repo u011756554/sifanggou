@@ -14,9 +14,11 @@ import com.app.sifanggou.net.EventCode;
 import com.app.sifanggou.utils.CommonUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
@@ -201,4 +203,27 @@ public class MainActivity extends BaseActivity {
 			}
 		}
     }
+
+	private Long backCode = 0l;
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if((keyCode == KeyEvent.KEYCODE_BACK)){
+			if((System.currentTimeMillis() - backCode < 2000)){
+				exitProgram();
+			}else{
+				backCode = System.currentTimeMillis();
+				CommonUtils.showToast("再点一次退出程序");
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	private void exitProgram(){
+		Intent intent=new Intent(Intent.ACTION_MAIN);
+		intent.addCategory(Intent.CATEGORY_HOME);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		this.startActivity(intent);
+	}
 }

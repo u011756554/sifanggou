@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.app.sifanggou.net.NetUtils;
 import com.app.sifanggou.utils.CommonUtils;
+import com.app.sifanggou.view.rongyun.MyExtensionModule;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -17,6 +18,11 @@ import com.umeng.analytics.MobclickAgent.EScenarioType;
 import android.app.Activity;
 import android.app.Application;
 import android.graphics.Bitmap;
+
+import io.rong.imkit.DefaultExtensionModule;
+import io.rong.imkit.IExtensionModule;
+import io.rong.imkit.RongExtensionManager;
+import io.rong.imkit.RongIM;
 
 public class MyApplication extends Application{
 	public static MyApplication instance;
@@ -32,6 +38,26 @@ public class MyApplication extends Application{
 			initImageLoader();
 		}
 		initUmeng();
+		RongIM.init(this);
+		RongIM.getInstance().setMessageAttachedUserInfo(true);
+		setMyExtensionModule();
+	}
+
+	public void setMyExtensionModule() {
+		List<IExtensionModule> moduleList = RongExtensionManager.getInstance().getExtensionModules();
+		IExtensionModule defaultModule = null;
+		if (moduleList != null) {
+			for (IExtensionModule module : moduleList) {
+				if (module instanceof DefaultExtensionModule) {
+					defaultModule = module;
+					break;
+				}
+			}
+			if (defaultModule != null) {
+				RongExtensionManager.getInstance().unregisterExtensionModule(defaultModule);
+				RongExtensionManager.getInstance().registerExtensionModule(new MyExtensionModule());
+			}
+		}
 	}
 
 	private void initUmeng() {
@@ -95,4 +121,5 @@ public class MyApplication extends Application{
 			activity.finish();
 		}
 	}
+
 }

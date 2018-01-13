@@ -153,6 +153,7 @@ public class CategoryProductActivity extends BaseActivity {
             @Override
             public void click(CommodityInfoBean bean) {
                 Intent intent = new Intent(CategoryProductActivity.this,ProductDetailActivity.class);
+                intent.putExtra(ProductPicActivity.KEY_DATA,bean);
                 startActivity(intent);
             }
         });

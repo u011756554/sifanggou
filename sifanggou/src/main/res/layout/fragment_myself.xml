@@ -275,8 +275,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_zizhaghao"
                     android:layout_width="match_parent"
-                    android:layout_height="49dp"
-                    android:visibility="gone">
+                    android:layout_height="49dp">
 
                     <ImageView
                         android:id="@+id/iv_zizhaghao"
@@ -456,7 +455,8 @@
                 <RelativeLayout
                     android:id="@+id/rl_mywallet"
                     android:layout_width="match_parent"
-                    android:layout_height="49dp">
+                    android:layout_height="49dp"
+                    android:visibility="gone">
 
                     <ImageView
                         android:id="@+id/iv_mywallet"
@@ -795,7 +795,7 @@
         android:layout_height="44dp">
 
         <RelativeLayout
-            android:id="@+id/rl_delete"
+            android:id="@+id/rl_scan"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
             <ImageView
@@ -817,7 +817,7 @@
             android:textColor="@color/white"/>
 
         <RelativeLayout
-            android:id="@+id/rl_login"
+            android:id="@+id/rl_set"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true">

@@ -2,22 +2,32 @@ package com.app.sifanggou.activity;
 
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
+import com.app.sifanggou.bean.AliyunToken;
+import com.app.sifanggou.bean.AliyunTokenBean;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.GetBusinessRongYunTokenResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.PreManager;
+import com.google.gson.Gson;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
 
 public class LoginActivity extends BaseActivity {
 
@@ -101,13 +111,83 @@ public class LoginActivity extends BaseActivity {
 				}
 				CommonUtils.showToast("登录成功");
 				LoginResponseBean loginBean = (LoginResponseBean) event.getReturnParamAtIndex(0);
-				PreManager.put(getApplicationContext(), AppContext.USER_LOGIN,loginBean);
+				if (loginBean != null
+						&& loginBean.getData() != null
+						&& loginBean.getData().getLogin_info() != null
+						&& loginBean.getData().getLogin_info().getBusiness_info() != null) {
+					PreManager.put(getApplicationContext(), AppContext.USER_LOGIN,loginBean);
 
-				Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-				startActivity(intent);
+					Uri headUri = Uri.parse(loginBean.getData().getLogin_info().getBusiness_info().getHead_pic_url());
+
+					UserInfo userInfo = new UserInfo(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+							loginBean.getData().getLogin_info().getName(),headUri);
+					RongIM.getInstance().setCurrentUserInfo(userInfo);
+
+					pushEventBlock(EventCode.HTTP_GETBUSINESSRONGYUNTOKEN,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code());
+				}
 			} else {
 				CommonUtils.showToast(event.getFailMessage());
 			}
+		}
+
+		if (event.getEventCode() == EventCode.HTTP_GETBUSINESSRONGYUNTOKEN) {
+			if (event.isSuccess()) {
+				GetBusinessRongYunTokenResponseBean bean = (GetBusinessRongYunTokenResponseBean) event.getReturnParamAtIndex(0);
+				if (bean != null
+						&& bean.getData() != null
+						&& !TextUtils.isEmpty(bean.getData().getToken())) {
+					connect(bean.getData().getToken());
+				}
+			} else {
+				CommonUtils.showToast(event.getFailMessage());
+			}
+		}
+	}
+
+	/**
+	 * <p>连接服务器，在整个应用程序全局，只需要调用一次，需在 {@link #init(Context)} 之后调用。</p>
+	 * <p>如果调用此接口遇到连接失败，SDK 会自动启动重连机制进行最多10次重连，分别是1, 2, 4, 8, 16, 32, 64, 128, 256, 512秒后。
+	 * 在这之后如果仍没有连接成功，还会在当检测到设备网络状态变化时再次进行重连。</p>
+	 *
+	 * @param token    从服务端获取的用户身份令牌（Token）。
+	 * @param callback 连接回调。
+	 * @return RongIM  客户端核心类的实例。
+	 */
+	private void connect(String token) {
+
+		if (getApplicationInfo().packageName.equals(CommonUtils.getCurProcessName(getApplicationContext()))) {
+
+			RongIM.connect(token, new RongIMClient.ConnectCallback() {
+
+				/**
+				 * Token 错误。可以从下面两点检查 1.  Token 是否过期，如果过期您需要向 App Server 重新请求一个新的 Token
+				 *                  2.  token 对应的 appKey 和工程里设置的 appKey 是否一致
+				 */
+				@Override
+				public void onTokenIncorrect() {
+
+				}
+
+				/**
+				 * 连接融云成功
+				 * @param userid 当前 token 对应的用户 id
+				 */
+				@Override
+				public void onSuccess(String userid) {
+					Log.d("LoginActivity", "--onSuccess" + userid);
+					startActivity(new Intent(LoginActivity.this, MainActivity.class));
+					finish();
+				}
+
+				/**
+				 * 连接融云失败
+				 * @param errorCode 错误码，可到官网 查看错误码对应的注释
+				 */
+				@Override
+				public void onError(RongIMClient.ErrorCode errorCode) {
+
+				}
+			});
 		}
 	}
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.R;
@@ -39,6 +40,8 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
             holder.ivPic1 = (ImageView) convertView.findViewById(R.id.iv_pic1);
             holder.ivPic2 = (ImageView) convertView.findViewById(R.id.iv_pic2);
             holder.ivPic3 = (ImageView) convertView.findViewById(R.id.iv_pic3);
+            holder.llContent = (LinearLayout) convertView.findViewById(R.id.ll_content);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -62,6 +65,15 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
         if (!TextUtils.isEmpty(bean.getAgent_level())) {
             holder.tvLevel.setText(bean.getAgent_level());
         }
+
+        holder.llContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.click(bean);
+                }
+            }
+        });
         return convertView;
     }
 
@@ -75,5 +87,16 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
         private ImageView ivPic1;
         private ImageView ivPic2;
         private ImageView ivPic3;
+        private LinearLayout llContent;
+    }
+
+    public interface UpdateListener {
+        void click(BusinessInfoBean bean);
+    }
+
+    private UpdateListener mListener;
+
+    public void setListener(UpdateListener listener) {
+        this.mListener = listener;
     }
 }

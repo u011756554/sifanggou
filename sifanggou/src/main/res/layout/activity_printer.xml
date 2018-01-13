@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:orientation="vertical"
+    android:background="@color/color_main">
+
+    <include layout="@layout/mode_header"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:id="@+id/edt_zdcode"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:layout_marginLeft="20dp"
+            android:hint="请输入终端号（列：0212355）"
+            android:textSize="@dimen/textsize_small"
+            android:textColor="#999999"
+            android:gravity="center_vertical"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#999999"
+            android:layout_marginLeft="@dimen/margin_normal"/>
+
+        <EditText
+            android:id="@+id/edt_zdmy"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:layout_marginLeft="20dp"
+            android:hint="请输入终密钥（列：0212355）"
+            android:textSize="@dimen/textsize_small"
+            android:textColor="#999999"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:background="@drawable/shape_bg_redbtn"
+        android:text="确认"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_normal"/>
+</LinearLayout>

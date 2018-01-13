@@ -8,6 +8,7 @@ public class CommodityInfoBean extends BaseBean {
     private String second_level_category_name;
     private String qc_report;
     private String quality_grade;
+    private BusinessInfoBean business_info;
     private String business_code;
     private String audit_status;
     private String type;
@@ -36,6 +37,14 @@ public class CommodityInfoBean extends BaseBean {
     private String first_level_category_code;
     private int selectCount;
     private boolean isSelect = false;
+
+    public BusinessInfoBean getBusiness_info() {
+        return business_info;
+    }
+
+    public void setBusiness_info(BusinessInfoBean business_info) {
+        this.business_info = business_info;
+    }
 
     public int getSelectCount() {
         return selectCount;

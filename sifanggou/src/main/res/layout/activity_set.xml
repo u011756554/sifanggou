@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:orientation="vertical"
+    android:background="@color/color_main">
+
+    <include layout="@layout/mode_header"></include>
+
+    <RelativeLayout
+        android:id="@+id/rl_add_account"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="昵称"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_normal"/>
+
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="添加子账户"
+            android:textColor="#999999"
+            android:textSize="@dimen/textsize_normal"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_normal"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_divider"
+        android:layout_marginLeft="@dimen/margin_normal"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_phone"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机号"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_normal"/>
+
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2222222"
+            android:textColor="#999999"
+            android:textSize="@dimen/textsize_normal"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_normal"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_pwd"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改登录密码"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_normal"/>
+
+
+        <ImageView
+            android:id="@+id/iv_pwd_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_right"
+            android:layout_marginRight="@dimen/margin_normal"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_divider"
+        android:layout_marginLeft="@dimen/margin_normal"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_code"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="二维码"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_normal"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_right"
+            android:layout_marginRight="@dimen/margin_normal"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_about"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关于四方购"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_normal"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_right"
+            android:layout_marginRight="@dimen/margin_normal"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_divider"
+        android:layout_marginLeft="@dimen/margin_normal"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_xieyi"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户服务协议"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_normal"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_right"
+            android:layout_marginRight="@dimen/margin_normal"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_divider"
+        android:layout_marginLeft="@dimen/margin_normal"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_haoping"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="四方购好评"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_normal"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_right"
+            android:layout_marginRight="@dimen/margin_normal"/>
+
+    </RelativeLayout>
+</LinearLayout>

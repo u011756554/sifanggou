@@ -16,9 +16,13 @@ import android.widget.TextView;
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.activity.DianPuDetailActivity;
+import com.app.sifanggou.activity.ProductDetailActivity;
 import com.app.sifanggou.activity.SearchActivity;
 import com.app.sifanggou.adapter.BusinessInfoBeanAdapter;
+import com.app.sifanggou.adapter.CommodityInfoBeanAdapter;
 import com.app.sifanggou.bean.BusinessInfoBean;
+import com.app.sifanggou.bean.CommodityInfoBean;
+import com.app.sifanggou.bean.SearchBusinessType;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
 import com.app.sifanggou.net.bean.LoginResponseBean;
@@ -61,6 +65,8 @@ public class DianPuFragment extends BaseFragment {
 	private static final String KEY_MORE = "more";
 
 	private LoginResponseBean loginBean;
+
+	private SearchBusinessType searchBusinessType = SearchBusinessType.NAME;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -139,13 +145,11 @@ public class DianPuFragment extends BaseFragment {
 			}
 		});
 
-		listViewMarket.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		adapterMarket.setListener(new BusinessInfoBeanAdapter.UpdateListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (position == dataListMarket.size() + 1 || position == 0) {
-					return;
-				}
-				Intent intent = new Intent(getActivity(), DianPuDetailActivity.class);
+			public void click(BusinessInfoBean bean) {
+				Intent intent = new Intent(getActivity(),DianPuDetailActivity.class);
+				intent.putExtra(DianPuDetailActivity.KEY_DATA,bean);
 				startActivity(intent);
 			}
 		});
@@ -204,7 +208,7 @@ public class DianPuFragment extends BaseFragment {
 	}
 
 	private void searchBusiness(String search,int item_num,int page_no,String tag) {
-		pushEventNoProgress(EventCode.HTTP_SERACHBUSINESSONNAME,search,item_num+"",page_no+"",tag);
+		pushEventNoProgress(EventCode.HTTP_SERACHBUSINESSONNAME,search,item_num+"",page_no+"",searchBusinessType.getType(),tag);
 	}
 
 	@Override

@@ -23,6 +23,7 @@ import com.app.sifanggou.adapter.BusinessInfoBeanAdapter;
 import com.app.sifanggou.adapter.CommodityInfoBeanAdapter;
 import com.app.sifanggou.bean.BusinessInfoBean;
 import com.app.sifanggou.bean.CommodityInfoBean;
+import com.app.sifanggou.bean.SearchBusinessType;
 import com.app.sifanggou.bean.SearchType;
 import com.app.sifanggou.bean.SearchTypeBean;
 import com.app.sifanggou.net.Event;
@@ -114,6 +115,8 @@ public class SearchActivity extends BaseActivity {
 
     public static final String KEY_TYPE = "key_SearchActivity_type";
     public static final String VULE_MARKET = "markert";
+
+    private SearchBusinessType searchBusinessType = SearchBusinessType.NAME;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -282,6 +285,16 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void click(CommodityInfoBean bean) {
                 Intent intent = new Intent(SearchActivity.this,ProductDetailActivity.class);
+                intent.putExtra(ProductDetailActivity.KEY_DATA,bean);
+                startActivity(intent);
+            }
+        });
+
+        adapterMarket.setListener(new BusinessInfoBeanAdapter.UpdateListener() {
+            @Override
+            public void click(BusinessInfoBean bean) {
+                Intent intent = new Intent(SearchActivity.this,DianPuDetailActivity.class);
+                intent.putExtra(DianPuDetailActivity.KEY_DATA,bean);
                 startActivity(intent);
             }
         });
@@ -290,17 +303,6 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SearchActivity.this,CarActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        listViewMarket.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == dataListMarket.size() + 1 || position == 0) {
-                    return;
-                }
-                Intent intent = new Intent(SearchActivity.this, DianPuDetailActivity.class);
                 startActivity(intent);
             }
         });
@@ -337,7 +339,7 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void searchBusiness(String search,int item_num,int page_no,String tag) {
-        pushEventNoProgress(EventCode.HTTP_SERACHBUSINESSONNAME,search,item_num+"",page_no+"",tag);
+        pushEventNoProgress(EventCode.HTTP_SERACHBUSINESSONNAME,search,item_num+"",page_no+"",searchBusinessType.getType(),tag);
     }
 
     private void searchCommodity(String search,int item_num,int page_no,String tag) {

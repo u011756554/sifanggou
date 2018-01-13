@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
+    android:orientation="vertical"
+    android:background="@color/color_main">
+
+    <include layout="@layout/mode_header"></include>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="为保障您的数据安全，修改密码前请填写原密码"
+        android:textColor="@color/color_gray"
+        android:textSize="@dimen/textsize_small"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/margin_normal"/>
+
+    <RelativeLayout
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/edt_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请填写密码"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:background="@null"/>
+
+    </RelativeLayout>
+</LinearLayout>

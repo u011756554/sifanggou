@@ -1,9 +1,13 @@
 package com.app.sifanggou.net;
 
 import com.app.sifanggou.net.httprunner.AddBusinessBuyShelfNumHttpRunner;
+import com.app.sifanggou.net.httprunner.AddBusinessCommodityCollectHttpRunner;
 import com.app.sifanggou.net.httprunner.AddBusinessCommodityHttpRunner;
 import com.app.sifanggou.net.httprunner.AddBusinessDeliverAddressHttpRunner;
+import com.app.sifanggou.net.httprunner.AddBusinessPartnerHttpRunner;
+import com.app.sifanggou.net.httprunner.AddBusinessPrintConfigHttpRunner;
 import com.app.sifanggou.net.httprunner.AddBusinessShoppingCartHttpRunner;
+import com.app.sifanggou.net.httprunner.AddBusinessStaffHttpRunner;
 import com.app.sifanggou.net.httprunner.AddBusinessUrgentSellCommodityHttpRunner;
 import com.app.sifanggou.net.httprunner.BatchUpdateCommodityShelfStatusHttpRunner;
 import com.app.sifanggou.net.httprunner.BusinessChangePasswordHttpRunner;
@@ -18,9 +22,15 @@ import com.app.sifanggou.net.httprunner.GetBusinenessInOutOrderInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinenessOrderInfoSpecialStatusHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCanAllocateShelfNumHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCommodityByCategoryCodeHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinessCommodityCollectHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCommodityInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessDeliverAddressHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinessInfoHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinessInviteCodeHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinessPartnerHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinessRongYunTokenHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessShoppingCartListHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinessStaffInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessUrgentSellCommoditHttpRunner;
 import com.app.sifanggou.net.httprunner.GetCityMarketHttpRunner;
 import com.app.sifanggou.net.httprunner.GetCommodityTypeListHttpRunner;
@@ -75,6 +85,16 @@ public class NetUtils {
 		eventManager.registerEventRunner(EventCode.HTTP_UPDATEBUSINESSORDERSTATUS, new UpdateBusinessOrderStatusHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETFIRSTPAGEAD, new GetFirstPageAdHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE, new GetBusinessCommodityByCategoryCodeHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_ADDBUSINESSCOMMODITYCOLLECT, new AddBusinessCommodityCollectHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_ADDBUSINESSPARTNER, new AddBusinessPartnerHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSCOMMODITYCOLLECT, new GetBusinessCommodityCollectHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSPARTNER, new GetBusinessPartnerHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSINVITECODE, new GetBusinessInviteCodeHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_ADDBUSINESSSTAFF, new AddBusinessStaffHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSSTAFFINFO, new GetBusinessStaffInfoHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_ADDBUSINESSPRINTCONFIG, new AddBusinessPrintConfigHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSRONGYUNTOKEN, new GetBusinessRongYunTokenHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSINFO, new GetBusinessInfoHttpRunner());
 	}
 }
 

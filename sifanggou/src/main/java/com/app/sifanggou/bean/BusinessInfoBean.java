@@ -37,7 +37,7 @@ public class BusinessInfoBean extends BaseBean {
     private String invite_code;
     private String agency_contract_num;
     private String scope;
-    private List<String> first_show_commodity_list;
+    private List<CommodityInfoBean> first_show_commodity_list;
 
 
     public String getCity() {
@@ -280,11 +280,11 @@ public class BusinessInfoBean extends BaseBean {
         this.scope = scope;
     }
 
-    public List<String> getFirst_show_commodity_list() {
+    public List<CommodityInfoBean> getFirst_show_commodity_list() {
         return first_show_commodity_list;
     }
 
-    public void setFirst_show_commodity_list(List<String> first_show_commodity_list) {
+    public void setFirst_show_commodity_list(List<CommodityInfoBean> first_show_commodity_list) {
         this.first_show_commodity_list = first_show_commodity_list;
     }
 }

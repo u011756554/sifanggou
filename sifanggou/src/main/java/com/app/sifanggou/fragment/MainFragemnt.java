@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
+import com.app.sifanggou.activity.ChatListActivity;
 import com.app.sifanggou.activity.JiXuChuCangActivity;
 import com.app.sifanggou.activity.SearchActivity;
 import com.app.sifanggou.activity.ShangPinGuanLiActivity;
@@ -54,6 +55,8 @@ public class MainFragemnt extends BaseFragment {
 	private LinearLayout llMyOrder;
 	@ViewInject(R.id.rl_search)
 	private RelativeLayout rlSearch;
+	@ViewInject(R.id.iv_msg)
+	private ImageView ivMsg;
 
 	private ViewPager mViewPager;
 	private GuangGaoPagerAdapter adapter;
@@ -188,6 +191,14 @@ public class MainFragemnt extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), SearchActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		ivMsg.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), ChatListActivity.class);
 				startActivity(intent);
 			}
 		});

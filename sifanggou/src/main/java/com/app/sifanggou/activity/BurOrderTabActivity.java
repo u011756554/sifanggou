@@ -35,6 +35,7 @@ public class BurOrderTabActivity extends BaseActivity implements PageSelectListe
 
     public static final String KEY_TYPE = "key_BurOrderTabActivity_type";
     public static final String VALUE_TYPE_DAIJIE = "daijie";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.app.sifanggou"
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion 15
+        targetSdkVersion 23
         jackOptions {
             enabled true
         }
@@ -24,6 +24,13 @@ android {
     useLibrary 'org.apache.http.legacy'
     productFlavors {
     }
+
+    sourceSets {
+        main {
+            jni.srcDirs = []
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -31,14 +38,13 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.squareup.okio:okio:1.9.0'
     compile 'com.google.code.gson:gson:2.3'
-    compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'pub.devrel:easypermissions:0.2.1'
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     //图片选择库
-    compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     compile 'cn.bingoogolapple:bga-adapter:1.1.5@aar'
     compile 'cn.bingoogolapple:bga-photopicker:1.2.3@aar'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
     compile files('libs/umeng-analytics-v6.1.1.jar')
     compile files('libs/universal-image-loader-1.9.2-with-sources.jar')
     compile files('libs/utdid4all-1.0.4.jar')
@@ -46,4 +52,9 @@ dependencies {
     compile files('libs/aliyun-oss-sdk-android-2.4.3.jar')
     compile files('libs/okhttp-3.4.1.jar')
     compile files('libs/okio-1.10.0.jar')
+    //二维码
+    compile 'com.google.zxing:core:3.2.1'
+    compile 'com.journeyapps:zxing-android-embedded:3.3.0'
+    compile project(':IMKit')
+    compile project(':IMLib')
 }

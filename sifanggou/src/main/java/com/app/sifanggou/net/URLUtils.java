@@ -93,5 +93,15 @@ public class URLUtils {
 	public static final String GETBUSINESSRONGYUNTOKEN = SERVER + "business/GetBusinessRongYunToken";
 
 	public static final String GETBUSINESSINFO = SERVER + "business/GetBusinessInfo";
+
+	public static final String GETALLBUSINESSURGENTSELLCOMMODITY = SERVER + "business/GetAllBusinessUrgentSellCommodity";
+
+	public static final String ISBUSINESSCOLLECTCOMMODITY = SERVER + "business/IsBusinessCollectCommodity";
+
+	public static final String DELBUSINESSCOMMODITYCOLLECT = SERVER + "business/DelBusinessCommodityCollect";
+
+	public static final String ISBUSINESSPARTNER = SERVER + "business/IsBusinessPartner";
+
+	public static final String DELBUSINESSPARTNER = SERVER + "business/DelBusinessPartner";
 }
 

@@ -7,6 +7,7 @@ import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.activity.ChatListActivity;
 import com.app.sifanggou.activity.JiXuChuCangActivity;
+import com.app.sifanggou.activity.JiXuProductListActivity;
 import com.app.sifanggou.activity.SearchActivity;
 import com.app.sifanggou.activity.ShangPinGuanLiActivity;
 import com.app.sifanggou.activity.UrlWebClientActivity;
@@ -174,7 +175,7 @@ public class MainFragemnt extends BaseFragment {
 		llJiXu.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), JiXuChuCangActivity.class);
+				Intent intent = new Intent(getActivity(), JiXuProductListActivity.class);
 				startActivity(intent);
 			}
 		});

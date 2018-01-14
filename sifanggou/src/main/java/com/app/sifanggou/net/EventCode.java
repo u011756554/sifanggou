@@ -94,5 +94,15 @@ public class EventCode {
 	public static final int HTTP_GETBUSINESSRONGYUNTOKEN = ++BASECODE;
 
 	public static final int HTTP_GETBUSINESSINFO = ++BASECODE;
+
+	public static final int HTTP_GETALLBUSINESSURGENTSELLCOMMODITY = ++BASECODE;
+
+	public static final int HTTP_ISBUSINESSCOLLECTCOMMODITY = ++BASECODE;
+
+	public static final int HTTP_DELBUSINESSCOMMODITYCOLLECT = ++BASECODE;
+
+	public static final int HTTP_ISBUSINESSPARTNER = ++BASECODE;
+
+	public static final int HTTP_DELBUSINESSPARTNER = ++BASECODE;
 }
 

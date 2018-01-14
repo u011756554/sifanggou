@@ -16,9 +16,11 @@ import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.adapter.GuangGaoPagerAdapter;
 import com.app.sifanggou.bean.CommodityInfoBean;
+import com.app.sifanggou.bean.ShouCangType;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
 import com.app.sifanggou.net.bean.GetBusinessRongYunTokenResponseBean;
+import com.app.sifanggou.net.bean.IsBusinessCollectCommodityResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.ImageLoaderUtil;
@@ -45,10 +47,10 @@ public class ProductDetailActivity extends BaseActivity {
     private TextView tvSaleNum;
     @ViewInject(R.id.tv_price)
     private TextView tvPrice;
-    @ViewInject(R.id.edt_count)
-    private EditText edtCount;
     @ViewInject(R.id.tv_shoucang)
     private TextView tvShouCang;
+    @ViewInject(R.id.tv_shoucang_status)
+    private TextView tvShouCangStatus;
     @ViewInject(R.id.tv_time)
     private TextView tvTime;
     @ViewInject(R.id.iv_pic)
@@ -83,7 +85,15 @@ public class ProductDetailActivity extends BaseActivity {
     private LinearLayout llShouCang;
     @ViewInject(R.id.ll_dianpu)
     private LinearLayout llDianPu;
+    @ViewInject(R.id.tv_jian)
+    private TextView tvJian;
+    @ViewInject(R.id.edt_count)
+    private EditText edtCount;
+    @ViewInject(R.id.tv_add)
+    private TextView tvAdd;
 
+    private int selectCount = 0;
+    private ShouCangType shouCangType = ShouCangType.NOSAVE;
 
     private LoginResponseBean loginBean;
     public static final String KEY_DATA = "key_ProductDetailActivity_data";
@@ -136,11 +146,48 @@ public class ProductDetailActivity extends BaseActivity {
         initListener();
         startLoopViewPager();
         mViewPager.setCurrentItem(0);
+        refreshShouCang();
+    }
+
+    private void refreshShouCang(){
+        if (shouCangType == ShouCangType.NOSAVE) {
+            tvShouCangStatus.setText("收藏");
+            llShouCang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (commodityInfoBean != null && loginBean != null) {
+                        String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
+                        String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
+                        String trans_no = System.currentTimeMillis()+"";
+                        String sign = CommonUtils.getSign(business_code,user_name,trans_no,PreManager.getString(getApplicationContext(),AppContext.USER_PWD));
+                        String commodity_id = commodityInfoBean.getCommodity_id();
+                        pushEventNoProgress(EventCode.HTTP_ADDBUSINESSCOMMODITYCOLLECT,business_code,user_name,trans_no,sign,commodity_id);
+                    }
+                }
+            });
+        } else {
+            tvShouCangStatus.setText("取消收藏");
+
+            llShouCang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (commodityInfoBean != null && loginBean != null) {
+                        String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
+                        String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
+                        String trans_no = System.currentTimeMillis()+"";
+                        String sign = CommonUtils.getSign(business_code,user_name,trans_no,PreManager.getString(getApplicationContext(),AppContext.USER_PWD));
+                        String commodity_id = commodityInfoBean.getCommodity_id();
+                        pushEventNoProgress(EventCode.HTTP_DELBUSINESSCOMMODITYCOLLECT,business_code,user_name,trans_no,sign,commodity_id);
+                    }
+                }
+            });
+        }
     }
 
     private void initData() {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
         commodityInfoBean = (CommodityInfoBean) getIntent().getSerializableExtra(KEY_DATA);
+        refreshShouCangData();
         if (commodityInfoBean != null) {
             if (!TextUtils.isEmpty(commodityInfoBean.getCommodity_name())) {
                 tvName.setText(commodityInfoBean.getCommodity_name());
@@ -223,6 +270,12 @@ public class ProductDetailActivity extends BaseActivity {
         }
     }
 
+    private void refreshShouCangData() {
+        if (loginBean != null && commodityInfoBean != null) {
+            pushEventNoProgress(EventCode.HTTP_ISBUSINESSCOLLECTCOMMODITY,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),commodityInfoBean.getCommodity_id());
+        }
+    }
+
     private void initListener() {
         btnDianPu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,20 +308,56 @@ public class ProductDetailActivity extends BaseActivity {
             }
         });
 
-        llShouCang.setOnClickListener(new View.OnClickListener() {
+        tvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (commodityInfoBean != null && loginBean != null) {
-                    String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
-                    String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
-                    String trans_no = System.currentTimeMillis()+"";
-                    String sign = CommonUtils.getSign(business_code,user_name,trans_no,PreManager.getString(getApplicationContext(),AppContext.USER_PWD));
-                    String commodity_id = commodityInfoBean.getCommodity_id();
-                    pushEventNoProgress(EventCode.HTTP_ADDBUSINESSCOMMODITYCOLLECT,business_code,user_name,trans_no,sign,commodity_id);
+                selectCount = selectCount + 1;
+                edtCount.setText(selectCount + "");
+            }
+        });
+
+        tvJian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectCount != 0) {
+                    selectCount = selectCount - 1;
+                    edtCount.setText(selectCount + "");
                 }
             }
         });
 
+        tvJiaRuGouWuChe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectCount <= 0) {
+                    CommonUtils.showToast("选择商品数量");
+                    return;
+                }
+                if (commodityInfoBean != null ) {
+                    carAdd(commodityInfoBean,selectCount);
+                }
+            }
+        });
+
+        tvXiaDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectCount <= 0) {
+                    CommonUtils.showToast("选择商品数量");
+                    return;
+                }
+                if (commodityInfoBean != null ) {
+                    carAdd(commodityInfoBean,selectCount);
+                }
+            }
+        });
+
+    }
+
+    private void carAdd(CommodityInfoBean bean,int count) {
+        if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
+            pushEventNoProgress(EventCode.HTTP_ADDBUSINESSSHOPPINGCART,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),bean.getCommodity_id(),count+"");
+        }
     }
 
     private void initView() {
@@ -277,6 +366,8 @@ public class ProductDetailActivity extends BaseActivity {
         mViewPager.setAdapter(adapter);
 
         dotLayout = (LinearLayout) findViewById(R.id.ly_dot);
+
+        edtCount.setText(selectCount + "");
     }
 
     private  void refreshPic(List<String> picList) {
@@ -337,9 +428,43 @@ public class ProductDetailActivity extends BaseActivity {
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
+        if (event.getEventCode() == EventCode.HTTP_ISBUSINESSCOLLECTCOMMODITY) {
+            if (event.isSuccess()) {
+                IsBusinessCollectCommodityResponseBean bean = (IsBusinessCollectCommodityResponseBean) event.getReturnParamAtIndex(0);
+                if (bean != null && bean.getData() != null && !TextUtils.isEmpty(bean.getData().getIs_collect())) {
+                    for (ShouCangType type : ShouCangType.values()) {
+                        if (type.getType().equals(bean.getData().getIs_collect())) {
+                            shouCangType = type;
+                            refreshShouCang();
+                        }
+                    }
+
+                }
+            } else {
+
+            }
+        }
+        if (event.getEventCode() == EventCode.HTTP_ADDBUSINESSSHOPPINGCART) {
+            if (event.isSuccess()) {
+                Intent intent = new Intent(ProductDetailActivity.this,CarActivity.class);
+                startActivity(intent);
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
         if (event.getEventCode() == EventCode.HTTP_ADDBUSINESSCOMMODITYCOLLECT) {
             if (event.isSuccess()) {
                 CommonUtils.showToast("收藏成功");
+                refreshShouCangData();
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
+
+        if (event.getEventCode() == EventCode.HTTP_DELBUSINESSCOMMODITYCOLLECT) {
+            if (event.isSuccess()) {
+                CommonUtils.showToast("取消收藏成功");
+                refreshShouCangData();
             } else {
                 CommonUtils.showToast(event.getFailMessage());
             }

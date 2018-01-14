@@ -14,10 +14,13 @@ import com.app.sifanggou.net.httprunner.BusinessChangePasswordHttpRunner;
 import com.app.sifanggou.net.httprunner.BusinessLoginHttpRunner;
 import com.app.sifanggou.net.httprunner.BusinessRegistHttpRunner;
 import com.app.sifanggou.net.httprunner.BusinessSubmitOrderHttpRunner;
+import com.app.sifanggou.net.httprunner.DelBusinessCommodityCollectHttpRunner;
 import com.app.sifanggou.net.httprunner.DelBusinessDeliverAddressHttpRunner;
+import com.app.sifanggou.net.httprunner.DelBusinessPartnerHttpRunner;
 import com.app.sifanggou.net.httprunner.DelBusinessShoppingCartHttpRunner;
 import com.app.sifanggou.net.httprunner.GetAgentLevelInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetAliyunstsTokenHttpRunner;
+import com.app.sifanggou.net.httprunner.GetAllBusinessUrgentSellCommodityHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinenessInOutOrderInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinenessOrderInfoSpecialStatusHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCanAllocateShelfNumHttpRunner;
@@ -38,6 +41,8 @@ import com.app.sifanggou.net.httprunner.GetFirstPageAdHttpRunner;
 import com.app.sifanggou.net.httprunner.GetProvinceCityZoneHttpRunner;
 import com.app.sifanggou.net.httprunner.GetShelfAmountHttpRunner;
 import com.app.sifanggou.net.httprunner.GetVerifyCodeHttpRunner;
+import com.app.sifanggou.net.httprunner.IsBusinessCollectCommodityHttpRunner;
+import com.app.sifanggou.net.httprunner.IsBusinessPartnerHttpRunner;
 import com.app.sifanggou.net.httprunner.SearchBusinessCommodityOnNameHttpRunner;
 import com.app.sifanggou.net.httprunner.SerachBusinessOnNameHttpRunner;
 import com.app.sifanggou.net.httprunner.UpdateBusinessDeliverAddressHttpRunner;
@@ -95,6 +100,12 @@ public class NetUtils {
 		eventManager.registerEventRunner(EventCode.HTTP_ADDBUSINESSPRINTCONFIG, new AddBusinessPrintConfigHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSRONGYUNTOKEN, new GetBusinessRongYunTokenHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSINFO, new GetBusinessInfoHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETALLBUSINESSURGENTSELLCOMMODITY, new GetAllBusinessUrgentSellCommodityHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_ISBUSINESSCOLLECTCOMMODITY, new IsBusinessCollectCommodityHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_DELBUSINESSCOMMODITYCOLLECT, new DelBusinessCommodityCollectHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_ISBUSINESSPARTNER, new IsBusinessPartnerHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_DELBUSINESSPARTNER, new DelBusinessPartnerHttpRunner());
+
 	}
 }
 

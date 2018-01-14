@@ -16,6 +16,7 @@ import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.bean.AgentLevelType;
 import com.app.sifanggou.bean.BusinessInfoBean;
+import com.app.sifanggou.bean.ShouCangType;
 import com.app.sifanggou.fragment.AllProductFragment;
 import com.app.sifanggou.fragment.BaseFragment;
 import com.app.sifanggou.fragment.DaiJieFragment;
@@ -26,6 +27,7 @@ import com.app.sifanggou.fragment.XinPinProductFragment;
 import com.app.sifanggou.listener.PageSelectListener;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.IsBusinessPartnerResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.ImageLoaderUtil;
@@ -73,12 +75,55 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
     public static final String KEY_DATA = "key_DianPuDetailActivity_data";
     private BusinessInfoBean dataBean;
     private LoginResponseBean loginBean;
+    private ShouCangType shouCangType = ShouCangType.NOSAVE;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
         initDatas();
         initListener();
+        refreshShouCang();
+    }
+
+    private void refreDianPuShouCang() {
+        if (loginBean != null && dataBean != null) {
+            pushEventNoProgress(EventCode.HTTP_ISBUSINESSPARTNER,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),dataBean.getBusiness_code());
+        }
+    }
+
+    private void refreshShouCang() {
+        if (shouCangType == ShouCangType.NOSAVE) {
+            tvSave.setText("收藏");
+            llSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (dataBean != null && loginBean != null) {
+                        String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
+                        String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
+                        String trans_no = System.currentTimeMillis()+"";
+                        String sign = CommonUtils.getSign(business_code,user_name,trans_no, PreManager.getString(getApplicationContext(), AppContext.USER_PWD));
+                        String partner_business_code = dataBean.getBusiness_code();
+                        pushEventNoProgress(EventCode.HTTP_ADDBUSINESSPARTNER,business_code,user_name,trans_no,sign,partner_business_code);
+                    }
+                }
+            });
+        } else {
+            tvSave.setText("取消收藏");
+
+            llSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (dataBean != null && loginBean != null) {
+                        String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
+                        String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
+                        String trans_no = System.currentTimeMillis()+"";
+                        String sign = CommonUtils.getSign(business_code,user_name,trans_no, PreManager.getString(getApplicationContext(), AppContext.USER_PWD));
+                        String partner_business_code = dataBean.getBusiness_code();
+                        pushEventNoProgress(EventCode.HTTP_DELBUSINESSPARTNER,business_code,user_name,trans_no,sign,partner_business_code);
+                    }
+                }
+            });
+        }
     }
 
     //初始化数据
@@ -107,6 +152,7 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
 
         dataBean = (BusinessInfoBean) getIntent().getSerializableExtra(KEY_DATA);
         refreshView(dataBean);
+        refreDianPuShouCang();
     }
 
     private void refreshView(BusinessInfoBean bean) {
@@ -138,20 +184,6 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
 
         mIndicator.setViewPager(myViewPager,0,DianPuDetailActivity.this);
 
-        llSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (dataBean != null && loginBean != null) {
-                    String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
-                    String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
-                    String trans_no = System.currentTimeMillis()+"";
-                    String sign = CommonUtils.getSign(business_code,user_name,trans_no, PreManager.getString(getApplicationContext(), AppContext.USER_PWD));
-                    String partner_business_code = dataBean.getBusiness_code();
-                    pushEventNoProgress(EventCode.HTTP_ADDBUSINESSPARTNER,business_code,user_name,trans_no,sign,partner_business_code);
-                }
-            }
-        });
-
     }
 
     @Override
@@ -165,6 +197,31 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
         if (event.getEventCode() == EventCode.HTTP_ADDBUSINESSPARTNER) {
             if (event.isSuccess()) {
                 CommonUtils.showToast("关注成功");
+                refreDianPuShouCang();
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
+        if (event.getEventCode() == EventCode.HTTP_DELBUSINESSPARTNER) {
+            if (event.isSuccess()) {
+                CommonUtils.showToast("取消关注成功");
+                refreDianPuShouCang();
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
+        if (event.getEventCode() == EventCode.HTTP_ISBUSINESSPARTNER) {
+            if (event.isSuccess()) {
+                IsBusinessPartnerResponseBean bean = (IsBusinessPartnerResponseBean) event.getReturnParamAtIndex(0);
+                if (bean != null && bean.getData() != null && !TextUtils.isEmpty(bean.getData().getIs_partner())) {
+                    for (ShouCangType type : ShouCangType.values()) {
+                        if (type.getType().equals(bean.getData().getIs_partner())) {
+                            shouCangType = type;
+                            refreshShouCang();
+                            break;
+                        }
+                    }
+                }
             } else {
                 CommonUtils.showToast(event.getFailMessage());
             }

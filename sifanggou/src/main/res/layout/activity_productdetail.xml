@@ -109,6 +109,7 @@
                     android:layout_marginTop="@dimen/margin_small"/>
 
                 <TextView
+                    android:id="@+id/tv_shoucang_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="收藏"
@@ -546,7 +547,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="区域代理"
-                    android:textColor="@color/color_text_radio_unselected"
+                    android:textColor="@color/red"
                     android:textSize="14sp"
                     android:layout_marginLeft="35dp"
                     android:singleLine="true"/>

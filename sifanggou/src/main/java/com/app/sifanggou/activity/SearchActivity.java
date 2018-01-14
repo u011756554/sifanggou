@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -75,6 +76,9 @@ public class SearchActivity extends BaseActivity {
     private TextView tvCarMount;
     @ViewInject(R.id.rl_car)
     private RelativeLayout rlCar;
+
+    @ViewInject(R.id.btn_xiadan)
+    private Button btnXiaDan;
     private View listViewFooterViewProduct;
     private View emptyViewViewProduct;
     private TextView noMoreTextProduct;
@@ -300,6 +304,14 @@ public class SearchActivity extends BaseActivity {
         });
 
         rlCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchActivity.this,CarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnXiaDan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SearchActivity.this,CarActivity.class);

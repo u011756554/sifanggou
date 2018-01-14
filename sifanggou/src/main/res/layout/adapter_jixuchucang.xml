@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textSize="13sp"
-                android:textColor="#555555"
+                android:textColor="@color/red"
                 android:maxLines="1"/>
 
             <TextView

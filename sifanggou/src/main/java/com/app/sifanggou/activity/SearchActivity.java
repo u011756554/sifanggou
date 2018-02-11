@@ -132,6 +132,7 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void initView() {
+        addBack(R.id.rl_back);
         //处理商品分页
         adapterProduct = new CommodityInfoBeanAdapter(SearchActivity.this,dataListProduct);
         swipeRefreshLayoutProduct.setColorSchemeResources(R.color.color_banner,R.color.color_banner,R.color.color_banner,R.color.color_banner);

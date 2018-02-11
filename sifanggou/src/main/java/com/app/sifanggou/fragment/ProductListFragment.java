@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.activity.CarActivity;
 import com.app.sifanggou.activity.ProductDetailActivity;
+import com.app.sifanggou.activity.RecommondProductActivity;
 import com.app.sifanggou.activity.SearchActivity;
 import com.app.sifanggou.adapter.CommodityInfoBeanAdapter;
 import com.app.sifanggou.bean.CommodityCollectBean;
@@ -40,6 +42,8 @@ public class ProductListFragment extends BaseFragment {
     private TextView tvCarMount;
     @ViewInject(R.id.rl_car)
     private RelativeLayout rlCar;
+    @ViewInject(R.id.btn_xiadan)
+    private Button btnXiaDan;
 
     //商品列表数据展示
     @ViewInject(R.id.srl_product)
@@ -145,6 +149,14 @@ public class ProductListFragment extends BaseFragment {
         });
 
         rlCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),CarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnXiaDan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),CarActivity.class);

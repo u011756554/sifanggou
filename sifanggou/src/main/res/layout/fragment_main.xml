@@ -36,7 +36,7 @@
 			android:layout_alignParentRight="true"
 			android:layout_centerVertical="true"
 			android:layout_marginRight="@dimen/margin_normal"
-			android:background="@drawable/icon_chat"/>
+			android:background="@drawable/icon_scan_do"/>
 
 		<RelativeLayout
 			android:id="@+id/rl_search"
@@ -116,7 +116,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="100dp"
 				android:orientation="horizontal">
-<!--
+
 				<LinearLayout
 					android:id="@+id/ll_niming"
 					android:layout_width="0dp"
@@ -140,7 +140,7 @@
 						android:textColor="@color/black"
 						android:layout_marginTop="5dp"/>
 				</LinearLayout>
--->
+
 				<LinearLayout
 					android:id="@+id/ll_jixuchucang"
 					android:layout_width="0dp"
@@ -207,7 +207,7 @@
 					<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:text="补货通道"
+						android:text="我的订单"
 						android:textSize="16sp"
 						android:textColor="@color/black"
 						android:layout_marginTop="5dp"/>
@@ -240,37 +240,158 @@
 					android:scaleType="centerCrop"/>
 			</LinearLayout>
 
-			<ImageView
+			<View
 				android:layout_width="match_parent"
-				android:layout_height="100dp"
-				android:layout_marginTop="@dimen/margin_normal"
-				android:padding="@dimen/margin_normal"
-				android:src="@drawable/icon_main_3"
-				android:scaleType="centerCrop"/>
+				android:layout_height="6dp"
+				android:layout_marginTop="10dp"
+				android:background="@color/color_main"/>
+
+			<RelativeLayout
+				android:id="@+id/rl_guanzhu_dianpu"
+				android:layout_width="match_parent"
+				android:layout_height="40dp">
+
+				<ImageView
+					android:id="@+id/iv_star_dianpu"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/icon_star_red"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="@dimen/margin_normal"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="收藏的商家"
+					android:textColor="@color/black"
+					android:textSize="@dimen/textsize_normal"
+					android:layout_toRightOf="@id/iv_star_dianpu"
+					android:layout_marginLeft="7dp"
+					android:layout_centerVertical="true"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="查看更多>"
+					android:textColor="@color/color_gray"
+					android:textSize="@dimen/textsize_small"
+					android:layout_alignParentRight="true"
+					android:layout_marginRight="@dimen/margin_normal"
+					android:layout_centerVertical="true"/>
+			</RelativeLayout>
+
+			<com.app.sifanggou.view.MyGridView
+				android:id="@+id/gv_guanzhu_dianpu"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/margin_normal"
+				android:layout_marginRight="@dimen/margin_normal"
+				android:numColumns="3"
+				android:verticalSpacing="10dp" />
 
 			<View
 				android:layout_width="match_parent"
-				android:layout_height="10dp"
+				android:layout_height="6dp"
+				android:layout_marginTop="10dp"
 				android:background="@color/color_main"/>
 
-			<!-- 补货通道 -->
+			<RelativeLayout
+				android:id="@+id/rl_guanzhu_product"
+				android:layout_width="match_parent"
+				android:layout_height="40dp">
 
-			<TextView
+				<ImageView
+					android:id="@+id/iv_star_product"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/icon_star_red"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="@dimen/margin_normal"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="关注的商品"
+					android:textColor="@color/black"
+					android:textSize="@dimen/textsize_normal"
+					android:layout_toRightOf="@id/iv_star_product"
+					android:layout_marginLeft="7dp"
+					android:layout_centerVertical="true"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="查看更多>"
+					android:textColor="@color/color_gray"
+					android:textSize="@dimen/textsize_small"
+					android:layout_alignParentRight="true"
+					android:layout_marginRight="@dimen/margin_normal"
+					android:layout_centerVertical="true"/>
+			</RelativeLayout>
+
+			<com.app.sifanggou.view.MyGridView
+				android:id="@+id/gv_guanzhu_product"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:paddingTop="10dp"
-				android:paddingBottom="10dp"
-				android:gravity="center"
-				android:textColor="@color/black"
-				android:text="补货通道"
-				android:textSize="@dimen/textsize_small"/>
+				android:layout_marginLeft="@dimen/margin_normal"
+				android:layout_marginRight="@dimen/margin_normal"
+				android:numColumns="3"
+				android:verticalSpacing="10dp" />
 
-			<ImageView
+			<View
 				android:layout_width="match_parent"
-				android:layout_height="120dp"
-				android:padding="@dimen/margin_normal"
-				android:src="@drawable/icon_main_4"
-				android:scaleType="centerCrop"/>
+				android:layout_height="6dp"
+				android:layout_marginTop="10dp"
+				android:background="@color/color_main"/>
+
+			<RelativeLayout
+				android:id="@+id/rl_commandproduct"
+				android:layout_width="match_parent"
+				android:layout_height="40dp">
+
+				<ImageView
+					android:id="@+id/iv_star_commandproduct"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/icon_star_red"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="@dimen/margin_normal"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="推荐商品"
+					android:textColor="@color/black"
+					android:textSize="@dimen/textsize_normal"
+					android:layout_toRightOf="@id/iv_star_commandproduct"
+					android:layout_marginLeft="7dp"
+					android:layout_centerVertical="true"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="查看更多>"
+					android:textColor="@color/color_gray"
+					android:textSize="@dimen/textsize_small"
+					android:layout_alignParentRight="true"
+					android:layout_marginRight="@dimen/margin_normal"
+					android:layout_centerVertical="true"/>
+			</RelativeLayout>
+
+			<com.app.sifanggou.view.MyGridView
+				android:id="@+id/gv_commandproduct"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/margin_normal"
+				android:layout_marginRight="@dimen/margin_normal"
+				android:numColumns="3"
+				android:verticalSpacing="10dp" />
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="6dp"
+				android:layout_marginTop="10dp"
+				android:background="@color/color_main"/>
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>    

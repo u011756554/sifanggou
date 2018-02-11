@@ -1,7 +1,9 @@
 package com.app.sifanggou.adapter;
 
 import android.content.Context;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +48,7 @@ public class CarItemAdapter extends SetBaseAdapter<CarItemBean> {
             holder.edtCount = (EditText) convertView.findViewById(R.id.edt_count);
             holder.tvAdd = (TextView) convertView.findViewById(R.id.tv_add);
             holder.ivDelete = (ImageView) convertView.findViewById(R.id.iv_delete);
+            holder.rlContent = convertView.findViewById(R.id.rl_content);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -64,6 +67,27 @@ public class CarItemAdapter extends SetBaseAdapter<CarItemBean> {
             holder.edtCount.setText(bean.getCommodity_num());
         }
         holder.edtCount.setEnabled(false);
+        final EditText editCount = holder.edtCount;
+        holder.edtCount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int count = Integer.valueOf(s.toString());
+                if (count >= 10000) {
+                    CommonUtils.showToast("数据过大");
+                    editCount.setText("0");
+                }
+            }
+        });
         holder.tvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +123,14 @@ public class CarItemAdapter extends SetBaseAdapter<CarItemBean> {
                 }
             }
         });
+        holder.rlContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.click(bean.getBusiness_code(),bean.getCommodity_id());
+                }
+            }
+        });
         return convertView;
     }
 
@@ -110,11 +142,13 @@ public class CarItemAdapter extends SetBaseAdapter<CarItemBean> {
         private EditText edtCount;
         private TextView tvAdd;
         private ImageView ivDelete;
+        private RelativeLayout rlContent;
     }
 
     public interface DataUpdateListener {
         void updateNum(String business_code,String commodity_id,String commodity_num);
         void delete(String business_code,String commodity_id);
+        void click(String business_code,String commodity_id);
     }
 
     private DataUpdateListener mListener;

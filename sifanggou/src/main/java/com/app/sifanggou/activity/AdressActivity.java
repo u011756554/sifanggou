@@ -128,6 +128,12 @@ public class AdressActivity extends BaseActivity {
                 intent.putExtra(AddAdressActivity.KEY_DATA,bean);
                 startActivityForResult(intent,REQUESTCODE_EDIT);
             }
+
+            @Override
+            public void moren(AdressBean bean) {
+                if (bean == null) return;
+                pushEventBlock(EventCode.HTTP_ADDBUSINESSDEFAULTDELIVERADDRESS,bean.getBusiness_code(),bean.getDelivery_id());
+            }
         });
         listView.setAdapter(adapter);
 
@@ -226,6 +232,14 @@ public class AdressActivity extends BaseActivity {
         super.onEventRunEnd(event);
         if (event.getEventCode() == EventCode.HTTP_DELBUSINESSDELIVERADDRESS) {
             if (event.isSuccess()) {
+                refresh();
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
+        if (event.getEventCode() == EventCode.HTTP_ADDBUSINESSDEFAULTDELIVERADDRESS) {
+            if (event.isSuccess()) {
+                CommonUtils.showToast("默认地址设置成功");
                 refresh();
             } else {
                 CommonUtils.showToast(event.getFailMessage());

@@ -13,6 +13,7 @@ import com.app.sifanggou.bean.AgentLevelBean;
 import com.app.sifanggou.bean.AgentLevelType;
 import com.app.sifanggou.bean.CityDataBean;
 import com.app.sifanggou.bean.CityMarketBean;
+import com.app.sifanggou.bean.HuoJiaType;
 import com.app.sifanggou.bean.ProvinceDataBean;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
@@ -20,6 +21,7 @@ import com.app.sifanggou.net.bean.AgentLevelResponseBean;
 import com.app.sifanggou.net.bean.BaseResponseBean;
 import com.app.sifanggou.net.bean.CityMarketResponseBean;
 import com.app.sifanggou.net.bean.CityResponseBean;
+import com.app.sifanggou.net.bean.GetCommodityTypeListResponseBean;
 import com.app.sifanggou.net.bean.ProvinceResponseBean;
 import com.app.sifanggou.net.bean.ProvinceResponseBean.DataBean;
 import com.app.sifanggou.utils.CommonUtils;
@@ -30,21 +32,28 @@ import com.app.sifanggou.view.BaseDialog;
 import com.app.sifanggou.view.ChangeHeadDialog;
 import com.app.sifanggou.view.ConfirmDialog;
 import com.app.sifanggou.view.MarketSelectDialog;
+import com.app.sifanggou.view.tree.Node;
+import com.app.sifanggou.view.tree.NodeResource;
+import com.app.sifanggou.view.tree.TreeListView;
+import com.app.sifanggou.view.tree.TreeUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -76,6 +85,10 @@ public class UploadCertificateActivity extends PicBaseActivity {
 	private RelativeLayout rlDailiShang;
 	@ViewInject(R.id.iv_dailishang)
 	private ImageView ivDailiShang;
+	@ViewInject(R.id.rl_scope)
+	private RelativeLayout rlScope;
+	@ViewInject(R.id.edt_scope)
+	private EditText edtScope;
 	
 	private MarketSelectDialog marketDialog;
 	private AgentLevelDialog agentLevelDialog;
@@ -106,6 +119,8 @@ public class UploadCertificateActivity extends PicBaseActivity {
 	private String highest_agency_contract_pic_url;//商家最高代理级别的代理合同url
 
 	private ConfirmDialog confirmDialog;
+	private List<NodeResource> nodeList;
+	private Node scopeNode;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -123,6 +138,7 @@ public class UploadCertificateActivity extends PicBaseActivity {
 	private void initListener() {
 		edtMarket.setEnabled(false);
 		edtDaiLi.setEnabled(false);
+		edtScope.setEnabled(false);
 		rlDelete.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -161,7 +177,8 @@ public class UploadCertificateActivity extends PicBaseActivity {
 					showToast("选择代理级别");
 					return;
 				}
-				String name = cityMarketBean.getName();
+				String name = edtMarketName.getText().toString();
+				String shop_number = edtMenPaiHao.getText().toString();
 				String province = cityMarketBean.getProvince();
 				String province_name = cityMarketBean.getProvince_name();
 				String city = cityMarketBean.getCity();
@@ -172,6 +189,7 @@ public class UploadCertificateActivity extends PicBaseActivity {
 				String head_pic_url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505414876514&di=e986ebb63011ff3b5abc5c3048317050&imgtype=0&src=http%3A%2F%2Fimg.jdzj.com%2FUserDocument%2F2015b%2Fzhonglongky%2FPicture%2F20151023111322.jpg";
 				String legal_person_id = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505414876514&di=e986ebb63011ff3b5abc5c3048317050&imgtype=0&src=http%3A%2F%2Fimg.jdzj.com%2FUserDocument%2F2015b%2Fzhonglongky%2FPicture%2F20151023111322.jpg";
 				String agent_level = "";
+				String scope = scopeNode.getValue();
 				for(AgentLevelType alvt : AgentLevelType.values()) {
 					if (alvt.getCode().equals(agentLevelBean.getLevel_num())) {
 						agent_level = alvt.getType();
@@ -192,7 +210,7 @@ public class UploadCertificateActivity extends PicBaseActivity {
 				String device_type = "android";
 
 				pushEventBlock(EventCode.HTTP_BUSINESSREGIST,name,province,province_name,city,city_name,lon,lat,market_code,head_pic_url,business_license,legal_person_id,agent_level,
-						highest_agency_contract_pic_url,invite_code,mobile,verify_code,password,registration_id,device_type,integrate_distribute_type);
+						highest_agency_contract_pic_url,invite_code,mobile,verify_code,password,registration_id,device_type,integrate_distribute_type,shop_number,scope);
 			}
 		});
 		
@@ -294,6 +312,15 @@ public class UploadCertificateActivity extends PicBaseActivity {
 				heTongDialog.show();
 			}
 		});
+
+		rlScope.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (nodeList != null) {
+					showPopWindow(nodeList);
+				}
+			}
+		});
 	}
 	
 	private void initData() {
@@ -304,6 +331,7 @@ public class UploadCertificateActivity extends PicBaseActivity {
 
 		pushEventNoProgress(EventCode.HTTP_GETPROVINCECITYZONE);
 		pushEventNoProgress(EventCode.HTTP_GETAGENTLEVELINFO);
+		pushEventNoProgress(EventCode.HTTP_GETCOMMODITYTYPELIST);
 	}
 	
 	private void selectMyProvice(String province) {
@@ -336,11 +364,54 @@ public class UploadCertificateActivity extends PicBaseActivity {
 			pushEventNoProgress(EventCode.HTTP_GETCITYMARKET, provinceCode,cityCode);
 		}
 	}
+
+	private PopupWindow popupWindow;
+	private void showPopWindow(final List<NodeResource> list){
+		if(popupWindow != null && popupWindow.isShowing()){
+			return;
+		}
+		View view = getLayoutInflater().inflate(R.layout.popwindow_company, null);
+		RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.rl_content);
+		TreeListView treeListView = new TreeListView(UploadCertificateActivity.this, list,0);
+		treeListView.setListener(new TreeListView.UpdateListener() {
+
+			@Override
+			public void update(Node node) {
+				if (popupWindow != null && popupWindow.isShowing()) {
+					popupWindow.dismiss();
+				}
+				edtScope.setText(node.getValue());
+				scopeNode = node;
+			}
+
+		});
+		rl.addView(treeListView);
+		popupWindow = new PopupWindow(view,CommonUtils.dip2px(UploadCertificateActivity.this, 200), CommonUtils.dip2px(UploadCertificateActivity.this, 320), true);
+		popupWindow.setFocusable(true);
+		popupWindow.setBackgroundDrawable(new BitmapDrawable());
+		popupWindow.setOutsideTouchable(false);
+		popupWindow.showAtLocation(getWindow().getDecorView().getRootView(), Gravity.CENTER,0,0);
+	}
+
 	
 	@Override
 	public void onEventRunEnd(Event event) {
 		// TODO Auto-generated method stub
 		super.onEventRunEnd(event);
+		if (event.getEventCode() == EventCode.HTTP_GETCOMMODITYTYPELIST) {
+			if (event.isSuccess()) {
+				GetCommodityTypeListResponseBean bean = (GetCommodityTypeListResponseBean) event.getReturnParamAtIndex(0);
+				System.out.print(bean.getData());
+				if (bean != null && bean.getData() != null && bean.getData().getCommodity_type_list() != null && bean.getData().getCommodity_type_list().size() > 0) {
+					if (nodeList != null) {
+						nodeList.clear();
+					}
+					nodeList = TreeUtils.commodityTypeBeanToFirstNodeResource(bean.getData().getCommodity_type_list());
+				}
+			} else {
+				CommonUtils.showToast(event.getFailMessage());
+			}
+		}
 		if (event.getEventCode() == EventCode.HTTP_GETPROVINCECITYZONE) {
 			if (event.isSuccess()) {
 				String province_code = (String) event.getReturnParamAtIndex(1);

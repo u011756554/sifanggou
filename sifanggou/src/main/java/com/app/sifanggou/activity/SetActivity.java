@@ -3,6 +3,7 @@ package com.app.sifanggou.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -11,6 +12,8 @@ import com.app.sifanggou.R;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.PreManager;
 import com.lidroid.xutils.view.annotation.ViewInject;
+
+import io.rong.imlib.RongIMClient;
 
 /**
  * Created by Administrator on 2018/1/8.
@@ -31,6 +34,10 @@ public class SetActivity extends BaseActivity {
     private RelativeLayout rlXieYi;
     @ViewInject(R.id.rl_haoping)
     private RelativeLayout rlHaoPing;
+    @ViewInject(R.id.rl_nickname)
+    private RelativeLayout rlNickName;
+    @ViewInject(R.id.btn_exit)
+    private Button btnExit;
 
     private LoginResponseBean loginBean;
     @Override
@@ -44,8 +51,6 @@ public class SetActivity extends BaseActivity {
     private void initView() {
         setTitle("设置");
         addBack(R.id.rl_back);
-
-
     }
 
     private void initListener() {
@@ -54,6 +59,25 @@ public class SetActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SetActivity.this,UpdatePwdActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        rlNickName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SetActivity.this,UpdateNickNameActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RongIMClient.getInstance().logout();
+
+                Intent intent = new Intent(SetActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

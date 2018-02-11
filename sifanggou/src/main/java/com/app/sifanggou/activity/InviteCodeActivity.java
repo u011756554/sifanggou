@@ -1,5 +1,7 @@
 package com.app.sifanggou.activity;
 
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -46,6 +48,12 @@ public class InviteCodeActivity extends BaseActivity {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
         if (loginBean != null) {
             pushEvent(EventCode.HTTP_GETBUSINESSINVITECODE,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code());
+            if (loginBean.getData() != null
+                    && loginBean.getData().getLogin_info() != null
+                    && loginBean.getData().getLogin_info().getBusiness_info() != null
+                    && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getInvite_code())) {
+                tvCode.setText(loginBean.getData().getLogin_info().getBusiness_info().getInvite_code());
+            }
         }
     }
 
@@ -57,10 +65,33 @@ public class InviteCodeActivity extends BaseActivity {
             }
         });
 
+        setRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String invitCode = tvCode.getText().toString();
+                if (TextUtils.isEmpty(invitCode)) {
+                    CommonUtils.showToast("邀请码为空");
+                    return;
+                }
+                ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                // 将文本内容放到系统剪贴板里。
+                cm.setText(invitCode);
+                CommonUtils.showToast("复制成功");
+            }
+        });
+
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String invitCode = tvCode.getText().toString();
+                if (TextUtils.isEmpty(invitCode)) {
+                    CommonUtils.showToast("邀请码为空");
+                    return;
+                }
+                ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                // 将文本内容放到系统剪贴板里。
+                cm.setText(invitCode);
+                CommonUtils.showToast("复制成功");
             }
         });
     }

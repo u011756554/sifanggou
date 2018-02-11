@@ -1,7 +1,9 @@
 package com.app.sifanggou.adapter;
 
 import android.content.Context;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.app.sifanggou.R;
 import com.app.sifanggou.bean.CommodityInfoBean;
 import com.app.sifanggou.bean.ProductType;
+import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.ImageLoaderUtil;
 
 import java.util.List;
@@ -74,12 +77,32 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
                 holder.tvHuoJia.setText("货架  "+ "代理");
             }
         }
-        if (!TextUtils.isEmpty(bean.getAdd_time())) {
-            holder.tvGengXin.setText("最近更新  "+ bean.getAdd_time());
+        if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getMarket_name())) {
+            holder.tvGengXin.setText("市场：  "+ bean.getBusiness_info().getMarket_name());
         }
         holder.edtCount.setText(bean.getSelectCount()+"");
 
         final EditText editCount = holder.edtCount;
+        holder.edtCount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int count = Integer.valueOf(s.toString());
+                if (count >= 10000) {
+                    CommonUtils.showToast("数据过大");
+                    editCount.setText("0");
+                }
+            }
+        });
         holder.tvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

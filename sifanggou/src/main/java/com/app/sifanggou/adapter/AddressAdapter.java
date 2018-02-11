@@ -40,6 +40,7 @@ public class AddressAdapter extends SetBaseAdapter<AdressBean> {
             holder.tvTimes = (TextView) convertView.findViewById(R.id.tv_times);
             holder.btnDelete = (Button) convertView.findViewById(R.id.btn_delete);
             holder.btnEdit = (Button) convertView.findViewById(R.id.btn_edit);
+            holder.btnMoren = convertView.findViewById(R.id.btn_moren);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -100,6 +101,15 @@ public class AddressAdapter extends SetBaseAdapter<AdressBean> {
                 }
             }
         });
+
+        holder.btnMoren.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.moren(bean);
+                }
+            }
+        });
         return convertView;
     }
 
@@ -111,11 +121,13 @@ public class AddressAdapter extends SetBaseAdapter<AdressBean> {
         private TextView tvTimes;
         private Button btnDelete;
         private Button btnEdit;
+        private Button btnMoren;
     }
 
     public interface UpdateListener{
         void delete(AdressBean bean);
         void edit(AdressBean bean);
+        void moren(AdressBean bean);
     }
 
     private UpdateListener mListener;

@@ -21,25 +21,25 @@
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_dianpu_default"
-            android:layout_marginLeft="@dimen/margin_normal"/>
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:src="@drawable/icon_dianpu_default" />
 
         <ImageView
             android:id="@+id/iv_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_normal"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/icon_right"/>
+            android:background="@drawable/icon_right" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/iv_head"
-            android:layout_toLeftOf="@id/iv_right"
             android:layout_marginLeft="@dimen/margin_normal"
             android:layout_marginRight="@dimen/margin_normal"
+            android:layout_toLeftOf="@id/iv_right"
+            android:layout_toRightOf="@id/iv_head"
             android:orientation="vertical">
 
             <TextView
@@ -47,11 +47,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_normal"
-                android:textSize="13sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
                 android:maxLines="1"
-                android:text="我是大多数方式"/>
+                android:text="我是大多数方式"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,8 +62,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -75,18 +75,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="经营范围:"
-                            android:textSize="11sp"
-                            android:textColor="#999999"/>
+                            android:textColor="#999999"
+                            android:textSize="11sp" />
 
                         <TextView
                             android:id="@+id/tv_fanwei"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_mini"
-                            android:text="符合调料"
-                            android:textSize="11sp"
+                            android:maxLines="1"
                             android:textColor="@color/black"
-                            android:maxLines="1"/>
+                            android:textSize="11sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -100,38 +99,38 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="产品数量:"
-                            android:textSize="11sp"
-                            android:textColor="#999999"/>
+                            android:textColor="#999999"
+                            android:textSize="11sp" />
 
                         <TextView
                             android:id="@+id/tv_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_mini"
-                            android:text="38"
-                            android:textSize="11sp"
+                            android:text="0"
+                            android:maxLines="1"
                             android:textColor="@color/red"
-                            android:maxLines="1"/>
+                            android:textSize="11sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:maxLines="1"
                             android:text="款商品"
-                            android:textSize="11sp"
                             android:textColor="@color/black"
-                            android:maxLines="1"/>
+                            android:textSize="11sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <View
                     android:layout_width="@dimen/margin_normal"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -143,18 +142,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="最高级别:"
-                            android:textSize="11sp"
-                            android:textColor="#999999"/>
+                            android:textColor="#999999"
+                            android:textSize="11sp" />
 
                         <TextView
                             android:id="@+id/tv_jiebie"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_mini"
-                            android:text="符合调料"
-                            android:textSize="11sp"
+                            android:maxLines="1"
                             android:textColor="@color/black"
-                            android:maxLines="1"/>
+                            android:textSize="11sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -168,26 +166,25 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="商家等级:"
-                            android:textSize="11sp"
-                            android:textColor="#999999"/>
+                            android:textColor="#999999"
+                            android:textSize="11sp" />
 
                         <TextView
                             android:id="@+id/tv_level"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/margin_mini"
-                            android:text="8"
-                            android:textSize="11sp"
+                            android:maxLines="1"
                             android:textColor="@color/red"
-                            android:maxLines="1"/>
+                            android:textSize="11sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:maxLines="1"
                             android:text="级"
-                            android:textSize="11sp"
                             android:textColor="@color/black"
-                            android:maxLines="1"/>
+                            android:textSize="11sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -195,6 +192,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/ll_pic"
         android:layout_width="match_parent"
         android:layout_height="106dp"
         android:layout_marginLeft="@dimen/margin_normal"

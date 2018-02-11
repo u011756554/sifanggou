@@ -15,11 +15,14 @@ import android.widget.TextView;
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.adapter.GuangGaoPagerAdapter;
+import com.app.sifanggou.bean.AgentLevelType;
+import com.app.sifanggou.bean.BusinessInfoBean;
 import com.app.sifanggou.bean.CommodityInfoBean;
 import com.app.sifanggou.bean.ShouCangType;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
 import com.app.sifanggou.net.bean.GetBusinessRongYunTokenResponseBean;
+import com.app.sifanggou.net.bean.GetCommodityInfoByIdResponseBean;
 import com.app.sifanggou.net.bean.IsBusinessCollectCommodityResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
@@ -51,6 +54,8 @@ public class ProductDetailActivity extends BaseActivity {
     private TextView tvShouCang;
     @ViewInject(R.id.tv_shoucang_status)
     private TextView tvShouCangStatus;
+    @ViewInject(R.id.iv_save)
+    private ImageView ivSave;
     @ViewInject(R.id.tv_time)
     private TextView tvTime;
     @ViewInject(R.id.iv_pic)
@@ -71,6 +76,7 @@ public class ProductDetailActivity extends BaseActivity {
     private TextView tvQualityLevel;
     @ViewInject(R.id.tv_type)
     private TextView tvType;
+
     @ViewInject(R.id.tv_level)
     private TextView tvLevel;
     @ViewInject(R.id.tv_dec)
@@ -97,7 +103,9 @@ public class ProductDetailActivity extends BaseActivity {
 
     private LoginResponseBean loginBean;
     public static final String KEY_DATA = "key_ProductDetailActivity_data";
+    public static final String KEY_ID = "key_ProductDetailActivity_id";
     private CommodityInfoBean commodityInfoBean;
+    private String commodity_id = "";
 
     private ViewPager mViewPager;
     private GuangGaoPagerAdapter adapter;
@@ -152,6 +160,7 @@ public class ProductDetailActivity extends BaseActivity {
     private void refreshShouCang(){
         if (shouCangType == ShouCangType.NOSAVE) {
             tvShouCangStatus.setText("收藏");
+            ivSave.setImageResource(R.drawable.icon_product_shoucang);
             llShouCang.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -167,7 +176,7 @@ public class ProductDetailActivity extends BaseActivity {
             });
         } else {
             tvShouCangStatus.setText("取消收藏");
-
+            ivSave.setImageResource(R.drawable.icon_star_saved);
             llShouCang.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -187,92 +196,185 @@ public class ProductDetailActivity extends BaseActivity {
     private void initData() {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
         commodityInfoBean = (CommodityInfoBean) getIntent().getSerializableExtra(KEY_DATA);
+        commodity_id = getIntent().getStringExtra(KEY_ID);
         refreshShouCangData();
-        if (commodityInfoBean != null) {
-            if (!TextUtils.isEmpty(commodityInfoBean.getCommodity_name())) {
-                tvName.setText(commodityInfoBean.getCommodity_name());
-            }
+        refreshCommodityInfo();
+//        if (commodityInfoBean != null) {
+//            if (!TextUtils.isEmpty(commodityInfoBean.getCommodity_name())) {
+//                tvName.setText(commodityInfoBean.getCommodity_name());
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getBrand_name())) {
+//                tvBrand.setText(commodityInfoBean.getBrand_name());
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getCommodity_pic_url())) {
+//                String dataArray[] = commodityInfoBean.getCommodity_pic_url().split(",");
+//                List<String> dataList = new ArrayList<String>();
+//                for (int i = 0 ; i<dataArray.length ; i++) {
+//                    dataList.add(dataArray[i]);
+//                }
+//                refreshPic(dataList);
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getSale_num())) {
+//                tvSaleNum.setText("销量  "+commodityInfoBean.getSale_num());
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getA_price())) {
+//                float price = Float.valueOf(commodityInfoBean.getA_price()) / 100;
+//                tvPrice.setText("￥"+price + "");
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getCollection_num())) {
+//                tvShouCang.setText("收藏  "+commodityInfoBean.getCollection_num()+"人");
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getAdd_time())) {
+//                tvTime.setText(commodityInfoBean.getAdd_time());
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getProduction_place())) {
+//                tvChanDi.setText(commodityInfoBean.getProduction_place());
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getSpecification())) {
+//                tvGuiGe.setText(commodityInfoBean.getSpecification());
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getSpecification())) {
+//                tvGuiGe.setText(commodityInfoBean.getSpecification());
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getQuality_grade())) {
+//                tvQualityLevel.setText(commodityInfoBean.getQuality_grade());
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getFirst_level_category_name())) {
+//                tvType.setText(commodityInfoBean.getFirst_level_category_name());
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getAgent_level())) {
+//                tvLevel.setText(commodityInfoBean.getAgent_level());
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getAgent_level())) {
+//                tvLevel.setText(commodityInfoBean.getAgent_level());
+//            }
+//
+//            if (!TextUtils.isEmpty(commodityInfoBean.getIntro())) {
+//                tvDec.setText(commodityInfoBean.getIntro());
+//            }
+//
+//            if (commodityInfoBean.getBusiness_info() != null) {
+//
+//                if (!TextUtils.isEmpty(commodityInfoBean.getBusiness_info().getHead_pic_url())) {
+//                    ImageLoaderUtil.display(commodityInfoBean.getBusiness_info().getHead_pic_url(),ivPic);
+//                }
+//
+//                if (!TextUtils.isEmpty(commodityInfoBean.getBusiness_info().getName())) {
+//                    tvDianPu.setText(commodityInfoBean.getBusiness_info().getName());
+//                }
+//
+//            }
+//
+//        }
+    }
 
-            if (!TextUtils.isEmpty(commodityInfoBean.getBrand_name())) {
-                tvBrand.setText(commodityInfoBean.getBrand_name());
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getCommodity_pic_url())) {
-                String dataArray[] = commodityInfoBean.getCommodity_pic_url().split(",");
-                List<String> dataList = new ArrayList<String>();
-                for (int i = 0 ; i<dataArray.length ; i++) {
-                    dataList.add(dataArray[i]);
-                }
-                refreshPic(dataList);
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getSale_num())) {
-                tvSaleNum.setText("销量  "+commodityInfoBean.getSale_num());
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getA_price())) {
-                float price = Float.valueOf(commodityInfoBean.getA_price()) / 100;
-                tvPrice.setText("￥"+price + "");
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getCollection_num())) {
-                tvShouCang.setText("收藏  "+commodityInfoBean.getCollection_num()+"人");
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getAdd_time())) {
-                tvTime.setText(commodityInfoBean.getAdd_time());
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getProduction_place())) {
-                tvChanDi.setText(commodityInfoBean.getProduction_place());
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getSpecification())) {
-                tvGuiGe.setText(commodityInfoBean.getSpecification());
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getSpecification())) {
-                tvGuiGe.setText(commodityInfoBean.getSpecification());
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getQuality_grade())) {
-                tvQualityLevel.setText(commodityInfoBean.getQuality_grade());
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getFirst_level_category_name())) {
-                tvType.setText(commodityInfoBean.getFirst_level_category_name());
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getAgent_level())) {
-                tvLevel.setText(commodityInfoBean.getAgent_level());
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getAgent_level())) {
-                tvLevel.setText(commodityInfoBean.getAgent_level());
-            }
-
-            if (!TextUtils.isEmpty(commodityInfoBean.getIntro())) {
-                tvDec.setText(commodityInfoBean.getIntro());
-            }
-
-            if (commodityInfoBean.getBusiness_info() != null) {
-
-                if (!TextUtils.isEmpty(commodityInfoBean.getBusiness_info().getHead_pic_url())) {
-                    ImageLoaderUtil.display(commodityInfoBean.getBusiness_info().getHead_pic_url(),ivPic);
-                }
-
-                if (!TextUtils.isEmpty(commodityInfoBean.getBusiness_info().getName())) {
-                    tvDianPu.setText(commodityInfoBean.getBusiness_info().getName());
-                }
-
-            }
-
+    private void refreshCommondityView(CommodityInfoBean infoBean) {
+        if (infoBean == null) return;
+        commodityInfoBean = infoBean;
+        if (!TextUtils.isEmpty(infoBean.getCommodity_name())) {
+            tvName.setText(infoBean.getCommodity_name());
         }
+
+        if (!TextUtils.isEmpty(infoBean.getBrand_name())) {
+            tvBrand.setText(infoBean.getBrand_name());
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getCommodity_pic_url())) {
+            String dataArray[] = infoBean.getCommodity_pic_url().split(",");
+            List<String> dataList = new ArrayList<String>();
+            for (int i = 0 ; i<dataArray.length ; i++) {
+                dataList.add(dataArray[i]);
+            }
+            refreshPic(dataList);
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getSale_num())) {
+            tvSaleNum.setText("销量  "+infoBean.getSale_num());
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getA_price())) {
+            float price = Float.valueOf(infoBean.getA_price()) / 100;
+            tvPrice.setText("￥"+price + "");
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getCollection_num())) {
+            tvShouCang.setText("收藏  "+infoBean.getCollection_num()+"人");
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getAdd_time())) {
+            tvTime.setText(infoBean.getAdd_time());
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getProduction_place())) {
+            tvChanDi.setText(infoBean.getProduction_place());
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getSpecification())) {
+            tvGuiGe.setText(infoBean.getSpecification());
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getQuality_grade())) {
+            tvQualityLevel.setText(infoBean.getQuality_grade());
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getFirst_level_category_name())) {
+            tvType.setText(infoBean.getFirst_level_category_name());
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getAgent_level())) {
+            for (AgentLevelType alt : AgentLevelType.values()) {
+                if (alt.getType().equals(infoBean.getAgent_level())) {
+                    tvLevel.setText(alt.getName());
+                }
+            }
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getIntro())) {
+            tvDec.setText(infoBean.getIntro());
+        }
+    }
+
+    private void refreshBusinessinfo(BusinessInfoBean infoBean) {
+        if (infoBean == null) return;
+        if (!TextUtils.isEmpty(infoBean.getHead_pic_url())) {
+            ImageLoaderUtil.display(infoBean.getHead_pic_url(),ivPic);
+        }
+        if (!TextUtils.isEmpty(infoBean.getTotal_commodity_num())
+                && !TextUtils.isEmpty(infoBean.getTotal_sale_num())) {
+            tvDianPuData.setText("总销量:  "+infoBean.getTotal_sale_num()+"  全部产品："+infoBean.getTotal_commodity_num());
+        }
+        if (!TextUtils.isEmpty(infoBean.getName())) {
+            if (!TextUtils.isEmpty(infoBean.getMarket_name())) {
+                tvDianPu.setText(infoBean.getName() + infoBean.getMarket_name() + infoBean.getShop_number());
+            }
+        }
+
     }
 
     private void refreshShouCangData() {
         if (loginBean != null && commodityInfoBean != null) {
             pushEventNoProgress(EventCode.HTTP_ISBUSINESSCOLLECTCOMMODITY,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),commodityInfoBean.getCommodity_id());
+        }
+    }
+
+    private void refreshCommodityInfo() {
+        if (commodityInfoBean != null) {
+            pushEventNoProgress(EventCode.HTTP_GETCOMMODITYINFOBYID,commodityInfoBean.getCommodity_id());
+        } else if (!TextUtils.isEmpty(commodity_id)){
+            pushEventNoProgress(EventCode.HTTP_GETCOMMODITYINFOBYID,commodity_id);
         }
     }
 
@@ -361,6 +463,7 @@ public class ProductDetailActivity extends BaseActivity {
     }
 
     private void initView() {
+        addBack(R.id.rl_back);
         mViewPager = (ViewPager) findViewById(R.id.viewpager_guanggao);
         adapter = new GuangGaoPagerAdapter(viewList);
         mViewPager.setAdapter(adapter);
@@ -428,6 +531,19 @@ public class ProductDetailActivity extends BaseActivity {
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
+        if (event.getEventCode() == EventCode.HTTP_GETCOMMODITYINFOBYID) {
+            if (event.isSuccess()) {
+                GetCommodityInfoByIdResponseBean bean = (GetCommodityInfoByIdResponseBean) event.getReturnParamAtIndex(0);
+                if (bean != null && bean.getData() != null && bean.getData().getCommodity_info() != null) {
+                    refreshCommondityView(bean.getData().getCommodity_info());
+                }
+                if (bean != null && bean.getData() != null && bean.getData().getBusiness_info() != null) {
+                    refreshBusinessinfo(bean.getData().getBusiness_info());
+                }
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
         if (event.getEventCode() == EventCode.HTTP_ISBUSINESSCOLLECTCOMMODITY) {
             if (event.isSuccess()) {
                 IsBusinessCollectCommodityResponseBean bean = (IsBusinessCollectCommodityResponseBean) event.getReturnParamAtIndex(0);

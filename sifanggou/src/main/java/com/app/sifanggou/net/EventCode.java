@@ -104,5 +104,23 @@ public class EventCode {
 	public static final int HTTP_ISBUSINESSPARTNER = ++BASECODE;
 
 	public static final int HTTP_DELBUSINESSPARTNER = ++BASECODE;
+
+	public static final int HTTP_UPDATEBUSINESSCOMMODITY = ++BASECODE;
+
+	public static final int HTTP_ADDBUSINESSDEFAULTDELIVERADDRESS = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSDEFAULTDELIVERADDRESS = ++BASECODE;
+
+	public static final int HTTP_GETRECOMMENDCOMMODITY = ++BASECODE;
+
+	public static final int HTTP_UPDATEBUSINESSINFO = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSINFOBYCODE = ++BASECODE;
+
+	public static final int HTTP_GETCOMMODITYINFOBYID = ++BASECODE;
+
+	public static final int HTTP_DELBUSINESSSTAFF = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSCOMMODITYINFO2 = ++BASECODE;
 }
 

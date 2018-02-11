@@ -6,20 +6,40 @@ import java.util.List;
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.activity.ChatListActivity;
+import com.app.sifanggou.activity.DianPuDetailActivity;
 import com.app.sifanggou.activity.JiXuChuCangActivity;
 import com.app.sifanggou.activity.JiXuProductListActivity;
+import com.app.sifanggou.activity.MainActivity;
+import com.app.sifanggou.activity.ProductDetailActivity;
+import com.app.sifanggou.activity.ProductPicActivity;
+import com.app.sifanggou.activity.RecommondProductActivity;
 import com.app.sifanggou.activity.SearchActivity;
 import com.app.sifanggou.activity.ShangPinGuanLiActivity;
+import com.app.sifanggou.activity.ShouCangActivity;
 import com.app.sifanggou.activity.UrlWebClientActivity;
+import com.app.sifanggou.adapter.DianPuCollectGridAdapter;
 import com.app.sifanggou.adapter.GuangGaoPagerAdapter;
 import com.app.sifanggou.adapter.HotAdapter;
+import com.app.sifanggou.adapter.ProductCollectGridAdapter;
+import com.app.sifanggou.bean.BusinessInfoBean;
+import com.app.sifanggou.bean.BusinessPartnerBean;
+import com.app.sifanggou.bean.CommodityCollectBean;
+import com.app.sifanggou.bean.CommodityInfoBean;
 import com.app.sifanggou.bean.DiPaiBean;
+import com.app.sifanggou.bean.RecommendCommodityBean;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.GetBusinessCommodityCollectResponseBean;
+import com.app.sifanggou.net.bean.GetBusinessPartnerResponseBean;
 import com.app.sifanggou.net.bean.GetFirstPageAdResponseBean;
+import com.app.sifanggou.net.bean.GetRecommendCommodityResponseBean;
 import com.app.sifanggou.net.bean.GuangGaoBean;
+import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.ImageLoaderUtil;
+import com.app.sifanggou.utils.PreManager;
+import com.app.sifanggou.view.MyGridView;
+import com.google.zxing.integration.android.IntentIntegrator;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import android.content.Context;
@@ -37,7 +57,9 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Gallery;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
@@ -58,6 +80,29 @@ public class MainFragemnt extends BaseFragment {
 	private RelativeLayout rlSearch;
 	@ViewInject(R.id.iv_msg)
 	private ImageView ivMsg;
+
+	//收藏商品
+	private LoginResponseBean loginBean;
+	private ProductCollectGridAdapter productCollectGridAdapter;
+	private List<CommodityInfoBean> commodityInfoBeanList = new ArrayList<CommodityInfoBean>();
+	@ViewInject(R.id.gv_guanzhu_product)
+	private MyGridView gvGuanZhuProduct;
+	@ViewInject(R.id.rl_guanzhu_product)
+	private RelativeLayout rlGuanZhuProduct;
+	//收藏商家
+	private DianPuCollectGridAdapter dianPuCollectGridAdapter;
+	private List<BusinessInfoBean> businessInfoBeanList = new ArrayList<BusinessInfoBean>();
+	@ViewInject(R.id.gv_guanzhu_dianpu)
+	private MyGridView gvGuanZhuDianPu;
+	@ViewInject(R.id.rl_guanzhu_dianpu)
+	private RelativeLayout rlGuanZhuDianPu;
+	//推荐商品
+	private ProductCollectGridAdapter recommandGridAdapter;
+	private List<CommodityInfoBean> recommandCommodityInfoBeanList = new ArrayList<CommodityInfoBean>();
+	@ViewInject(R.id.rl_commandproduct)
+	private RelativeLayout rlCommandProduct;
+	@ViewInject(R.id.gv_commandproduct)
+	private MyGridView gvCommnadProduct;
 
 	private ViewPager mViewPager;
 	private GuangGaoPagerAdapter adapter;
@@ -110,10 +155,18 @@ public class MainFragemnt extends BaseFragment {
 		// TODO Auto-generated method stub
 		initView();
 		initListener();
-		getAd();
+		initData();
 		startLoopViewPager();
 		mViewPager.setCurrentItem(0);
 		super.onActivityCreated(savedInstanceState);
+	}
+
+	private void initData() {
+		loginBean = PreManager.get(getActivity().getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
+		getCollectProduct();
+		getCollectDianPu();
+		getRecommandProduct();
+		getAd();
 	}
 	
 	private void initView() {
@@ -121,6 +174,15 @@ public class MainFragemnt extends BaseFragment {
 		dotLayout = (LinearLayout) contentView.findViewById(R.id.ly_dot);
 		adapter = new GuangGaoPagerAdapter(viewList);
 		mViewPager.setAdapter(adapter);
+
+		productCollectGridAdapter = new ProductCollectGridAdapter(getActivity(),commodityInfoBeanList);
+		gvGuanZhuProduct.setAdapter(productCollectGridAdapter);
+
+		dianPuCollectGridAdapter = new DianPuCollectGridAdapter(getActivity(),businessInfoBeanList);
+		gvGuanZhuDianPu.setAdapter(dianPuCollectGridAdapter);
+
+		recommandGridAdapter = new ProductCollectGridAdapter(getActivity(),recommandCommodityInfoBeanList);
+		gvCommnadProduct.setAdapter(recommandGridAdapter);
 	}	
 	
 	@SuppressWarnings("deprecation")
@@ -199,14 +261,87 @@ public class MainFragemnt extends BaseFragment {
 		ivMsg.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), ChatListActivity.class);
+//				Intent intent = new Intent(getActivity(), ChatListActivity.class);
+//				startActivity(intent);
+				new IntentIntegrator(getActivity())
+						.setOrientationLocked(true)
+//                .setCaptureActivity(CustomScanActivity.class) // 设置自定义的activity是CustomActivity
+						.initiateScan(); // 初始化扫描
+			}
+		});
+
+		gvGuanZhuDianPu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(getActivity(), DianPuDetailActivity.class);
+				intent.putExtra(DianPuDetailActivity.KEY_DATA,businessInfoBeanList.get(position));
 				startActivity(intent);
+			}
+		});
+
+		gvGuanZhuProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+				intent.putExtra(ProductDetailActivity.KEY_DATA,commodityInfoBeanList.get(position));
+				startActivity(intent);
+			}
+		});
+
+		rlGuanZhuDianPu.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(),ShouCangActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		rlGuanZhuProduct.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(),ShouCangActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		rlCommandProduct.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(),RecommondProductActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		llMyOrder.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				((MainActivity)(getActivity())).pageChanged(4);
 			}
 		});
 	}
 
 	private void getAd() {
 		pushEventNoProgress(EventCode.HTTP_GETFIRSTPAGEAD);
+	}
+
+	private void getCollectProduct() {
+		if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
+			pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYCOLLECT,
+					loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+					AppContext.PAGE_SIZE+"",AppContext.PAGE+"","refresh");
+		}
+	}
+
+	private void getCollectDianPu() {
+		if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
+			pushEventNoProgress(EventCode.HTTP_GETBUSINESSPARTNER,
+					loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+					AppContext.PAGE_SIZE+"",AppContext.PAGE+"","refresh");
+		}
+	}
+
+	private void getRecommandProduct() {
+		pushEventNoProgress(EventCode.HTTP_GETRECOMMENDCOMMODITY,AppContext.PAGE_SIZE+"",AppContext.PAGE+"","refresh");
 	}
 
 	private  void refreshAd(List<GuangGaoBean> adList) {
@@ -276,12 +411,75 @@ public class MainFragemnt extends BaseFragment {
 	@Override
 	public void onEventRunEnd(Event event) {
 		super.onEventRunEnd(event);
+		if (event.getEventCode() == EventCode.HTTP_GETRECOMMENDCOMMODITY) {
+			if (event.isSuccess()) {
+				GetRecommendCommodityResponseBean bean = (GetRecommendCommodityResponseBean) event.getReturnParamAtIndex(0);
+				if (bean == null || bean.getData() == null
+						|| bean.getData().getRecommend_commodity() == null) {
+					return;
+				}
+				List<CommodityInfoBean> tmpList = new ArrayList<CommodityInfoBean>();
+				for(RecommendCommodityBean cc : bean.getData().getRecommend_commodity()) {
+					tmpList.add(cc.getCommodity_info());
+				}
+				if (tmpList.size() >= 6) {
+					tmpList = tmpList.subList(0,6);
+				}
+				recommandCommodityInfoBeanList.clear();
+				recommandCommodityInfoBeanList.addAll(tmpList);
+				recommandGridAdapter.notifyDataSetChanged();
+			} else {
+				CommonUtils.showToast(event.getFailMessage());
+			}
+		}
 		if (event.getEventCode() == EventCode.HTTP_GETFIRSTPAGEAD) {
 			if (event.isSuccess()) {
 				GetFirstPageAdResponseBean bean = (GetFirstPageAdResponseBean) event.getReturnParamAtIndex(0);
 				if (bean != null && bean.getData() != null) {
 					refreshAd(bean.getData().getFirst_page_ad());
 				}
+			} else {
+				CommonUtils.showToast(event.getFailMessage());
+			}
+		}
+
+		if(event.getEventCode() == EventCode.HTTP_GETBUSINESSPARTNER) {
+			if (event.isSuccess()) {
+				GetBusinessPartnerResponseBean bean = (GetBusinessPartnerResponseBean) event.getReturnParamAtIndex(0);
+				if (bean == null || bean.getData().getBusiness_partner() == null) {
+					return;
+				}
+				List<BusinessInfoBean> tmpList = new ArrayList<BusinessInfoBean>();
+				for(BusinessPartnerBean bpb : bean.getData().getBusiness_partner()) {
+					tmpList.add(bpb.getPartner_business_info());
+				}
+				if (tmpList.size() >= 6) {
+					tmpList = tmpList.subList(0,6);
+				}
+				businessInfoBeanList.clear();
+				businessInfoBeanList.addAll(tmpList);
+				dianPuCollectGridAdapter.notifyDataSetChanged();
+			} else {
+				CommonUtils.showToast(event.getFailMessage());
+			}
+		}
+
+		if (event.getEventCode() == EventCode.HTTP_GETBUSINESSCOMMODITYCOLLECT) {
+			if (event.isSuccess()) {
+				GetBusinessCommodityCollectResponseBean bean = (GetBusinessCommodityCollectResponseBean) event.getReturnParamAtIndex(0);
+				if (bean == null || bean.getData() == null || bean.getData().getBusiness_commodity_collect_list() == null) {
+					return;
+				}
+				List<CommodityInfoBean> tmpList = new ArrayList<CommodityInfoBean>();
+				for(CommodityCollectBean cc : bean.getData().getBusiness_commodity_collect_list()) {
+					tmpList.add(cc.getCommodity_info());
+				}
+				if (tmpList.size() >= 6) {
+					tmpList = tmpList.subList(0,6);
+				}
+				commodityInfoBeanList.clear();
+				commodityInfoBeanList.addAll(tmpList);
+				productCollectGridAdapter.notifyDataSetChanged();
 			} else {
 				CommonUtils.showToast(event.getFailMessage());
 			}

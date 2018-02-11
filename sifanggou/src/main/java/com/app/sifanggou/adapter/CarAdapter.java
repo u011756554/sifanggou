@@ -96,6 +96,15 @@ public class CarAdapter extends SetBaseAdapter<CarBean> {
         if (!TextUtils.isEmpty(bean.getBusiness_name())) {
             holder.tvName.setText(bean.getBusiness_name());
         }
+
+        holder.ivChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mChateLiseter != null) {
+                    mChateLiseter.chat(bean);
+                }
+            }
+        });
         return convertView;
     }
 
@@ -113,5 +122,15 @@ public class CarAdapter extends SetBaseAdapter<CarBean> {
 
     public void setListener(CarItemAdapter.DataUpdateListener listener) {
         this.mListener = listener;
+    }
+
+    public interface  ChatListener {
+        void chat(CarBean bean);
+    }
+
+    private ChatListener mChateLiseter;
+
+    public void setListener(ChatListener chateLiseter) {
+        this.mChateLiseter = chateLiseter;
     }
 }

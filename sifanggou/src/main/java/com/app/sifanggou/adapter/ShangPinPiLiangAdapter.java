@@ -74,14 +74,15 @@ public class ShangPinPiLiangAdapter extends SetBaseAdapter<CommodityInfoBean> {
                 holder.tvHuoJia.setText("货架  "+ "代理");
             }
         }
-        if (!TextUtils.isEmpty(bean.getAdd_time())) {
-            holder.tvGengXin.setText("最近更新  "+ bean.getAdd_time());
+        if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getMarket_name())) {
+            holder.tvGengXin.setText("市场：  "+ bean.getBusiness_info().getMarket_name());
         }
         holder.rlPriceEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (priceEditListener != null ) {
-                    priceEditListener.updatePrice(bean.getCommodity_id(),bean.getA_price(),bean.getB_price());
+//                    priceEditListener.updatePrice(bean.getCommodity_id(),bean.getA_price(),bean.getB_price());
+                    priceEditListener.updateCommodity(bean);
                 }
             }
         });
@@ -102,6 +103,7 @@ public class ShangPinPiLiangAdapter extends SetBaseAdapter<CommodityInfoBean> {
 
     public interface PriceEditListener {
         void updatePrice(String commodity_id,String a_price,String b_price);
+        void updateCommodity(CommodityInfoBean bean);
     }
 
     private PriceEditListener priceEditListener;

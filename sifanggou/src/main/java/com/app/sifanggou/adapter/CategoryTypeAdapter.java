@@ -62,7 +62,9 @@ public class CategoryTypeAdapter extends SetBaseAdapter<CommodityTypeBean> {
 
     public void setDefSelect(int position) {
         this.defItem = position;
-        notifyDataSetChanged();
+        if (mListener != null) {
+            mListener.check(position);
+        }
     }
 
     public interface CheckListener {

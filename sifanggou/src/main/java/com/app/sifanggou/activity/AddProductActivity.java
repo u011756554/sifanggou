@@ -25,6 +25,7 @@ import com.app.sifanggou.R;
 import com.app.sifanggou.adapter.GuangGaoPagerAdapter;
 import com.app.sifanggou.bean.AgentLevelBean;
 import com.app.sifanggou.bean.AgentLevelType;
+import com.app.sifanggou.bean.CommodityInfoBean;
 import com.app.sifanggou.bean.HuoJiaType;
 import com.app.sifanggou.bean.ProductType;
 import com.app.sifanggou.net.Event;
@@ -183,17 +184,31 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
     private GuangGaoPagerAdapter hetongAdapter;
     private List<View> hetongViewList = new ArrayList<View>();
     private int hetongCurrentIndex = 0;
+
+    //初始化数据
+    public static String KEY_INITDATA = "key_AddProductActivity_initdata";
+    private CommodityInfoBean initCommodityInfoBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getData();
         initView();
         initListener();
         initData();
     }
 
+    private void getData() {
+        initCommodityInfoBean = (CommodityInfoBean) getIntent().getSerializableExtra(KEY_INITDATA);
+    }
+
     private void initView() {
         addBack(R.id.rl_back);
-        setTitle("添加商品");
+        if (initCommodityInfoBean == null) {
+            setTitle("添加商品");
+        } else {
+            setTitle("编辑商品");
+        }
+
 
         agentLevelDialog = new AgentLevelDialog(AddProductActivity.this);
         //定义普通货架图片
@@ -209,9 +224,156 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
 
     private void initData() {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
+        refreshEditData(initCommodityInfoBean);
         refreshHuoJiaType();
         pushEventNoProgress(EventCode.HTTP_GETCOMMODITYTYPELIST);
         pushEventNoProgress(EventCode.HTTP_GETAGENTLEVELINFO);
+    }
+
+    /**
+     * 刷新编辑商品数据
+     * @param infoBean
+     */
+    private void refreshEditData(CommodityInfoBean infoBean) {
+        if (infoBean == null) return;
+        //不能编辑的属性
+        edtPinPai.setEnabled(false);
+        edtPinPaiDaiLi.setEnabled(false);
+        edtChanDi.setEnabled(false);
+        edtChanDiDaiLi.setEnabled(false);
+
+        //初始化货架
+        if (!TextUtils.isEmpty(infoBean.getType())) {
+            for (HuoJiaType type : HuoJiaType.values()) {
+                if (type.getType().equals(infoBean.getType())) {
+                    huoJiaType = type;
+                    refreshHuoJiaType();
+                    break;
+                }
+            }
+        }
+        //初始化商品图片
+        if (!TextUtils.isEmpty(infoBean.getCommodity_pic_url())) {
+            String dataArray[] = infoBean.getCommodity_pic_url().split(",");
+            ArrayList<String> dataList = new ArrayList<String>();
+            for (int i = 0 ; i<dataArray.length ; i++) {
+                dataList.add(dataArray[i]);
+            }
+            if (huoJiaType == HuoJiaType.DAILI) {
+                daiLiUrlList = dataList;
+                refreshDaiLiView();
+
+
+            } else if (huoJiaType == HuoJiaType.PUTONG) {
+                puTongUrlList = dataList;
+                refreshPuTongView();
+            }
+        }
+
+        //初始化合同图片
+        if (huoJiaType == HuoJiaType.DAILI && !TextUtils.isEmpty(infoBean.getAgency_contract_pic_url())) {
+            String hetongArray[] = infoBean.getAgency_contract_pic_url().split(",");
+            ArrayList<String> hetongList = new ArrayList<String>();
+            for (int i = 0 ; i<hetongArray.length ; i++) {
+                hetongList.add(hetongArray[i]);
+            }
+            hetongUrlList = hetongList;
+            refreshHeTongView();
+        }
+
+        //初始化其它信息
+        if (huoJiaType == HuoJiaType.DAILI) {
+            refreshInitDaliData(infoBean);
+        } else {
+            refreshInitPutongData(infoBean);
+        }
+    }
+
+    /**
+     * 初始化普通商品信息
+     * @param bean
+     */
+    private void refreshInitPutongData(CommodityInfoBean bean) {
+        if (bean == null) return;
+        edtName.setText(bean.getCommodity_name());
+        edtDec.setText(bean.getIntro());
+        edtPinPai.setText(bean.getBrand_name());
+
+        if (!TextUtils.isEmpty(bean.getA_price())) {
+            float aPrice = Float.valueOf(bean.getA_price()) / 100;
+            edtTongJiPrice.setText(aPrice + "");
+        }
+        if (!TextUtils.isEmpty(bean.getB_price())) {
+            float bPrice = Float.valueOf(bean.getB_price()) / 100;
+            edtXiaJiPrice.setText(bPrice + "");
+        }
+
+        edtKuCun.setText(bean.getCollection_num());
+        edtChanDi.setText(bean.getProduction_place());
+        edtGuiGe.setText(bean.getSpecification());
+        edtZhiLiangDengJi.setText(bean.getQuality_grade());
+
+        firstNode.setCurId(bean.getFirst_level_category_code());
+        firstNode.setValue(bean.getFirst_level_category_name());
+        secondNode.setCurId(bean.getSecond_level_category_code());
+        secondNode.setValue(bean.getSecond_level_category_name());
+        thirdNode.setCurId(bean.getThird_level_category_code());
+        thirdNode.setValue(bean.getThird_level_category_name());
+        tvFenLei.setText(bean.getFirst_level_category_name()+"  "+
+                bean.getSecond_level_category_name()+"  "+
+                bean.getThird_level_category_name());
+    }
+
+    /**
+     * 初始化代理商品信息
+     * @param bean
+     */
+    private void refreshInitDaliData(CommodityInfoBean bean) {
+        if (bean == null) return;
+        edtNameDaiLi.setText(bean.getCommodity_name());
+        edtDecDaiLi.setText(bean.getIntro());
+        edtPinPaiDaiLi.setText(bean.getBrand_name());
+
+        if (!TextUtils.isEmpty(bean.getA_price())) {
+            float aPrice = Float.valueOf(bean.getA_price()) / 100;
+            edtTongJiPriceDaiLi.setText(aPrice + "");
+        }
+        if (!TextUtils.isEmpty(bean.getB_price())) {
+            float bPrice = Float.valueOf(bean.getB_price()) / 100;
+            edtXiaJiPriceDaiLi.setText(bPrice + "");
+        }
+
+        edtKuCunDaiLi.setText(bean.getCollection_num());
+        edtChanDiDaiLi.setText(bean.getProduction_place());
+        edtGuiGeDaiLi.setText(bean.getSpecification());
+        edtZhiLiangDengJiDaiLi.setText(bean.getQuality_grade());
+
+        firstDaiLiNode.setCurId(bean.getFirst_level_category_code());
+        firstDaiLiNode.setValue(bean.getFirst_level_category_name());
+        secondDaiLiNode.setCurId(bean.getSecond_level_category_code());
+        secondDaiLiNode.setValue(bean.getSecond_level_category_name());
+        thirdDaiLiNode.setCurId(bean.getThird_level_category_code());
+        thirdDaiLiNode.setValue(bean.getThird_level_category_name());
+        tvFenLeiDaiLi.setText(bean.getFirst_level_category_name()+"  "+
+                bean.getSecond_level_category_name()+"  "+
+                bean.getThird_level_category_name());
+        refreshAgentLevel(agentLevelDataList,bean);
+    }
+
+    /**
+     * 刷新代理级别
+     * @param agentLevelDataList
+     * @param bean
+     */
+    private void refreshAgentLevel(List<AgentLevelBean> agentLevelDataList,CommodityInfoBean bean) {
+        if (agentLevelDataList == null || bean == null) return;
+        for(AgentLevelBean alb : agentLevelDataList) {
+            if (bean.getAgent_level().equals(alb.getLevel_num())) {
+                agentLevelBean = alb;
+                tvJieBieDaiLi.setText(alb.getLevel_name());
+                break;
+            }
+        }
     }
 
     /**
@@ -361,6 +523,16 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
             viewDaiLiHuoJia.setSelected(true);
             svPutong.setVisibility(View.GONE);
             svDaili.setVisibility(View.VISIBLE);
+        }
+
+        if (initCommodityInfoBean != null) {
+            if (huoJiaType == HuoJiaType.DAILI) {
+                llPuTong.setEnabled(false);
+                llPuTong.setClickable(false);
+            } else if (huoJiaType == HuoJiaType.PUTONG) {
+                llDaiLi.setEnabled(false);
+                llDaiLi.setClickable(false);
+            }
         }
     }
 
@@ -615,9 +787,13 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                     String a_price = (int)(Float.valueOf(edtTongJiPrice.getText().toString()) * 100) + "";
                     String b_price = (int)(Float.valueOf(edtXiaJiPrice.getText().toString()) * 100) + "";
 
-                    pushEventBlock(EventCode.HTTP_ADDBUSINESSCOMMODITY,business_code,mobile,trans_no,sign,commodity_name,type,brand_name,first_level_category_code,second_level_category_code,third_level_category_code,
-                            commodity_pic_url,quality_grade,production_place,specification,intro,a_price,b_price);
-
+                    if (initCommodityInfoBean == null) {
+                        pushEventBlock(EventCode.HTTP_ADDBUSINESSCOMMODITY,business_code,mobile,trans_no,sign,commodity_name,type,brand_name,first_level_category_code,second_level_category_code,third_level_category_code,
+                                commodity_pic_url,quality_grade,production_place,specification,intro,a_price,b_price);
+                    } else {
+                        pushEventBlock(EventCode.HTTP_UPDATEBUSINESSCOMMODITY,business_code,mobile,trans_no,sign,initCommodityInfoBean.getCommodity_id(),commodity_name,first_level_category_code,second_level_category_code,
+                                third_level_category_code,type,"","",commodity_pic_url,specification,intro,a_price,b_price);
+                    }
                 } else {
                     if (TextUtils.isEmpty(edtNameDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品名称");
@@ -722,8 +898,14 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                     String a_price = (int)(Float.valueOf(edtTongJiPriceDaiLi.getText().toString()) * 100) + "";
                     String b_price = (int)(Float.valueOf(edtXiaJiPriceDaiLi.getText().toString()) * 100) + "";
 
-                    pushEventBlock(EventCode.HTTP_ADDBUSINESSCOMMODITY,business_code,mobile,trans_no,sign,commodity_name,type,brand_name,first_level_category_code,second_level_category_code,third_level_category_code,
-                            commodity_pic_url,quality_grade,production_place,specification,intro,a_price,b_price,agency_contract_pic_url,agent_level);
+                    if (initCommodityInfoBean == null) {
+                        pushEventBlock(EventCode.HTTP_ADDBUSINESSCOMMODITY,business_code,mobile,trans_no,sign,commodity_name,type,brand_name,first_level_category_code,second_level_category_code,third_level_category_code,
+                                commodity_pic_url,quality_grade,production_place,specification,intro,a_price,b_price,agency_contract_pic_url,agent_level);
+                    } else {
+                        pushEventBlock(EventCode.HTTP_UPDATEBUSINESSCOMMODITY,business_code,mobile,trans_no,sign,initCommodityInfoBean.getCommodity_id(),commodity_name,first_level_category_code,second_level_category_code,
+                                third_level_category_code,type,agency_contract_pic_url,agent_level,commodity_pic_url,specification,intro,a_price,b_price);
+                    }
+
                 }
             }
         });
@@ -773,6 +955,13 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
+        if (event.getEventCode() == EventCode.HTTP_UPDATEBUSINESSCOMMODITY) {
+            if (event.isSuccess()) {
+                finish();
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
         if (event.getEventCode() == EventCode.HTTP_GETBUSINESSCANALLOCATESHELFNUM) {
             if (event.isSuccess()) {
                 GetBusinessCanAllocateShelfNumResponseBean bean = (GetBusinessCanAllocateShelfNumResponseBean) event.getReturnParamAtIndex(0);
@@ -819,6 +1008,9 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                     agentLevelList.add(mlb.getLevel_name());
                 }
                 agentLevelDialog.setData(agentLevelList,0);
+                if (initCommodityInfoBean != null) {
+                    refreshAgentLevel(agentLevelDataList,initCommodityInfoBean);
+                }
             }
         } else {
             showToast(event.getFailMessage());

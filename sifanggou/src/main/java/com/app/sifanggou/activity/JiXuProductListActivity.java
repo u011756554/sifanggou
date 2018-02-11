@@ -75,6 +75,9 @@ public class JiXuProductListActivity extends BaseActivity {
     }
 
     private void initView() {
+        addBack(R.id.rl_back);
+        setTitle("急需出仓");
+
         adapterProduct = new AllBusinessUrgentSellCommodityAdapter(JiXuProductListActivity.this,dataListProduct);
         swipeRefreshLayoutProduct.setColorSchemeResources(R.color.color_banner,R.color.color_banner,R.color.color_banner,R.color.color_banner);
         listViewFooterViewProduct = LayoutInflater.from(JiXuProductListActivity.this).inflate(R.layout.mode_more, null);
@@ -133,7 +136,7 @@ public class JiXuProductListActivity extends BaseActivity {
             @Override
             public void click(AllBusinessUrgentSellCommodityBean bean) {
                 Intent intent = new Intent(JiXuProductListActivity.this,ProductDetailActivity.class);
-                intent.putExtra(ProductDetailActivity.KEY_DATA,bean);
+                intent.putExtra(ProductDetailActivity.KEY_ID,bean.getCommodity_id());
                 startActivity(intent);
             }
         });

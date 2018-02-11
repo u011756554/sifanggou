@@ -45,6 +45,8 @@ public class BusinessRegistHttpRunner extends HttpRunner {
         String registration_id = (String) event.getParamAtIndex(17);
         String device_type = (String) event.getParamAtIndex(18);
         String integrate_distribute_type = (String) event.getParamAtIndex(19);
+        String shop_number = (String) event.getParamAtIndex(20);
+        String scope = (String) event.getParamAtIndex(21);
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("name", name);
@@ -67,6 +69,8 @@ public class BusinessRegistHttpRunner extends HttpRunner {
         map.put("registration_id", registration_id);
         map.put("device_type", device_type);
         map.put("integrate_distribute_type",integrate_distribute_type);
+        map.put("shop_number",shop_number);
+        map.put("scope",scope);
 
         String result = HttpUtils.doPost(URLUtils.BUSINESSREGIST, map);
 

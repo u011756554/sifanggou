@@ -106,7 +106,13 @@ public class MyAccountActivity extends BaseActivity {
         adapter.setListener(new AccountAdapter.UpdateListener() {
             @Override
             public void delete(BusinessStaffBean businessStaffBean) {
+                String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
+                String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
+                String trans_no = System.currentTimeMillis()+"";
+                String sign = CommonUtils.getSign(business_code,user_name,trans_no,PreManager.getString(getApplicationContext(),AppContext.USER_PWD));
+                String mobile = businessStaffBean.getUser_name();
 
+                pushEventBlock(EventCode.HTTP_DELBUSINESSSTAFF,business_code,user_name,trans_no,sign,mobile);
             }
 
         });
@@ -172,7 +178,7 @@ public class MyAccountActivity extends BaseActivity {
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
-        if (event.getEventCode() == EventCode.HTTP_DELBUSINESSDELIVERADDRESS) {
+        if (event.getEventCode() == EventCode.HTTP_DELBUSINESSSTAFF) {
             if (event.isSuccess()) {
                 refresh();
             } else {

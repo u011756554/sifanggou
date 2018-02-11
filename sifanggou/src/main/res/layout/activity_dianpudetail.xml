@@ -103,7 +103,8 @@
                     android:layout_height="wrap_content"
                     android:text="川农视频特产店"
                     android:textColor="@color/white"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:singleLine="true"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

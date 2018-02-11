@@ -14,6 +14,21 @@ import java.util.List;
 
 public class TreeUtils {
 
+    public static List<NodeResource> commodityTypeBeanToFirstNodeResource(List<CommodityTypeBean> dataList) {
+        List<NodeResource> resultList = new ArrayList<NodeResource>();
+        for(CommodityTypeBean bean : dataList) {
+            if ("0".equals(bean.getParent_category_code())) {
+                NodeResource node = new NodeResource();
+                node.setValue(bean.getName());
+                node.setCurId(bean.getCategory_code());
+                node.setParentId(bean.getParent_category_code());
+                resultList.add(node);
+            }
+
+        }
+        return resultList;
+    }
+
     public static List<NodeResource> commodityTypeBeanToNodeResource(List<CommodityTypeBean> dataList) {
         List<NodeResource> resultList = new ArrayList<NodeResource>();
         for(CommodityTypeBean bean : dataList) {

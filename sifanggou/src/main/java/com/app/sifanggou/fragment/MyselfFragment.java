@@ -1,12 +1,24 @@
 package com.app.sifanggou.fragment;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.activity.AdressActivity;
 import com.app.sifanggou.activity.BurOrderTabActivity;
@@ -22,9 +34,21 @@ import com.app.sifanggou.activity.SetActivity;
 import com.app.sifanggou.activity.ShangPinGuanLiActivity;
 import com.app.sifanggou.activity.ShouCangActivity;
 import com.app.sifanggou.activity.ShouCangEdActivity;
+import com.app.sifanggou.activity.UploadCertificateActivity;
+import com.app.sifanggou.bean.AgentLevelType;
+import com.app.sifanggou.bean.BusinessInfoBean;
+import com.app.sifanggou.net.Event;
+import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.GetBusinessInfoByCodeResponseBean;
+import com.app.sifanggou.net.bean.LoginResponseBean;
+import com.app.sifanggou.net.httprunner.GetBusinessInfoByCodeHttpRunner;
+import com.app.sifanggou.utils.CommonUtils;
+import com.app.sifanggou.utils.ImageLoaderUtil;
+import com.app.sifanggou.utils.PreManager;
+import com.app.sifanggou.view.ChangeHeadDialog;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
-public class MyselfFragment extends BaseFragment{
+public class MyselfFragment extends PicBaseFragment{
 	@ViewInject(R.id.rl_shangpinguanli)
 	private RelativeLayout rlShangPinGuanLi;
 	@ViewInject(R.id.rl_chucanghistory)
@@ -57,7 +81,23 @@ public class MyselfFragment extends BaseFragment{
 	private RelativeLayout rlScan;
 	@ViewInject(R.id.rl_mymessage)
 	private RelativeLayout rlMyMessage;
+	@ViewInject(R.id.iv_head)
+	private ImageView ivHead;
+	@ViewInject(R.id.tv_level)
+	private TextView tvLevel;
+	@ViewInject(R.id.tv_rezheng)
+	private TextView tvRenZheng;
+	@ViewInject(R.id.tv_name)
+	private TextView tvName;
+	@ViewInject(R.id.tv_addr)
+	private TextView tvAddr;
+	@ViewInject(R.id.rl_kefu)
+	private RelativeLayout rlKeFu;
+	@ViewInject(R.id.tv_kefu)
+	private TextView tvKeFu;
 
+	private LoginResponseBean loginBean;
+	private ChangeHeadDialog headDialog;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -70,6 +110,47 @@ public class MyselfFragment extends BaseFragment{
 		super.onActivityCreated(savedInstanceState);
 		initView();
 		initListener();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		initData();
+	}
+
+	private void initData() {
+		loginBean = PreManager.get(getActivity().getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
+		if (loginBean != null
+				&& loginBean.getData() != null
+				&& loginBean.getData().getLogin_info() != null
+				&& loginBean.getData().getLogin_info().getBusiness_info() != null) {
+			if (!TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+				pushEventNoProgress(EventCode.HTTP_GETBUSINESSINFOBYCODE,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code());
+			}
+
+		}
+	}
+
+	private void refreshView(BusinessInfoBean bean) {
+		if (bean == null) return;
+		if (!TextUtils.isEmpty(bean.getHead_pic_url())) {
+			ImageLoaderUtil.display(bean.getHead_pic_url(),ivHead);
+		}
+		if (!TextUtils.isEmpty(bean.getAgent_level())) {
+			for(AgentLevelType alvt : AgentLevelType.values()) {
+				if (alvt.getType().equals(bean.getAgent_level())) {
+					tvLevel.setText(alvt.getCode());
+					break;
+				}
+			}
+		}
+		if (!TextUtils.isEmpty(bean.getName())) {
+			tvName.setText(bean.getName());
+			if (!TextUtils.isEmpty(bean.getMarket_name())) {
+				tvAddr.setText(bean.getName() + bean.getMarket_name() + bean.getShop_number());
+			}
+		}
+
 	}
 
 	private void initView() {
@@ -198,5 +279,111 @@ public class MyselfFragment extends BaseFragment{
 				startActivity(intent);
 			}
 		});
+
+		ivHead.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (headDialog == null) {
+					headDialog = new ChangeHeadDialog(getActivity());
+				}
+				headDialog.setListener(new ChangeHeadDialog.ChangeHeadDialogListener() {
+
+					@Override
+					public void pic() {
+						selectPicFromLocal(TAG_HEADPIC);
+					}
+
+					@Override
+					public void capture() {
+						selectPicFromCamera(TAG_HEADPIC);
+					}
+				});
+				headDialog.show();
+			}
+		});
+
+		rlKeFu.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String number = tvKeFu.getText().toString();
+				if (!TextUtils.isEmpty(number)) {
+					if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
+							!= PackageManager.PERMISSION_GRANTED){
+						ActivityCompat.requestPermissions(getActivity(),
+								new String[]{Manifest.permission.CALL_PHONE},
+								PERMISSION_CALL);
+					} else {
+						Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+number));
+						startActivity(intent);
+					}
+
+				}
+			}
+		});
+	}
+
+	private static final String TAG_HEADPIC = "TAG_YingYePic";
+	@Override
+	public void onSuccess(PutObjectRequest putObjectRequest, PutObjectResult putObjectResult,String tag) {
+		String url = oss.presignPublicObjectURL(AppContext.OSS_BUCKET,putObjectRequest.getObjectKey());
+		System.out.println("上传图片："+url);
+		if (!TextUtils.isEmpty(url)) {
+			if (TAG_HEADPIC.equals(tag)) {
+				ImageLoaderUtil.display(url,ivHead);
+				if (loginBean != null && loginBean.getData() != null
+						&& loginBean.getData().getLogin_info() != null
+						&& loginBean.getData().getLogin_info().getBusiness_info() != null
+						&& !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+					pushEventBlock(EventCode.HTTP_UPDATEBUSINESSINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+							"","","","","","","","",url,"");
+				}
+			} else {
+
+			}
+
+		}
+	}
+
+	@Override
+	public void onEventRunEnd(Event event) {
+		super.onEventRunEnd(event);
+		if (event.getEventCode() == EventCode.HTTP_UPDATEBUSINESSINFO) {
+			if (event.isSuccess()) {
+				CommonUtils.showToast("修改头像成功");
+			} else {
+				CommonUtils.showToast(event.getFailMessage());
+			}
+		}
+		if (event.getEventCode() == EventCode.HTTP_GETBUSINESSINFOBYCODE) {
+			if (event.isSuccess()) {
+				GetBusinessInfoByCodeResponseBean bean = (GetBusinessInfoByCodeResponseBean) event.getReturnParamAtIndex(0);
+				if (bean != null && bean.getData() != null && bean.getData().getBusiness_info() != null) {
+					refreshView(bean.getData().getBusiness_info());
+				}
+			} else {
+				CommonUtils.showToast(event.getFailMessage());
+			}
+		}
+	}
+
+	private static final int PERMISSION_CALL = 0x011;
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		switch(requestCode) {
+			case PERMISSION_CALL:
+				if (grantResults.length > 0
+						&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					String number = tvKeFu.getText().toString();
+					if (!TextUtils.isEmpty(number)) {
+						Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+number));
+						startActivity(intent);
+					}
+				} else {
+					CommonUtils.showToast("请开启应用拨打电话权限");
+				}
+
+		}
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 }

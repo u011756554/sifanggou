@@ -78,7 +78,7 @@ public class ChuCangHistoryActivity extends BaseActivity {
         listViewFooterView = LayoutInflater.from(ChuCangHistoryActivity.this).inflate(R.layout.mode_more, null);
         noMoreText = (TextView) listViewFooterView.findViewById(R.id.no_more);
         loadingText = (TextView) listViewFooterView.findViewById(R.id.load_more);
-        emptyViewView = LayoutInflater.from(ChuCangHistoryActivity.this).inflate(R.layout.mode_empty_shangpin, null);
+        emptyViewView = LayoutInflater.from(ChuCangHistoryActivity.this).inflate(R.layout.mode_empty, null);
 
         listView.addHeaderView(emptyViewView);
         listView.addFooterView(listViewFooterView);

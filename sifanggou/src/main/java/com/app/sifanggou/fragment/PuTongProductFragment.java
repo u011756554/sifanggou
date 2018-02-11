@@ -1,8 +1,10 @@
 package com.app.sifanggou.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -12,9 +14,16 @@ import android.widget.TextView;
 
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
+import com.app.sifanggou.activity.AddProductActivity;
+import com.app.sifanggou.activity.DianPuDetailActivity;
 import com.app.sifanggou.activity.PiLiangGuanLiActivity;
+import com.app.sifanggou.activity.ProductDetailActivity;
+import com.app.sifanggou.activity.SearchActivity;
+import com.app.sifanggou.adapter.CommodityInfoBeanAdapter;
+import com.app.sifanggou.adapter.ShangPinListAdapter;
 import com.app.sifanggou.adapter.ShangPinPiLiangAdapter;
 import com.app.sifanggou.bean.ChuShouType;
+import com.app.sifanggou.bean.CommityInfoType;
 import com.app.sifanggou.bean.CommodityInfoBean;
 import com.app.sifanggou.bean.HuoJiaType;
 import com.app.sifanggou.bean.SaleType;
@@ -57,11 +66,11 @@ public class PuTongProductFragment extends BaseFragment {
 
     //数据区域
     private List<CommodityInfoBean> list=new ArrayList<CommodityInfoBean>();
-    private ShangPinPiLiangAdapter adapter;
+    private CommodityInfoBeanAdapter adapter;
 
+    private String commityInfoTypeALLType = CommityInfoType.COMMON.getType();
+    private String BUSINESS_CODE = "";
     private LoginResponseBean loginBean;
-    private String saleType = SaleType.ON_SALE_COMMON.getType();
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -79,7 +88,7 @@ public class PuTongProductFragment extends BaseFragment {
     }
 
     private void initView() {
-        adapter = new ShangPinPiLiangAdapter(getActivity(),list);
+        adapter = new CommodityInfoBeanAdapter(getActivity(),list);
         swipeRefreshLayout.setColorSchemeResources(R.color.color_banner,R.color.color_banner,R.color.color_banner,R.color.color_banner);
         listViewFooterView = LayoutInflater.from(getActivity()).inflate(R.layout.mode_more, null);
         noMoreText = (TextView) listViewFooterView.findViewById(R.id.no_more);
@@ -122,11 +131,37 @@ public class PuTongProductFragment extends BaseFragment {
 
     private void initData() {
         loginBean = PreManager.get(getActivity().getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
-        refreshData();
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String business_code = bundle.getString(DianPuDetailActivity.KEY_ID);
+            if (!TextUtils.isEmpty(business_code)) {
+                BUSINESS_CODE = business_code;
+                refreshData();
+            }
+        }
+
     }
 
     private void initListener() {
+        adapter.setListener(new CommodityInfoBeanAdapter.AddListener() {
+            @Override
+            public void add(CommodityInfoBean bean) {
+                carAdd(bean);
+            }
 
+            @Override
+            public void click(CommodityInfoBean bean) {
+                Intent intent = new Intent(getActivity(),ProductDetailActivity.class);
+                intent.putExtra(ProductDetailActivity.KEY_DATA,bean);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void carAdd(CommodityInfoBean bean) {
+        if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
+            pushEventNoProgress(EventCode.HTTP_ADDBUSINESSSHOPPINGCART,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),bean.getCommodity_id(),bean.getSelectCount()+"");
+        }
     }
 
     private void load() {
@@ -150,15 +185,15 @@ public class PuTongProductFragment extends BaseFragment {
     }
 
     private void refreshData() {
-        if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
+        if (!TextUtils.isEmpty(BUSINESS_CODE)) {
             page = 0;
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),saleType,AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYINFO2,BUSINESS_CODE,commityInfoTypeALLType,AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
         }
     }
 
     private void getData() {
-        if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),saleType,AppContext.ITEM_NUM+"",page + "",KEY_MORE);
+        if (!TextUtils.isEmpty(BUSINESS_CODE)) {
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYINFO2,BUSINESS_CODE,commityInfoTypeALLType,AppContext.ITEM_NUM+"",page + "",KEY_MORE);
         }
     }
     public void setNoData(boolean show) {
@@ -187,7 +222,16 @@ public class PuTongProductFragment extends BaseFragment {
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
-        if (event.getEventCode() == EventCode.HTTP_GETBUSINESSCOMMODITYINFO) {
+        if (event.getEventCode() == EventCode.HTTP_ADDBUSINESSSHOPPINGCART) {
+            if (event.isSuccess()) {
+                String commodity_num = (String) event.getReturnParamAtIndex(1);
+                ((DianPuDetailActivity)getActivity()).carCount = ((DianPuDetailActivity)getActivity()).carCount + Integer.valueOf(commodity_num);
+                ((DianPuDetailActivity)getActivity()).tvCarMount.setText(((DianPuDetailActivity)getActivity()).carCount + "");
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
+        if (event.getEventCode() == EventCode.HTTP_GETBUSINESSCOMMODITYINFO2) {
             String type = (String) event.getReturnParamAtIndex(1);
             if (type.equals(KEY_REFRESH)) {
                 CommonUtils.showToast(KEY_REFRESH);

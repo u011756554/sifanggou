@@ -1,10 +1,12 @@
 package com.app.sifanggou.bean;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Administrator on 2017/10/27.
  */
 
-public class NodeBaseBean extends BaseBean {
+public class NodeBaseBean extends BaseBean implements Comparable<NodeBaseBean>{
     protected String parent_category_code;
     protected String category_code;
     protected String name;
@@ -31,5 +33,16 @@ public class NodeBaseBean extends BaseBean {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public int compareTo(@NonNull NodeBaseBean o) {
+        int thisCode = Integer.valueOf(category_code);
+        int otherCode = Integer.valueOf(o.getCategory_code());
+        if (thisCode > otherCode) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }

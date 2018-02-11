@@ -4,13 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.R;
 import com.app.sifanggou.bean.FirstChildNodeTypeBean;
+import com.app.sifanggou.bean.SecondChildNodeTypeBean;
 import com.app.sifanggou.view.MyGridView;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,18 +41,30 @@ public class CategorySecondTypeAdapter extends SetBaseAdapter<FirstChildNodeType
         }
         final FirstChildNodeTypeBean bean = mList.get(position);
         holder.tvName.setText(bean.getName());
-        if(bean.getChild_node_list() != null) {
+        if(bean.getChild_node_list() != null && bean.getChild_node_list().size() > 0) {
+            Collections.sort(bean.getChild_node_list());
             CategoryGridAdapter adapter = new CategoryGridAdapter(parent.getContext(),bean.getChild_node_list());
             holder.mgType.setAdapter(adapter);
-        }
-        holder.rlSecond.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mListener != null) {
-                    mListener.check(bean);
+
+            holder.mgType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (mListener != null) {
+                        mListener.gridCheck(bean.getChild_node_list().get(position));
+                    }
                 }
-            }
-        });
+            });
+        } else {
+
+        }
+//        holder.rlSecond.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mListener != null) {
+//                    mListener.check(bean);
+//                }
+//            }
+//        });
         return convertView;
     }
 
@@ -61,6 +76,7 @@ public class CategorySecondTypeAdapter extends SetBaseAdapter<FirstChildNodeType
 
     public interface SecondListener {
         void check(FirstChildNodeTypeBean bean);
+        void gridCheck(SecondChildNodeTypeBean bean);
     }
 
     private SecondListener mListener;

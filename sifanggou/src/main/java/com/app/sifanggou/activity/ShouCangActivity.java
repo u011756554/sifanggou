@@ -42,7 +42,7 @@ public class ShouCangActivity extends BaseActivity implements PageSelectListener
     //初始化界面
     private void initView() {
         addBack(R.id.rl_back);
-        setTitle("我的关注");
+        setTitle("我的收藏");
 
         myViewPager=(ViewPager)findViewById(R.id.myViewPager);
         mIndicator=(ViewPagerIndicator)findViewById(R.id.mIndicator);

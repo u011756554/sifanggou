@@ -37,8 +37,26 @@ public class BusinessInfoBean extends BaseBean {
     private String invite_code;
     private String agency_contract_num;
     private String scope;
+    private String total_sale_num;
+    private String total_commodity_num;
     private List<CommodityInfoBean> first_show_commodity_list;
 
+
+    public String getTotal_sale_num() {
+        return total_sale_num;
+    }
+
+    public void setTotal_sale_num(String total_sale_num) {
+        this.total_sale_num = total_sale_num;
+    }
+
+    public String getTotal_commodity_num() {
+        return total_commodity_num;
+    }
+
+    public void setTotal_commodity_num(String total_commodity_num) {
+        this.total_commodity_num = total_commodity_num;
+    }
 
     public String getCity() {
         return city;

@@ -35,6 +35,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.rong.imkit.RongIM;
+
 /**
  * Created by Administrator on 2017/11/23.
  */
@@ -91,6 +93,20 @@ public class CarActivity extends BaseActivity {
             @Override
             public void delete(String business_code, String commodity_id) {
                 pushEventNoProgress(EventCode.HTTP_DELBUSINESSSHOPPINGCART,business_code,commodity_id);
+            }
+
+            @Override
+            public void click(String business_code, String commodity_id) {
+                Intent intent = new Intent(CarActivity.this,ProductDetailActivity.class);
+                intent.putExtra(ProductDetailActivity.KEY_ID,commodity_id);
+                startActivity(intent);
+            }
+        });
+
+        adapter.setListener(new CarAdapter.ChatListener() {
+            @Override
+            public void chat(CarBean bean) {
+                RongIM.getInstance().startPrivateChat(CarActivity.this, bean.getBusiness_code(), bean.getBusiness_name());
             }
         });
 

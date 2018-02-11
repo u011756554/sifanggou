@@ -31,7 +31,6 @@ public class JiXuChuCangAdapter extends SetBaseAdapter<CommodityInfoBean> {
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_jixuchucang,null);
             holder = new ViewHolder();
-//            holder.ivSelect = (ImageView) convertView.findViewById(R.id.iv_select);
             holder.ivPic = (ImageView) convertView.findViewById(R.id.iv_pic);
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
             holder.tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
@@ -44,11 +43,6 @@ public class JiXuChuCangAdapter extends SetBaseAdapter<CommodityInfoBean> {
             holder = (ViewHolder) convertView.getTag();
         }
         CommodityInfoBean bean = mList.get(position);
-//        if (bean.isSelect()) {
-//            holder.ivSelect.setSelected(true);
-//        } else {
-//            holder.ivSelect.setSelected(false);
-//        }
         if (!TextUtils.isEmpty(bean.getCommodity_pic_url())) {
             ImageLoaderUtil.display(bean.getCommodity_pic_url(),holder.ivPic);
         }
@@ -72,14 +66,13 @@ public class JiXuChuCangAdapter extends SetBaseAdapter<CommodityInfoBean> {
                 holder.tvHuoJia.setText("货架  "+ "代理");
             }
         }
-        if (!TextUtils.isEmpty(bean.getAdd_time())) {
-            holder.tvGengXin.setText("最近更新  "+ bean.getAdd_time());
+        if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getMarket_name())) {
+            holder.tvGengXin.setText("市场：  "+ bean.getBusiness_info().getMarket_name());
         }
         return convertView;
     }
 
     private class ViewHolder{
-//        private ImageView ivSelect;
         private ImageView ivPic;
         private TextView tvName;
         private TextView tvPrice;

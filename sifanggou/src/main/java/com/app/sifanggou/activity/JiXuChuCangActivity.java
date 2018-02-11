@@ -170,53 +170,11 @@ public class JiXuChuCangActivity extends BaseActivity {
                 if (position == list.size() + 1 || position == 0) {
                     return;
                 }
-//                if (list.get(position - 1).isSelect()) {
-//                    list.get(position - 1).setSelect(false);
-//                } else {
-//                    list.get(position - 1).setSelect(true);
-//                }
-//                adapter.notifyDataSetChanged();
                 Intent intent = new Intent(JiXuChuCangActivity.this,ChuCangActivity.class);
                 intent.putExtra(ChuCangActivity.KEY_CHUCANG,list.get(position - 1));
                 startActivity(intent);
             }
         });
-
-//        rlAll.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                for(CommodityInfoBean bean : list) {
-//                    bean.setSelect(true);
-//                }
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
-//
-//        rlChuCang.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (loginBean == null || loginBean.getData() == null || loginBean.getData().getLogin_info() == null || loginBean.getData().getLogin_info().getBusiness_info() == null) {
-//                    return;
-//                }
-//                List<CommodityInfoBean> tmpList = new ArrayList<CommodityInfoBean>();
-//                for(CommodityInfoBean bean : list) {
-//                    if (bean.isSelect()) {
-//                        tmpList.add(bean);
-//                    }
-//                }
-//                if (tmpList.size() == 0) {
-//                    CommonUtils.showToast("请选择商品");
-//                    return;
-//                }
-//                if (tmpList.size() != 1) {
-//                    CommonUtils.showToast("最多出仓一款商品");
-//                    return;
-//                }
-//                Intent intent = new Intent(JiXuChuCangActivity.this,ChuCangActivity.class);
-//                intent.putExtra(ChuCangActivity.KEY_CHUCANG,tmpList.get(0));
-//                startActivity(intent);
-//            }
-//        });
 
         llPuTong.setOnClickListener(new View.OnClickListener() {
             @Override

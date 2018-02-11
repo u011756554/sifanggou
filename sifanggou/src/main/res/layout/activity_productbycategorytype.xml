@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_product"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/mode_header"></include>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="#4d4a47"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btn_xiadan"
+            android:layout_width="141dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="下单"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:background="#ff3366"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_yellow_circle"
+        android:layout_above="@id/rl_bottom"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginBottom="-45dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_car"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bg_red_circle"
+        android:layout_toRightOf="@id/rl_car"
+        android:layout_marginLeft="-25dp"
+        android:layout_above="@id/rl_car"
+        android:layout_marginBottom="-25dp">
+
+        <TextView
+            android:id="@+id/tv_mount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="0"
+            android:textSize="10sp"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_product"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:layout_below="@id/header"
+        android:layout_above="@id/rl_car"
+        android:background="@color/color_main">
+
+        <ListView
+            android:id="@+id/ll_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:divider="@null"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>

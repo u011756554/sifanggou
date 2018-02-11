@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.R;
+import com.app.sifanggou.bean.AgentLevelType;
 import com.app.sifanggou.bean.BusinessInfoBean;
 import com.app.sifanggou.utils.ImageLoaderUtil;
 
@@ -41,7 +42,7 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
             holder.ivPic2 = (ImageView) convertView.findViewById(R.id.iv_pic2);
             holder.ivPic3 = (ImageView) convertView.findViewById(R.id.iv_pic3);
             holder.llContent = (LinearLayout) convertView.findViewById(R.id.ll_content);
-
+            holder.llPic = convertView.findViewById(R.id.ll_pic);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -53,17 +54,24 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
         if (!TextUtils.isEmpty(bean.getName())) {
             holder.tvName.setText(bean.getName());
         }
-        if (!TextUtils.isEmpty(bean.getGrade())) {
-            holder.tvFanWei.setText(bean.getGrade());
+        if (!TextUtils.isEmpty(bean.getScope())) {
+            holder.tvFanWei.setText(bean.getScope());
         }
         if (!TextUtils.isEmpty(bean.getAgent_level())) {
-            holder.tvMaxLevel.setText(bean.getAgent_level());
-        }
-        if (!TextUtils.isEmpty(bean.getCity())) {
-            holder.tvCount.setText(bean.getCity());
+            for(AgentLevelType alvt : AgentLevelType.values()) {
+                if (alvt.getType().equals(bean.getAgent_level())) {
+                    holder.tvMaxLevel.setText(alvt.getName());
+                    break;
+                }
+            }
         }
         if (!TextUtils.isEmpty(bean.getAgent_level())) {
-            holder.tvLevel.setText(bean.getAgent_level());
+            for(AgentLevelType alvt : AgentLevelType.values()) {
+                if (alvt.getType().equals(bean.getAgent_level())) {
+                    holder.tvLevel.setText(alvt.getCode());
+                    break;
+                }
+            }
         }
 
         holder.llContent.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +82,33 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
                 }
             }
         });
+
+        if (bean.getFirst_show_commodity_list() != null && bean.getFirst_show_commodity_list().size() > 0) {
+            holder.tvCount.setText(bean.getFirst_show_commodity_list().size()+"");
+            holder.llPic.setVisibility(View.VISIBLE);
+            if (bean.getFirst_show_commodity_list().size() == 1) {
+                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(0).getCommodity_pic_url(),holder.ivPic1);
+                holder.ivPic1.setVisibility(View.VISIBLE);
+                holder.ivPic2.setVisibility(View.INVISIBLE);
+                holder.ivPic3.setVisibility(View.INVISIBLE);
+            } else if (bean.getFirst_show_commodity_list().size() == 2) {
+                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(0).getCommodity_pic_url(),holder.ivPic1);
+                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(1).getCommodity_pic_url(),holder.ivPic2);
+                holder.ivPic1.setVisibility(View.VISIBLE);
+                holder.ivPic2.setVisibility(View.VISIBLE);
+                holder.ivPic3.setVisibility(View.INVISIBLE);
+            }else if (bean.getFirst_show_commodity_list().size() >= 3) {
+                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(0).getCommodity_pic_url(),holder.ivPic1);
+                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(1).getCommodity_pic_url(),holder.ivPic2);
+                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(2).getCommodity_pic_url(),holder.ivPic3);
+                holder.ivPic1.setVisibility(View.VISIBLE);
+                holder.ivPic2.setVisibility(View.VISIBLE);
+                holder.ivPic3.setVisibility(View.VISIBLE);
+            }
+        } else {
+            holder.llPic.setVisibility(View.GONE);
+            holder.tvCount.setText("0");
+        }
         return convertView;
     }
 
@@ -87,6 +122,7 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
         private ImageView ivPic1;
         private ImageView ivPic2;
         private ImageView ivPic3;
+        private LinearLayout llPic;
         private LinearLayout llContent;
     }
 

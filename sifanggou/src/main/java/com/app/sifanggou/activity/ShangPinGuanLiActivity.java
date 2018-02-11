@@ -98,6 +98,7 @@ public class ShangPinGuanLiActivity extends BaseActivity {
     }
 
     private void initView() {
+        addBack(R.id.rl_back);
         //处理分页
         adapter = new ShangPinAdapter(ShangPinGuanLiActivity.this,list);
         swipeRefreshLayout.setColorSchemeResources(R.color.color_banner,R.color.color_banner,R.color.color_banner,R.color.color_banner);
@@ -211,6 +212,15 @@ public class ShangPinGuanLiActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ShangPinGuanLiActivity.this,PiLiangGuanLiActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        adapter.setListener(new ShangPinAdapter.ClickListener() {
+            @Override
+            public void click(CommodityInfoBean bean) {
+                Intent intent = new Intent(ShangPinGuanLiActivity.this,ProductDetailActivity.class);
+                intent.putExtra(ProductDetailActivity.KEY_DATA,bean);
                 startActivity(intent);
             }
         });

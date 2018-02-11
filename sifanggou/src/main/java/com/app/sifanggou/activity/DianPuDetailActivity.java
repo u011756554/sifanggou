@@ -1,11 +1,13 @@
 package com.app.sifanggou.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,6 +29,7 @@ import com.app.sifanggou.fragment.XinPinProductFragment;
 import com.app.sifanggou.listener.PageSelectListener;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.GetBusinessInfoByCodeResponseBean;
 import com.app.sifanggou.net.bean.IsBusinessPartnerResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
@@ -52,6 +55,8 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
     private TextView tvRenZheng;
     @ViewInject(R.id.tv_save)
     private TextView tvSave;
+    @ViewInject(R.id.iv_save)
+    private ImageView ivSave;
     @ViewInject(R.id.tv_huodong)
     private TextView tvHuoDong;
     @ViewInject(R.id.iv_head)
@@ -76,6 +81,17 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
     private BusinessInfoBean dataBean;
     private LoginResponseBean loginBean;
     private ShouCangType shouCangType = ShouCangType.NOSAVE;
+
+    @ViewInject(R.id.tv_mount)
+    public TextView tvCarMount;
+    public int carCount = 0;
+    @ViewInject(R.id.rl_car)
+    private RelativeLayout rlCar;
+
+    @ViewInject(R.id.btn_xiadan)
+    private Button btnXiaDan;
+
+    public static final String KEY_ID = "key_dianpudetaileActivit_id";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +109,7 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
 
     private void refreshShouCang() {
         if (shouCangType == ShouCangType.NOSAVE) {
+            ivSave.setImageResource(R.drawable.icon_save_white);
             tvSave.setText("收藏");
             llSave.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -109,7 +126,7 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
             });
         } else {
             tvSave.setText("取消收藏");
-
+            ivSave.setImageResource(R.drawable.icon_star_saved);
             llSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -129,10 +146,19 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
     //初始化数据
     private void initDatas() {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
+        dataBean = (BusinessInfoBean) getIntent().getSerializableExtra(KEY_DATA);
         allProductFragment = new AllProductFragment();
         puTongProductFragment = new PuTongProductFragment();
         daiLiProductFragment = new DaiLiProductFragment();
         xinPinProductFragment = new XinPinProductFragment();
+        if (dataBean != null && !TextUtils.isEmpty(dataBean.getBusiness_code())) {
+            Bundle bundle = new Bundle();
+            bundle.putString(KEY_ID,dataBean.getBusiness_code());
+            allProductFragment.setArguments(bundle);
+            puTongProductFragment.setArguments(bundle);
+            daiLiProductFragment.setArguments(bundle);
+        }
+
         mContents.add(allProductFragment);
         mContents.add(puTongProductFragment);
         mContents.add(daiLiProductFragment);
@@ -150,14 +176,24 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
             }
         };
 
-        dataBean = (BusinessInfoBean) getIntent().getSerializableExtra(KEY_DATA);
-        refreshView(dataBean);
+        refreshDianPu();
         refreDianPuShouCang();
+    }
+
+    private void refreshDianPu() {
+        if (dataBean != null && !TextUtils.isEmpty(dataBean.getBusiness_code())) {
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSINFOBYCODE,dataBean.getBusiness_code());
+        }
     }
 
     private void refreshView(BusinessInfoBean bean) {
         if (bean == null) {return;}
-        tvName.setText(bean.getName());
+        if (!TextUtils.isEmpty(bean.getName())) {
+            tvName.setText(bean.getName());
+            if (!TextUtils.isEmpty(bean.getMarket_name())) {
+                tvHuoDong.setText(bean.getMarket_name() + bean.getShop_number());
+            }
+        }
         for(int i = 0 ; i < AgentLevelType.values().length ; i++) {
             if (bean.getAgent_level().equals(AgentLevelType.values()[i].getType())) {
                 tvLevel.setText(AgentLevelType.values()[i].getCode());
@@ -184,6 +220,31 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
 
         mIndicator.setViewPager(myViewPager,0,DianPuDetailActivity.this);
 
+        rlHuoDong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DianPuDetailActivity.this,UrlWebClientActivity.class);
+                intent.putExtra(UrlWebClientActivity.KEY_TITILE,"活动");
+                intent.putExtra(UrlWebClientActivity.KEY_URL,AppContext.URL_HUODONG);
+                startActivity(intent);
+            }
+        });
+
+        rlCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DianPuDetailActivity.this,CarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnXiaDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DianPuDetailActivity.this,CarActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -194,6 +255,12 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
+        if (event.getEventCode() == EventCode.HTTP_GETBUSINESSINFOBYCODE) {
+            GetBusinessInfoByCodeResponseBean bean = (GetBusinessInfoByCodeResponseBean) event.getReturnParamAtIndex(0);
+            if (bean != null && bean.getData() != null && bean.getData().getBusiness_info() != null) {
+                refreshView(bean.getData().getBusiness_info());
+            }
+        }
         if (event.getEventCode() == EventCode.HTTP_ADDBUSINESSPARTNER) {
             if (event.isSuccess()) {
                 CommonUtils.showToast("关注成功");

@@ -57,6 +57,9 @@ public class ShouKuanRecordFragment extends BaseFragment {
     private InOutOrderInfoAdapter adapter;
     private List<OrderNoBaseBean> list = new ArrayList<OrderNoBaseBean>();
     private LoginResponseBean loginBean;
+
+    private String chooseYear = CommonUtils.getYear();
+    private String chosseMonth = CommonUtils.getMonth();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -150,13 +153,13 @@ public class ShouKuanRecordFragment extends BaseFragment {
     private void refreshData() {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
             page = 0;
-            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.RECEIPTED.getType(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH,CommonUtils.getYear(),CommonUtils.getMonth());
+            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.RECEIPTED.getType(),AppContext.ITEM_NUM+"",page + "",KEY_REFRESH,chooseYear,chosseMonth);
         }
     }
 
     private void getData() {
         if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
-            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.RECEIPTED.getType(),AppContext.ITEM_NUM+"",page + "",KEY_MORE,CommonUtils.getYear(),CommonUtils.getMonth());
+            pushEventNoProgress(EventCode.HTTP_GETBUSINENESSINOUTORDERINFO,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(), OrderType.RECEIPTED.getType(),AppContext.ITEM_NUM+"",page + "",KEY_MORE,chooseYear,chosseMonth);
         }
     }
 
@@ -261,5 +264,11 @@ public class ShouKuanRecordFragment extends BaseFragment {
             emptyViewView.setPadding(0, - headHeight, 0, 0);
             emptyViewView.setClickable(false);
         }
+    }
+
+    public void chooseTime(String year,String month) {
+        this.chooseYear = year;
+        this.chosseMonth = month;
+        refresh();
     }
 }

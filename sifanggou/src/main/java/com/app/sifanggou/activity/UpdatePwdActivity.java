@@ -34,7 +34,7 @@ public class UpdatePwdActivity extends BaseActivity {
         rlOldPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UpdatePwdActivity.this,ComfirmPwdActivity.class);
+                Intent intent = new Intent(UpdatePwdActivity.this,UpdatePwdByCodeActivity.class);
                 startActivity(intent);
             }
         });

@@ -26,6 +26,7 @@ public class AddBusinessStaffHttpRunner extends HttpRunner {
         String mobile = (String) event.getParamAtIndex(4);
         String name = (String) event.getParamAtIndex(5);
         String role = (String) event.getParamAtIndex(6);
+        String password = (String) event.getParamAtIndex(7);
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("user_name", user_name);
@@ -35,6 +36,7 @@ public class AddBusinessStaffHttpRunner extends HttpRunner {
         map.put("mobile", mobile);
         map.put("name", name);
         map.put("role", role);
+        map.put("password", password);
 
         String result = HttpUtils.doPost(URLUtils.ADDBUSINESSSTAFF   , map);
 

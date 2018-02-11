@@ -15,6 +15,7 @@ import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.activity.CarActivity;
 import com.app.sifanggou.activity.ConfirmOrderActivity;
+import com.app.sifanggou.activity.ProductDetailActivity;
 import com.app.sifanggou.adapter.CarAdapter;
 import com.app.sifanggou.adapter.CarItemAdapter;
 import com.app.sifanggou.bean.CarBean;
@@ -29,6 +30,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.rong.imkit.RongIM;
 
 public class CarFragment extends BaseFragment {
 
@@ -99,6 +102,21 @@ public class CarFragment extends BaseFragment {
 			@Override
 			public void delete(String business_code, String commodity_id) {
 				pushEventNoProgress(EventCode.HTTP_DELBUSINESSSHOPPINGCART,business_code,commodity_id);
+			}
+
+			@Override
+			public void click(String business_code, String commodity_id) {
+				Intent intent = new Intent(getActivity(),ProductDetailActivity.class);
+				intent.putExtra(ProductDetailActivity.KEY_ID,commodity_id);
+				startActivity(intent);
+			}
+		});
+
+
+		adapter.setListener(new CarAdapter.ChatListener() {
+			@Override
+			public void chat(CarBean bean) {
+				RongIM.getInstance().startPrivateChat(getActivity(), bean.getBusiness_code(), bean.getBusiness_name());
 			}
 		});
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.R;
@@ -38,6 +39,7 @@ public class ShangPinAdapter extends SetBaseAdapter<CommodityInfoBean> {
             holder.tvShouCang = (TextView) convertView.findViewById(R.id.tv_shoucang);
             holder.tvHuoJia = (TextView) convertView.findViewById(R.id.tv_huojia);
             holder.tvGengXin = (TextView) convertView.findViewById(R.id.tv_gengxin);
+            holder.rlContent = convertView.findViewById(R.id.rl_content);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -67,9 +69,17 @@ public class ShangPinAdapter extends SetBaseAdapter<CommodityInfoBean> {
                 holder.tvHuoJia.setText("货架  "+ "代理");
             }
         }
-        if (!TextUtils.isEmpty(bean.getAdd_time())) {
-            holder.tvGengXin.setText("最近更新  "+ bean.getAdd_time());
+        if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getMarket_name())) {
+            holder.tvGengXin.setText("市场：  "+ bean.getBusiness_info().getMarket_name());
         }
+        holder.rlContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mClickListener != null) {
+                    mClickListener.click(bean);
+                }
+            }
+        });
         return convertView;
     }
 
@@ -81,5 +91,16 @@ public class ShangPinAdapter extends SetBaseAdapter<CommodityInfoBean> {
         private TextView tvShouCang;
         private TextView tvHuoJia;
         private TextView tvGengXin;
+        private RelativeLayout rlContent;
+    }
+
+    public interface ClickListener{
+        void click(CommodityInfoBean bean);
+    }
+
+    private ClickListener mClickListener;
+
+    public void setListener(ClickListener clickListener) {
+        this.mClickListener = clickListener;
     }
 }

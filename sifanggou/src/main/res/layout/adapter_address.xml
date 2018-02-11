@@ -105,6 +105,19 @@
                 android:textColor="@color/red"
                 android:maxLines="1"/>
 
+            <Button
+                android:id="@+id/btn_moren"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/btn_edit"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:background="@drawable/shape_bg_redlinebtn"
+                android:text="设为默认"
+                android:textSize="16sp"
+                android:textColor="@color/red"
+                android:maxLines="1"/>
+
         </RelativeLayout>
 
     </LinearLayout>

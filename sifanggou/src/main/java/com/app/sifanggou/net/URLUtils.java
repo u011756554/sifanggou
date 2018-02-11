@@ -103,5 +103,24 @@ public class URLUtils {
 	public static final String ISBUSINESSPARTNER = SERVER + "business/IsBusinessPartner";
 
 	public static final String DELBUSINESSPARTNER = SERVER + "business/DelBusinessPartner";
+
+	public static final String UPDATEBUSINESSCOMMODITY = SERVER + "business/UpdateBusinessCommodity";
+
+	public static final String ADDBUSINESSDEFAULTDELIVERADDRESS = SERVER + "business/AddBusinessDefaultDeliverAddress";
+
+	public static final String GETBUSINESSDEFAULTDELIVERADDRESS = SERVER + "business/GetBusinessDefaultDeliverAddress";
+
+	public static final String GETRECOMMENDCOMMODITY = SERVER + "business/GetRecommendCommodity";
+
+	public static final String UPDATEBUSINESSINFO = SERVER + "business/UpdateBusinessInfo";
+
+	public static final String GETBUSINESSINFOBYCODE = SERVER + "business/GetBusinessInfoByCode";
+
+	public static final String GETCOMMODITYINFOBYID = SERVER + "business/GetCommodityInfoById";
+
+	public static final String DELBUSINESSSTAFF = SERVER + "business/DelBusinessStaff";
+
+	public static final String GETBUSINESSCOMMODITYINFO2 = SERVER + "business/GetBusinessCommodityInfo2";
+
 }
 

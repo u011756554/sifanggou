@@ -75,8 +75,16 @@ public class ChuCangActivity extends BaseActivity{
         edtFenLei.setEnabled(false);
 
         if (infoData != null) {
-            edtPriceTongJi.setText(infoData.getA_price());
-            edtPriceXiaJi.setText(infoData.getB_price());
+            if (!TextUtils.isEmpty(infoData.getA_price())) {
+                float aPrice = Float.valueOf(infoData.getA_price()) / 100;
+                edtPriceTongJi.setText(aPrice + "");
+            }
+
+            if (!TextUtils.isEmpty(infoData.getB_price())) {
+                float bPrice = Float.valueOf(infoData.getB_price()) / 100;
+                edtPriceXiaJi.setText(bPrice+"");
+            }
+
             edtKuCun.setText(infoData.getCollection_num());
             edtChanDi.setText(infoData.getProduction_place());
             edtGuiGe.setText(infoData.getSpecification());

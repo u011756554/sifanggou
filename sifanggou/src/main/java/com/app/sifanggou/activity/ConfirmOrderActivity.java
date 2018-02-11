@@ -14,6 +14,7 @@ import com.app.sifanggou.R;
 import com.app.sifanggou.bean.AdressBean;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.GetBusinessDefaultDeliverAddressResponseBean;
 import com.app.sifanggou.net.bean.GetBusinessShoppingCartListResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
@@ -69,6 +70,19 @@ public class ConfirmOrderActivity extends BaseActivity {
     private void initData() {
         dataBean = (GetBusinessShoppingCartListResponseBean) getIntent().getSerializableExtra(KEY_DATA);
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
+
+        getMorenAdress();
+    }
+
+    private void getMorenAdress() {
+        if (loginBean == null
+                || loginBean.getData() == null
+                || loginBean.getData().getLogin_info() == null
+                || loginBean.getData().getLogin_info().getBusiness_info() == null
+                || TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+            return;
+        }
+        pushEventNoProgress(EventCode.HTTP_GETBUSINESSDEFAULTDELIVERADDRESS,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code());
     }
 
     private void initView() {
@@ -164,10 +178,22 @@ public class ConfirmOrderActivity extends BaseActivity {
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
+        if (event.getEventCode() == EventCode.HTTP_GETBUSINESSDEFAULTDELIVERADDRESS) {
+            if (event.isSuccess()) {
+                GetBusinessDefaultDeliverAddressResponseBean bean = (GetBusinessDefaultDeliverAddressResponseBean) event.getReturnParamAtIndex(0);
+                if (bean != null && bean.getData() != null && bean.getData().getDefault_deliver_address() != null) {
+                    mAdressBean = bean.getData().getDefault_deliver_address().getDeliver_address();
+                    refreshView();
+                }
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
         if (event.getEventCode() == EventCode.HTTP_BUSINESSSUBMITORDER) {
             if (event.isSuccess()) {
                 CommonUtils.showToast("下单成功");
-                Intent intent = new Intent(ConfirmOrderActivity.this,BuyOrderActivity.class);
+                Intent intent = new Intent(ConfirmOrderActivity.this, BurOrderTabActivity.class);
+                intent.putExtra(BurOrderTabActivity.KEY_TYPE,BurOrderTabActivity.VALUE_TYPE_DAIJIE);
                 startActivity(intent);
             } else {
                 CommonUtils.showToast(event.getFailMessage());

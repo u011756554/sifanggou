@@ -17,7 +17,12 @@ import com.app.sifanggou.net.EventCode;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.PreManager;
+import com.app.sifanggou.view.BaseDialog;
+import com.app.sifanggou.view.ZhiWeiDialog;
 import com.lidroid.xutils.view.annotation.ViewInject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/1/8.
@@ -35,8 +40,11 @@ public class AddAccountActivity extends BaseActivity {
     private TextView tvZhiWei;
     @ViewInject(R.id.btn_pay)
     private Button btnPay;
+    @ViewInject(R.id.edt_pwd)
+    private EditText edtPwd;
 
     private ZhiWeiType zhiWeiType = ZhiWeiType.OPERATOR;
+    private ZhiWeiDialog zhiWeiDialog;
     private LoginResponseBean loginBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +75,7 @@ public class AddAccountActivity extends BaseActivity {
                 String name = edtName.getText().toString();
                 String phone = edtPhone.getText().toString();
                 String role = zhiWeiType.getType();
+                String pwd = edtPwd.getText().toString();
                 if (TextUtils.isEmpty(name)) {
                     CommonUtils.showToast("请输入名字");
                     return;
@@ -76,12 +85,54 @@ public class AddAccountActivity extends BaseActivity {
                     return;
                 }
 
+                if (TextUtils.isEmpty(pwd)) {
+                    CommonUtils.showToast("请输入登录密码");
+                    return;
+                }
+
                 String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
                 String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
                 String trans_no = System.currentTimeMillis()+"";
                 String sign = CommonUtils.getSign(business_code,user_name,trans_no,PreManager.getString(getApplicationContext(),AppContext.USER_PWD));
+                try {
+                    String password = CommonUtils.EncoderByMd5(pwd);
+                    pushEventBlock(EventCode.HTTP_ADDBUSINESSSTAFF,business_code,user_name,trans_no,sign,phone,name,role,password);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-                pushEventBlock(EventCode.HTTP_ADDBUSINESSSTAFF,business_code,user_name,trans_no,sign,phone,name,role);
+        rlZhiWei.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (zhiWeiDialog == null) {
+                    zhiWeiDialog = new ZhiWeiDialog(AddAccountActivity.this);
+                    List<String> zhiweiList = new ArrayList<String>();
+                    for (ZhiWeiType zwt : ZhiWeiType.values()) {
+                        zhiweiList.add(zwt.getValue());
+                    }
+                    zhiWeiDialog.setData(zhiweiList,0);
+
+                    zhiWeiDialog.setListener(new BaseDialog.DialogListener() {
+
+                        @Override
+                        public void update(Object object) {
+                            String type = (String) object;
+                            if (type != null) {
+                                for (ZhiWeiType zwt : ZhiWeiType.values()) {
+                                    if (zwt.getValue().equals(type)) {
+                                        zhiWeiType = zwt;
+                                        tvZhiWei.setText(type);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                zhiWeiDialog.show();
             }
         });
     }

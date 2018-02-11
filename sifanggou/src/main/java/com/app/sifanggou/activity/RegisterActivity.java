@@ -1,5 +1,6 @@
 package com.app.sifanggou.activity;
 
+import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -33,6 +35,8 @@ public class RegisterActivity extends BaseActivity {
 	private EditText edtInviteCode;
 	@ViewInject(R.id.edt_pwd)
 	private EditText edtPwd;
+	@ViewInject(R.id.ll_xieyi)
+	private LinearLayout llXieYi;
 	
 	private int time = 60;
 	private boolean isCoding = false;
@@ -96,7 +100,19 @@ public class RegisterActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				finish();
 			}
-		});		
+		});
+
+		llXieYi.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(RegisterActivity.this,UrlWebClientActivity.class);
+				intent.putExtra(UrlWebClientActivity.KEY_URL, AppContext.URL_XIEYI);
+				intent.putExtra(UrlWebClientActivity.KEY_TITILE, "注册协议");
+				startActivity(intent);
+			}
+		});
 	}
 	
 	@Override

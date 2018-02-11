@@ -30,7 +30,9 @@ public class GetBusinessCommodityByCategoryCodeHttpRunner extends HttpRunner {
         String tag = (String) event.getParamAtIndex(5);
 
         HashMap<String, String> map = new HashMap<String, String>();
-        map.put("first_category_code", first_category_code);
+        if (!TextUtils.isEmpty(first_category_code)) {
+            map.put("first_category_code", first_category_code);
+        }
         if (!TextUtils.isEmpty(second_category_code)) {
             map.put("second_category_code", second_category_code);
         }

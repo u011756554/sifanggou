@@ -1,11 +1,13 @@
 package com.app.sifanggou.activity;
 
 import com.app.sifanggou.AppContext;
+import com.app.sifanggou.MyApplication;
 import com.app.sifanggou.R;
 import com.app.sifanggou.bean.AliyunToken;
 import com.app.sifanggou.bean.AliyunTokenBean;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.GetBusinessInfoByCodeResponseBean;
 import com.app.sifanggou.net.bean.GetBusinessRongYunTokenResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
@@ -41,6 +43,11 @@ public class LoginActivity extends BaseActivity {
 	private EditText edtPhone;
 	@ViewInject(R.id.edt_pwd)
 	private EditText edtPwd;
+	@ViewInject(R.id.tv_register)
+	private TextView tvRegiser;
+	@ViewInject(R.id.rl_delete)
+	private RelativeLayout rlDelete;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -86,6 +93,16 @@ public class LoginActivity extends BaseActivity {
 				startActivity(intent);
 			}
 		});
+
+		tvRegiser.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+				startActivity(intent);
+			}
+		});
 		
 		tvForget.setOnClickListener(new OnClickListener() {
 			
@@ -96,11 +113,34 @@ public class LoginActivity extends BaseActivity {
 				startActivity(intent);
 			}
 		});
+
+		rlDelete.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				MyApplication.instance.exit();
+				finish();
+			}
+		});
 	}
 
 	@Override
 	public void onEventRunEnd(Event event) {
 		super.onEventRunEnd(event);
+        if (event.getEventCode() == EventCode.HTTP_GETBUSINESSINFOBYCODE) {
+            if (event.isSuccess()) {
+				GetBusinessInfoByCodeResponseBean bean = (GetBusinessInfoByCodeResponseBean) event.getReturnParamAtIndex(0);
+				if (bean != null && bean.getData() != null && bean.getData().getBusiness_info() != null) {
+					Uri headUri = Uri.parse(bean.getData().getBusiness_info().getHead_pic_url());
+					UserInfo userInfo = new UserInfo(bean.getData().getBusiness_info().getBusiness_code(),
+							bean.getData().getBusiness_info().getName(),headUri);
+					RongIM.getInstance().refreshUserInfoCache(userInfo);
+				}
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
 		if (event.getEventCode() == EventCode.HTTP_BUSINESSLOGIN) {
 			if (event.isSuccess()) {
 				PreManager.putString(getApplicationContext(),AppContext.USER_ACCOUNT,edtPhone.getText().toString());
@@ -109,7 +149,6 @@ public class LoginActivity extends BaseActivity {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				CommonUtils.showToast("登录成功");
 				LoginResponseBean loginBean = (LoginResponseBean) event.getReturnParamAtIndex(0);
 				if (loginBean != null
 						&& loginBean.getData() != null
@@ -122,6 +161,13 @@ public class LoginActivity extends BaseActivity {
 					UserInfo userInfo = new UserInfo(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
 							loginBean.getData().getLogin_info().getName(),headUri);
 					RongIM.getInstance().setCurrentUserInfo(userInfo);
+                    RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+
+                        @Override
+                        public UserInfo getUserInfo(String userId) {
+                            return findUserById(userId);
+                        }
+                    },true);
 
 					pushEventBlock(EventCode.HTTP_GETBUSINESSRONGYUNTOKEN,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code());
 				}
@@ -175,6 +221,7 @@ public class LoginActivity extends BaseActivity {
 				@Override
 				public void onSuccess(String userid) {
 					Log.d("LoginActivity", "--onSuccess" + userid);
+					CommonUtils.showToast("登录成功");
 					startActivity(new Intent(LoginActivity.this, MainActivity.class));
 					finish();
 				}
@@ -190,4 +237,11 @@ public class LoginActivity extends BaseActivity {
 			});
 		}
 	}
+
+	private UserInfo findUserById(String userId) {
+        Uri headUri = Uri.parse(AppContext.URL_HEAD);
+        UserInfo userInfo = new UserInfo(userId,userId,headUri);
+        pushEventNoProgress(EventCode.HTTP_GETBUSINESSINFOBYCODE,userId);
+        return userInfo;
+    }
 }

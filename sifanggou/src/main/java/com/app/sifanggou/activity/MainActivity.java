@@ -125,7 +125,7 @@ public class MainActivity extends BaseActivity {
 		rbMain.performClick();
 	}	
 	
-	private void pageChanged(int index) {
+	public void pageChanged(int index) {
 		currentTabIndex = index;
 		showFragment(index);
 		switch (index)

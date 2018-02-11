@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.MyApplication;
+import com.app.sifanggou.bean.DateBean;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -690,6 +691,20 @@ public class CommonUtils {
 	public static String getMonth() {
 		Calendar calendar = Calendar.getInstance();
 		return calendar.get(Calendar.MONTH) + 1 + "";
+	}
+
+	public static List<DateBean> getDateList() {
+		List<DateBean> dateList = new ArrayList<>();
+		int startYear = Integer.valueOf(getYear());
+		for(int year = startYear - 1 ; year < startYear + 2 ; year++) {
+			for(int month =1 ; month < 13 ;month++) {
+				DateBean dateBean = new DateBean();
+				dateBean.setYear(year+"");
+				dateBean.setMonth(month+"");
+				dateList.add(dateBean);
+			}
+		}
+		return  dateList;
 	}
 
 	public static String buildTransaction() {

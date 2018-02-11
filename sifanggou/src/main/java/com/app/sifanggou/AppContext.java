@@ -46,4 +46,9 @@ public class AppContext {
 
 	public static final int PAGE = 0; //页码
 	public static final int PAGE_SIZE= 10; //分页数据
+
+	public static final String URL_XIEYI = "http://admin.4fango.com/12.html";
+	public static final String URL_HUODONG = "http://admin.4fango.com/4f.html";
+	public static final String URL_HEAD = "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2334584121,1324775889&fm=27&gp=0.jpg";
+
 }

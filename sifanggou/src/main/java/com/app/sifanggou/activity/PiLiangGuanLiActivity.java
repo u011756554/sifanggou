@@ -125,6 +125,7 @@ public class PiLiangGuanLiActivity extends BaseActivity {
     }
 
     private void initView() {
+        addBack(R.id.rl_back);
         //处理分页
         adapter = new ShangPinPiLiangAdapter(PiLiangGuanLiActivity.this,list);
         swipeRefreshLayout.setColorSchemeResources(R.color.color_banner,R.color.color_banner,R.color.color_banner,R.color.color_banner);
@@ -162,21 +163,28 @@ public class PiLiangGuanLiActivity extends BaseActivity {
         adapter.setPriceEditListener(new ShangPinPiLiangAdapter.PriceEditListener() {
             @Override
             public void updatePrice(final String commodity_id, final String a_price, final String b_price) {
-                if (editPriceDialog == null) {
-                    editPriceDialog = new EditPriceDialog(PiLiangGuanLiActivity.this);
-                }
-                editPriceDialog.setData(a_price,b_price);
-                editPriceDialog.setUpdatePriceListener(new EditPriceDialog.UpdatePriceListener() {
-                    @Override
-                    public void update(String aPrice, String bPrice) {
-                        if (loginBean == null || loginBean.getData() == null || loginBean.getData().getLogin_info() == null || loginBean.getData().getLogin_info().getBusiness_info() == null) {
-                            return;
-                        }
-                        pushEventBlock(EventCode.HTTP_UPDATECOMMODITYPRICE,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
-                                loginBean.getData().getLogin_info().getBusiness_info().getMobile(),commodity_id, aPrice,bPrice);
-                    }
-                });
-                editPriceDialog.show();
+//                if (editPriceDialog == null) {
+//                    editPriceDialog = new EditPriceDialog(PiLiangGuanLiActivity.this);
+//                }
+//                editPriceDialog.setData(a_price,b_price);
+//                editPriceDialog.setUpdatePriceListener(new EditPriceDialog.UpdatePriceListener() {
+//                    @Override
+//                    public void update(String aPrice, String bPrice) {
+//                        if (loginBean == null || loginBean.getData() == null || loginBean.getData().getLogin_info() == null || loginBean.getData().getLogin_info().getBusiness_info() == null) {
+//                            return;
+//                        }
+//                        pushEventBlock(EventCode.HTTP_UPDATECOMMODITYPRICE,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+//                                loginBean.getData().getLogin_info().getBusiness_info().getMobile(),commodity_id, aPrice,bPrice);
+//                    }
+//                });
+//                editPriceDialog.show();
+            }
+
+            @Override
+            public void updateCommodity(CommodityInfoBean bean) {
+                Intent intent = new Intent(PiLiangGuanLiActivity.this,AddProductActivity.class);
+                intent.putExtra(AddProductActivity.KEY_INITDATA,bean);
+                startActivity(intent);
             }
         });
 

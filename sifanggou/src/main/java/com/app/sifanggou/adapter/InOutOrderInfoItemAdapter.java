@@ -36,6 +36,7 @@ public class InOutOrderInfoItemAdapter extends SetBaseAdapter<CommodityOrderBean
             holder.ivPic = (ImageView) convertView.findViewById(R.id.iv_pic);
             holder.tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
+            holder.tvNum = convertView.findViewById(R.id.tv_num);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -48,6 +49,10 @@ public class InOutOrderInfoItemAdapter extends SetBaseAdapter<CommodityOrderBean
         if (!TextUtils.isEmpty(bean.getCommodity_name())) {
             holder.tvName.setText(bean.getCommodity_name());
         }
+
+        if (!TextUtils.isEmpty(bean.getCommodity_num())) {
+            holder.tvNum.setText("数量:"+bean.getCommodity_num());
+        }
         if (!TextUtils.isEmpty(bean.getCommodity_pic_url())) {
             ImageLoaderUtil.display(bean.getCommodity_pic_url(),holder.ivPic);
         }
@@ -58,6 +63,7 @@ public class InOutOrderInfoItemAdapter extends SetBaseAdapter<CommodityOrderBean
         private ImageView ivPic;
         private TextView tvName;
         private TextView tvPrice;
+        private TextView tvNum;
     }
 
 }

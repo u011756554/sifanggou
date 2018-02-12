@@ -101,6 +101,7 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
                     CommonUtils.showToast("数据过大");
                     editCount.setText("0");
                 }
+                bean.setSelectCount(count);
             }
         });
         holder.tvAdd.setOnClickListener(new View.OnClickListener() {

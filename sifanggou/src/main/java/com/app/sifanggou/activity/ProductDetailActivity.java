@@ -106,6 +106,7 @@ public class ProductDetailActivity extends BaseActivity {
     public static final String KEY_ID = "key_ProductDetailActivity_id";
     private CommodityInfoBean commodityInfoBean;
     private String commodity_id = "";
+    private BusinessInfoBean businessInfoBean;
 
     private ViewPager mViewPager;
     private GuangGaoPagerAdapter adapter;
@@ -314,10 +315,6 @@ public class ProductDetailActivity extends BaseActivity {
             tvShouCang.setText("收藏  "+infoBean.getCollection_num()+"人");
         }
 
-        if (!TextUtils.isEmpty(infoBean.getAdd_time())) {
-            tvTime.setText(infoBean.getAdd_time());
-        }
-
         if (!TextUtils.isEmpty(infoBean.getProduction_place())) {
             tvChanDi.setText(infoBean.getProduction_place());
         }
@@ -349,6 +346,7 @@ public class ProductDetailActivity extends BaseActivity {
 
     private void refreshBusinessinfo(BusinessInfoBean infoBean) {
         if (infoBean == null) return;
+        businessInfoBean = infoBean;
         if (!TextUtils.isEmpty(infoBean.getHead_pic_url())) {
             ImageLoaderUtil.display(infoBean.getHead_pic_url(),ivPic);
         }
@@ -360,6 +358,10 @@ public class ProductDetailActivity extends BaseActivity {
             if (!TextUtils.isEmpty(infoBean.getMarket_name())) {
                 tvDianPu.setText(infoBean.getName() + infoBean.getMarket_name() + infoBean.getShop_number());
             }
+        }
+
+        if (!TextUtils.isEmpty(infoBean.getMarket_name())) {
+            tvTime.setText("市场："+infoBean.getMarket_name());
         }
 
     }
@@ -382,9 +384,9 @@ public class ProductDetailActivity extends BaseActivity {
         btnDianPu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (commodityInfoBean != null && commodityInfoBean.getBusiness_info() != null) {
+                if (businessInfoBean != null) {
                     Intent intent = new Intent(ProductDetailActivity.this,DianPuDetailActivity.class);
-                    intent.putExtra(DianPuDetailActivity.KEY_DATA,commodityInfoBean.getBusiness_info());
+                    intent.putExtra(DianPuDetailActivity.KEY_DATA,businessInfoBean);
                     startActivity(intent);
                 }
             }
@@ -393,8 +395,8 @@ public class ProductDetailActivity extends BaseActivity {
         llChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (commodityInfoBean != null && commodityInfoBean.getBusiness_info() != null) {
-                    pushEvent(EventCode.HTTP_GETBUSINESSRONGYUNTOKEN,commodityInfoBean.getBusiness_code());
+                if (businessInfoBean != null) {
+                    pushEvent(EventCode.HTTP_GETBUSINESSRONGYUNTOKEN,businessInfoBean.getBusiness_code());
                 }
             }
         });
@@ -402,9 +404,9 @@ public class ProductDetailActivity extends BaseActivity {
         llDianPu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (commodityInfoBean != null && commodityInfoBean.getBusiness_info() != null) {
+                if (businessInfoBean != null) {
                     Intent intent = new Intent(ProductDetailActivity.this,DianPuDetailActivity.class);
-                    intent.putExtra(DianPuDetailActivity.KEY_DATA,commodityInfoBean.getBusiness_info());
+                    intent.putExtra(DianPuDetailActivity.KEY_DATA,businessInfoBean);
                     startActivity(intent);
                 }
             }
@@ -431,12 +433,13 @@ public class ProductDetailActivity extends BaseActivity {
         tvJiaRuGouWuChe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectCount <= 0) {
+                int count = Integer.valueOf(edtCount.getText().toString());
+                if (count <= 0) {
                     CommonUtils.showToast("选择商品数量");
                     return;
                 }
                 if (commodityInfoBean != null ) {
-                    carAdd(commodityInfoBean,selectCount);
+                    carAdd(commodityInfoBean,count);
                 }
             }
         });
@@ -444,12 +447,13 @@ public class ProductDetailActivity extends BaseActivity {
         tvXiaDan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (selectCount <= 0) {
+                int count = Integer.valueOf(edtCount.getText().toString());
+                if (count <= 0) {
                     CommonUtils.showToast("选择商品数量");
                     return;
                 }
                 if (commodityInfoBean != null ) {
-                    carAdd(commodityInfoBean,selectCount);
+                    carAdd(commodityInfoBean,count);
                 }
             }
         });
@@ -592,8 +596,8 @@ public class ProductDetailActivity extends BaseActivity {
                 if (bean != null
                         && bean.getData() != null
                         && !TextUtils.isEmpty(bean.getData().getToken())) {
-                    if (commodityInfoBean != null && commodityInfoBean.getBusiness_info() != null) {
-                        RongIM.getInstance().startPrivateChat(ProductDetailActivity.this, commodityInfoBean.getBusiness_code(), commodityInfoBean.getBusiness_info().getName());
+                    if (businessInfoBean != null) {
+                        RongIM.getInstance().startPrivateChat(ProductDetailActivity.this, businessInfoBean.getBusiness_code(), businessInfoBean.getName());
                     }
                 }
             } else {

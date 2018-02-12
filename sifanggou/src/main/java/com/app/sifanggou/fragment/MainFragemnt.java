@@ -288,6 +288,14 @@ public class MainFragemnt extends BaseFragment {
 			}
 		});
 
+		gvCommnadProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+				intent.putExtra(ProductDetailActivity.KEY_DATA,recommandCommodityInfoBeanList.get(position));
+				startActivity(intent);
+			}
+		});
 		rlGuanZhuDianPu.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

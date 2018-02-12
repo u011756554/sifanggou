@@ -225,8 +225,8 @@
 
                     <TextView
                         android:id="@+id/tv_jian"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:background="@drawable/shape_bg_orental_gray"
                         android:layout_marginLeft="@dimen/margin_normal"
                         android:text="—"
@@ -237,7 +237,7 @@
                     <EditText
                         android:id="@+id/edt_count"
                         android:layout_width="40dp"
-                        android:layout_height="20dp"
+                        android:layout_height="30dp"
                         android:background="@drawable/shape_bg_orental_gray"
                         android:text="0"
                         android:textColor="#4d4a47"
@@ -247,8 +247,8 @@
 
                     <TextView
                         android:id="@+id/tv_add"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:background="@drawable/shape_bg_orental_gray"
                         android:text="+"
                         android:textColor="#4d4a47"
@@ -305,10 +305,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="价格更新2017-12-22"
+                    android:text="市场"
                     android:textColor="@color/color_text_radio_unselected"
                     android:textSize="12sp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/margin_small"/>
             </LinearLayout>
 
             <View

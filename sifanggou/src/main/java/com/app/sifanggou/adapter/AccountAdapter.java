@@ -51,8 +51,12 @@ public class AccountAdapter extends SetBaseAdapter<BusinessStaffBean> {
                 if (businessStaffBean.getRole().equals(ZhiWeiType.values()[i].getType())) {
                     holder.tvType.setText("("+ZhiWeiType.values()[i].getValue()+")");
                 }
+                if (businessStaffBean.getRole().equals(ZhiWeiType.BOSS.getType())) {
+                    holder.tvName.setText("BOSS");
+                }
             }
         }
+        
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

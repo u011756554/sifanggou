@@ -91,7 +91,7 @@ public class AddAccountActivity extends BaseActivity {
                 }
 
                 String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
-                String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
+                String user_name = PreManager.getString(getApplicationContext(),AppContext.USER_ACCOUNT);
                 String trans_no = System.currentTimeMillis()+"";
                 String sign = CommonUtils.getSign(business_code,user_name,trans_no,PreManager.getString(getApplicationContext(),AppContext.USER_PWD));
                 try {

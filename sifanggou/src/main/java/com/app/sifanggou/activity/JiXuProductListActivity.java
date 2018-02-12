@@ -38,6 +38,8 @@ public class JiXuProductListActivity extends BaseActivity {
 
     @ViewInject(R.id.btn_xiadan)
     private Button btnXiaDan;
+    @ViewInject(R.id.btn_car)
+    private Button btnCar;
     //商品列表数据展示
     @ViewInject(R.id.srl_product)
     private SwipeRefreshLayout swipeRefreshLayoutProduct;
@@ -150,6 +152,14 @@ public class JiXuProductListActivity extends BaseActivity {
         });
 
         btnXiaDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(JiXuProductListActivity.this,CarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(JiXuProductListActivity.this,CarActivity.class);

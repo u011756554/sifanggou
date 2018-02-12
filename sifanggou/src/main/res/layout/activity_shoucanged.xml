@@ -10,6 +10,30 @@
 
     <include layout="@layout/mode_header"></include>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_count_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:textSize="13sp"
+            android:textColor="#999999" />
+
+        <TextView
+            android:id="@+id/tv_count_today"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:textSize="13sp"
+            android:textColor="#999999" />
+
+    </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_data"
@@ -17,7 +41,7 @@
         android:layout_height="match_parent"
         android:clickable="false"
         android:layout_below="@id/ll_tab"
-        android:background="@color/color_main">
+        android:background="@color/white">
 
         <ListView
             android:id="@+id/ll_data"

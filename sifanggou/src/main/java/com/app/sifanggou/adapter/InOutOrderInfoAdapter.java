@@ -60,7 +60,14 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
         }
         final OrderNoBaseBean orderNoBaseBean = mList.get(position);
         if (orderNoBaseBean.getSeller_business_info() != null && !TextUtils.isEmpty(orderNoBaseBean.getSeller_business_info().getName())){
-            holder.tvName.setText(orderNoBaseBean.getSeller_business_info().getName());
+            holder.tvName.setText(orderNoBaseBean.getSeller_business_info().getName()
+                    +"  "+orderNoBaseBean.getSeller_business_info().getMarket_name()
+                    +"  "+orderNoBaseBean.getSeller_business_info().getShop_number());
+        } else if(orderNoBaseBean.getBuyer_business_info() != null
+                && !TextUtils.isEmpty(orderNoBaseBean.getBuyer_business_info().getName())) {
+            holder.tvName.setText(orderNoBaseBean.getBuyer_business_info().getName()
+                    +"  "+orderNoBaseBean.getBuyer_business_info().getMarket_name()
+                    +"  "+orderNoBaseBean.getBuyer_business_info().getShop_number());
         }
         if (!TextUtils.isEmpty(orderNoBaseBean.getTotal_amount())){
             float price = Float.valueOf(orderNoBaseBean.getTotal_amount()) / 100;

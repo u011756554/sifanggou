@@ -240,7 +240,7 @@ public class AdressActivity extends BaseActivity {
         if (event.getEventCode() == EventCode.HTTP_ADDBUSINESSDEFAULTDELIVERADDRESS) {
             if (event.isSuccess()) {
                 CommonUtils.showToast("默认地址设置成功");
-                refresh();
+                finish();
             } else {
                 CommonUtils.showToast(event.getFailMessage());
             }

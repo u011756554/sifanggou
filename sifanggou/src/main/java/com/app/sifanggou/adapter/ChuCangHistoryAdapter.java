@@ -63,7 +63,7 @@ public class ChuCangHistoryAdapter extends SetBaseAdapter<UrgentSellCommodityBea
             }
         }
         if (!TextUtils.isEmpty(bean.getValid_deadline())) {
-            holder.tvGengXin.setText("有效期  "+ bean.getValid_deadline());
+            holder.tvGengXin.setText("有效期:  "+ bean.getValid_deadline());
         }
         return convertView;
     }

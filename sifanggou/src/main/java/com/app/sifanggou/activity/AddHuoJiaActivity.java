@@ -86,7 +86,7 @@ public class AddHuoJiaActivity extends BaseActivity {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
         refreshHuoJiaType();
 
-        for(int i = 1 ; i < 49 ; i++) {
+        for(int i = 1 ; i < 2 ; i++) {
             yearList.add(i+"");
         }
     }

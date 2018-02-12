@@ -143,9 +143,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="注：每个子账户200元/年（首个子账户免费1年使用权）"
+        android:text="注：每个子账户100元/年（首个子账户免费1年使用权）"
         android:textSize="@dimen/textsize_small"
-        android:textColor="@color/red"/>
+        android:textColor="@color/red"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/btn_pay"
@@ -155,7 +156,7 @@
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
         android:background="@drawable/shape_bg_redbtn"
-        android:text="确认并支付"
+        android:text="确认"
         android:textColor="@color/white"
         android:textSize="@dimen/textsize_normal"/>
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -48,6 +49,8 @@ public class CategoryProductActivity extends BaseActivity {
     private TextView tvCarMount;
     @ViewInject(R.id.rl_car)
     private RelativeLayout rlCar;
+    @ViewInject(R.id.btn_car)
+    private Button btnCar;
     private View listViewFooterViewProduct;
     private View emptyViewViewProduct;
     private TextView noMoreTextProduct;
@@ -159,6 +162,14 @@ public class CategoryProductActivity extends BaseActivity {
         });
 
         rlCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CategoryProductActivity.this,CarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryProductActivity.this,CarActivity.class);

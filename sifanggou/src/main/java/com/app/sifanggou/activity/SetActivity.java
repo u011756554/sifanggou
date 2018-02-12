@@ -28,12 +28,8 @@ public class SetActivity extends BaseActivity {
     private RelativeLayout rlPwd;
     @ViewInject(R.id.rl_code)
     private RelativeLayout rlCode;
-    @ViewInject(R.id.rl_about)
-    private RelativeLayout rlAbout;
     @ViewInject(R.id.rl_xieyi)
     private RelativeLayout rlXieYi;
-    @ViewInject(R.id.rl_haoping)
-    private RelativeLayout rlHaoPing;
     @ViewInject(R.id.rl_nickname)
     private RelativeLayout rlNickName;
     @ViewInject(R.id.btn_exit)
@@ -78,6 +74,16 @@ public class SetActivity extends BaseActivity {
                 Intent intent = new Intent(SetActivity.this,LoginActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        rlXieYi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SetActivity.this,UrlWebClientActivity.class);
+                intent.putExtra(UrlWebClientActivity.KEY_URL, AppContext.URL_XIEYI);
+                intent.putExtra(UrlWebClientActivity.KEY_TITILE, "注册协议");
+                startActivity(intent);
             }
         });
     }

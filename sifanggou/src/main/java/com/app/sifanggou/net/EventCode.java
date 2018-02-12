@@ -122,5 +122,7 @@ public class EventCode {
 	public static final int HTTP_DELBUSINESSSTAFF = ++BASECODE;
 
 	public static final int HTTP_GETBUSINESSCOMMODITYINFO2 = ++BASECODE;
+
+	public static final int HTTP_GETBUSINESSCONCERNEDINFO = ++BASECODE;
 }
 

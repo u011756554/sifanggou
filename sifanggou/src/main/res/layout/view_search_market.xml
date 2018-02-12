@@ -17,7 +17,8 @@
         android:layout_height="45dp"
         android:layout_below="@id/view_line"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <RelativeLayout
             android:id="@+id/rl_jyfw"
@@ -113,7 +114,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="false"
-        android:layout_below="@id/ll_tab"
         android:background="@color/color_main">
 
         <ListView

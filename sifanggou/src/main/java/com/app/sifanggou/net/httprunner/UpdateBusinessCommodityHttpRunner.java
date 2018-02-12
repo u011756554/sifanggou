@@ -37,6 +37,9 @@ public class UpdateBusinessCommodityHttpRunner extends HttpRunner {
         String intro = (String) event.getParamAtIndex(14);
         String a_price = (String) event.getParamAtIndex(15);
         String b_price = (String) event.getParamAtIndex(16);
+        String brand_name = (String) event.getParamAtIndex(17);
+        String production_place = (String) event.getParamAtIndex(18);
+
 //
 //        String brand_name = (String) event.getParamAtIndex(6);
 //        String quality_grade = (String) event.getParamAtIndex(11);
@@ -64,6 +67,8 @@ public class UpdateBusinessCommodityHttpRunner extends HttpRunner {
         map.put("intro", intro);
         map.put("a_price", a_price);
         map.put("b_price", b_price);
+        map.put("brand_name", brand_name);
+        map.put("production_place", production_place);
         if(!TextUtils.isEmpty(agency_contract_pic_url)) {
             map.put("agency_contract_pic_url", agency_contract_pic_url);
         }

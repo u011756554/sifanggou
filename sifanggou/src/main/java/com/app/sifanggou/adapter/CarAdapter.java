@@ -94,7 +94,7 @@ public class CarAdapter extends SetBaseAdapter<CarBean> {
             holder.tvPrice.setText(totalPrice/100 + "");
         }
         if (!TextUtils.isEmpty(bean.getBusiness_name())) {
-            holder.tvName.setText(bean.getBusiness_name());
+            holder.tvName.setText(bean.getBusiness_name() + "  " +bean.getBusiness_info().getMarket_name() + "  " + bean.getBusiness_info().getShop_number());
         }
 
         holder.ivChat.setOnClickListener(new View.OnClickListener() {

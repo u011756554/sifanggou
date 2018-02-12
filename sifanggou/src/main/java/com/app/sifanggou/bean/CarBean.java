@@ -9,12 +9,21 @@ import java.util.List;
 public class CarBean extends BaseBean {
 
     private String business_name;
+    private BusinessInfoBean business_info;
     private String total_amount;
     private String total_num;
     private List<CarItemBean> commodity_info_list;
     private String business_code;
     private boolean isSelect = true;
     private boolean isShow = true;
+
+    public BusinessInfoBean getBusiness_info() {
+        return business_info;
+    }
+
+    public void setBusiness_info(BusinessInfoBean business_info) {
+        this.business_info = business_info;
+    }
 
     public boolean isShow() {
         return isShow;

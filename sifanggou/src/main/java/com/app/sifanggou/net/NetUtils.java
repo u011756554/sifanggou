@@ -30,6 +30,7 @@ import com.app.sifanggou.net.httprunner.GetBusinessCommodityByCategoryCodeHttpRu
 import com.app.sifanggou.net.httprunner.GetBusinessCommodityCollectHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCommodityInfo2HttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessCommodityInfoHttpRunner;
+import com.app.sifanggou.net.httprunner.GetBusinessConcernedInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessDefaultDeliverAddressHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessDeliverAddressHttpRunner;
 import com.app.sifanggou.net.httprunner.GetBusinessInfoByCodeHttpRunner;
@@ -123,6 +124,7 @@ public class NetUtils {
 		eventManager.registerEventRunner(EventCode.HTTP_GETCOMMODITYINFOBYID, new GetCommodityInfoByIdHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_DELBUSINESSSTAFF, new DelBusinessStaffHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSCOMMODITYINFO2, new GetBusinessCommodityInfo2HttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSCONCERNEDINFO, new GetBusinessConcernedInfoHttpRunner());
 	}
 }
 

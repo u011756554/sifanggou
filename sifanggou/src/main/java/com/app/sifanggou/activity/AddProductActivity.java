@@ -237,10 +237,10 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
     private void refreshEditData(CommodityInfoBean infoBean) {
         if (infoBean == null) return;
         //不能编辑的属性
-        edtPinPai.setEnabled(false);
-        edtPinPaiDaiLi.setEnabled(false);
-        edtChanDi.setEnabled(false);
-        edtChanDiDaiLi.setEnabled(false);
+//        edtPinPai.setEnabled(false);
+//        edtPinPaiDaiLi.setEnabled(false);
+//        edtChanDi.setEnabled(false);
+//        edtChanDiDaiLi.setEnabled(false);
 
         //初始化货架
         if (!TextUtils.isEmpty(infoBean.getType())) {
@@ -792,7 +792,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                                 commodity_pic_url,quality_grade,production_place,specification,intro,a_price,b_price);
                     } else {
                         pushEventBlock(EventCode.HTTP_UPDATEBUSINESSCOMMODITY,business_code,mobile,trans_no,sign,initCommodityInfoBean.getCommodity_id(),commodity_name,first_level_category_code,second_level_category_code,
-                                third_level_category_code,type,"","",commodity_pic_url,specification,intro,a_price,b_price);
+                                third_level_category_code,type,"","",commodity_pic_url,specification,intro,a_price,b_price,brand_name,production_place);
                     }
                 } else {
                     if (TextUtils.isEmpty(edtNameDaiLi.getText().toString())) {
@@ -903,7 +903,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                                 commodity_pic_url,quality_grade,production_place,specification,intro,a_price,b_price,agency_contract_pic_url,agent_level);
                     } else {
                         pushEventBlock(EventCode.HTTP_UPDATEBUSINESSCOMMODITY,business_code,mobile,trans_no,sign,initCommodityInfoBean.getCommodity_id(),commodity_name,first_level_category_code,second_level_category_code,
-                                third_level_category_code,type,agency_contract_pic_url,agent_level,commodity_pic_url,specification,intro,a_price,b_price);
+                                third_level_category_code,type,agency_contract_pic_url,agent_level,commodity_pic_url,specification,intro,a_price,b_price,brand_name,production_place);
                     }
 
                 }

@@ -142,7 +142,7 @@
             android:layout_marginRight="@dimen/margin_normal"/>
 
     </RelativeLayout>
-
+<!--
     <RelativeLayout
         android:id="@+id/rl_about"
         android:layout_height="50dp"
@@ -172,14 +172,16 @@
 
     <View
         android:layout_width="match_parent"
+
         android:layout_height="1dp"
         android:background="@color/color_divider"
         android:layout_marginLeft="@dimen/margin_normal"/>
-
+-->
     <RelativeLayout
         android:id="@+id/rl_xieyi"
         android:layout_height="50dp"
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:background="@color/white">
 
         <TextView
@@ -207,7 +209,7 @@
         android:layout_height="1dp"
         android:background="@color/color_divider"
         android:layout_marginLeft="@dimen/margin_normal"/>
-
+<!--
     <RelativeLayout
         android:id="@+id/rl_haoping"
         android:layout_height="50dp"
@@ -233,7 +235,7 @@
             android:layout_marginRight="@dimen/margin_normal"/>
 
     </RelativeLayout>
-
+-->
     <Button
         android:id="@+id/btn_exit"
         android:layout_width="match_parent"

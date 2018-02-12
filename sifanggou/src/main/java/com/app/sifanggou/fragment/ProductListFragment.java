@@ -20,6 +20,7 @@ import com.app.sifanggou.activity.ProductDetailActivity;
 import com.app.sifanggou.activity.RecommondProductActivity;
 import com.app.sifanggou.activity.SearchActivity;
 import com.app.sifanggou.adapter.CommodityInfoBeanAdapter;
+import com.app.sifanggou.adapter.CommodityInfoBeanOlderAdpater;
 import com.app.sifanggou.bean.CommodityCollectBean;
 import com.app.sifanggou.bean.CommodityInfoBean;
 import com.app.sifanggou.net.Event;
@@ -61,7 +62,7 @@ public class ProductListFragment extends BaseFragment {
     private int pageSizeProduct = AppContext.PAGE_SIZE;
     private int pageProduct = AppContext.PAGE;
     private int headHeightProduct;
-    private CommodityInfoBeanAdapter adapterProduct;
+    private CommodityInfoBeanOlderAdpater adapterProduct;
     private List<CommodityInfoBean> dataListProduct = new ArrayList<CommodityInfoBean>();
 
     private LoginResponseBean loginBean;
@@ -85,7 +86,7 @@ public class ProductListFragment extends BaseFragment {
 
     private void initView() {
         //处理商品分页
-        adapterProduct = new CommodityInfoBeanAdapter(getActivity(),dataListProduct);
+        adapterProduct = new CommodityInfoBeanOlderAdpater(getActivity(),dataListProduct);
         swipeRefreshLayoutProduct.setColorSchemeResources(R.color.color_banner,R.color.color_banner,R.color.color_banner,R.color.color_banner);
         listViewFooterViewProduct = LayoutInflater.from(getActivity()).inflate(R.layout.mode_more, null);
         noMoreTextProduct = (TextView) listViewFooterViewProduct.findViewById(R.id.no_more);

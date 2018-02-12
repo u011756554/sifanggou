@@ -136,13 +136,8 @@ public class MyselfFragment extends PicBaseFragment{
 		if (!TextUtils.isEmpty(bean.getHead_pic_url())) {
 			ImageLoaderUtil.display(bean.getHead_pic_url(),ivHead);
 		}
-		if (!TextUtils.isEmpty(bean.getAgent_level())) {
-			for(AgentLevelType alvt : AgentLevelType.values()) {
-				if (alvt.getType().equals(bean.getAgent_level())) {
-					tvLevel.setText(alvt.getCode());
-					break;
-				}
-			}
+		if (!TextUtils.isEmpty(bean.getGrade())) {
+			tvLevel.setText(bean.getGrade());
 		}
 		if (!TextUtils.isEmpty(bean.getName())) {
 			tvName.setText(bean.getName());

@@ -9,9 +9,17 @@ public class CommodityCollectBean extends BaseBean {
     private String commodity_id;
     private String business_code;
     private String collect_time;
-
+    private BusinessInfoBean business_info;
     public CommodityInfoBean getCommodity_info() {
         return commodity_info;
+    }
+
+    public BusinessInfoBean getBusiness_info() {
+        return business_info;
+    }
+
+    public void setBusiness_info(BusinessInfoBean business_info) {
+        this.business_info = business_info;
     }
 
     public void setCommodity_info(CommodityInfoBean commodity_info) {

@@ -87,6 +87,8 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
     public int carCount = 0;
     @ViewInject(R.id.rl_car)
     private RelativeLayout rlCar;
+    @ViewInject(R.id.btn_car)
+    private Button btnCar;
 
     @ViewInject(R.id.btn_xiadan)
     private Button btnXiaDan;
@@ -239,6 +241,14 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
         });
 
         btnXiaDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DianPuDetailActivity.this,CarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DianPuDetailActivity.this,CarActivity.class);

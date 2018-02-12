@@ -61,6 +61,11 @@ public class LoginActivity extends BaseActivity {
 		if(!TextUtils.isEmpty(phone)) {
 			edtPhone.setText(phone);
 		}
+
+		String pwd = PreManager.getString(getApplicationContext(),AppContext.USER_PWD_NOCODE);
+		if(!TextUtils.isEmpty(phone)) {
+			edtPwd.setText(pwd);
+		}
 	}
 	
 	private void initListener() {
@@ -144,6 +149,7 @@ public class LoginActivity extends BaseActivity {
 		if (event.getEventCode() == EventCode.HTTP_BUSINESSLOGIN) {
 			if (event.isSuccess()) {
 				PreManager.putString(getApplicationContext(),AppContext.USER_ACCOUNT,edtPhone.getText().toString());
+				PreManager.putString(getApplicationContext(),AppContext.USER_PWD_NOCODE,edtPwd.getText().toString());
 				try {
 					PreManager.putString(getApplicationContext(),AppContext.USER_PWD,CommonUtils.EncoderByMd5(edtPwd.getText().toString()));
 				} catch (Exception e) {

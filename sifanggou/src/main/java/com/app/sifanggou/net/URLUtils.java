@@ -122,5 +122,7 @@ public class URLUtils {
 
 	public static final String GETBUSINESSCOMMODITYINFO2 = SERVER + "business/GetBusinessCommodityInfo2";
 
+	public static final String GETBUSINESSCONCERNEDINFO = SERVER + "business/GetBusinessConcernedInfo";
+
 }
 

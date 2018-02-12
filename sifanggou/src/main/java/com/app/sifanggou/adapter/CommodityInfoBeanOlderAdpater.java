@@ -21,12 +21,11 @@ import com.app.sifanggou.utils.ImageLoaderUtil;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/11/22.
+ * Created by Administrator on 2018/2/12.
  */
 
-public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> {
-
-    public CommodityInfoBeanAdapter(Context context, List<CommodityInfoBean> list) {
+public class CommodityInfoBeanOlderAdpater extends SetBaseAdapter<CommodityInfoBean> {
+    public CommodityInfoBeanOlderAdpater(Context context, List<CommodityInfoBean> list) {
         super(context, list);
     }
 
@@ -34,7 +33,7 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_commodity,null);
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_commodityinfobeanold,null);
             holder = new ViewHolder();
             holder.ivPic = (ImageView) convertView.findViewById(R.id.iv_pic);
             holder.ivAdd = (ImageView) convertView.findViewById(R.id.iv_add);
@@ -166,9 +165,9 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
         void click(CommodityInfoBean bean);
     }
 
-    private AddListener addListener;
+    private CommodityInfoBeanAdapter.AddListener addListener;
 
-    public void setListener(AddListener listener) {
+    public void setListener(CommodityInfoBeanAdapter.AddListener listener) {
         this.addListener = listener;
     }
 }

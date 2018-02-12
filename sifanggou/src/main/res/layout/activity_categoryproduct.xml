@@ -129,12 +129,30 @@
 
         </LinearLayout>
 
+        <View
+            android:id="@+id/view_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_mini"
+            android:layout_alignParentBottom="true"></View>
+
+        <Button
+            android:id="@+id/btn_car"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_margin="@dimen/margin_small"
+            android:background="@drawable/shape_btn_red"
+            android:text="购物车"
+            android:textSize="@dimen/textsize_large"
+            android:textColor="@color/white"
+            android:layout_above="@id/view_bottom"/>
+
         <RelativeLayout
             android:id="@+id/rl_bottom"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:background="#4d4a47"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/btn_xiadan"
@@ -155,7 +173,8 @@
             android:background="@drawable/shape_bg_yellow_circle"
             android:layout_above="@id/rl_bottom"
             android:layout_marginLeft="@dimen/margin_normal"
-            android:layout_marginBottom="-45dp">
+            android:layout_marginBottom="-45dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -193,7 +212,7 @@
             android:layout_height="match_parent"
             android:clickable="false"
             android:layout_below="@id/ll_tab"
-            android:layout_above="@id/rl_car"
+            android:layout_above="@id/btn_car"
             android:background="@color/color_main">
 
             <ListView

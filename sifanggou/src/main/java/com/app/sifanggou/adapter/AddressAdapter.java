@@ -38,6 +38,7 @@ public class AddressAdapter extends SetBaseAdapter<AdressBean> {
             holder.tvPhone = (TextView) convertView.findViewById(R.id.tv_phone);
             holder.tvAddress = (TextView) convertView.findViewById(R.id.tv_address);
             holder.tvTimes = (TextView) convertView.findViewById(R.id.tv_times);
+            holder.tvMoren = convertView.findViewById(R.id.tv_ismoren);
             holder.btnDelete = (Button) convertView.findViewById(R.id.btn_delete);
             holder.btnEdit = (Button) convertView.findViewById(R.id.btn_edit);
             holder.btnMoren = convertView.findViewById(R.id.btn_moren);
@@ -46,6 +47,11 @@ public class AddressAdapter extends SetBaseAdapter<AdressBean> {
             holder = (ViewHolder) convertView.getTag();
         }
         final AdressBean bean = mList.get(position);
+        if ("1".equals(bean.getIs_default())) {
+            holder.tvMoren.setVisibility(View.VISIBLE);
+        } else {
+            holder.tvMoren.setVisibility(View.GONE);
+        }
         if (type.equals(AdressActivity.TYPE_SELECT)) {
             holder.ivSelect.setVisibility(View.VISIBLE);
             if (bean.isSelect()) {
@@ -119,6 +125,7 @@ public class AddressAdapter extends SetBaseAdapter<AdressBean> {
         private TextView tvPhone;
         private TextView tvAddress;
         private TextView tvTimes;
+        private TextView tvMoren;
         private Button btnDelete;
         private Button btnEdit;
         private Button btnMoren;

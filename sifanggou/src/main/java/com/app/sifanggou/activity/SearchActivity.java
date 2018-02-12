@@ -24,6 +24,7 @@ import com.app.sifanggou.adapter.BusinessInfoBeanAdapter;
 import com.app.sifanggou.adapter.CommodityInfoBeanAdapter;
 import com.app.sifanggou.bean.BusinessInfoBean;
 import com.app.sifanggou.bean.CommodityInfoBean;
+import com.app.sifanggou.bean.OrderTreeType;
 import com.app.sifanggou.bean.SearchBusinessType;
 import com.app.sifanggou.bean.SearchType;
 import com.app.sifanggou.bean.SearchTypeBean;
@@ -76,6 +77,19 @@ public class SearchActivity extends BaseActivity {
     private TextView tvCarMount;
     @ViewInject(R.id.rl_car)
     private RelativeLayout rlCar;
+    @ViewInject(R.id.btn_car)
+    private Button btnCar;
+
+    @ViewInject(R.id.rl_price)
+    private RelativeLayout rlPrice;
+    @ViewInject(R.id.rl_xiaoliang)
+    private RelativeLayout rlXiaoLiang;
+    @ViewInject(R.id.tv_price_order)
+    private TextView tvPriceOrder;
+    @ViewInject(R.id.tv_amount_order)
+    private TextView tvAmountOrder;
+
+    private OrderTreeType orderTreeType = OrderTreeType.PRICE;
 
     @ViewInject(R.id.btn_xiadan)
     private Button btnXiaDan;
@@ -124,11 +138,11 @@ public class SearchActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         initView();
         initListener();
         initData();
         refreshSearchType();
+        refreshOrderTreeTYpe();
     }
 
     private void initView() {
@@ -238,6 +252,16 @@ public class SearchActivity extends BaseActivity {
         }
     }
 
+    private void refreshOrderTreeTYpe() {
+        if (orderTreeType == OrderTreeType.PRICE) {
+            tvPriceOrder.setTextColor(getResources().getColor(R.color.color_banner));
+            tvAmountOrder.setTextColor(getResources().getColor(R.color.black));
+        } else if(orderTreeType == OrderTreeType.AMOUNT) {
+            tvPriceOrder.setTextColor(getResources().getColor(R.color.black));
+            tvAmountOrder.setTextColor(getResources().getColor(R.color.color_banner));
+        }
+    }
+
     private void initData() {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
         String type = getIntent().getStringExtra(KEY_TYPE);
@@ -319,6 +343,32 @@ public class SearchActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        btnCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchActivity.this,CarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        rlPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderTreeType = OrderTreeType.PRICE;
+                refreshOrderTreeTYpe();
+                refreshProduct();
+            }
+        });
+
+        rlXiaoLiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderTreeType = OrderTreeType.AMOUNT;
+                refreshOrderTreeTYpe();
+                refreshProduct();
+            }
+        });
     }
 
     private void initPopupWindow() {
@@ -356,7 +406,14 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void searchCommodity(String search,int item_num,int page_no,String tag) {
-        pushEventNoProgress(EventCode.HTTP_SEARCHBUSINESSCOMMODITYONNAME,search,item_num+"",page_no+"",tag);
+        if (loginBean != null
+                && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+            pushEventNoProgress(EventCode.HTTP_SEARCHBUSINESSCOMMODITYONNAME,search,orderTreeType.getType(),loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),item_num+"",page_no+"",tag);
+        }
+
     }
 
     private void car() {

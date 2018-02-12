@@ -30,6 +30,7 @@ public class AppContext {
 	public static final String USER_KEY = "login_user_key";
 	public static final String USER_ACCOUNT = "USER_ACCOUNT";
 	public static final String USER_PWD = "USER_PWD";
+	public static final String USER_PWD_NOCODE = "USER_PWD_NOCODE";
 	public static final String USER_LOGIN = "login_user_login";
 	public static final String USER_ID = "login_user_id";
 	public static final String URL_SUCCESSCODE = "1";

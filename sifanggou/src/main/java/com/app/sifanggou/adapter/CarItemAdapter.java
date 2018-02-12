@@ -123,7 +123,7 @@ public class CarItemAdapter extends SetBaseAdapter<CarItemBean> {
                 }
             }
         });
-        holder.rlContent.setOnClickListener(new View.OnClickListener() {
+        holder.ivPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {

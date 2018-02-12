@@ -13,6 +13,7 @@ public class OrderNoBaseBean extends BaseBean {
     private String buyer_pay_status;
     private String buyer_receive_status;
     private SellerInfoBean seller_business_info;
+    private SellerInfoBean buyer_business_info;
     private String total_amount;
     private String sub_order_no;
     private String total_num;
@@ -20,6 +21,14 @@ public class OrderNoBaseBean extends BaseBean {
     private String buyer_receive_time;
     private String seller_business_code;
     private boolean isShow = true;
+
+    public SellerInfoBean getBuyer_business_info() {
+        return buyer_business_info;
+    }
+
+    public void setBuyer_business_info(SellerInfoBean buyer_business_info) {
+        this.buyer_business_info = buyer_business_info;
+    }
 
     public boolean isShow() {
         return isShow;

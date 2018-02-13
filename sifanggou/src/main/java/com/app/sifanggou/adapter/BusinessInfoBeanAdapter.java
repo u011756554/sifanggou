@@ -65,6 +65,10 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
                 }
             }
         }
+        if (!TextUtils.isEmpty(bean.getTotal_commodity_num())) {
+            holder.tvCount.setText(bean.getTotal_commodity_num());
+        }
+
         if (!TextUtils.isEmpty(bean.getAgent_level())) {
             for(AgentLevelType alvt : AgentLevelType.values()) {
                 if (alvt.getType().equals(bean.getAgent_level())) {
@@ -84,7 +88,6 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
         });
 
         if (bean.getFirst_show_commodity_list() != null && bean.getFirst_show_commodity_list().size() > 0) {
-            holder.tvCount.setText(bean.getFirst_show_commodity_list().size()+"");
             holder.llPic.setVisibility(View.VISIBLE);
             if (bean.getFirst_show_commodity_list().size() == 1) {
                 ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(0).getCommodity_pic_url(),holder.ivPic1);
@@ -107,8 +110,8 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
             }
         } else {
             holder.llPic.setVisibility(View.GONE);
-            holder.tvCount.setText("0");
         }
+
         return convertView;
     }
 

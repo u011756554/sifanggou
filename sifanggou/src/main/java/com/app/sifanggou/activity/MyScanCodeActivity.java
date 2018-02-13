@@ -11,6 +11,7 @@ import com.app.sifanggou.R;
 import com.app.sifanggou.bean.BaseBean;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.GetBusinessInfoByCodeResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.PreManager;
@@ -61,7 +62,7 @@ public class MyScanCodeActivity extends BaseActivity {
     public void customScan(){
         new IntentIntegrator(this)
                 .setOrientationLocked(true)
-//                .setCaptureActivity(CustomScanActivity.class) // 设置自定义的activity是CustomActivity
+                .setCaptureActivity(CustomScanActivity.class) // 设置自定义的activity是CustomActivity
                 .initiateScan(); // 初始化扫描
     }
 
@@ -75,8 +76,7 @@ public class MyScanCodeActivity extends BaseActivity {
                 // ScanResult 为 获取到的字符串
                 String ScanResult = intentResult.getContents();
                 Toast.makeText(this,"扫描成功"+ScanResult,Toast.LENGTH_LONG).show();
-
-                pushEventBlock(EventCode.HTTP_GETBUSINESSINFO,ScanResult);
+                pushEventBlock(EventCode.HTTP_GETBUSINESSINFOBYCODE,ScanResult);
             }
         } else {
             super.onActivityResult(requestCode,resultCode,data);
@@ -87,11 +87,15 @@ public class MyScanCodeActivity extends BaseActivity {
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
-        if (event.getEventCode() == EventCode.HTTP_GETBUSINESSINFO) {
+        if (event.getEventCode() == EventCode.HTTP_GETBUSINESSINFOBYCODE) {
             if (event.isSuccess()) {
-                Intent intent = new Intent(MyScanCodeActivity.this,DianPuDetailActivity.class);
-//                intent.putExtra(DianPuDetailActivity.KEY_DATA, BaseBean);
-                startActivity(intent);
+                GetBusinessInfoByCodeResponseBean bean = (GetBusinessInfoByCodeResponseBean) event.getReturnParamAtIndex(0);
+                if (bean != null && bean.getData() != null && bean.getData().getBusiness_info() != null) {
+                    Intent intent = new Intent(MyScanCodeActivity.this,DianPuDetailActivity.class);
+                    intent.putExtra(DianPuDetailActivity.KEY_DATA,bean.getData().getBusiness_info());
+                    startActivity(intent);
+                    finish();
+                }
             } else {
                 CommonUtils.showToast(event.getFailMessage());
             }

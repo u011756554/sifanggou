@@ -219,9 +219,9 @@ public class ShangPinGuanLiActivity extends BaseActivity {
         adapter.setListener(new ShangPinAdapter.ClickListener() {
             @Override
             public void click(CommodityInfoBean bean) {
-                Intent intent = new Intent(ShangPinGuanLiActivity.this,ProductDetailActivity.class);
-                intent.putExtra(ProductDetailActivity.KEY_DATA,bean);
-                startActivity(intent);
+//                Intent intent = new Intent(ShangPinGuanLiActivity.this,ProductDetailActivity.class);
+//                intent.putExtra(ProductDetailActivity.KEY_DATA,bean);
+//                startActivity(intent);
             }
         });
     }

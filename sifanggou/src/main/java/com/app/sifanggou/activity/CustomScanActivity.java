@@ -20,10 +20,10 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 
 public class CustomScanActivity extends BaseActivity implements DecoratedBarcodeView.TorchListener{
 
-    @ViewInject(R.id.btn_switch)
-    Button swichLight;
-    @ViewInject(R.id.btn_hint1) Button hint1Show;
-    @ViewInject(R.id.btn_hint2) Button hint2Show;
+//    @ViewInject(R.id.btn_switch)
+//    Button swichLight;
+//    @ViewInject(R.id.btn_hint1) Button hint1Show;
+//    @ViewInject(R.id.btn_hint2) Button hint2Show;
     @ViewInject(R.id.dbv_custom)
     DecoratedBarcodeView mDBV;
 
@@ -36,9 +36,9 @@ public class CustomScanActivity extends BaseActivity implements DecoratedBarcode
         mDBV.setTorchListener(this);
 
         // 如果没有闪光灯功能，就去掉相关按钮
-        if(!hasFlash()) {
-            swichLight.setVisibility(View.GONE);
-        }
+//        if(!hasFlash()) {
+//            swichLight.setVisibility(View.GONE);
+//        }
 
         //重要代码，初始化捕获
         captureManager = new CaptureManager(this,mDBV);
@@ -94,13 +94,13 @@ public class CustomScanActivity extends BaseActivity implements DecoratedBarcode
     }
 
     // 点击切换闪光灯
-    @OnClick(R.id.btn_switch)
-    public void swichLight(){
-        if(isLightOn){
-            mDBV.setTorchOff();
-        }else{
-            mDBV.setTorchOn();
-        }
-    }
+//    @OnClick(R.id.btn_switch)
+//    public void swichLight(){
+//        if(isLightOn){
+//            mDBV.setTorchOff();
+//        }else{
+//            mDBV.setTorchOn();
+//        }
+//    }
 
 }

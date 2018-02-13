@@ -12,7 +12,7 @@
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
-        android:layout_height="44dp"
+        android:layout_height="52dp"
         android:textSize="@dimen/textsize_normal"
         android:gravity="center"
         android:textColor="@color/color_category_text"

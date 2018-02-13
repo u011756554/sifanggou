@@ -3,6 +3,7 @@ package com.app.sifanggou.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -15,12 +16,15 @@ import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.adapter.CommodityInfoBeanAdapter;
 import com.app.sifanggou.bean.CommodityInfoBean;
+import com.app.sifanggou.bean.CommodityTypeBean;
+import com.app.sifanggou.bean.FirstChildNodeTypeBean;
 import com.app.sifanggou.bean.NodeBaseBean;
 import com.app.sifanggou.bean.OrderTreeType;
 import com.app.sifanggou.bean.RecommendCommodityBean;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
 import com.app.sifanggou.net.bean.GetBusinessCommodityByCategoryCodeResponseBean;
+import com.app.sifanggou.net.bean.GetCommodityTypeListResponseBean;
 import com.app.sifanggou.net.bean.GetRecommendCommodityResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
@@ -28,6 +32,7 @@ import com.app.sifanggou.utils.PreManager;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,6 +47,8 @@ public class ProductByCategorytypeActivity extends BaseActivity {
     private RelativeLayout rlCar;
     @ViewInject(R.id.btn_xiadan)
     private Button btnXiaDan;
+    @ViewInject(R.id.btn_car)
+    private Button btnCar;
 
     //商品列表数据展示
     @ViewInject(R.id.srl_product)
@@ -70,6 +77,11 @@ public class ProductByCategorytypeActivity extends BaseActivity {
 
     public static final String KEY_DATA = "key_ProductByCategorytypeActivity_type";
     private NodeBaseBean nodeBaseBean;
+    private List<CommodityTypeBean> commodity_type_list = new ArrayList<CommodityTypeBean>();
+
+    private String first_category_code = "";
+    private String second_category_code = "";
+    private String third_category_code = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,8 +133,6 @@ public class ProductByCategorytypeActivity extends BaseActivity {
                 refreshProduct();
             }
         });
-
-        refreshProduct();
     }
 
     private void initData() {
@@ -131,6 +141,11 @@ public class ProductByCategorytypeActivity extends BaseActivity {
         if (nodeBaseBean != null) {
             setTitle(nodeBaseBean.getName());
         }
+        getData();
+    }
+
+    private void getData() {
+        pushEventNoProgress(EventCode.HTTP_GETCOMMODITYTYPELIST);
     }
 
     private void initListener() {
@@ -157,6 +172,14 @@ public class ProductByCategorytypeActivity extends BaseActivity {
         });
 
         btnXiaDan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductByCategorytypeActivity.this,CarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProductByCategorytypeActivity.this,CarActivity.class);
@@ -194,15 +217,25 @@ public class ProductByCategorytypeActivity extends BaseActivity {
     }
 
     private void refreshDataProduct() {
+        if (TextUtils.isEmpty(first_category_code)
+                && TextUtils.isEmpty(second_category_code)
+                && TextUtils.isEmpty(third_category_code)) {
+            return;
+        }
         if (nodeBaseBean != null) {
             pageProduct = AppContext.PAGE;
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,nodeBaseBean.getParent_category_code(),nodeBaseBean.getCategory_code(), OrderTreeType.PRICE.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",KEY_REFRESH);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,first_category_code,second_category_code,third_category_code, OrderTreeType.PRICE.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",KEY_REFRESH);
         }
     }
 
     private void getDataProduct() {
+        if (TextUtils.isEmpty(first_category_code)
+                && TextUtils.isEmpty(second_category_code)
+                && TextUtils.isEmpty(third_category_code)) {
+            return;
+        }
         if (nodeBaseBean != null) {
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,nodeBaseBean.getParent_category_code(),nodeBaseBean.getCategory_code(), OrderTreeType.PRICE.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",KEY_MORE);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,first_category_code,second_category_code,third_category_code, OrderTreeType.PRICE.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",KEY_MORE);
         }
     }
 
@@ -229,9 +262,77 @@ public class ProductByCategorytypeActivity extends BaseActivity {
         }
     }
 
+    private NodeBaseBean getFirstParentNode(NodeBaseBean node) {
+        NodeBaseBean parentNodeBean = null;
+        for(CommodityTypeBean commodityTypeBean : commodity_type_list) {
+            if (node.getParent_category_code() == null) continue;
+            if (node.getParent_category_code().equals(commodityTypeBean.getCategory_code())) {
+                parentNodeBean = new NodeBaseBean();
+                parentNodeBean.setCategory_code(commodityTypeBean.getCategory_code());
+                parentNodeBean.setName(commodityTypeBean.getName());
+                parentNodeBean.setParent_category_code(commodityTypeBean.getParent_category_code());
+                break;
+            }
+        }
+        return parentNodeBean;
+    }
+
+    private NodeBaseBean getSecondParentNode(NodeBaseBean node) {
+        NodeBaseBean parentNodeBean = null;
+        for(CommodityTypeBean ctb : commodity_type_list) {
+            if (ctb.getChild_node_list() == null) continue;
+            for (FirstChildNodeTypeBean firstChildNodeTypeBean : ctb.getChild_node_list()) {
+                if (node.getParent_category_code().equals(firstChildNodeTypeBean.getCategory_code())) {
+                    parentNodeBean = new NodeBaseBean();
+                    parentNodeBean.setCategory_code(firstChildNodeTypeBean.getCategory_code());
+                    parentNodeBean.setName(firstChildNodeTypeBean.getName());
+                    parentNodeBean.setParent_category_code(firstChildNodeTypeBean.getParent_category_code());
+                    break;
+                }
+            }
+        }
+        return parentNodeBean;
+    }
+
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
+        if (event.getEventCode() == EventCode.HTTP_GETCOMMODITYTYPELIST) {
+            if (event.isSuccess()){
+                GetCommodityTypeListResponseBean bean = (GetCommodityTypeListResponseBean) event.getReturnParamAtIndex(0);
+                if (bean != null && bean.getData() != null && bean.getData().getCommodity_type_list() != null && bean.getData().getCommodity_type_list().size() > 0) {
+                    commodity_type_list.addAll(bean.getData().getCommodity_type_list());
+                    if (nodeBaseBean != null) {
+                        first_category_code = "";
+                        second_category_code = "";
+                        third_category_code = "";
+                        if ("0".equals(nodeBaseBean.getParent_category_code())) {
+                            first_category_code = nodeBaseBean.getCategory_code();
+                        } else {
+                            NodeBaseBean firstParentNode = getFirstParentNode(nodeBaseBean);
+                            if (firstParentNode != null) {
+                                first_category_code = firstParentNode.getCategory_code();
+                                second_category_code = nodeBaseBean.getCategory_code();
+                            } else {
+                                NodeBaseBean sencodeNodeBaseBean = getSecondParentNode(nodeBaseBean);
+                                if (sencodeNodeBaseBean != null) {
+                                    second_category_code = sencodeNodeBaseBean.getCategory_code();
+                                    third_category_code = nodeBaseBean.getCategory_code();
+                                    NodeBaseBean nbb = getFirstParentNode(sencodeNodeBaseBean);
+                                    if (nbb != null) {
+                                        first_category_code = nbb.getCategory_code();
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+                refreshProduct();
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
         if (event.getEventCode() == EventCode.HTTP_ADDBUSINESSSHOPPINGCART) {
             if (event.isSuccess()) {
                 String commodity_num = (String) event.getReturnParamAtIndex(1);

@@ -77,16 +77,16 @@ public class AddAccountActivity extends BaseActivity {
                 String role = zhiWeiType.getType();
                 String pwd = edtPwd.getText().toString();
                 if (TextUtils.isEmpty(name)) {
-                    CommonUtils.showToast("请输入名字");
+                    CommonUtils.showToast("请输入名字!");
                     return;
                 }
                 if (TextUtils.isEmpty(phone)) {
-                    CommonUtils.showToast("请输入手机号");
+                    CommonUtils.showToast("请输入手机号!");
                     return;
                 }
 
                 if (TextUtils.isEmpty(pwd)) {
-                    CommonUtils.showToast("请输入登录密码");
+                    CommonUtils.showToast("请输入登录密码!");
                     return;
                 }
 

@@ -337,6 +337,8 @@ public class ProductDetailActivity extends BaseActivity {
                     tvLevel.setText(alt.getName());
                 }
             }
+        } else {
+            tvLevel.setText("无");
         }
 
         if (!TextUtils.isEmpty(infoBean.getIntro())) {

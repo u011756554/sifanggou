@@ -565,7 +565,6 @@
                     android:id="@+id/tv_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="区域代理"
                     android:textColor="@color/red"
                     android:textSize="14sp"
                     android:layout_marginLeft="35dp"

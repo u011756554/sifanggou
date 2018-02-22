@@ -6,6 +6,7 @@ import java.util.List;
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.activity.ChatListActivity;
+import com.app.sifanggou.activity.CustomScanActivity;
 import com.app.sifanggou.activity.DianPuDetailActivity;
 import com.app.sifanggou.activity.JiXuChuCangActivity;
 import com.app.sifanggou.activity.JiXuProductListActivity;
@@ -265,7 +266,7 @@ public class MainFragemnt extends BaseFragment {
 //				startActivity(intent);
 				new IntentIntegrator(getActivity())
 						.setOrientationLocked(true)
-//                .setCaptureActivity(CustomScanActivity.class) // 设置自定义的activity是CustomActivity
+                		.setCaptureActivity(CustomScanActivity.class) // 设置自定义的activity是CustomActivity
 						.initiateScan(); // 初始化扫描
 			}
 		});

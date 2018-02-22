@@ -1,8 +1,10 @@
 package com.app.sifanggou.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,17 +86,26 @@ public class DaiJieFragment extends BaseFragment {
         adapter.setDaiJieListener(new InOutOrderInfoAdapter.DaiJieListener() {
             @Override
             public void jieKuan(OrderNoBaseBean bean) {
-                if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null) {
-                    String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
-                    String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
-                    String trans_no = System.currentTimeMillis() + "";
-                    String sign = CommonUtils.getSign(business_code,user_name,trans_no, PreManager.getString(getActivity().getApplicationContext(), AppContext.USER_PWD));
-                    String order_no = bean.getOrder_no();
-                    String sub_order_no = bean.getSub_order_no();
-                    String order_status = OrderStatusType.PAID.getType();
+                new AlertDialog.Builder(getActivity())
+                        .setCancelable(true)
+                        .setTitle("已结款")
+                        .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null) {
+                                    String business_code = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
+                                    String user_name = loginBean.getData().getLogin_info().getBusiness_info().getMobile();
+                                    String trans_no = System.currentTimeMillis() + "";
+                                    String sign = CommonUtils.getSign(business_code,user_name,trans_no, PreManager.getString(getActivity().getApplicationContext(), AppContext.USER_PWD));
+                                    String order_no = bean.getOrder_no();
+                                    String sub_order_no = bean.getSub_order_no();
+                                    String order_status = OrderStatusType.PAID.getType();
 
-                    pushEventBlock(EventCode.HTTP_UPDATEBUSINESSORDERSTATUS,business_code,user_name,trans_no,sign,order_no,sub_order_no,order_status);
-                }
+                                    pushEventBlock(EventCode.HTTP_UPDATEBUSINESSORDERSTATUS,business_code,user_name,trans_no,sign,order_no,sub_order_no,order_status);
+                                }
+                            }
+                        })
+                        .create().show();
             }
         });
 

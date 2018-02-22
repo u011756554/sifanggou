@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="59dp"
         android:background="#4d4a47"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/btn_xiadan"
@@ -34,7 +35,8 @@
         android:background="@drawable/shape_bg_yellow_circle"
         android:layout_above="@id/rl_bottom"
         android:layout_marginLeft="@dimen/margin_normal"
-        android:layout_marginBottom="-45dp">
+        android:layout_marginBottom="-45dp"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -52,7 +54,8 @@
         android:layout_toRightOf="@id/rl_car"
         android:layout_marginLeft="-25dp"
         android:layout_above="@id/rl_car"
-        android:layout_marginBottom="-25dp">
+        android:layout_marginBottom="-25dp"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_mount"
@@ -71,7 +74,6 @@
         android:layout_height="match_parent"
         android:clickable="false"
         android:layout_below="@id/header"
-        android:layout_above="@id/rl_car"
         android:background="@color/color_main">
 
         <ListView

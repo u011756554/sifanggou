@@ -150,13 +150,18 @@ public class MainFragemnt extends BaseFragment {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_main);
 	}
-	
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		initData();
+	}
+
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		initView();
 		initListener();
-		initData();
 		startLoopViewPager();
 		mViewPager.setCurrentItem(0);
 		super.onActivityCreated(savedInstanceState);

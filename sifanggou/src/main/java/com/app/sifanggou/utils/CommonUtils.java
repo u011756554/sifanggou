@@ -696,7 +696,7 @@ public class CommonUtils {
 	public static List<DateBean> getDateList() {
 		List<DateBean> dateList = new ArrayList<>();
 		int startYear = Integer.valueOf(getYear());
-		for(int year = startYear - 1 ; year < startYear + 2 ; year++) {
+		for(int year = startYear - 1 ; year <= startYear; year++) {
 			for(int month =1 ; month < 13 ;month++) {
 				DateBean dateBean = new DateBean();
 				dateBean.setYear(year+"");

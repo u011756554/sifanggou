@@ -39,8 +39,10 @@ public class AppContext {
 	public static final int ITEM_NUM = 10; //每页数量，最大32
 
 	public static final String OSS_ENDPOINT = "http://oss-cn-shenzhen.aliyuncs.com"; //阿里云OSS域名
-	public static final String OSS_ACCESSKEYID = "OSS_AccessKeyId"; //阿里云OSS域名
-	public static final String OSS_SECRETKEYID = "OSS_SecretKeyId"; //阿里云OSS域名
+//	public static final String OSS_ACCESSKEYID = "OSS_AccessKeyId"; //阿里云OSS域名
+//	public static final String OSS_SECRETKEYID = "OSS_SecretKeyId"; //阿里云OSS域名
+	public static final String OSS_ACCESSKEYID = "LTAIyr4lwzs6vjZD"; //阿里云OSS域名
+	public static final String OSS_SECRETKEYID = "MlQnRcJ4A6J9iKGmYTUIxQo0wSxpAr"; //阿里云OSS域名
 	public static final String OSS_SECURITYTOKEN = "OSS_SecurityToken"; //阿里云OSS域名
 
 	public static final String OSS_BUCKET = "sifanggou-oss"; //阿里云BUCKET

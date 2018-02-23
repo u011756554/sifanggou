@@ -17,8 +17,26 @@ public class AllBusinessUrgentSellCommodityBean extends BaseBean {
     private String type;
     private String add_time;
     private String commodity_name;
+    private String original_price;
+    private BusinessInfoBean business_info;
     private int selectCount;
     private boolean isSelect = false;
+
+    public String getOriginal_price() {
+        return original_price;
+    }
+
+    public void setOriginal_price(String original_price) {
+        this.original_price = original_price;
+    }
+
+    public BusinessInfoBean getBusiness_info() {
+        return business_info;
+    }
+
+    public void setBusiness_info(BusinessInfoBean business_info) {
+        this.business_info = business_info;
+    }
 
     public int getSelectCount() {
         return selectCount;

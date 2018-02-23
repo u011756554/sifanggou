@@ -48,7 +48,7 @@ public class CarAdapter extends SetBaseAdapter<CarBean> {
         if (bean.isSelect()) {
             holder.ivSelect.setSelected(true);
         } else {
-            holder.ivSelect.setSelected(false);
+            holder.ivSelect.setSelected(true);
         }
         holder.ivSelect.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,15 +1,18 @@
 package com.app.sifanggou.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
 import com.app.sifanggou.activity.CategoryProductActivity;
 import com.app.sifanggou.activity.ProductByCategorytypeActivity;
@@ -45,6 +48,8 @@ public class CategoryFragment extends BaseFragment {
 	private TextView tvTitle;
 	@ViewInject(R.id.right_layout)
 	private RelativeLayout rlRight;
+	@ViewInject(R.id.iv_category)
+	private ImageView ivCategory;
 
 	private List<CommodityTypeBean> commodity_type_list = new ArrayList<CommodityTypeBean>();
     private CategoryTypeAdapter adapter;
@@ -161,6 +166,17 @@ public class CategoryFragment extends BaseFragment {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(getActivity(), ProductByCategorytypeActivity.class);
 				intent.putExtra(ProductByCategorytypeActivity.KEY_DATA,nodeList.get(position));
+				startActivity(intent);
+			}
+		});
+
+		ivCategory.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setAction("android.intent.action.VIEW");
+				Uri content_url = Uri.parse(AppContext.URL_CATEGORY);
+				intent.setData(content_url);
 				startActivity(intent);
 			}
 		});

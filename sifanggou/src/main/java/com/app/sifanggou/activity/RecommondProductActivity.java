@@ -241,7 +241,11 @@ public class RecommondProductActivity extends BaseActivity {
                     }
                     List<CommodityInfoBean> tmpList = new ArrayList<CommodityInfoBean>();
                     for(RecommendCommodityBean cc : bean.getData().getRecommend_commodity()) {
-                        tmpList.add(cc.getCommodity_info());
+                        CommodityInfoBean tmpInfoBean = cc.getCommodity_info();
+                        if (tmpInfoBean != null) {
+                            tmpInfoBean.setBusiness_info(cc.getBusiness_info());
+                        }
+                        tmpList.add(tmpInfoBean);
                     }
 
                     if (tmpList != null) {

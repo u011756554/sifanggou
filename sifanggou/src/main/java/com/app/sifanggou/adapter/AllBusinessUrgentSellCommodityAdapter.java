@@ -60,8 +60,8 @@ public class AllBusinessUrgentSellCommodityAdapter extends SetBaseAdapter<AllBus
             float price = Float.valueOf(bean.getSell_price()) / 100;
             holder.tvPrice.setText("￥"+price);
         }
-        if (!TextUtils.isEmpty(bean.getSell_price())) {
-            float price = Float.valueOf(bean.getSell_price()) / 100;
+        if (!TextUtils.isEmpty(bean.getOriginal_price())) {
+            float price = Float.valueOf(bean.getOriginal_price()) / 100;
             holder.tvOldPrice.setText("原价"+price);
         }
         if (!TextUtils.isEmpty(bean.getSale_num())) {
@@ -75,8 +75,8 @@ public class AllBusinessUrgentSellCommodityAdapter extends SetBaseAdapter<AllBus
             }
         }
 
-        if (!TextUtils.isEmpty(bean.getAdd_time())) {
-            holder.tvGengXin.setText("最近更新  "+ bean.getAdd_time());
+        if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getMarket_name())) {
+            holder.tvGengXin.setText("市场  "+ bean.getBusiness_info().getMarket_name());
         }
         holder.edtCount.setText(bean.getSelectCount()+"");
 

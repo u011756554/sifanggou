@@ -196,13 +196,26 @@ public class JiXuProductListActivity extends BaseActivity {
     }
 
     private void refreshDataProduct() {
-        pageProduct = AppContext.PAGE;
-        pushEventNoProgress(EventCode.HTTP_GETALLBUSINESSURGENTSELLCOMMODITY,AppContext.PAGE_SIZE+"",pageProduct+"",KEY_REFRESH);
+        if (loginBean != null
+                && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+            pageProduct = AppContext.PAGE;
+            pushEventNoProgress(EventCode.HTTP_GETALLBUSINESSURGENTSELLCOMMODITY,AppContext.PAGE_SIZE+"",pageProduct+"",
+                    loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),KEY_REFRESH);
+        }
     }
 
     private void getDataProduct() {
-        pushEventNoProgress(EventCode.HTTP_GETALLBUSINESSURGENTSELLCOMMODITY,AppContext.PAGE_SIZE+"",pageProduct+"",KEY_MORE);
-
+        if (loginBean != null
+                && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+            pushEventNoProgress(EventCode.HTTP_GETALLBUSINESSURGENTSELLCOMMODITY,AppContext.PAGE_SIZE+"",pageProduct+"",
+                    loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),KEY_MORE);
+        }
     }
 
     public void setNoDataProduct(boolean show) {

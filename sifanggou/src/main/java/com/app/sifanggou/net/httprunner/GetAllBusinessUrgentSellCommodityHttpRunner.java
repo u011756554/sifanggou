@@ -24,11 +24,13 @@ public class GetAllBusinessUrgentSellCommodityHttpRunner extends HttpRunner {
     public void onEventRun(Event event) throws Exception {
         String item_num = (String) event.getParamAtIndex(0);
         String page_no = (String) event.getParamAtIndex(1);
-        String tag = (String) event.getParamAtIndex(2);
+        String business_code = (String) event.getParamAtIndex(2);
+        String tag = (String) event.getParamAtIndex(3);
 
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("item_num", item_num);
         map.put("page_no", page_no);
+        map.put("business_code", business_code);
 
         String result = HttpUtils.doPostObject(URLUtils.GETALLBUSINESSURGENTSELLCOMMODITY, map);
 

@@ -74,6 +74,7 @@ public class AllBusinessUrgentSellCommodityAdapter extends SetBaseAdapter<AllBus
                 holder.tvHuoJia.setText("货架  "+ "代理");
             }
         }
+
         if (!TextUtils.isEmpty(bean.getAdd_time())) {
             holder.tvGengXin.setText("最近更新  "+ bean.getAdd_time());
         }

@@ -28,6 +28,7 @@ public class BusinessSubmitOrderHttpRunner extends HttpRunner {
         String express_fee = (String) event.getParamAtIndex(5);
         String pay_mode = (String) event.getParamAtIndex(6);
         String delivery_id = (String) event.getParamAtIndex(7);
+        String delivery_time = (String) event.getParamAtIndex(8);
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("business_code", business_code);
@@ -38,6 +39,7 @@ public class BusinessSubmitOrderHttpRunner extends HttpRunner {
         map.put("express_fee", express_fee);
         map.put("pay_mode", pay_mode);
         map.put("delivery_id", delivery_id);
+        map.put("delivery_time", delivery_id);
 
         String result = HttpUtils.doPost(URLUtils.BUSINESSSUBMITORDER, map);
 

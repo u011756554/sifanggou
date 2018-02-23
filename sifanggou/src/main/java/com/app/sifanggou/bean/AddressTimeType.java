@@ -5,7 +5,7 @@ package com.app.sifanggou.bean;
  */
 
 public enum AddressTimeType {
-    WORKDAY("3小时内送货（周边调货）222"),WEEKEND("当天送货（同城调货）"),NOLIMIT("3天内送货（备货/压仓）");
+    WORKDAY("3小时内送货（周边调货"),WEEKEND("当天送货（同城调货）"),NOLIMIT("3天内送货（备货/压仓）");
 
     private String type;
     AddressTimeType(String type) {

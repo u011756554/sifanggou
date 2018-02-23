@@ -154,8 +154,9 @@ public class ConfirmOrderActivity extends BaseActivity {
                 String express_fee = "0";
                 String pay_mode = "offline";
                 String delivery_id = mAdressBean.getDelivery_id();
+                String delivery_time = mAdressBean.getDelivery_time();
 
-                pushEventBlock(EventCode.HTTP_BUSINESSSUBMITORDER,business_code,user_name,trans_no,sign,amount,express_fee,pay_mode,delivery_id);
+                pushEventBlock(EventCode.HTTP_BUSINESSSUBMITORDER,business_code,user_name,trans_no,sign,amount,express_fee,pay_mode,delivery_id,delivery_time);
             }
         });
     }

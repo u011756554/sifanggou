@@ -68,7 +68,7 @@
                 android:id="@+id/tv_xiaoliang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:gravity="left"
                 android:layout_gravity="center_vertical"
                 android:textSize="13sp"
@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="left"
                 android:textSize="13sp"
                 android:textColor="#555555"
@@ -98,7 +98,7 @@
                 android:id="@+id/tv_huojia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:gravity="left"
                 android:layout_gravity="center_vertical"
                 android:textSize="13sp"
@@ -110,11 +110,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="left"
                 android:textSize="13sp"
-                android:textColor="#555555"
-                android:maxLines="1"/>
+                android:textColor="#555555"/>
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

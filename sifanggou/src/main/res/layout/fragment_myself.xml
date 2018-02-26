@@ -361,13 +361,11 @@
                         android:id="@+id/tv_mymessage_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="5条未读"
-                        android:textColor="#999999"
+                        android:textColor="@color/red"
                         android:textSize="16sp"
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@id/iv_mymessage_right"
-                        android:layout_marginRight="12dp"
-                        android:visibility="gone"/>
+                        android:layout_marginRight="12dp"/>
                 </RelativeLayout>
 
                 <View

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.app.sifanggou.R;
 import com.app.sifanggou.bean.ProductType;
 import com.app.sifanggou.bean.UrgentSellCommodityBean;
+import com.app.sifanggou.utils.ImageLoaderUtil;
 
 import java.util.List;
 
@@ -42,6 +43,9 @@ public class ChuCangHistoryAdapter extends SetBaseAdapter<UrgentSellCommodityBea
             holder = (ViewHolder) convertView.getTag();
         }
         UrgentSellCommodityBean bean = mList.get(position);
+        if (!TextUtils.isEmpty(bean.getCommodity_pic_url())) {
+            ImageLoaderUtil.display(bean.getCommodity_pic_url(),holder.ivPic);
+        }
         if (!TextUtils.isEmpty(bean.getCommodity_name())) {
             holder.tvName.setText(bean.getCommodity_name());
         }
@@ -63,7 +67,8 @@ public class ChuCangHistoryAdapter extends SetBaseAdapter<UrgentSellCommodityBea
             }
         }
         if (!TextUtils.isEmpty(bean.getValid_deadline())) {
-            holder.tvGengXin.setText("有效期:  "+ bean.getValid_deadline());
+            String deadLine = bean.getValid_deadline();
+            holder.tvGengXin.setText("有效期:  "+ deadLine);
         }
         return convertView;
     }

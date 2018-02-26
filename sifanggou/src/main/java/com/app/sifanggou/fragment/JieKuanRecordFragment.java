@@ -29,6 +29,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.rong.imkit.RongIM;
+
 /**
  * Created by Administrator on 2017/12/6.
  */
@@ -78,8 +80,7 @@ public class JieKuanRecordFragment extends BaseFragment {
 
     private void initView() {
         //处理分页
-        adapter = new InOutOrderInfoAdapter(getActivity(),list);
-
+        adapter = new InOutOrderInfoAdapter(getActivity(),list,InOutOrderInfoAdapter.TYPE_DAIJIEKUAN);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.color_banner,R.color.color_banner,R.color.color_banner,R.color.color_banner);
         listViewFooterView = LayoutInflater.from(getActivity()).inflate(R.layout.mode_more, null);
@@ -122,7 +123,19 @@ public class JieKuanRecordFragment extends BaseFragment {
     }
 
     private void initListener() {
+        adapter.setDaiJieListener(new InOutOrderInfoAdapter.DaiJieListener() {
+            @Override
+            public void jieKuan(OrderNoBaseBean bean) {
 
+            }
+
+            @Override
+            public void chat(OrderNoBaseBean bean) {
+                if (bean.getSeller_business_info() != null) {
+                    RongIM.getInstance().startPrivateChat(getActivity(), bean.getSeller_business_code(), bean.getSeller_business_info().getName());
+                }
+            }
+        });
     }
 
     private void initData() {

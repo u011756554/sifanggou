@@ -52,13 +52,6 @@ public class JiXuChuCangActivity extends BaseActivity {
     @ViewInject(R.id.btn_chucang)
     private Button btnHistory;
 
-//    @ViewInject(R.id.rl_all)
-//    private RelativeLayout rlAll;
-//    @ViewInject(R.id.rl_chucang)
-//    private RelativeLayout rlChuCang;
-
-    private RelativeLayout rlAddProduct;
-
     //列表数据展示
     @ViewInject(R.id.srl_splist)
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -98,8 +91,7 @@ public class JiXuChuCangActivity extends BaseActivity {
         listViewFooterView = LayoutInflater.from(JiXuChuCangActivity.this).inflate(R.layout.mode_more, null);
         noMoreText = (TextView) listViewFooterView.findViewById(R.id.no_more);
         loadingText = (TextView) listViewFooterView.findViewById(R.id.load_more);
-        emptyViewView = LayoutInflater.from(JiXuChuCangActivity.this).inflate(R.layout.mode_empty_shangpin, null);
-        rlAddProduct = (RelativeLayout) emptyViewView.findViewById(R.id.rl_myfragment_fragment);
+        emptyViewView = LayoutInflater.from(JiXuChuCangActivity.this).inflate(R.layout.mode_empty, null);
 
         listView.addHeaderView(emptyViewView);
         listView.addFooterView(listViewFooterView);
@@ -156,13 +148,6 @@ public class JiXuChuCangActivity extends BaseActivity {
     }
 
     private void initListener() {
-        rlAddProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(JiXuChuCangActivity.this,AddProductActivity.class);
-                startActivity(intent);
-            }
-        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.app.sifanggou.AppContext;
 import com.app.sifanggou.R;
+import com.app.sifanggou.activity.CarActivity;
 import com.app.sifanggou.adapter.CarAdapter;
 import com.app.sifanggou.adapter.CarItemAdapter;
 import com.app.sifanggou.adapter.InOutOrderInfoAdapter;
@@ -33,6 +34,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.rong.imkit.RongIM;
 
 /**
  * Created by Administrator on 2017/12/6.
@@ -106,6 +109,13 @@ public class DaiJieFragment extends BaseFragment {
                             }
                         })
                         .create().show();
+            }
+
+            @Override
+            public void chat(OrderNoBaseBean bean) {
+                if (bean.getSeller_business_info() != null) {
+                    RongIM.getInstance().startPrivateChat(getActivity(), bean.getSeller_business_code(), bean.getSeller_business_info().getName());
+                }
             }
         });
 

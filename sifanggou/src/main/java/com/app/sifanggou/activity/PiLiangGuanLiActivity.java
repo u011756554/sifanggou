@@ -59,7 +59,6 @@ public class PiLiangGuanLiActivity extends BaseActivity {
     private TextView viewDaiLiHuoJia;
     @ViewInject(R.id.right_layout)
     private RelativeLayout rlRight;
-    private RelativeLayout rlAddProduct;
     @ViewInject(R.id.rl_all)
     private RelativeLayout rlAll;
     @ViewInject(R.id.rl_xiajia)
@@ -132,8 +131,7 @@ public class PiLiangGuanLiActivity extends BaseActivity {
         listViewFooterView = LayoutInflater.from(PiLiangGuanLiActivity.this).inflate(R.layout.mode_more, null);
         noMoreText = (TextView) listViewFooterView.findViewById(R.id.no_more);
         loadingText = (TextView) listViewFooterView.findViewById(R.id.load_more);
-        emptyViewView = LayoutInflater.from(PiLiangGuanLiActivity.this).inflate(R.layout.mode_empty_shangpin, null);
-        rlAddProduct = (RelativeLayout) emptyViewView.findViewById(R.id.rl_myfragment_fragment);
+        emptyViewView = LayoutInflater.from(PiLiangGuanLiActivity.this).inflate(R.layout.mode_empty, null);
 
         listView.addHeaderView(emptyViewView);
         listView.addFooterView(listViewFooterView);
@@ -261,14 +259,6 @@ public class PiLiangGuanLiActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PiLiangGuanLiActivity.this,AddHuoJiaActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        rlAddProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PiLiangGuanLiActivity.this,AddProductActivity.class);
                 startActivity(intent);
             }
         });

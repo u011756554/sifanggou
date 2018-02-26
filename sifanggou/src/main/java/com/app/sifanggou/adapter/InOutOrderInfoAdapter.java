@@ -30,7 +30,9 @@ import java.util.List;
 public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
     private Gson gson = new Gson();
     public static final String TYPE_JIEKUAN = "已结款";
+    public static final String TYPE_DAIJIEKUAN = "待结款";
     public static final String TYPE_SHOUKUAN = "已收款";
+    public static final String TYPE_DAISHOUKUAN = "待收款";
     private String type = "";
     public InOutOrderInfoAdapter(Context context, List<OrderNoBaseBean> list,String type) {
         super(context, list);
@@ -54,6 +56,8 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
             holder.tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
             holder.tvTime = (TextView) convertView.findViewById(R.id.tv_time);
             holder.btnOrder = (Button) convertView.findViewById(R.id.btn_order);
+            holder.ivChat = convertView.findViewById(R.id.iv_chat);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -93,6 +97,21 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
                     orderNoBaseBean.setShow(true);
                 }
                 notifyDataSetChanged();
+            }
+        });
+
+        holder.ivChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (type.equals(TYPE_JIEKUAN) || type.equals(TYPE_DAIJIEKUAN)) {
+                    if (daiJieListener != null) {
+                        daiJieListener.chat(orderNoBaseBean);
+                    }
+                } else if(type.equals(TYPE_SHOUKUAN) || type.equals(TYPE_DAISHOUKUAN)) {
+                    if (daiShouListener != null) {
+                        daiShouListener.chat(orderNoBaseBean);
+                    }
+                }
             }
         });
 
@@ -150,10 +169,12 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
         private MyListView lvItem;
         private TextView tvPrice;
         private Button btnOrder;
+        private ImageView ivChat;
     }
 
     public interface DaiShouListener {
         void shouKuan(OrderNoBaseBean bean);
+        void chat(OrderNoBaseBean bean);
     }
 
     private DaiShouListener daiShouListener;
@@ -164,6 +185,7 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
 
     public interface DaiJieListener {
         void jieKuan(OrderNoBaseBean bean);
+        void chat(OrderNoBaseBean bean);
     }
 
     private DaiJieListener daiJieListener;

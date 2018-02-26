@@ -30,6 +30,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.rong.imkit.RongIM;
+
 /**
  * Created by Administrator on 2017/12/6.
  */
@@ -91,6 +93,13 @@ public class DaiShouFragment extends BaseFragment {
                     String order_status = OrderStatusType.RECEIPTED.getType();
 
                     pushEventBlock(EventCode.HTTP_UPDATEBUSINESSORDERSTATUS,business_code,user_name,trans_no,sign,order_no,sub_order_no,order_status);
+                }
+            }
+
+            @Override
+            public void chat(OrderNoBaseBean bean) {
+                if (bean.getBuyer_business_info() != null) {
+                    RongIM.getInstance().startPrivateChat(getActivity(), bean.getBuyer_business_code(), bean.getBuyer_business_info().getName());
                 }
             }
         });

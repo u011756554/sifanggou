@@ -39,7 +39,7 @@ public class BusinessSubmitOrderHttpRunner extends HttpRunner {
         map.put("express_fee", express_fee);
         map.put("pay_mode", pay_mode);
         map.put("delivery_id", delivery_id);
-        map.put("delivery_time", delivery_id);
+        map.put("delivery_time", delivery_time);
 
         String result = HttpUtils.doPost(URLUtils.BUSINESSSUBMITORDER, map);
 

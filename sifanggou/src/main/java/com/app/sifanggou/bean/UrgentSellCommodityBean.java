@@ -15,6 +15,15 @@ public class UrgentSellCommodityBean extends BaseBean {
     private String type;
     private String add_time;
     private String commodity_name;
+    private String commodity_pic_url;
+
+    public String getCommodity_pic_url() {
+        return commodity_pic_url;
+    }
+
+    public void setCommodity_pic_url(String commodity_pic_url) {
+        this.commodity_pic_url = commodity_pic_url;
+    }
 
     public String getValid_deadline() {
         return valid_deadline;

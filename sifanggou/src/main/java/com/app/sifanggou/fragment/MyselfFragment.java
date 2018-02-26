@@ -50,6 +50,8 @@ import com.app.sifanggou.utils.PreManager;
 import com.app.sifanggou.view.ChangeHeadDialog;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+import io.rong.imlib.RongIMClient;
+
 public class MyselfFragment extends PicBaseFragment{
 	@ViewInject(R.id.rl_shangpinguanli)
 	private RelativeLayout rlShangPinGuanLi;
@@ -83,6 +85,8 @@ public class MyselfFragment extends PicBaseFragment{
 	private RelativeLayout rlScan;
 	@ViewInject(R.id.rl_mymessage)
 	private RelativeLayout rlMyMessage;
+	@ViewInject(R.id.tv_mymessage_count)
+	private TextView tvMessageCount;
 	@ViewInject(R.id.iv_head)
 	private ImageView ivHead;
 	@ViewInject(R.id.tv_level)
@@ -118,6 +122,10 @@ public class MyselfFragment extends PicBaseFragment{
 	public void onResume() {
 		super.onResume();
 		initData();
+		int count = RongIMClient.getInstance().getTotalUnreadCount();
+		if (count != 0) {
+			tvMessageCount.setText(count+"条未读信息");
+		}
 	}
 
 	private void initData() {
@@ -144,7 +152,7 @@ public class MyselfFragment extends PicBaseFragment{
 		if (!TextUtils.isEmpty(bean.getName())) {
 			tvName.setText(bean.getName());
 			if (!TextUtils.isEmpty(bean.getMarket_name())) {
-				tvAddr.setText(bean.getName() + bean.getMarket_name() + bean.getShop_number());
+				tvAddr.setText(bean.getMarket_name() + bean.getShop_number());
 			}
 		}
 

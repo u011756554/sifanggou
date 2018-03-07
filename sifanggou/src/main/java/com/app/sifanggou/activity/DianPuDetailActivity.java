@@ -196,11 +196,8 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
                 tvHuoDong.setText(bean.getMarket_name() + bean.getShop_number());
             }
         }
-        for(int i = 0 ; i < AgentLevelType.values().length ; i++) {
-            if (bean.getAgent_level().equals(AgentLevelType.values()[i].getType())) {
-                tvLevel.setText(AgentLevelType.values()[i].getCode());
-                break;
-            }
+        if (!TextUtils.isEmpty(bean.getGrade())) {
+            tvLevel.setText(bean.getGrade());
         }
         if (!TextUtils.isEmpty(bean.getHead_pic_url())) {
             ImageLoaderUtil.display(bean.getHead_pic_url(),ivHead);

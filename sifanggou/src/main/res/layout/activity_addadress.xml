@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/margin_normal"
-                android:text="周一至周五收货"
+                android:text="3小时内送货（周边调货)"
                 android:gravity="center|left"
                 android:textSize="16sp"
                 android:textColor="@color/color_edit"/>

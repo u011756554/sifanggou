@@ -85,9 +85,11 @@ public abstract class PicBaseActivity extends BaseActivity implements OSSCallBac
     }
 
     protected void uploadFile(String filePath,String tag) {
+        //压缩图片
+        String compressUrl = PictureUtils.instance().compress(filePath);
         this.tag = tag;
         showProgressDialog(null,"正在上传");
-        PutObjectRequest put = new PutObjectRequest(AppContext.OSS_BUCKET, CommonUtils.getAndroidId(this) + System.currentTimeMillis(), filePath);
+        PutObjectRequest put = new PutObjectRequest(AppContext.OSS_BUCKET, CommonUtils.getAndroidId(this) + System.currentTimeMillis(), compressUrl);
         OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
 
             @Override

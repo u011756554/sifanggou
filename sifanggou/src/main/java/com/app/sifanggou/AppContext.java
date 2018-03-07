@@ -21,7 +21,7 @@ public class AppContext {
 	//缓存数据
 	public static final String APP_NAME = "sifanggou";	//文件名字
 	public static final String FILE_SAVE_ROOT_DIRECTORY = File.separator + APP_NAME + File.separator;
-	public static final int PICTURE_SIZE = 300;	//暂且没用到，控制压缩图片大小，单位kb	
+	public static final int PICTURE_SIZE = 100;	//暂且没用到，控制压缩图片大小，单位kb
 	public static final String SAVE_PATH = "/"+APP_NAME;	//压缩文件保存路径
 	public static final String TAKEPICTURE_PATH = "/"+APP_NAME+"/camera";	//通过相机拍照图片保存文件夹路径
 	public static final String TAKEPICTURE_FILE = "temp.jgp";	//通过相机拍照图片保存文件名称	

@@ -11,8 +11,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.R;
+import com.app.sifanggou.activity.UploadCertificateActivity;
 import com.app.sifanggou.bean.CommodityOrderBean;
 import com.app.sifanggou.bean.OrderNoBaseBean;
+import com.app.sifanggou.view.BaseDialog;
+import com.app.sifanggou.view.ConfirmDialog;
 import com.app.sifanggou.view.MyListView;
 import com.google.gson.Gson;
 
@@ -34,6 +37,7 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
     public static final String TYPE_SHOUKUAN = "已收款";
     public static final String TYPE_DAISHOUKUAN = "待收款";
     private String type = "";
+    private ConfirmDialog confirmDialog;
     public InOutOrderInfoAdapter(Context context, List<OrderNoBaseBean> list,String type) {
         super(context, list);
         this.type = type;
@@ -57,6 +61,7 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
             holder.tvTime = (TextView) convertView.findViewById(R.id.tv_time);
             holder.btnOrder = (Button) convertView.findViewById(R.id.btn_order);
             holder.ivChat = convertView.findViewById(R.id.iv_chat);
+            holder.btnRemark = convertView.findViewById(R.id.btn_remark);
 
             convertView.setTag(holder);
         } else {
@@ -145,6 +150,7 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
                 }
             });
         } else if(type.equals(TYPE_SHOUKUAN)) {
+            holder.btnRemark.setVisibility(View.VISIBLE);
             holder.btnOrder.setVisibility(View.VISIBLE);
             holder.btnOrder.setText("已收款");
             holder.btnOrder.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +164,35 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
         } else {
             holder.btnOrder.setVisibility(View.GONE);
         }
+
+        holder.btnRemark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (orderNoBaseBean != null
+                        && orderNoBaseBean.getBuyer_business_info() != null) {
+                    String content = orderNoBaseBean.getBuyer_business_info().getName()
+                            + "  "+orderNoBaseBean.getBuyer_business_info().getMobile()+"\n"
+                            + orderNoBaseBean.getBuyer_business_info().getMarket_name()+"\n";
+                    if (confirmDialog == null) {
+                        confirmDialog = new ConfirmDialog(mContext);
+                    }
+                    if (confirmDialog.isShowing()) {
+                        return;
+                    }
+                    confirmDialog.setContent(content);
+                    confirmDialog.setListener(new BaseDialog.DialogListener() {
+                        @Override
+                        public void update(Object object) {
+                            String result = (String) object;
+                            if ("ok".equals(result)) {
+
+                            }
+                        }
+                    });
+                    confirmDialog.show();
+                }
+            }
+        });
         return convertView;
     }
 
@@ -170,6 +205,7 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
         private TextView tvPrice;
         private Button btnOrder;
         private ImageView ivChat;
+        private Button btnRemark;
     }
 
     public interface DaiShouListener {

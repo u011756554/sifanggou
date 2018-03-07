@@ -186,8 +186,8 @@ public class UploadCertificateActivity extends PicBaseActivity {
 				String lon = "0";
 				String lat = "0";
 				String market_code = cityMarketBean.getMarket_code();
-				String head_pic_url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505414876514&di=e986ebb63011ff3b5abc5c3048317050&imgtype=0&src=http%3A%2F%2Fimg.jdzj.com%2FUserDocument%2F2015b%2Fzhonglongky%2FPicture%2F20151023111322.jpg";
-				String legal_person_id = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505414876514&di=e986ebb63011ff3b5abc5c3048317050&imgtype=0&src=http%3A%2F%2Fimg.jdzj.com%2FUserDocument%2F2015b%2Fzhonglongky%2FPicture%2F20151023111322.jpg";
+				String head_pic_url = "";
+				String legal_person_id = "";
 				String agent_level = "";
 				String scope = scopeNode.getValue();
 				for(AgentLevelType alvt : AgentLevelType.values()) {
@@ -335,6 +335,10 @@ public class UploadCertificateActivity extends PicBaseActivity {
 	}
 	
 	private void selectMyProvice(String province) {
+		if (marketDialog != null) {
+			marketDialog.clearCity();
+		}
+
 		String provinceCode = "";
 		for(ProvinceDataBean pdata : provinceDataList) {
 			if (pdata.getName().equals(province)) {

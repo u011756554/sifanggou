@@ -50,6 +50,8 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
         BusinessInfoBean bean = mList.get(position);
         if (!TextUtils.isEmpty(bean.getHead_pic_url())) {
             ImageLoaderUtil.display(bean.getHead_pic_url(),holder.ivHead);
+        } else {
+            holder.ivHead.setImageResource(R.drawable.icon_dianpu_default);
         }
         if (!TextUtils.isEmpty(bean.getName())) {
             holder.tvName.setText(bean.getName());
@@ -69,13 +71,8 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
             holder.tvCount.setText(bean.getTotal_commodity_num());
         }
 
-        if (!TextUtils.isEmpty(bean.getAgent_level())) {
-            for(AgentLevelType alvt : AgentLevelType.values()) {
-                if (alvt.getType().equals(bean.getAgent_level())) {
-                    holder.tvLevel.setText(alvt.getCode());
-                    break;
-                }
-            }
+        if (!TextUtils.isEmpty(bean.getGrade())) {
+            holder.tvLevel.setText(bean.getGrade());
         }
 
         holder.llContent.setOnClickListener(new View.OnClickListener() {
@@ -90,20 +87,50 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
         if (bean.getFirst_show_commodity_list() != null && bean.getFirst_show_commodity_list().size() > 0) {
             holder.llPic.setVisibility(View.VISIBLE);
             if (bean.getFirst_show_commodity_list().size() == 1) {
-                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(0).getCommodity_pic_url(),holder.ivPic1);
+                String url[] = bean.getFirst_show_commodity_list().get(0).getCommodity_pic_url().split(",");
+                if (url == null || url.length <= 0) {
+
+                } else {
+                    ImageLoaderUtil.display(url[0],holder.ivPic1);
+                }
                 holder.ivPic1.setVisibility(View.VISIBLE);
                 holder.ivPic2.setVisibility(View.INVISIBLE);
                 holder.ivPic3.setVisibility(View.INVISIBLE);
             } else if (bean.getFirst_show_commodity_list().size() == 2) {
-                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(0).getCommodity_pic_url(),holder.ivPic1);
-                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(1).getCommodity_pic_url(),holder.ivPic2);
+                String url1[] = bean.getFirst_show_commodity_list().get(0).getCommodity_pic_url().split(",");
+                String url2[] = bean.getFirst_show_commodity_list().get(1).getCommodity_pic_url().split(",");
+                if (url1 == null || url1.length <= 0) {
+
+                } else {
+                    ImageLoaderUtil.display(url1[0],holder.ivPic1);
+                }
+                if (url2 == null || url2.length <= 0) {
+
+                } else {
+                    ImageLoaderUtil.display(url2[0],holder.ivPic2);
+                }
                 holder.ivPic1.setVisibility(View.VISIBLE);
                 holder.ivPic2.setVisibility(View.VISIBLE);
                 holder.ivPic3.setVisibility(View.INVISIBLE);
             }else if (bean.getFirst_show_commodity_list().size() >= 3) {
-                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(0).getCommodity_pic_url(),holder.ivPic1);
-                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(1).getCommodity_pic_url(),holder.ivPic2);
-                ImageLoaderUtil.display(bean.getFirst_show_commodity_list().get(2).getCommodity_pic_url(),holder.ivPic3);
+                String url1[] = bean.getFirst_show_commodity_list().get(0).getCommodity_pic_url().split(",");
+                String url2[] = bean.getFirst_show_commodity_list().get(1).getCommodity_pic_url().split(",");
+                String url3[] = bean.getFirst_show_commodity_list().get(2).getCommodity_pic_url().split(",");
+                if (url1 == null || url1.length <= 0) {
+
+                } else {
+                    ImageLoaderUtil.display(url1[0],holder.ivPic1);
+                }
+                if (url2 == null || url2.length <= 0) {
+
+                } else {
+                    ImageLoaderUtil.display(url2[0],holder.ivPic2);
+                }
+                if (url3 == null || url3.length <= 0) {
+
+                } else {
+                    ImageLoaderUtil.display(url3[0],holder.ivPic3);
+                }
                 holder.ivPic1.setVisibility(View.VISIBLE);
                 holder.ivPic2.setVisibility(View.VISIBLE);
                 holder.ivPic3.setVisibility(View.VISIBLE);

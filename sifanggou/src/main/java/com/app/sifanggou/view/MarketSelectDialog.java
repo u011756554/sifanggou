@@ -155,6 +155,11 @@ public class MarketSelectDialog extends BaseDialog {
 //		this.levelList = levelList;
 //		refreshLevelView(index);
 //	}
+
+	public void clearCity() {
+		cityList.clear();
+		refreshCityView(0);
+	}
 	
 	public void setMarket(List<String> marketList,int index) {
 		this.marketList = marketList;

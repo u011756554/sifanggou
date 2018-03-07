@@ -75,6 +75,7 @@ public class BurOrderTabActivity extends BaseActivity implements PageSelectListe
             }
         };
     }
+
     //初始化界面
     private void initView() {
         addBack(R.id.rl_back);

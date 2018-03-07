@@ -11,10 +11,14 @@ import com.app.sifanggou.fragment.MyselfFragment;
 import com.app.sifanggou.fragment.CategoryFragment;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
+import com.app.sifanggou.net.bean.GetVerInfoResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
+import com.app.sifanggou.view.BaseDialog;
+import com.app.sifanggou.view.VersionUpdateDialog;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -50,7 +54,9 @@ public class MainActivity extends BaseActivity {
 	
 	private ArrayList<BaseFragment> fragments = new ArrayList<BaseFragment>();
 	private int currentTabIndex = 0;
-	
+
+	private VersionUpdateDialog versionUpdateDialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -189,6 +195,7 @@ public class MainActivity extends BaseActivity {
     
     private void getData() {
     	pushEvent(EventCode.HTTP_GETPROVINCECITYZONE);
+		pushEvent(EventCode.HTTP_GETVERINFO);
     }
     
     @Override
@@ -198,6 +205,36 @@ public class MainActivity extends BaseActivity {
     	if (event.getEventCode() == EventCode.HTTP_GETPROVINCECITYZONE) {
 			if (event.isSuccess()) {
 				
+			} else {
+				CommonUtils.showToast(event.getFailMessage());
+			}
+		}
+
+		if (event.getEventCode() == EventCode.HTTP_GETVERINFO) {
+			if (event.isSuccess()) {
+				GetVerInfoResponseBean bean = (GetVerInfoResponseBean) event.getReturnParamAtIndex(0);
+				if (bean != null
+						&& bean.getData() != null
+						&& bean.getData().getVer_info() != null) {
+					if (!CommonUtils.checkVersionIsSame(bean.getData().getVer_info().getVersion())) {
+						if (versionUpdateDialog == null) {
+							versionUpdateDialog = new VersionUpdateDialog(MainActivity.this);
+						}
+						versionUpdateDialog.setData("发现新版本："+bean.getData().getVer_info().getVersion());
+						versionUpdateDialog.setListener(new BaseDialog.DialogListener() {
+
+							@Override
+							public void update(Object object) {
+								if ("true".equals((String)object)) {
+									Intent intent = new Intent(Intent.ACTION_VIEW);
+									intent.setData(Uri.parse(bean.getData().getVer_info().getDownload_url()));
+									startActivity(intent);
+								}
+							}
+						});
+						versionUpdateDialog.show();
+					}
+				}
 			} else {
 				CommonUtils.showToast(event.getFailMessage());
 			}

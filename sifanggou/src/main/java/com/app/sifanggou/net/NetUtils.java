@@ -48,6 +48,7 @@ import com.app.sifanggou.net.httprunner.GetFirstPageAdHttpRunner;
 import com.app.sifanggou.net.httprunner.GetProvinceCityZoneHttpRunner;
 import com.app.sifanggou.net.httprunner.GetRecommendCommodityHttpRunner;
 import com.app.sifanggou.net.httprunner.GetShelfAmountHttpRunner;
+import com.app.sifanggou.net.httprunner.GetVerInfoHttpRunner;
 import com.app.sifanggou.net.httprunner.GetVerifyCodeHttpRunner;
 import com.app.sifanggou.net.httprunner.IsBusinessCollectCommodityHttpRunner;
 import com.app.sifanggou.net.httprunner.IsBusinessPartnerHttpRunner;
@@ -125,6 +126,7 @@ public class NetUtils {
 		eventManager.registerEventRunner(EventCode.HTTP_DELBUSINESSSTAFF, new DelBusinessStaffHttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSCOMMODITYINFO2, new GetBusinessCommodityInfo2HttpRunner());
 		eventManager.registerEventRunner(EventCode.HTTP_GETBUSINESSCONCERNEDINFO, new GetBusinessConcernedInfoHttpRunner());
+		eventManager.registerEventRunner(EventCode.HTTP_GETVERINFO, new GetVerInfoHttpRunner());
 	}
 }
 

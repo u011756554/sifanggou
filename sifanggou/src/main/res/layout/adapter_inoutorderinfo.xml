@@ -24,16 +24,6 @@
             android:layout_marginLeft="@dimen/margin_normal"
             android:background="@drawable/icon_kefu"/>
 
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/iv_chat"
-            android:layout_marginLeft="@dimen/margin_mini"
-            android:textSize="15sp"
-            android:textColor="@color/black"/>
-
         <ImageView
             android:id="@+id/iv_extend"
             android:layout_width="wrap_content"
@@ -43,6 +33,31 @@
             android:background="@drawable/selector_select_extend"
             android:layout_marginRight="@dimen/margin_normal"/>
 
+        <Button
+            android:id="@+id/btn_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/iv_extend"
+            android:layout_marginRight="@dimen/margin_mini"
+            android:text="备注"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:background="@color/color_banner"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_chat"
+            android:layout_toLeftOf="@id/btn_remark"
+            android:layout_marginRight="@dimen/margin_mini"
+            android:layout_marginLeft="@dimen/margin_mini"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:maxLines="1"/>
     </RelativeLayout>
 
     <com.app.sifanggou.view.MyListView

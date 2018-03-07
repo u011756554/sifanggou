@@ -707,6 +707,17 @@ public class CommonUtils {
 		return  dateList;
 	}
 
+	public static boolean checkVersionIsSame(String version) {
+		String versionName = getVersion();
+		if (TextUtils.isEmpty(version) || TextUtils.isEmpty(versionName)) {
+			return true;
+		} else {
+			if (!version.equals(versionName)) {
+				return false;
+			}
+		}
+		return true;
+	}
 	public static String buildTransaction() {
 		return System.currentTimeMillis() + "jihua";
 	}

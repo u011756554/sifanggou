@@ -103,7 +103,7 @@
                 android:textSize="19sp"
                 android:textColor="#222222"
                 android:gravity="center"
-                android:text="商品名称"/>
+                android:text="商品名称" />
 
             <EditText
                 android:id="@+id/edt_name"
@@ -116,7 +116,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <View
@@ -152,7 +153,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <View
@@ -296,7 +298,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <View
@@ -331,7 +334,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <View
@@ -366,7 +370,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <View

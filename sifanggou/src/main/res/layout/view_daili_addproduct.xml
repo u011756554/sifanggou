@@ -189,7 +189,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <View
@@ -225,7 +226,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <View
@@ -368,7 +370,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <View
@@ -403,7 +406,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <View
@@ -438,7 +442,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"/>
+                android:layout_marginRight="15dp"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <View

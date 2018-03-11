@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.R;
+import com.app.sifanggou.bean.AgentLevelType;
 import com.app.sifanggou.bean.AllBusinessUrgentSellCommodityBean;
 import com.app.sifanggou.bean.ProductType;
 import com.app.sifanggou.utils.ImageLoaderUtil;
@@ -67,12 +68,21 @@ public class AllBusinessUrgentSellCommodityAdapter extends SetBaseAdapter<AllBus
         if (!TextUtils.isEmpty(bean.getSale_num())) {
             holder.tvXiaoLiang.setText("销量  "+ bean.getSale_num());
         }
-        if (!TextUtils.isEmpty(bean.getType())) {
-            if (bean.getType().equals(ProductType.COMMON.getType())){
-                holder.tvHuoJia.setText("货架  "+ "普通");
-            } else if(bean.getType().equals(ProductType.AGENCY.getType())) {
-                holder.tvHuoJia.setText("货架  "+ "代理");
+//        if (!TextUtils.isEmpty(bean.getType())) {
+//            if (bean.getType().equals(ProductType.COMMON.getType())){
+//                holder.tvHuoJia.setText("货架  "+ "普通");
+//            } else if(bean.getType().equals(ProductType.AGENCY.getType())) {
+//                holder.tvHuoJia.setText("货架  "+ "代理");
+//            }
+//        }
+        if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getAgent_level())) {
+            for (AgentLevelType alt : AgentLevelType.values()) {
+                if (alt.getType().equals(bean.getBusiness_info().getAgent_level())) {
+                    holder.tvHuoJia.setText(alt.getName());
+                }
             }
+        } else {
+            holder.tvHuoJia.setText("");
         }
 
         if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getMarket_name())) {

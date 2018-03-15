@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.R;
+import com.app.sifanggou.bean.AgentLevelType;
 import com.app.sifanggou.bean.CommodityInfoBean;
 import com.app.sifanggou.bean.ProductType;
 import com.app.sifanggou.utils.CommonUtils;
@@ -70,13 +71,24 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
         if (!TextUtils.isEmpty(bean.getCollection_num())) {
             holder.tvNum.setText("被收藏  "+ bean.getCollection_num());
         }
-        if (!TextUtils.isEmpty(bean.getType())) {
-            if (bean.getType().equals(ProductType.COMMON.getType())){
-                holder.tvHuoJia.setText("货架  "+ "普通");
-            } else if(bean.getType().equals(ProductType.AGENCY.getType())) {
-                holder.tvHuoJia.setText("货架  "+ "代理");
+//        if (!TextUtils.isEmpty(bean.getType())) {
+//            if (bean.getType().equals(ProductType.COMMON.getType())){
+//                holder.tvHuoJia.setText("货架  "+ "普通");
+//            } else if(bean.getType().equals(ProductType.AGENCY.getType())) {
+//                holder.tvHuoJia.setText("货架  "+ "代理");
+//            }
+//        }
+
+        if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getAgent_level())) {
+            for (AgentLevelType alt : AgentLevelType.values()) {
+                if (alt.getType().equals(bean.getBusiness_info().getAgent_level())) {
+                    holder.tvHuoJia.setText(alt.getName());
+                }
             }
+        } else {
+            holder.tvHuoJia.setText("");
         }
+
         if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getMarket_name())) {
             holder.tvGengXin.setText("市场：  "+ bean.getBusiness_info().getMarket_name());
         }

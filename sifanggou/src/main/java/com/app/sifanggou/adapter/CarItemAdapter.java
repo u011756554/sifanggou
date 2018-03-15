@@ -55,7 +55,12 @@ public class CarItemAdapter extends SetBaseAdapter<CarItemBean> {
         }
         final CarItemBean bean = mList.get(position);
         if (!TextUtils.isEmpty(bean.getCommodity_pic_url())) {
-            ImageLoaderUtil.display(bean.getCommodity_pic_url(),holder.ivPic);
+            String url[] = bean.getCommodity_pic_url().split(",");
+            if (url == null || url.length <= 0) {
+
+            } else {
+                ImageLoaderUtil.display(url[0],holder.ivPic);
+            }
         }
         if (!TextUtils.isEmpty(bean.getPrice())) {
             holder.tvPrice.setText("￥"+ Float.valueOf(bean.getPrice())/100);

@@ -58,7 +58,10 @@ public class ProductCollectGridAdapter extends SetBaseAdapter<CommodityInfoBean>
 
         }
         holder.tvName.setText(infoBean.getCommodity_name());
-        if (!TextUtils.isEmpty(infoBean.getA_price())) {
+        if (!TextUtils.isEmpty(infoBean.getPrice())) {
+            float price = Float.valueOf(infoBean.getPrice()) / 100;
+            holder.tvPrice.setText("￥"+price);
+        } else if (!TextUtils.isEmpty(infoBean.getA_price())) {
             float price = Float.valueOf(infoBean.getA_price()) / 100;
             holder.tvPrice.setText("￥"+price);
         }

@@ -15,9 +15,11 @@ public class CommodityInfoBean extends BaseBean {
     private String commodity_stock_pic_url;
     private String agent_level;
     private String agency_contract_pic_url;
+    private String is_urgent_sell;
     private String a_price;
     private String third_level_category_name;
     private String enable;
+    private String price;
     private String intro;
     private String commodity_name;
     private String first_level_category_name;
@@ -37,6 +39,22 @@ public class CommodityInfoBean extends BaseBean {
     private String first_level_category_code;
     private int selectCount;
     private boolean isSelect = false;
+
+    public String getIs_urgent_sell() {
+        return is_urgent_sell;
+    }
+
+    public void setIs_urgent_sell(String is_urgent_sell) {
+        this.is_urgent_sell = is_urgent_sell;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public BusinessInfoBean getBusiness_info() {
         return business_info;

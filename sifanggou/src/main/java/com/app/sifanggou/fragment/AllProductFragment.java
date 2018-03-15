@@ -134,10 +134,6 @@ public class AllProductFragment extends BaseFragment {
 
     private void initListener() {
         adapter.setListener(new CommodityInfoBeanAdapter.AddListener() {
-            @Override
-            public void add(CommodityInfoBean bean) {
-                carAdd(bean);
-            }
 
             @Override
             public void click(CommodityInfoBean bean) {
@@ -175,17 +171,32 @@ public class AllProductFragment extends BaseFragment {
     }
 
     private void refreshData() {
-        if (!TextUtils.isEmpty(BUSINESS_CODE)) {
+        if (!TextUtils.isEmpty(BUSINESS_CODE)
+                && loginBean != null
+                && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
             page = 0;
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYINFO2,BUSINESS_CODE,commityInfoTypeALLType,AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYINFO2,BUSINESS_CODE,
+                    loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+                    commityInfoTypeALLType,AppContext.ITEM_NUM+"",page + "",KEY_REFRESH);
         }
     }
 
     private void getData() {
-        if (!TextUtils.isEmpty(BUSINESS_CODE)) {
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYINFO2,BUSINESS_CODE,commityInfoTypeALLType,AppContext.ITEM_NUM+"",page + "",KEY_MORE);
+        if (!TextUtils.isEmpty(BUSINESS_CODE)
+                && loginBean != null
+                && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYINFO2,BUSINESS_CODE,
+                    loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+                    commityInfoTypeALLType,AppContext.ITEM_NUM+"",page + "",KEY_MORE);
         }
     }
+
     public void setNoData(boolean show) {
         if (isFirst) {
             CommonUtils.measureView(emptyViewView);

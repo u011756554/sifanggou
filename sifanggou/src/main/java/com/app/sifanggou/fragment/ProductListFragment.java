@@ -135,7 +135,7 @@ public class ProductListFragment extends BaseFragment {
     }
 
     private void initListener() {
-        adapterProduct.setListener(new CommodityInfoBeanAdapter.AddListener() {
+        adapterProduct.setListener(new CommodityInfoBeanOlderAdpater.AddListener() {
             @Override
             public void add(CommodityInfoBean bean) {
                 carAdd(bean);
@@ -256,6 +256,7 @@ public class ProductListFragment extends BaseFragment {
                     }
                     List<CommodityInfoBean> tmpList = new ArrayList<CommodityInfoBean>();
                     for(CommodityCollectBean cc : bean.getData().getBusiness_commodity_collect_list()) {
+                        cc.getCommodity_info().setBusiness_info(cc.getBusiness_info());
                         tmpList.add(cc.getCommodity_info());
                     }
 

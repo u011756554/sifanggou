@@ -1,13 +1,10 @@
 package com.app.sifanggou.adapter;
 
 import android.content.Context;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,8 +12,6 @@ import android.widget.TextView;
 import com.app.sifanggou.R;
 import com.app.sifanggou.bean.AgentLevelType;
 import com.app.sifanggou.bean.CommodityInfoBean;
-import com.app.sifanggou.bean.ProductType;
-import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.ImageLoaderUtil;
 
 import java.util.List;
@@ -38,16 +33,12 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_commodity,null);
             holder = new ViewHolder();
             holder.ivPic = (ImageView) convertView.findViewById(R.id.iv_pic);
-            holder.ivAdd = (ImageView) convertView.findViewById(R.id.iv_add);
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
             holder.tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
             holder.tvXiaoLiang = (TextView) convertView.findViewById(R.id.tv_xiaoliang);
-            holder.tvNum = (TextView) convertView.findViewById(R.id.tv_num);
+            holder.tvGuiGe = (TextView) convertView.findViewById(R.id.tv_num);
             holder.tvHuoJia = (TextView) convertView.findViewById(R.id.tv_huojia);
             holder.tvGengXin = (TextView) convertView.findViewById(R.id.tv_gengxin);
-            holder.edtCount = (EditText) convertView.findViewById(R.id.edt_count);
-            holder.tvAdd = (TextView) convertView.findViewById(R.id.tv_add);
-            holder.tvJian = (TextView) convertView.findViewById(R.id.tv_jian);
             holder.rlContent = (RelativeLayout) convertView.findViewById(R.id.rl_content);
             convertView.setTag(holder);
         } else {
@@ -61,15 +52,18 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
         if (!TextUtils.isEmpty(bean.getCommodity_name())) {
             holder.tvName.setText(bean.getCommodity_name());
         }
-        if (!TextUtils.isEmpty(bean.getA_price())) {
+        if (!TextUtils.isEmpty(bean.getPrice())) {
+            float price = Float.valueOf(bean.getPrice()) / 100;
+            holder.tvPrice.setText("￥"+price);
+        } else if(!TextUtils.isEmpty(bean.getA_price())) {
             float price = Float.valueOf(bean.getA_price()) / 100;
             holder.tvPrice.setText("￥"+price);
         }
         if (!TextUtils.isEmpty(bean.getSale_num())) {
             holder.tvXiaoLiang.setText("销量  "+ bean.getSale_num());
         }
-        if (!TextUtils.isEmpty(bean.getCollection_num())) {
-            holder.tvNum.setText("被收藏  "+ bean.getCollection_num());
+        if (!TextUtils.isEmpty(bean.getSpecification())) {
+            holder.tvGuiGe.setText("规格  "+ bean.getSpecification());
         }
 //        if (!TextUtils.isEmpty(bean.getType())) {
 //            if (bean.getType().equals(ProductType.COMMON.getType())){
@@ -90,62 +84,8 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
         }
 
         if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getMarket_name())) {
-            holder.tvGengXin.setText("市场：  "+ bean.getBusiness_info().getMarket_name());
+            holder.tvGengXin.setText("市场  "+ bean.getBusiness_info().getMarket_name());
         }
-        holder.edtCount.setText(bean.getSelectCount()+"");
-
-        final EditText editCount = holder.edtCount;
-        holder.edtCount.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                int count = Integer.valueOf(s.toString());
-                if (count >= 10000) {
-                    CommonUtils.showToast("数据过大");
-                    editCount.setText("0");
-                }
-                bean.setSelectCount(count);
-            }
-        });
-        holder.tvAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count = Integer.valueOf(bean.getSelectCount());
-                count = count + 1;
-                bean.setSelectCount(count);
-                editCount.setText(count + "");
-            }
-        });
-
-        holder.tvJian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count = Integer.valueOf(bean.getSelectCount());
-                if (count != 0) {
-                    count = count - 1;
-                }
-                bean.setSelectCount(count);
-                editCount.setText(count + "");
-            }
-        });
-
-        holder.ivAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (addListener != null && bean.getSelectCount() > 0) {
-                    addListener.add(bean);
-                }
-            }
-        });
 
         holder.ivPic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,21 +100,16 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
 
     private class ViewHolder {
         private ImageView ivPic;
-        private ImageView ivAdd;
         private TextView tvName;
         private TextView tvPrice;
         private TextView tvXiaoLiang;
-        private TextView tvNum;
+        private TextView tvGuiGe;
         private TextView tvHuoJia;
         private TextView tvGengXin;
-        private TextView tvJian;
-        private TextView tvAdd;
-        private EditText edtCount;
         private RelativeLayout rlContent;
     }
 
     public interface AddListener {
-        void add(CommodityInfoBean bean);
         void click(CommodityInfoBean bean);
     }
 

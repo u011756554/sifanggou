@@ -130,10 +130,6 @@ public class JiXuProductListActivity extends BaseActivity {
 
     private void initListener() {
         adapterProduct.setListener(new AllBusinessUrgentSellCommodityAdapter.AddListener() {
-            @Override
-            public void add(AllBusinessUrgentSellCommodityBean bean) {
-                carAdd(bean);
-            }
 
             @Override
             public void click(AllBusinessUrgentSellCommodityBean bean) {

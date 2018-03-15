@@ -3,6 +3,7 @@ package com.app.sifanggou.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -129,10 +130,6 @@ public class RecommondProductActivity extends BaseActivity {
 
     private void initListener() {
         adapterProduct.setListener(new CommodityInfoBeanAdapter.AddListener() {
-            @Override
-            public void add(CommodityInfoBean bean) {
-                carAdd(bean);
-            }
 
             @Override
             public void click(CommodityInfoBean bean) {
@@ -159,13 +156,6 @@ public class RecommondProductActivity extends BaseActivity {
         });
     }
 
-
-    private void carAdd(CommodityInfoBean bean) {
-        if (loginBean != null && loginBean.getData() != null && loginBean.getData().getLogin_info() != null && loginBean.getData().getLogin_info().getBusiness_info() != null) {
-            pushEventNoProgress(EventCode.HTTP_ADDBUSINESSSHOPPINGCART,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),bean.getCommodity_id(),bean.getSelectCount()+"");
-        }
-    }
-
     //商品UI
     private void loadProduct() {
         if (!isRefreshingProduct && !isLoadingProduct && !isOverProduct) {
@@ -188,12 +178,28 @@ public class RecommondProductActivity extends BaseActivity {
     }
 
     private void refreshDataProduct() {
-        pageProduct = AppContext.PAGE;
-        pushEventNoProgress(EventCode.HTTP_GETRECOMMENDCOMMODITY,AppContext.PAGE_SIZE+"",pageProduct+"",KEY_REFRESH);
+        if (loginBean != null
+                && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())){
+            pageProduct = AppContext.PAGE;
+            pushEventNoProgress(EventCode.HTTP_GETRECOMMENDCOMMODITY,
+                    loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+                    AppContext.PAGE_SIZE+"",pageProduct+"",KEY_REFRESH);
+        }
     }
 
     private void getDataProduct() {
-        pushEventNoProgress(EventCode.HTTP_GETRECOMMENDCOMMODITY,AppContext.PAGE_SIZE+"",pageProduct+"",KEY_MORE);
+        if (loginBean != null
+                && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())){
+            pushEventNoProgress(EventCode.HTTP_GETRECOMMENDCOMMODITY,
+                    loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+                    AppContext.PAGE_SIZE+"",pageProduct+"",KEY_MORE);
+        }
     }
 
     public void setNoDataProduct(boolean show) {
@@ -222,15 +228,6 @@ public class RecommondProductActivity extends BaseActivity {
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
-        if (event.getEventCode() == EventCode.HTTP_ADDBUSINESSSHOPPINGCART) {
-            if (event.isSuccess()) {
-                String commodity_num = (String) event.getReturnParamAtIndex(1);
-                carCount =  carCount + Integer.valueOf(commodity_num);
-                tvCarMount.setText(carCount+"");
-            } else {
-                CommonUtils.showToast(event.getFailMessage());
-            }
-        }
         if (event.getEventCode() == EventCode.HTTP_GETRECOMMENDCOMMODITY) {
             if (event.isSuccess()) {
                 String type = (String) event.getReturnParamAtIndex(1);

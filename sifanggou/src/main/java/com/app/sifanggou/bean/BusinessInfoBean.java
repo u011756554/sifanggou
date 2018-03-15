@@ -18,6 +18,7 @@ public class BusinessInfoBean extends BaseBean {
     private String head_pic_url;
     private String legal_person_id;
     private String integrate_distribute_type;
+    private String city_name;
     private String store_pic_url;
     private String province;
     private String zone;
@@ -41,6 +42,14 @@ public class BusinessInfoBean extends BaseBean {
     private String total_commodity_num;
     private List<CommodityInfoBean> first_show_commodity_list;
 
+
+    public String getCity_name() {
+        return city_name;
+    }
+
+    public void setCity_name(String city_name) {
+        this.city_name = city_name;
+    }
 
     public String getTotal_sale_num() {
         return total_sale_num;

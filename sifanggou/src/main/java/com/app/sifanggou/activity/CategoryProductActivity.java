@@ -148,10 +148,6 @@ public class CategoryProductActivity extends BaseActivity {
 
     private void initListener() {
         adapterProduct.setListener(new CommodityInfoBeanAdapter.AddListener() {
-            @Override
-            public void add(CommodityInfoBean bean) {
-                carAdd(bean);
-            }
 
             @Override
             public void click(CommodityInfoBean bean) {
@@ -291,11 +287,27 @@ public class CategoryProductActivity extends BaseActivity {
 
     private void refreshDataProduct() {
         pageProduct = AppContext.PAGE;
-        pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,first_category_code,second_category_code,orderTreeType.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",KEY_REFRESH);
+        if(loginBean != null
+                && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,first_category_code,second_category_code,orderTreeType.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",
+                    loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+                    KEY_REFRESH);
+        }
     }
 
     private void getDataProduct() {
-        pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,first_category_code,second_category_code,orderTreeType.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",KEY_MORE);
+        if(loginBean != null
+                && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,first_category_code,second_category_code,orderTreeType.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",
+                    loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+                    KEY_MORE);
+        }
     }
 
     public void setNoDataProduct(boolean show) {

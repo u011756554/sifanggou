@@ -28,6 +28,7 @@ public class GetBusinessCommodityByCategoryCodeHttpRunner extends HttpRunner {
         String order_type = (String) event.getParamAtIndex(3);
         String item_num = (String) event.getParamAtIndex(4);
         String page_no = (String) event.getParamAtIndex(5);
+        String business_code = (String) event.getParamAtIndex(6);
         String tag = (String) event.getParamAtIndex(6);
 
         HashMap<String, String> map = new HashMap<String, String>();
@@ -43,6 +44,7 @@ public class GetBusinessCommodityByCategoryCodeHttpRunner extends HttpRunner {
         map.put("order_type", order_type);
         map.put("item_num", item_num);
         map.put("page_no", page_no);
+        map.put("business_code", business_code);
 
         String result = HttpUtils.doPost(URLUtils.GETBUSINESSCOMMODITYBYCATEGORYCODE, map);
 

@@ -150,10 +150,6 @@ public class ProductByCategorytypeActivity extends BaseActivity {
 
     private void initListener() {
         adapterProduct.setListener(new CommodityInfoBeanAdapter.AddListener() {
-            @Override
-            public void add(CommodityInfoBean bean) {
-                carAdd(bean);
-            }
 
             @Override
             public void click(CommodityInfoBean bean) {
@@ -222,9 +218,18 @@ public class ProductByCategorytypeActivity extends BaseActivity {
                 && TextUtils.isEmpty(third_category_code)) {
             return;
         }
-        if (nodeBaseBean != null) {
+        if (nodeBaseBean != null
+                && loginBean != null
+                && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
             pageProduct = AppContext.PAGE;
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,first_category_code,second_category_code,third_category_code, OrderTreeType.PRICE.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",KEY_REFRESH);
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,first_category_code,
+                    second_category_code,third_category_code,
+                    OrderTreeType.PRICE.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",
+                    loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+                    KEY_REFRESH);
         }
     }
 
@@ -234,8 +239,17 @@ public class ProductByCategorytypeActivity extends BaseActivity {
                 && TextUtils.isEmpty(third_category_code)) {
             return;
         }
-        if (nodeBaseBean != null) {
-            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,first_category_code,second_category_code,third_category_code, OrderTreeType.PRICE.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",KEY_MORE);
+        if (nodeBaseBean != null
+                && loginBean != null
+                && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+            pushEventNoProgress(EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE,first_category_code,
+                    second_category_code,third_category_code,
+                    OrderTreeType.PRICE.getType(),AppContext.PAGE_SIZE+"",pageProduct+"",
+                    loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+                    KEY_MORE);
         }
     }
 

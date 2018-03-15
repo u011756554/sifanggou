@@ -50,6 +50,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -355,7 +356,13 @@ public class MainFragemnt extends BaseFragment {
 	}
 
 	private void getRecommandProduct() {
-		pushEventNoProgress(EventCode.HTTP_GETRECOMMENDCOMMODITY,AppContext.PAGE_SIZE+"",AppContext.PAGE+"","refresh");
+		if (loginBean != null
+				&& loginBean.getData() != null
+				&& loginBean.getData().getLogin_info() != null
+				&& loginBean.getData().getLogin_info().getBusiness_info() != null
+				&& !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code()))
+		pushEventNoProgress(EventCode.HTTP_GETRECOMMENDCOMMODITY,loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+				AppContext.PAGE_SIZE+"",AppContext.PAGE+"","refresh");
 	}
 
 	private  void refreshAd(List<GuangGaoBean> adList) {

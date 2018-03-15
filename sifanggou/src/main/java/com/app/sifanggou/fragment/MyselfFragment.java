@@ -50,6 +50,7 @@ import com.app.sifanggou.utils.PreManager;
 import com.app.sifanggou.view.ChangeHeadDialog;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 
 public class MyselfFragment extends PicBaseFragment{
@@ -122,10 +123,21 @@ public class MyselfFragment extends PicBaseFragment{
 	public void onResume() {
 		super.onResume();
 		initData();
-		int count = RongIMClient.getInstance().getTotalUnreadCount();
-		if (count != 0) {
-			tvMessageCount.setText(count+"条未读信息");
-		}
+		RongIMClient.getInstance().getTotalUnreadCount(new RongIMClient.ResultCallback<Integer>() {
+			@Override
+			public void onSuccess(Integer integer) {
+				if (integer.intValue() != 0) {
+					tvMessageCount.setText(integer.intValue()+"条未读信息");
+				} else {
+					tvMessageCount.setText("");
+				}
+			}
+
+			@Override
+			public void onError(RongIMClient.ErrorCode errorCode) {
+
+			}
+		});
 	}
 
 	private void initData() {

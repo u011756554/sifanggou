@@ -86,37 +86,6 @@
                 android:textColor="#555555"
                 android:maxLines="1"/>
 
-            <TextView
-                android:id="@+id/tv_jian"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/shape_bg_orental_gray"
-                android:layout_marginLeft="@dimen/margin_normal"
-                android:text="—"
-                android:textColor="#4d4a47"
-                android:textSize="11sp"
-                android:gravity="center"/>
-
-            <EditText
-                android:id="@+id/edt_count"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:background="@drawable/shape_bg_orental_gray"
-                android:text="0"
-                android:textColor="#4d4a47"
-                android:textSize="11sp"
-                android:gravity="center"
-                android:inputType="number"/>
-
-            <TextView
-                android:id="@+id/tv_add"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/shape_bg_orental_gray"
-                android:text="+"
-                android:textColor="#4d4a47"
-                android:textSize="11sp"
-                android:gravity="center"/>
 
         </LinearLayout>
 

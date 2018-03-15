@@ -306,10 +306,6 @@ public class SearchActivity extends BaseActivity {
         });
 
         adapterProduct.setListener(new CommodityInfoBeanAdapter.AddListener() {
-            @Override
-            public void add(CommodityInfoBean bean) {
-                carAdd(bean);
-            }
 
             @Override
             public void click(CommodityInfoBean bean) {

@@ -34,16 +34,12 @@ public class AllBusinessUrgentSellCommodityAdapter extends SetBaseAdapter<AllBus
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_allbusinessurgentsellcommodity,null);
             holder = new ViewHolder();
             holder.ivPic = (ImageView) convertView.findViewById(R.id.iv_pic);
-            holder.ivAdd = (ImageView) convertView.findViewById(R.id.iv_add);
             holder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
             holder.tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
             holder.tvXiaoLiang = (TextView) convertView.findViewById(R.id.tv_xiaoliang);
             holder.tvOldPrice = (TextView) convertView.findViewById(R.id.tv_old_price);
             holder.tvHuoJia = (TextView) convertView.findViewById(R.id.tv_huojia);
             holder.tvGengXin = (TextView) convertView.findViewById(R.id.tv_gengxin);
-            holder.edtCount = (EditText) convertView.findViewById(R.id.edt_count);
-            holder.tvAdd = (TextView) convertView.findViewById(R.id.tv_add);
-            holder.tvJian = (TextView) convertView.findViewById(R.id.tv_jian);
             holder.rlContent = (RelativeLayout) convertView.findViewById(R.id.rl_content);
             convertView.setTag(holder);
         } else {
@@ -88,39 +84,6 @@ public class AllBusinessUrgentSellCommodityAdapter extends SetBaseAdapter<AllBus
         if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getMarket_name())) {
             holder.tvGengXin.setText("市场  "+ bean.getBusiness_info().getMarket_name());
         }
-        holder.edtCount.setText(bean.getSelectCount()+"");
-
-        final EditText editCount = holder.edtCount;
-        holder.tvAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count = Integer.valueOf(bean.getSelectCount());
-                count = count + 1;
-                bean.setSelectCount(count);
-                editCount.setText(count + "");
-            }
-        });
-
-        holder.tvJian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count = Integer.valueOf(bean.getSelectCount());
-                if (count != 0) {
-                    count = count - 1;
-                }
-                bean.setSelectCount(count);
-                editCount.setText(count + "");
-            }
-        });
-
-        holder.ivAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (addListener != null && bean.getSelectCount() > 0) {
-                    addListener.add(bean);
-                }
-            }
-        });
 
         holder.rlContent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,21 +98,16 @@ public class AllBusinessUrgentSellCommodityAdapter extends SetBaseAdapter<AllBus
 
     private class ViewHolder {
         private ImageView ivPic;
-        private ImageView ivAdd;
         private TextView tvName;
         private TextView tvPrice;
         private TextView tvOldPrice;
         private TextView tvXiaoLiang;
         private TextView tvHuoJia;
         private TextView tvGengXin;
-        private TextView tvJian;
-        private TextView tvAdd;
-        private EditText edtCount;
         private RelativeLayout rlContent;
     }
 
     public interface AddListener {
-        void add(AllBusinessUrgentSellCommodityBean bean);
         void click(AllBusinessUrgentSellCommodityBean bean);
     }
 

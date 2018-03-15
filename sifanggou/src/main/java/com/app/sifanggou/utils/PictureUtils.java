@@ -41,8 +41,8 @@ public class PictureUtils {
 		newOpts.inJustDecodeBounds = false;
 		int w = newOpts.outWidth;  
         int h = newOpts.outHeight;  
-        float hh = 1080f;//  
-        float ww = 720f;//  
+        float hh = 540f;//
+        float ww = 360f;//
         int be = 1;  
         if (w > h && w > ww) {  
             be = (int) (newOpts.outWidth / ww);  

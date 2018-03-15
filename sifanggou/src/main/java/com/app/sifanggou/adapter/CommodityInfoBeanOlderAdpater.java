@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.R;
+import com.app.sifanggou.bean.AgentLevelType;
 import com.app.sifanggou.bean.CommodityInfoBean;
 import com.app.sifanggou.bean.ProductType;
 import com.app.sifanggou.utils.CommonUtils;
@@ -42,7 +43,7 @@ public class CommodityInfoBeanOlderAdpater extends SetBaseAdapter<CommodityInfoB
             holder.tvXiaoLiang = (TextView) convertView.findViewById(R.id.tv_xiaoliang);
             holder.tvNum = (TextView) convertView.findViewById(R.id.tv_num);
             holder.tvHuoJia = (TextView) convertView.findViewById(R.id.tv_huojia);
-            holder.tvGengXin = (TextView) convertView.findViewById(R.id.tv_gengxin);
+            holder.tvGuiGe = (TextView) convertView.findViewById(R.id.tv_guige);
             holder.edtCount = (EditText) convertView.findViewById(R.id.edt_count);
             holder.tvAdd = (TextView) convertView.findViewById(R.id.tv_add);
             holder.tvJian = (TextView) convertView.findViewById(R.id.tv_jian);
@@ -59,8 +60,8 @@ public class CommodityInfoBeanOlderAdpater extends SetBaseAdapter<CommodityInfoB
         if (!TextUtils.isEmpty(bean.getCommodity_name())) {
             holder.tvName.setText(bean.getCommodity_name());
         }
-        if (!TextUtils.isEmpty(bean.getA_price())) {
-            float price = Float.valueOf(bean.getA_price()) / 100;
+        if (!TextUtils.isEmpty(bean.getPrice())) {
+            float price = Float.valueOf(bean.getPrice()) / 100;
             holder.tvPrice.setText("￥"+price);
         }
         if (!TextUtils.isEmpty(bean.getSale_num())) {
@@ -69,16 +70,21 @@ public class CommodityInfoBeanOlderAdpater extends SetBaseAdapter<CommodityInfoB
         if (!TextUtils.isEmpty(bean.getCollection_num())) {
             holder.tvNum.setText("被收藏  "+ bean.getCollection_num());
         }
-        if (!TextUtils.isEmpty(bean.getType())) {
-            if (bean.getType().equals(ProductType.COMMON.getType())){
-                holder.tvHuoJia.setText("货架  "+ "普通");
-            } else if(bean.getType().equals(ProductType.AGENCY.getType())) {
-                holder.tvHuoJia.setText("货架  "+ "代理");
+
+        if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getAgent_level())) {
+            for (AgentLevelType alt : AgentLevelType.values()) {
+                if (alt.getType().equals(bean.getBusiness_info().getAgent_level())) {
+                    holder.tvHuoJia.setText(alt.getName());
+                }
             }
+        } else {
+            holder.tvHuoJia.setText("");
         }
-        if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getMarket_name())) {
-            holder.tvGengXin.setText("市场：  "+ bean.getBusiness_info().getMarket_name());
+
+        if (!TextUtils.isEmpty(bean.getSpecification())) {
+            holder.tvGuiGe.setText("规格  "+ bean.getSpecification());
         }
+
         holder.edtCount.setText(bean.getSelectCount()+"");
 
         final EditText editCount = holder.edtCount;
@@ -153,7 +159,7 @@ public class CommodityInfoBeanOlderAdpater extends SetBaseAdapter<CommodityInfoB
         private TextView tvXiaoLiang;
         private TextView tvNum;
         private TextView tvHuoJia;
-        private TextView tvGengXin;
+        private TextView tvGuiGe;
         private TextView tvJian;
         private TextView tvAdd;
         private EditText edtCount;
@@ -165,9 +171,9 @@ public class CommodityInfoBeanOlderAdpater extends SetBaseAdapter<CommodityInfoB
         void click(CommodityInfoBean bean);
     }
 
-    private CommodityInfoBeanAdapter.AddListener addListener;
+    private AddListener addListener;
 
-    public void setListener(CommodityInfoBeanAdapter.AddListener listener) {
+    public void setListener(AddListener listener) {
         this.addListener = listener;
     }
 }

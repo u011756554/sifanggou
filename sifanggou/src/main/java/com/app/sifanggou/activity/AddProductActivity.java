@@ -81,6 +81,29 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
     private HuoJiaType huoJiaType = HuoJiaType.PUTONG;
 
     //普通商品属性
+
+    private static final String KEY_DEC = "key_dec";
+    private static final String KEY_NAME = "key_name";
+    private static final String KEY_PINPAI = "key_pinpai";
+    private static final String KEY_TONGJI = "key_tongji";
+    private static final String KEY_XIAJI= "key_xiaji";
+    private static final String KEY_KUCUN = "key_kucun";
+    private static final String KEY_CHANDI = "key_chandi";
+    private static final String KEY_GUIGE = "key_guige";
+    private static final String KEY_DENGJI = "key_dengji";
+    private static final String KEY_FENLEI = "key_fenlei";
+
+    private String dec;
+    private String name;
+    private String pinpai;
+    private String tongji;
+    private String xiaji;
+    private String kucun;
+    private String chandi;
+    private String guige;
+    private String dengji;
+    private Node fenleiNode;
+
     private ArrayList<String> puTongUrlList = new ArrayList<String>();
     @ViewInject(R.id.edt_dec)
     private EditText edtDec;
@@ -114,6 +137,31 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
     private ImageView ivPutongCamera;
 
     //代理商品属性
+
+    private static final String KEY_DEC_DAILI = "key_dec_daili";
+    private static final String KEY_NAME_DAILI = "key_name_daili";
+    private static final String KEY_PINPAI_DAILI = "key_pinpai_daili";
+    private static final String KEY_TONGJI_DAILI = "key_tongji_daili";
+    private static final String KEY_XIAJI_DAILI= "key_xiaji_daili";
+    private static final String KEY_KUCUN_DAILI = "key_kucun_daili";
+    private static final String KEY_CHANDI_DAILI = "key_chandi_daili";
+    private static final String KEY_GUIGE_DAILI = "key_guige_daili";
+    private static final String KEY_DENGJI_DAILI = "key_dengji_daili";
+    private static final String KEY_FENLEI_DAILI = "key_fenlei_daili";
+    private static final String KEY_JIBIE_DAILI = "key_jiebie_daili";
+
+    private String dec_daili;
+    private String name_daili;
+    private String pinpai_daili;
+    private String tongji_daili;
+    private String xiaji_daili;
+    private String kucun_daili;
+    private String chandi_daili;
+    private String guige_daili;
+    private String dengji_daili;
+    private Node fenleiNodeDaiLi;
+    private AgentLevelBean agentLevelBeanDaiLi;
+
     private ArrayList<String> daiLiUrlList = new ArrayList<String>();
     private ArrayList<String> hetongUrlList = new ArrayList<String>();
     @ViewInject(R.id.edt_dec_daili)
@@ -224,10 +272,102 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
 
     private void initData() {
         loginBean = PreManager.get(getApplicationContext(), AppContext.USER_LOGIN,LoginResponseBean.class);
+        refreshSaveData();
         refreshEditData(initCommodityInfoBean);
         refreshHuoJiaType();
         pushEventNoProgress(EventCode.HTTP_GETCOMMODITYTYPELIST);
         pushEventNoProgress(EventCode.HTTP_GETAGENTLEVELINFO);
+    }
+
+    private void refreshSaveData() {
+        dec = PreManager.getString(getApplicationContext(),KEY_DEC);
+        name = PreManager.getString(getApplicationContext(),KEY_NAME);
+        xiaji = PreManager.getString(getApplicationContext(),KEY_XIAJI);
+        kucun = PreManager.getString(getApplicationContext(),KEY_KUCUN);
+        chandi = PreManager.getString(getApplicationContext(),KEY_CHANDI);
+        guige = PreManager.getString(getApplicationContext(),KEY_GUIGE);
+        dengji = PreManager.getString(getApplicationContext(),KEY_DENGJI);
+        pinpai = PreManager.getString(getApplicationContext(),KEY_PINPAI);
+        tongji = PreManager.getString(getApplicationContext(),KEY_TONGJI);
+        fenleiNode = PreManager.get(getApplicationContext(),KEY_FENLEI,Node.class);
+
+        if (!TextUtils.isEmpty(dec)) {
+            edtDec.setText(dec);
+        }
+        if (!TextUtils.isEmpty(name)) {
+            edtName.setText(name);
+        }
+        if (!TextUtils.isEmpty(xiaji)) {
+            edtXiaJiPrice.setText(xiaji);
+        }
+        if (!TextUtils.isEmpty(kucun)) {
+            edtKuCun.setText(kucun);
+        }
+        if (!TextUtils.isEmpty(chandi)) {
+            edtChanDi.setText(chandi);
+        }
+        if (!TextUtils.isEmpty(guige)) {
+            edtGuiGe.setText(guige);
+        }
+        if (!TextUtils.isEmpty(dengji)) {
+            edtZhiLiangDengJi.setText(dengji);
+        }
+        if (!TextUtils.isEmpty(pinpai)) {
+            edtPinPai.setText(pinpai);
+        }
+        if (!TextUtils.isEmpty(tongji)) {
+            edtTongJiPrice.setText(tongji);
+        }
+        if (fenleiNode != null) {
+            getFenLei(fenleiNode);
+        }
+
+
+        dec_daili = PreManager.getString(getApplicationContext(),KEY_DEC_DAILI);
+        name_daili = PreManager.getString(getApplicationContext(),KEY_NAME_DAILI);
+        xiaji_daili = PreManager.getString(getApplicationContext(),KEY_XIAJI_DAILI);
+        kucun_daili = PreManager.getString(getApplicationContext(),KEY_KUCUN_DAILI);
+        chandi_daili = PreManager.getString(getApplicationContext(),KEY_CHANDI_DAILI);
+        guige_daili = PreManager.getString(getApplicationContext(),KEY_GUIGE_DAILI);
+        dengji_daili = PreManager.getString(getApplicationContext(),KEY_DENGJI_DAILI);
+        pinpai_daili = PreManager.getString(getApplicationContext(),KEY_PINPAI_DAILI);
+        tongji_daili = PreManager.getString(getApplicationContext(),KEY_TONGJI_DAILI);
+        fenleiNodeDaiLi = PreManager.get(getApplicationContext(),KEY_FENLEI_DAILI,Node.class);
+        agentLevelBeanDaiLi = PreManager.get(getApplicationContext(),KEY_JIBIE_DAILI,AgentLevelBean.class);
+
+        if (!TextUtils.isEmpty(dec_daili)) {
+            edtDecDaiLi.setText(dec_daili);
+        }
+        if (!TextUtils.isEmpty(name_daili)) {
+            edtNameDaiLi.setText(name_daili);
+        }
+        if (!TextUtils.isEmpty(xiaji_daili)) {
+            edtXiaJiPriceDaiLi.setText(xiaji_daili);
+        }
+        if (!TextUtils.isEmpty(kucun_daili)) {
+            edtKuCunDaiLi.setText(kucun_daili);
+        }
+        if (!TextUtils.isEmpty(chandi_daili)) {
+            edtChanDiDaiLi.setText(chandi_daili);
+        }
+        if (!TextUtils.isEmpty(guige_daili)) {
+            edtGuiGeDaiLi.setText(guige_daili);
+        }
+        if (!TextUtils.isEmpty(dengji_daili)) {
+            edtZhiLiangDengJiDaiLi.setText(dengji_daili);
+        }
+        if (!TextUtils.isEmpty(pinpai_daili)) {
+            edtPinPaiDaiLi.setText(pinpai_daili);
+        }
+        if (!TextUtils.isEmpty(tongji_daili)) {
+            edtTongJiPriceDaiLi.setText(tongji_daili);
+        }
+        if (fenleiNodeDaiLi != null) {
+            getFenLeiDaiLi(fenleiNodeDaiLi);
+        }
+        if (agentLevelBeanDaiLi != null) {
+            tvJieBieDaiLi.setText(agentLevelBeanDaiLi.getLevel_name());
+        }
     }
 
     /**
@@ -370,6 +510,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
         for(AgentLevelBean alb : agentLevelDataList) {
             if (bean.getAgent_level().equals(alb.getLevel_num())) {
                 agentLevelBean = alb;
+                PreManager.put(getApplicationContext(),KEY_JIBIE_DAILI,alb);
                 tvJieBieDaiLi.setText(alb.getLevel_name());
                 break;
             }
@@ -605,6 +746,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                         for(AgentLevelBean alb : agentLevelDataList) {
                             if (alb.getLevel_name().equals(daili)) {
                                 agentLevelBean = alb;
+                                PreManager.put(getApplicationContext(),KEY_JIBIE_DAILI,alb);
                                 tvJieBieDaiLi.setText(daili);
                                 break;
                             }
@@ -706,6 +848,8 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                     if (TextUtils.isEmpty(edtName.getText().toString())) {
                         CommonUtils.showToast("请输入商品名称");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_NAME,edtName.getText().toString());
                     }
                     if (puTongUrlList.size() <= 0) {
                         CommonUtils.showToast("请添加商品图片");
@@ -714,34 +858,50 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                     if (TextUtils.isEmpty(edtDec.getText().toString())) {
                         CommonUtils.showToast("请输入商品描述");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_DEC,edtDec.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtPinPai.getText().toString())) {
                         CommonUtils.showToast("请输入商品品牌");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_PINPAI,edtPinPai.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtTongJiPrice.getText().toString())) {
                         CommonUtils.showToast("请输入商品同级价格");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_TONGJI,edtTongJiPrice.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtXiaJiPrice.getText().toString())) {
                         CommonUtils.showToast("请输入商品下级价格");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_XIAJI,edtXiaJiPrice.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtKuCun.getText().toString())) {
                         CommonUtils.showToast("请输入库存");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_KUCUN,edtKuCun.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtChanDi.getText().toString())) {
                         CommonUtils.showToast("请输入产地");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_CHANDI,edtChanDi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtGuiGe.getText().toString())) {
                         CommonUtils.showToast("请输入商品规格");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_GUIGE,edtGuiGe.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtZhiLiangDengJi.getText().toString())) {
                         CommonUtils.showToast("请输入商品质量等级");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_DENGJI,edtZhiLiangDengJi.getText().toString());
                     }
                     if (TextUtils.isEmpty(firstNode.getCurId())
                             && TextUtils.isEmpty(secondNode.getCurId())
@@ -798,6 +958,8 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                     if (TextUtils.isEmpty(edtNameDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品名称");
                         return;
+                    }  else {
+                        PreManager.putString(getApplicationContext(),KEY_NAME_DAILI,edtNameDaiLi.getText().toString());
                     }
                     if (daiLiUrlList.size() <= 0) {
                         CommonUtils.showToast("请添加商品图片");
@@ -810,34 +972,50 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                     if (TextUtils.isEmpty(edtDecDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品描述");
                         return;
+                    }  else {
+                        PreManager.putString(getApplicationContext(),KEY_DEC_DAILI,edtDecDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtPinPaiDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品品牌");
                         return;
+                    }  else {
+                        PreManager.putString(getApplicationContext(),KEY_PINPAI_DAILI,edtPinPaiDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtTongJiPriceDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品同级价格");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_TONGJI_DAILI,edtTongJiPriceDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtXiaJiPriceDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品下级价格");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_XIAJI_DAILI,edtXiaJiPriceDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtKuCunDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入库存");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_KUCUN_DAILI,edtKuCunDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtChanDiDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入产地");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_CHANDI_DAILI,edtChanDiDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtGuiGeDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品规格");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_GUIGE_DAILI,edtGuiGeDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtZhiLiangDengJiDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品质量等级");
                         return;
+                    } else {
+                        PreManager.putString(getApplicationContext(),KEY_DENGJI_DAILI,edtZhiLiangDengJiDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(firstDaiLiNode.getCurId())
                             && TextUtils.isEmpty(secondDaiLiNode.getCurId())
@@ -1006,7 +1184,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                 agentLevelList.clear();
                 for(AgentLevelBean mlb : agentLevelDataList) {
                     if ("综合加工".equals(mlb.getLevel_name())
-                            || "综合配送".equals(mlb.getLevel_name()){
+                            || "综合配送".equals(mlb.getLevel_name())){
                         continue;
                     }
                     agentLevelList.add(mlb.getLevel_name());
@@ -1057,6 +1235,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                 }
                 if (huoJiaType == HuoJiaType.PUTONG) {
                     getFenLei(node);
+                    PreManager.put(getApplicationContext(),KEY_FENLEI,node);
                 } else {
                     getFenLeiDaiLi(node);
                 }
@@ -1110,7 +1289,6 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
             firstNode = thirdNodeThis;
             tvFenLei.setText(firstNode.getValue());
         }
-
     }
 
     private void getFenLeiDaiLi(Node node) {

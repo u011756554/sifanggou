@@ -6,6 +6,10 @@ package com.app.sifanggou.bean;
 
 public class OrderNoBaseBean extends BaseBean {
     private String order_no;
+    private String deliver_time;
+    private String address;
+    private String mobile;
+    private String receiver_name;
     private String seller_payee_status;
     private String create_time;
     private String buyer_business_code;
@@ -21,6 +25,38 @@ public class OrderNoBaseBean extends BaseBean {
     private String buyer_receive_time;
     private String seller_business_code;
     private boolean isShow = true;
+
+    public String getDeliver_time() {
+        return deliver_time;
+    }
+
+    public void setDeliver_time(String deliver_time) {
+        this.deliver_time = deliver_time;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getReceiver_name() {
+        return receiver_name;
+    }
+
+    public void setReceiver_name(String receiver_name) {
+        this.receiver_name = receiver_name;
+    }
 
     public SellerInfoBean getBuyer_business_info() {
         return buyer_business_info;

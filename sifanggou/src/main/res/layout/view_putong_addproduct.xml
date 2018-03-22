@@ -81,6 +81,7 @@
         android:textColor="@color/black"
         android:textColorHint="#DDDDDD"
         android:gravity="left|top"
+        android:imeOptions="actionDone"
         android:padding="15dp"/>
 
     <LinearLayout
@@ -117,6 +118,7 @@
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:imeOptions="actionDone"
                 android:maxLines="1"/>
         </LinearLayout>
 
@@ -154,6 +156,7 @@
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:imeOptions="actionDone"
                 android:maxLines="1"/>
         </LinearLayout>
 
@@ -191,6 +194,7 @@
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:imeOptions="actionDone"
                 android:inputType="numberDecimal"/>
         </LinearLayout>
 
@@ -227,6 +231,7 @@
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:imeOptions="actionDone"
                 android:inputType="numberDecimal"/>
         </LinearLayout>
 
@@ -263,6 +268,7 @@
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:imeOptions="actionDone"
                 android:inputType="numberDecimal"/>
         </LinearLayout>
 
@@ -299,6 +305,7 @@
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:imeOptions="actionDone"
                 android:maxLines="1"/>
         </LinearLayout>
 
@@ -335,6 +342,7 @@
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:imeOptions="actionDone"
                 android:maxLines="1"/>
         </LinearLayout>
 
@@ -371,6 +379,7 @@
                 android:textColorHint="#DDDDDD"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:imeOptions="actionDone"
                 android:maxLines="1"/>
         </LinearLayout>
 

@@ -168,11 +168,11 @@ public class InOutOrderInfoAdapter extends SetBaseAdapter<OrderNoBaseBean> {
         holder.btnRemark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (orderNoBaseBean != null
-                        && orderNoBaseBean.getBuyer_business_info() != null) {
-                    String content = orderNoBaseBean.getBuyer_business_info().getName()
-                            + "  "+orderNoBaseBean.getBuyer_business_info().getMobile()+"\n"
-                            + orderNoBaseBean.getBuyer_business_info().getMarket_name()+"\n";
+                if (orderNoBaseBean != null){
+                    String content = "收货人:  "+ orderNoBaseBean.getReceiver_name()+"\n"
+                            + "手机号：  "+orderNoBaseBean.getMobile()+"\n"
+                            + "收货时间：  "+orderNoBaseBean.getDeliver_time()+"\n"
+                            + "收货地址：  "+orderNoBaseBean.getAddress()+"\n";
                     if (confirmDialog == null) {
                         confirmDialog = new ConfirmDialog(mContext);
                     }

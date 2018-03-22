@@ -88,6 +88,14 @@ public class CommonUtils {
 		}
 	}
 
+	public static boolean isOldUrl(String picUrl) {
+		String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505414876514&di=e986ebb63011ff3b5abc5c3048317050&imgtype=0&src=http%3A%2F%2Fimg.jdzj.com%2FUserDocument%2F2015b%2Fzhonglongky%2FPicture%2F20151023111322.jpg";
+		if (url.equals(picUrl)){
+			return true;
+		}
+		return false;
+	}
+
 	public static SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMdd");
 	public static void showToast(CharSequence cs) {
 		Toast.makeText(MyApplication.instance, cs, Toast.LENGTH_LONG).show();

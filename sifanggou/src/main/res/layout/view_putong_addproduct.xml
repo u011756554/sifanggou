@@ -119,6 +119,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:imeOptions="actionDone"
+                android:inputType="text"
                 android:maxLines="1"/>
         </LinearLayout>
 
@@ -157,6 +158,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:imeOptions="actionDone"
+                android:inputType="text"
                 android:maxLines="1"/>
         </LinearLayout>
 
@@ -306,6 +308,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:imeOptions="actionDone"
+                android:inputType="text"
                 android:maxLines="1"/>
         </LinearLayout>
 
@@ -343,6 +346,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:imeOptions="actionDone"
+                android:inputType="text"
                 android:maxLines="1"/>
         </LinearLayout>
 
@@ -380,6 +384,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:imeOptions="actionDone"
+                android:inputType="text"
                 android:maxLines="1"/>
         </LinearLayout>
 

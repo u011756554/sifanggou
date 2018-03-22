@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.sifanggou.AppContext;
+import com.app.sifanggou.MyApplication;
 import com.app.sifanggou.R;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.PreManager;
@@ -73,7 +74,8 @@ public class SetActivity extends BaseActivity {
 
                 Intent intent = new Intent(SetActivity.this,LoginActivity.class);
                 startActivity(intent);
-                finish();
+
+                MyApplication.instance.exit();
             }
         });
 

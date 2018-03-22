@@ -110,6 +110,24 @@ public class CategoryFragment extends BaseFragment {
 						Collections.sort(nodeList);
 						categoryItemGridAdapter.notifyDataSetChanged();
 					}
+				} else {
+					if ("8".equals(commodity_type_list.get(position).getCategory_code())) {
+						lvTypeTwo.setVisibility(View.GONE);
+						gvType.setVisibility(View.VISIBLE);
+						nodeList.clear();
+
+						List<FirstChildNodeTypeBean> tmpList = new ArrayList<FirstChildNodeTypeBean>();
+						FirstChildNodeTypeBean firstChildNodeTypeBean = new FirstChildNodeTypeBean();
+						firstChildNodeTypeBean.setName("其他类别");
+						firstChildNodeTypeBean.setParent_category_code(commodity_type_list.get(position).getParent_category_code());
+						firstChildNodeTypeBean.setCategory_code(commodity_type_list.get(position).getCategory_code());
+						firstChildNodeTypeBean.setChild_node_list(null);
+						tmpList.add(firstChildNodeTypeBean);
+
+						nodeList.addAll(tmpList);
+						Collections.sort(nodeList);
+						categoryItemGridAdapter.notifyDataSetChanged();
+					}
 				}
 			}
 		});

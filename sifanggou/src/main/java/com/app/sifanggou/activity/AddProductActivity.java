@@ -102,7 +102,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
     private String chandi;
     private String guige;
     private String dengji;
-    private Node fenleiNode;
+    private NodeResource fenleiNode;
 
     private ArrayList<String> puTongUrlList = new ArrayList<String>();
     @ViewInject(R.id.edt_dec)
@@ -159,7 +159,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
     private String chandi_daili;
     private String guige_daili;
     private String dengji_daili;
-    private Node fenleiNodeDaiLi;
+    private NodeResource fenleiNodeDaiLi;
     private AgentLevelBean agentLevelBeanDaiLi;
 
     private ArrayList<String> daiLiUrlList = new ArrayList<String>();
@@ -289,7 +289,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
         dengji = PreManager.getString(getApplicationContext(),KEY_DENGJI);
         pinpai = PreManager.getString(getApplicationContext(),KEY_PINPAI);
         tongji = PreManager.getString(getApplicationContext(),KEY_TONGJI);
-        fenleiNode = PreManager.get(getApplicationContext(),KEY_FENLEI,Node.class);
+        fenleiNode = PreManager.get(getApplicationContext(),KEY_FENLEI,NodeResource.class);
 
         if (!TextUtils.isEmpty(dec)) {
             edtDec.setText(dec);
@@ -318,9 +318,6 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
         if (!TextUtils.isEmpty(tongji)) {
             edtTongJiPrice.setText(tongji);
         }
-        if (fenleiNode != null) {
-            getFenLei(fenleiNode);
-        }
 
 
         dec_daili = PreManager.getString(getApplicationContext(),KEY_DEC_DAILI);
@@ -332,7 +329,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
         dengji_daili = PreManager.getString(getApplicationContext(),KEY_DENGJI_DAILI);
         pinpai_daili = PreManager.getString(getApplicationContext(),KEY_PINPAI_DAILI);
         tongji_daili = PreManager.getString(getApplicationContext(),KEY_TONGJI_DAILI);
-        fenleiNodeDaiLi = PreManager.get(getApplicationContext(),KEY_FENLEI_DAILI,Node.class);
+        fenleiNodeDaiLi = PreManager.get(getApplicationContext(),KEY_FENLEI_DAILI,NodeResource.class);
         agentLevelBeanDaiLi = PreManager.get(getApplicationContext(),KEY_JIBIE_DAILI,AgentLevelBean.class);
 
         if (!TextUtils.isEmpty(dec_daili)) {
@@ -361,9 +358,6 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
         }
         if (!TextUtils.isEmpty(tongji_daili)) {
             edtTongJiPriceDaiLi.setText(tongji_daili);
-        }
-        if (fenleiNodeDaiLi != null) {
-            getFenLeiDaiLi(fenleiNodeDaiLi);
         }
         if (agentLevelBeanDaiLi != null) {
             tvJieBieDaiLi.setText(agentLevelBeanDaiLi.getLevel_name());
@@ -1164,6 +1158,12 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                         nodeList.clear();
                     }
                     nodeList = TreeUtils.commodityTypeBeanToNodeResource(bean.getData().getCommodity_type_list());
+                    if (fenleiNode != null) {
+                        getFenLei(fenleiNode);
+                    }
+                    if (fenleiNodeDaiLi != null) {
+                        getFenLeiDaiLi(fenleiNodeDaiLi);
+                    }
                 }
             } else {
                 CommonUtils.showToast(event.getFailMessage());
@@ -1234,10 +1234,20 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                     popupWindow.dismiss();
                 }
                 if (huoJiaType == HuoJiaType.PUTONG) {
-                    getFenLei(node);
-                    PreManager.put(getApplicationContext(),KEY_FENLEI,node);
+                    NodeResource nodeResource = new NodeResource();
+                    nodeResource.setCurId(node.getCurId());
+                    nodeResource.setValue(node.getValue());
+                    nodeResource.setParentId(node.getParentId());
+
+                    getFenLei(nodeResource);
+                    PreManager.put(getApplicationContext(),KEY_FENLEI,nodeResource);
                 } else {
-                    getFenLeiDaiLi(node);
+                    NodeResource nodeResource = new NodeResource();
+                    nodeResource.setCurId(node.getCurId());
+                    nodeResource.setValue(node.getValue());
+                    nodeResource.setParentId(node.getParentId());
+                    getFenLeiDaiLi(nodeResource);
+                    PreManager.put(getApplicationContext(),KEY_FENLEI_DAILI,nodeResource);
                 }
 
             }
@@ -1251,7 +1261,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
         popupWindow.showAtLocation(getWindow().getDecorView().getRootView(),Gravity.CENTER,0,0);
     }
 
-    private void getFenLei(Node node) {
+    private void getFenLei(NodeResource node) {
         if (node == null || nodeList == null) {
             return;
         }
@@ -1259,7 +1269,10 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
         Node secondNodeThis = new Node();
         Node thirdNodeThis = new Node();
 
-        thirdNodeThis = node;
+        thirdNodeThis.setValue(node.getValue());
+        thirdNodeThis.setCurId(node.getCurId());
+        thirdNodeThis.setParentId(node.getParentId());
+
         for (NodeResource sNode : nodeList) {
             if (sNode.getCurId().equals(thirdNodeThis.getParentId())) {
                 secondNodeThis.setValue(sNode.getValue());
@@ -1291,7 +1304,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
         }
     }
 
-    private void getFenLeiDaiLi(Node node) {
+    private void getFenLeiDaiLi(NodeResource node) {
         if (node == null || nodeList == null) {
             return;
         }
@@ -1299,7 +1312,9 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
         Node secondNodeThis = new Node();
         Node thirdNodeThis = new Node();
 
-        thirdNodeThis = node;
+        thirdNodeThis.setValue(node.getValue());
+        thirdNodeThis.setCurId(node.getCurId());
+        thirdNodeThis.setParentId(node.getParentId());
         for (NodeResource sNode : nodeList) {
             if (sNode.getCurId().equals(thirdNodeThis.getParentId())) {
                 secondNodeThis.setValue(sNode.getValue());

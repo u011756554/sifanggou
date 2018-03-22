@@ -15,7 +15,7 @@ public enum CategoryType {
     GT("罐头"),HTC("火腿肠"),JD("鸡蛋"),JDG("鸡蛋干"),LR("腊肉"),PD("皮蛋"),WCR("午餐肉"),XD("咸蛋"),XCC("香肠"),YD("鸭蛋"),QTRD("其他肉蛋"),
     PCC("泡菜"),PJ("泡姜"),PJD("泡豇豆"),PJJ("泡椒"),PLB("泡萝卜"),TS("糖蒜"),QTYZP("其他腌制品"),
     BL("贝类"),JZL("海藻类"),YXJ("鱼虾蟹"),QTSC("其他水产"),
-    FZ("粉状"),GZ("膏状"),JMF("酵母粉"),MYT("麦芽糖"),SS("色素"),XJ("香精"),YT("液体"),QTTJJ("其他添加剂");
+    FZ("粉状"),GZ("膏状"),JMF("酵母粉"),MYT("麦芽糖"),SS("色素"),XJ("香精"),YT("液体"),QTTJJ("其他添加剂"),QTLB("其他类别");
     
     private String childName;
     CategoryType(String childName) {

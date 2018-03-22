@@ -54,7 +54,8 @@ public class InOutOrderInfoItemAdapter extends SetBaseAdapter<CommodityOrderBean
             holder.tvNum.setText("数量:"+bean.getCommodity_num());
         }
         if (!TextUtils.isEmpty(bean.getCommodity_pic_url())) {
-            ImageLoaderUtil.display(bean.getCommodity_pic_url(),holder.ivPic);
+            String url[] = bean.getCommodity_pic_url().split(",");
+            ImageLoaderUtil.display(url[0],holder.ivPic);
         }
         return convertView;
     }

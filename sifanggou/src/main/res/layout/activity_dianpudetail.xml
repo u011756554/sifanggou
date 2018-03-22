@@ -201,16 +201,42 @@
         android:layout_height="@dimen/margin_mini"
         android:layout_alignParentBottom="true"></View>
 
-    <Button
-        android:id="@+id/btn_car"
+    <LinearLayout
+        android:id="@+id/ll_car"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
         android:layout_margin="@dimen/margin_small"
-        android:background="@drawable/shape_btn_red"
-        android:text="购物车"
-        android:textSize="@dimen/textsize_large"
-        android:textColor="@color/white"
-        android:layout_above="@id/view_bottom"/>
+        android:layout_above="@id/view_bottom">
+
+        <Button
+            android:id="@+id/btn_chat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_btn_red"
+            android:text="联系卖家"
+            android:textSize="@dimen/textsize_large"
+            android:textColor="@color/white"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="3dp"
+            android:background="@color/color_divider"/>
+
+        <Button
+            android:id="@+id/btn_car"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_btn_red"
+            android:text="购物车"
+            android:textSize="@dimen/textsize_large"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rl_bottom"
@@ -276,7 +302,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/color_main"
-        android:layout_above="@id/btn_car"
+        android:layout_above="@id/ll_car"
         android:layout_below="@id/ll_top">
 
         <com.app.sifanggou.view.tab.ViewPagerIndicator

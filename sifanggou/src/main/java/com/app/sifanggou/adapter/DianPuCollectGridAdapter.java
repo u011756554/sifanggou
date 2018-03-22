@@ -53,7 +53,13 @@ public class DianPuCollectGridAdapter extends SetBaseAdapter<BusinessInfoBean> {
         holder.ivPic.setLayoutParams(params);
 
         if (!TextUtils.isEmpty(businessInfoBean.getHead_pic_url())) {
-            ImageLoaderUtil.display(businessInfoBean.getHead_pic_url(),holder.ivPic);
+            if (CommonUtils.isOldUrl(businessInfoBean.getHead_pic_url())) {
+                holder.ivPic.setImageResource(R.drawable.icon_dianpu_default);
+            } else {
+                ImageLoaderUtil.display(businessInfoBean.getHead_pic_url(),holder.ivPic);
+            }
+        } else {
+            holder.ivPic.setImageResource(R.drawable.icon_dianpu_default);
         }
         holder.tvName.setText(businessInfoBean.getName());
         holder.tvMarket.setText(businessInfoBean.getMarket_name());

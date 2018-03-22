@@ -7,8 +7,8 @@
     <RelativeLayout
         android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:background="#4d4a47"
+        android:layout_height="50dp"
+        android:background="@color/white"
         android:layout_alignParentBottom="true">
 
         <Button
@@ -18,8 +18,8 @@
             android:layout_alignParentRight="true"
             android:text="下单"
             android:textSize="17sp"
-            android:textColor="@color/white"
-            android:background="#ff3366"/>
+            android:textColor="@color/black"
+            android:background="@color/white"/>
 
     </RelativeLayout>
 
@@ -28,9 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_bg_yellow_circle"
-        android:layout_above="@id/rl_bottom"
-        android:layout_marginLeft="@dimen/margin_normal"
-        android:layout_marginBottom="-45dp">
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/margin_normal">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -46,9 +45,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_bg_red_circle"
         android:layout_toRightOf="@id/rl_car"
-        android:layout_marginLeft="-25dp"
+        android:layout_marginLeft="-20dp"
         android:layout_above="@id/rl_car"
-        android:layout_marginBottom="-25dp">
+        android:layout_marginBottom="-20dp">
 
         <TextView
             android:id="@+id/tv_mount"

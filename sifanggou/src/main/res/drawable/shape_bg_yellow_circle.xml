@@ -4,9 +4,9 @@
 
     <!-- 圆角 -->
     <corners
-        android:radius="30dp"/>
+        android:radius="25dp"/>
 
-    <size android:width="60dp" android:height="60dp"></size>
+    <size android:width="50dp" android:height="50dp"></size>
 
     <solid android:color="#ff9900"></solid>
 

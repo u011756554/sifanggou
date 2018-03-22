@@ -43,7 +43,7 @@
             android:text="备注"
             android:textSize="14sp"
             android:textColor="@color/white"
-            android:background="@color/color_banner"
+            android:background="@color/color_gray"
             android:visibility="gone"/>
 
         <TextView

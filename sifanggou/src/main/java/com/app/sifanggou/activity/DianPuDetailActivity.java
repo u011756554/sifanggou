@@ -30,6 +30,7 @@ import com.app.sifanggou.listener.PageSelectListener;
 import com.app.sifanggou.net.Event;
 import com.app.sifanggou.net.EventCode;
 import com.app.sifanggou.net.bean.GetBusinessInfoByCodeResponseBean;
+import com.app.sifanggou.net.bean.GetBusinessRongYunTokenResponseBean;
 import com.app.sifanggou.net.bean.IsBusinessPartnerResponseBean;
 import com.app.sifanggou.net.bean.LoginResponseBean;
 import com.app.sifanggou.utils.CommonUtils;
@@ -41,6 +42,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import io.rong.imkit.RongIM;
 
 /**
  * Created by Administrator on 2017/12/6.
@@ -89,6 +92,8 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
     private RelativeLayout rlCar;
     @ViewInject(R.id.btn_car)
     private Button btnCar;
+    @ViewInject(R.id.btn_chat)
+    private Button btnChat;
 
     @ViewInject(R.id.btn_xiadan)
     private Button btnXiaDan;
@@ -190,6 +195,8 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
 
     private void refreshView(BusinessInfoBean bean) {
         if (bean == null) {return;}
+
+        dataBean = bean;
         if (!TextUtils.isEmpty(bean.getName())) {
             tvName.setText(bean.getName());
             if (!TextUtils.isEmpty(bean.getMarket_name())) {
@@ -252,6 +259,15 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
                 startActivity(intent);
             }
         });
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dataBean != null) {
+                    pushEvent(EventCode.HTTP_GETBUSINESSRONGYUNTOKEN,dataBean.getBusiness_code());
+                }
+            }
+        });
     }
 
     @Override
@@ -262,6 +278,20 @@ public class DianPuDetailActivity extends BaseActivity implements PageSelectList
     @Override
     public void onEventRunEnd(Event event) {
         super.onEventRunEnd(event);
+        if (event.getEventCode() == EventCode.HTTP_GETBUSINESSRONGYUNTOKEN) {
+            if (event.isSuccess()) {
+                GetBusinessRongYunTokenResponseBean bean = (GetBusinessRongYunTokenResponseBean) event.getReturnParamAtIndex(0);
+                if (bean != null
+                        && bean.getData() != null
+                        && !TextUtils.isEmpty(bean.getData().getToken())) {
+                    if (dataBean != null) {
+                        RongIM.getInstance().startPrivateChat(DianPuDetailActivity.this, dataBean.getBusiness_code(), dataBean.getName());
+                    }
+                }
+            } else {
+                CommonUtils.showToast(event.getFailMessage());
+            }
+        }
         if (event.getEventCode() == EventCode.HTTP_GETBUSINESSINFOBYCODE) {
             GetBusinessInfoByCodeResponseBean bean = (GetBusinessInfoByCodeResponseBean) event.getReturnParamAtIndex(0);
             if (bean != null && bean.getData() != null && bean.getData().getBusiness_info() != null) {

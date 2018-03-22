@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.app.sifanggou.R;
 import com.app.sifanggou.bean.AgentLevelType;
 import com.app.sifanggou.bean.BusinessInfoBean;
+import com.app.sifanggou.utils.CommonUtils;
 import com.app.sifanggou.utils.ImageLoaderUtil;
 
 import java.util.List;
@@ -49,7 +50,11 @@ public class BusinessInfoBeanAdapter extends SetBaseAdapter<BusinessInfoBean> {
         }
         BusinessInfoBean bean = mList.get(position);
         if (!TextUtils.isEmpty(bean.getHead_pic_url())) {
-            ImageLoaderUtil.display(bean.getHead_pic_url(),holder.ivHead);
+            if (CommonUtils.isOldUrl(bean.getHead_pic_url())) {
+                holder.ivHead.setImageResource(R.drawable.icon_dianpu_default);
+            } else {
+                ImageLoaderUtil.display(bean.getHead_pic_url(),holder.ivHead);
+            }
         } else {
             holder.ivHead.setImageResource(R.drawable.icon_dianpu_default);
         }

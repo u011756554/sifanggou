@@ -6,6 +6,18 @@ package com.app.sifanggou.bean;
 
 public class AllBusinessUrgentSellCommodityBean extends BaseBean {
 
+    private String first_level_category_name;
+    private String second_level_category_name;
+    private String third_level_category_name;
+    private String third_level_category_code;
+    private String first_level_category_code;
+    private String production_place;
+    private String quality_grade;
+    private String second_level_category_code;
+    private String specification;
+    private String agent_level;
+    private String intro;
+
     private String valid_deadline;
     private String commodity_id;
     private String sell_price;
@@ -21,6 +33,94 @@ public class AllBusinessUrgentSellCommodityBean extends BaseBean {
     private BusinessInfoBean business_info;
     private int selectCount;
     private boolean isSelect = false;
+
+    public String getFirst_level_category_name() {
+        return first_level_category_name;
+    }
+
+    public void setFirst_level_category_name(String first_level_category_name) {
+        this.first_level_category_name = first_level_category_name;
+    }
+
+    public String getSecond_level_category_name() {
+        return second_level_category_name;
+    }
+
+    public void setSecond_level_category_name(String second_level_category_name) {
+        this.second_level_category_name = second_level_category_name;
+    }
+
+    public String getThird_level_category_name() {
+        return third_level_category_name;
+    }
+
+    public void setThird_level_category_name(String third_level_category_name) {
+        this.third_level_category_name = third_level_category_name;
+    }
+
+    public String getThird_level_category_code() {
+        return third_level_category_code;
+    }
+
+    public void setThird_level_category_code(String third_level_category_code) {
+        this.third_level_category_code = third_level_category_code;
+    }
+
+    public String getFirst_level_category_code() {
+        return first_level_category_code;
+    }
+
+    public void setFirst_level_category_code(String first_level_category_code) {
+        this.first_level_category_code = first_level_category_code;
+    }
+
+    public String getProduction_place() {
+        return production_place;
+    }
+
+    public void setProduction_place(String production_place) {
+        this.production_place = production_place;
+    }
+
+    public String getQuality_grade() {
+        return quality_grade;
+    }
+
+    public void setQuality_grade(String quality_grade) {
+        this.quality_grade = quality_grade;
+    }
+
+    public String getSecond_level_category_code() {
+        return second_level_category_code;
+    }
+
+    public void setSecond_level_category_code(String second_level_category_code) {
+        this.second_level_category_code = second_level_category_code;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
+    }
+
+    public String getAgent_level() {
+        return agent_level;
+    }
+
+    public void setAgent_level(String agent_level) {
+        this.agent_level = agent_level;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
 
     public String getOriginal_price() {
         return original_price;

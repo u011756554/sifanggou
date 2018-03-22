@@ -1005,6 +1005,10 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                 agentLevelDataList = dataBean.getData().getAgent_level_list();
                 agentLevelList.clear();
                 for(AgentLevelBean mlb : agentLevelDataList) {
+                    if ("综合加工".equals(mlb.getLevel_name())
+                            || "综合配送".equals(mlb.getLevel_name()){
+                        continue;
+                    }
                     agentLevelList.add(mlb.getLevel_name());
                 }
                 agentLevelDialog.setData(agentLevelList,0);

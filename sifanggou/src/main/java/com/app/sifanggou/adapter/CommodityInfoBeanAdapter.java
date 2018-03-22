@@ -65,17 +65,10 @@ public class CommodityInfoBeanAdapter extends SetBaseAdapter<CommodityInfoBean> 
         if (!TextUtils.isEmpty(bean.getSpecification())) {
             holder.tvGuiGe.setText("规格  "+ bean.getSpecification());
         }
-//        if (!TextUtils.isEmpty(bean.getType())) {
-//            if (bean.getType().equals(ProductType.COMMON.getType())){
-//                holder.tvHuoJia.setText("货架  "+ "普通");
-//            } else if(bean.getType().equals(ProductType.AGENCY.getType())) {
-//                holder.tvHuoJia.setText("货架  "+ "代理");
-//            }
-//        }
 
-        if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getAgent_level())) {
+        if (!TextUtils.isEmpty(bean.getAgent_level())) {
             for (AgentLevelType alt : AgentLevelType.values()) {
-                if (alt.getType().equals(bean.getBusiness_info().getAgent_level())) {
+                if (alt.getType().equals(bean.getAgent_level())) {
                     holder.tvHuoJia.setText(alt.getName());
                 }
             }

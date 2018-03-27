@@ -45,6 +45,8 @@ import com.app.sifanggou.view.tree.TreeListView;
 import com.app.sifanggou.view.tree.TreeUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,16 +84,16 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
 
     //普通商品属性
 
-    private static final String KEY_DEC = "key_dec";
-    private static final String KEY_NAME = "key_name";
-    private static final String KEY_PINPAI = "key_pinpai";
-    private static final String KEY_TONGJI = "key_tongji";
-    private static final String KEY_XIAJI= "key_xiaji";
-    private static final String KEY_KUCUN = "key_kucun";
-    private static final String KEY_CHANDI = "key_chandi";
-    private static final String KEY_GUIGE = "key_guige";
-    private static final String KEY_DENGJI = "key_dengji";
-    private static final String KEY_FENLEI = "key_fenlei";
+    public static final String KEY_DEC = "key_dec";
+    public static final String KEY_NAME = "key_name";
+    public static final String KEY_PINPAI = "key_pinpai";
+    public static final String KEY_TONGJI = "key_tongji";
+    public static final String KEY_XIAJI= "key_xiaji";
+    public static final String KEY_KUCUN = "key_kucun";
+    public static final String KEY_CHANDI = "key_chandi";
+    public static final String KEY_GUIGE = "key_guige";
+    public static final String KEY_DENGJI = "key_dengji";
+    public static final String KEY_FENLEI = "key_fenlei";
 
     private String dec;
     private String name;
@@ -138,17 +140,17 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
 
     //代理商品属性
 
-    private static final String KEY_DEC_DAILI = "key_dec_daili";
-    private static final String KEY_NAME_DAILI = "key_name_daili";
-    private static final String KEY_PINPAI_DAILI = "key_pinpai_daili";
-    private static final String KEY_TONGJI_DAILI = "key_tongji_daili";
-    private static final String KEY_XIAJI_DAILI= "key_xiaji_daili";
-    private static final String KEY_KUCUN_DAILI = "key_kucun_daili";
-    private static final String KEY_CHANDI_DAILI = "key_chandi_daili";
-    private static final String KEY_GUIGE_DAILI = "key_guige_daili";
-    private static final String KEY_DENGJI_DAILI = "key_dengji_daili";
-    private static final String KEY_FENLEI_DAILI = "key_fenlei_daili";
-    private static final String KEY_JIBIE_DAILI = "key_jiebie_daili";
+    public static final String KEY_DEC_DAILI = "key_dec_daili";
+    public static final String KEY_NAME_DAILI = "key_name_daili";
+    public static final String KEY_PINPAI_DAILI = "key_pinpai_daili";
+    public static final String KEY_TONGJI_DAILI = "key_tongji_daili";
+    public static final String KEY_XIAJI_DAILI= "key_xiaji_daili";
+    public static final String KEY_KUCUN_DAILI = "key_kucun_daili";
+    public static final String KEY_CHANDI_DAILI = "key_chandi_daili";
+    public static final String KEY_GUIGE_DAILI = "key_guige_daili";
+    public static final String KEY_DENGJI_DAILI = "key_dengji_daili";
+    public static final String KEY_FENLEI_DAILI = "key_fenlei_daili";
+    public static final String KEY_JIBIE_DAILI = "key_jiebie_daili";
 
     private String dec_daili;
     private String name_daili;
@@ -236,6 +238,9 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
     //初始化数据
     public static String KEY_INITDATA = "key_AddProductActivity_initdata";
     private CommodityInfoBean initCommodityInfoBean;
+
+    //本地存储
+    private String businessCode = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -280,16 +285,23 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
     }
 
     private void refreshSaveData() {
-        dec = PreManager.getString(getApplicationContext(),KEY_DEC);
-        name = PreManager.getString(getApplicationContext(),KEY_NAME);
-        xiaji = PreManager.getString(getApplicationContext(),KEY_XIAJI);
-        kucun = PreManager.getString(getApplicationContext(),KEY_KUCUN);
-        chandi = PreManager.getString(getApplicationContext(),KEY_CHANDI);
-        guige = PreManager.getString(getApplicationContext(),KEY_GUIGE);
-        dengji = PreManager.getString(getApplicationContext(),KEY_DENGJI);
-        pinpai = PreManager.getString(getApplicationContext(),KEY_PINPAI);
-        tongji = PreManager.getString(getApplicationContext(),KEY_TONGJI);
-        fenleiNode = PreManager.get(getApplicationContext(),KEY_FENLEI,NodeResource.class);
+        if (loginBean == null || loginBean.getData() == null
+                || loginBean.getData().getLogin_info() == null
+                || loginBean.getData().getLogin_info().getBusiness_info() == null
+                || TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+            return;
+        }
+        businessCode = loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code();
+        dec = PreManager.getString(getApplicationContext(),KEY_DEC + businessCode);
+        name = PreManager.getString(getApplicationContext(),KEY_NAME + businessCode);
+        xiaji = PreManager.getString(getApplicationContext(),KEY_XIAJI + businessCode);
+        kucun = PreManager.getString(getApplicationContext(),KEY_KUCUN + businessCode);
+        chandi = PreManager.getString(getApplicationContext(),KEY_CHANDI + businessCode);
+        guige = PreManager.getString(getApplicationContext(),KEY_GUIGE + businessCode);
+        dengji = PreManager.getString(getApplicationContext(),KEY_DENGJI + businessCode);
+        pinpai = PreManager.getString(getApplicationContext(),KEY_PINPAI + businessCode);
+        tongji = PreManager.getString(getApplicationContext(),KEY_TONGJI + businessCode);
+        fenleiNode = PreManager.get(getApplicationContext(),KEY_FENLEI + businessCode,NodeResource.class);
 
         if (!TextUtils.isEmpty(dec)) {
             edtDec.setText(dec);
@@ -320,17 +332,17 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
         }
 
 
-        dec_daili = PreManager.getString(getApplicationContext(),KEY_DEC_DAILI);
-        name_daili = PreManager.getString(getApplicationContext(),KEY_NAME_DAILI);
-        xiaji_daili = PreManager.getString(getApplicationContext(),KEY_XIAJI_DAILI);
-        kucun_daili = PreManager.getString(getApplicationContext(),KEY_KUCUN_DAILI);
-        chandi_daili = PreManager.getString(getApplicationContext(),KEY_CHANDI_DAILI);
-        guige_daili = PreManager.getString(getApplicationContext(),KEY_GUIGE_DAILI);
-        dengji_daili = PreManager.getString(getApplicationContext(),KEY_DENGJI_DAILI);
-        pinpai_daili = PreManager.getString(getApplicationContext(),KEY_PINPAI_DAILI);
-        tongji_daili = PreManager.getString(getApplicationContext(),KEY_TONGJI_DAILI);
-        fenleiNodeDaiLi = PreManager.get(getApplicationContext(),KEY_FENLEI_DAILI,NodeResource.class);
-        agentLevelBeanDaiLi = PreManager.get(getApplicationContext(),KEY_JIBIE_DAILI,AgentLevelBean.class);
+        dec_daili = PreManager.getString(getApplicationContext(),KEY_DEC_DAILI + businessCode);
+        name_daili = PreManager.getString(getApplicationContext(),KEY_NAME_DAILI + businessCode);
+        xiaji_daili = PreManager.getString(getApplicationContext(),KEY_XIAJI_DAILI + businessCode);
+        kucun_daili = PreManager.getString(getApplicationContext(),KEY_KUCUN_DAILI + businessCode);
+        chandi_daili = PreManager.getString(getApplicationContext(),KEY_CHANDI_DAILI + businessCode);
+        guige_daili = PreManager.getString(getApplicationContext(),KEY_GUIGE_DAILI + businessCode);
+        dengji_daili = PreManager.getString(getApplicationContext(),KEY_DENGJI_DAILI + businessCode);
+        pinpai_daili = PreManager.getString(getApplicationContext(),KEY_PINPAI_DAILI + businessCode);
+        tongji_daili = PreManager.getString(getApplicationContext(),KEY_TONGJI_DAILI + businessCode);
+        fenleiNodeDaiLi = PreManager.get(getApplicationContext(),KEY_FENLEI_DAILI + businessCode,NodeResource.class);
+        agentLevelBeanDaiLi = PreManager.get(getApplicationContext(),KEY_JIBIE_DAILI + businessCode,AgentLevelBean.class);
 
         if (!TextUtils.isEmpty(dec_daili)) {
             edtDecDaiLi.setText(dec_daili);
@@ -504,7 +516,9 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
         for(AgentLevelBean alb : agentLevelDataList) {
             if (bean.getAgent_level().equals(alb.getLevel_num())) {
                 agentLevelBean = alb;
-                PreManager.put(getApplicationContext(),KEY_JIBIE_DAILI,alb);
+                if(!TextUtils.isEmpty(businessCode)) {
+                    PreManager.put(getApplicationContext(),KEY_JIBIE_DAILI + businessCode,alb);
+                }
                 tvJieBieDaiLi.setText(alb.getLevel_name());
                 break;
             }
@@ -740,7 +754,9 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                         for(AgentLevelBean alb : agentLevelDataList) {
                             if (alb.getLevel_name().equals(daili)) {
                                 agentLevelBean = alb;
-                                PreManager.put(getApplicationContext(),KEY_JIBIE_DAILI,alb);
+                                if(!TextUtils.isEmpty(businessCode)) {
+                                    PreManager.put(getApplicationContext(),KEY_JIBIE_DAILI + businessCode,alb);
+                                }
                                 tvJieBieDaiLi.setText(daili);
                                 break;
                             }
@@ -1240,14 +1256,19 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                     nodeResource.setParentId(node.getParentId());
 
                     getFenLei(nodeResource);
-                    PreManager.put(getApplicationContext(),KEY_FENLEI,nodeResource);
+                    if (!TextUtils.isEmpty(businessCode)) {
+                        PreManager.put(getApplicationContext(),KEY_FENLEI + businessCode,nodeResource);
+                    }
                 } else {
                     NodeResource nodeResource = new NodeResource();
                     nodeResource.setCurId(node.getCurId());
                     nodeResource.setValue(node.getValue());
                     nodeResource.setParentId(node.getParentId());
                     getFenLeiDaiLi(nodeResource);
-                    PreManager.put(getApplicationContext(),KEY_FENLEI_DAILI,nodeResource);
+                    if (!TextUtils.isEmpty(businessCode)) {
+                        PreManager.put(getApplicationContext(),KEY_FENLEI_DAILI + businessCode,nodeResource);
+                    }
+
                 }
 
             }

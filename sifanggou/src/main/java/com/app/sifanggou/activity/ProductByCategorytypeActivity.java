@@ -357,6 +357,10 @@ public class ProductByCategorytypeActivity extends BaseActivity {
             }
         }
         if (event.getEventCode() == EventCode.HTTP_GETBUSINESSCOMMODITYBYCATEGORYCODE) {
+            if (swipeRefreshLayoutProduct.isRefreshing()) {
+                swipeRefreshLayoutProduct.setRefreshing(false);
+            }
+
             if (event.isSuccess()) {
                 String type = (String) event.getReturnParamAtIndex(1);
                 if (type.equals(KEY_REFRESH)) {
@@ -369,6 +373,7 @@ public class ProductByCategorytypeActivity extends BaseActivity {
                         tmpList.add(cc);
                     }
 
+                    isRefreshingProduct = false;
                     if (tmpList != null) {
                         pageProduct++;
                         dataListProduct.clear();
@@ -391,9 +396,8 @@ public class ProductByCategorytypeActivity extends BaseActivity {
                             setNoDataProduct(false);
                         }
                     }
-                    swipeRefreshLayoutProduct.setRefreshing(false);
                     adapterProduct.notifyDataSetChanged();
-                    isRefreshingProduct = false;
+
                 } else {
                     GetBusinessCommodityByCategoryCodeResponseBean bean = (GetBusinessCommodityByCategoryCodeResponseBean) event.getReturnParamAtIndex(0);
                     if (bean == null || bean.getData() == null || bean.getData().getBusiness_commodity_info_list() == null) {
@@ -427,6 +431,7 @@ public class ProductByCategorytypeActivity extends BaseActivity {
                             setNoDataProduct(false);
                         }
                     }
+                    adapterProduct.notifyDataSetChanged();
                 }
             } else {
                 CommonUtils.showToast(event.getFailMessage());

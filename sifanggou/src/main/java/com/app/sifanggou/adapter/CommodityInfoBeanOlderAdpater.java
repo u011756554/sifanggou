@@ -71,9 +71,9 @@ public class CommodityInfoBeanOlderAdpater extends SetBaseAdapter<CommodityInfoB
             holder.tvNum.setText("被收藏  "+ bean.getCollection_num());
         }
 
-        if (bean.getBusiness_info() != null && !TextUtils.isEmpty(bean.getBusiness_info().getAgent_level())) {
+        if (!TextUtils.isEmpty(bean.getAgent_level())) {
             for (AgentLevelType alt : AgentLevelType.values()) {
-                if (alt.getType().equals(bean.getBusiness_info().getAgent_level())) {
+                if (alt.getType().equals(bean.getAgent_level())) {
                     holder.tvHuoJia.setText(alt.getName());
                 }
             }

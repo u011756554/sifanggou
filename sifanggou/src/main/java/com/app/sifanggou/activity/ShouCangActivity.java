@@ -31,6 +31,10 @@ public class ShouCangActivity extends BaseActivity implements PageSelectListener
     private ProductListFragment productListFragment;
     private DianPuListFrament dianPuListFrament;
 
+    public static final String KEY_TYPE = "key_type";
+    public static final String TYPE_PRODUCT = "type_product";
+    public static final String TYPE_DIANPU = "type_dianpu";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +76,13 @@ public class ShouCangActivity extends BaseActivity implements PageSelectListener
         mIndicator.setmTabVisibleCount(2);
         mIndicator.setTabTitles(mTitle);
 
-        mIndicator.setViewPager(myViewPager,0,ShouCangActivity.this);
+        String type = getIntent().getStringExtra(KEY_TYPE);
+        if (TYPE_DIANPU.equals(type)) {
+            mIndicator.setViewPager(myViewPager,1,ShouCangActivity.this);
+        } else {
+            mIndicator.setViewPager(myViewPager,0,ShouCangActivity.this);
+        }
+
     }
 
     @Override

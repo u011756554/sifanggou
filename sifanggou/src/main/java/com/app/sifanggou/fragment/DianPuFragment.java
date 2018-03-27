@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -208,7 +209,15 @@ public class DianPuFragment extends BaseFragment {
 	}
 
 	private void searchBusiness(String search,int item_num,int page_no,String tag) {
-		pushEventNoProgress(EventCode.HTTP_SERACHBUSINESSONNAME,search,item_num+"",page_no+"",searchBusinessType.getType(),tag);
+		if(loginBean != null && loginBean.getData() != null
+				&& loginBean.getData().getLogin_info() != null
+				&& loginBean.getData().getLogin_info().getBusiness_info() != null
+				&& !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+			pushEventNoProgress(EventCode.HTTP_SERACHBUSINESSONNAME,
+					loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+					search,
+					item_num+"",page_no+"",searchBusinessType.getType(),tag);
+		}
 	}
 
 	@Override

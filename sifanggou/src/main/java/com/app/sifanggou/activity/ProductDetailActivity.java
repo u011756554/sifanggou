@@ -83,8 +83,6 @@ public class ProductDetailActivity extends BaseActivity {
     private TextView tvDec;
     @ViewInject(R.id.tv_jiarugouwuche)
     private TextView tvJiaRuGouWuChe;
-    @ViewInject(R.id.tv_xiadan)
-    private TextView tvXiaDan;
     @ViewInject(R.id.ll_chat)
     private LinearLayout llChat;
     @ViewInject(R.id.ll_shoucang)
@@ -433,20 +431,6 @@ public class ProductDetailActivity extends BaseActivity {
         });
 
         tvJiaRuGouWuChe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count = Integer.valueOf(edtCount.getText().toString());
-                if (count <= 0) {
-                    CommonUtils.showToast("选择商品数量");
-                    return;
-                }
-                if (commodityInfoBean != null ) {
-                    carAdd(commodityInfoBean,count);
-                }
-            }
-        });
-
-        tvXiaDan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int count = Integer.valueOf(edtCount.getText().toString());

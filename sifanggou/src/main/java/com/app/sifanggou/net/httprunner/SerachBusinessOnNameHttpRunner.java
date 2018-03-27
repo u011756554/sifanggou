@@ -23,13 +23,15 @@ public class SerachBusinessOnNameHttpRunner extends HttpRunner {
 
     @Override
     public void onEventRun(Event event) throws Exception {
-        String find_param = (String) event.getParamAtIndex(0);
-        String item_num = (String) event.getParamAtIndex(1);
-        String page_no = (String) event.getParamAtIndex(2);
-        String type = (String) event.getParamAtIndex(3);
-        String tag = (String) event.getParamAtIndex(4);
+        String business_code = (String) event.getParamAtIndex(0);
+        String find_param = (String) event.getParamAtIndex(1);
+        String item_num = (String) event.getParamAtIndex(2);
+        String page_no = (String) event.getParamAtIndex(3);
+        String type = (String) event.getParamAtIndex(4);
+        String tag = (String) event.getParamAtIndex(5);
 
         HashMap<String, String> map = new HashMap<String, String>();
+        map.put("business_code", business_code);
         map.put("find_param", find_param);
         map.put("item_num", item_num);
         map.put("page_no", page_no);

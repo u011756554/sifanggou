@@ -398,7 +398,15 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void searchBusiness(String search,int item_num,int page_no,String tag) {
-        pushEventNoProgress(EventCode.HTTP_SERACHBUSINESSONNAME,search,item_num+"",page_no+"",searchBusinessType.getType(),tag);
+        if(loginBean != null && loginBean.getData() != null
+                && loginBean.getData().getLogin_info() != null
+                && loginBean.getData().getLogin_info().getBusiness_info() != null
+                && !TextUtils.isEmpty(loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code())) {
+            pushEventNoProgress(EventCode.HTTP_SERACHBUSINESSONNAME,
+                    loginBean.getData().getLogin_info().getBusiness_info().getBusiness_code(),
+                    search,
+                    item_num+"",page_no+"",searchBusinessType.getType(),tag);
+        }
     }
 
     private void searchCommodity(String search,int item_num,int page_no,String tag) {

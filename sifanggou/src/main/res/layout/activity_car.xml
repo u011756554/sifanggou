@@ -50,7 +50,7 @@
             <Button
                 android:id="@+id/btn_xiadan"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="@dimen/btn_height"
                 android:layout_margin="@dimen/margin_normal"
                 android:background="@drawable/shape_btn_red"
                 android:text="下单"

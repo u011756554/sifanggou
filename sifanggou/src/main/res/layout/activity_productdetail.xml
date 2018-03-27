@@ -13,38 +13,9 @@
         android:background="@color/white">
 
         <LinearLayout
-            android:id="@+id/ll_right"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_jiarugouwuche"
-                android:layout_width="94dp"
-                android:layout_height="match_parent"
-                android:background="#FEE818"
-                android:text="加入购物车"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize_normal"
-                android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/tv_xiadan"
-                android:layout_width="94dp"
-                android:layout_height="match_parent"
-                android:background="#FF3366"
-                android:text="下单"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textsize_normal"
-                android:gravity="center"/>
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_toLeftOf="@id/ll_right">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/ll_chat"
@@ -118,6 +89,24 @@
                     android:textSize="13sp"
                     android:layout_marginTop="@dimen/margin_mini"
                     android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_jiarugouwuche"
+                    android:layout_width="94dp"
+                    android:layout_height="match_parent"
+                    android:background="#FEE818"
+                    android:text="加入购物车"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize_normal"
+                    android:gravity="center"/>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

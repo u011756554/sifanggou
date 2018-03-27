@@ -14,6 +14,7 @@ import com.app.sifanggou.activity.MainActivity;
 import com.app.sifanggou.activity.ProductDetailActivity;
 import com.app.sifanggou.activity.ProductPicActivity;
 import com.app.sifanggou.activity.RecommondProductActivity;
+import com.app.sifanggou.activity.SaleOrderTabActivity;
 import com.app.sifanggou.activity.SearchActivity;
 import com.app.sifanggou.activity.ShangPinGuanLiActivity;
 import com.app.sifanggou.activity.ShouCangActivity;
@@ -307,6 +308,7 @@ public class MainFragemnt extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(),ShouCangActivity.class);
+				intent.putExtra(ShouCangActivity.KEY_TYPE,ShouCangActivity.TYPE_DIANPU);
 				startActivity(intent);
 			}
 		});
@@ -330,7 +332,10 @@ public class MainFragemnt extends BaseFragment {
 		llMyOrder.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((MainActivity)(getActivity())).pageChanged(4);
+//				((MainActivity)(getActivity())).pageChanged(4);
+				Intent intent = new Intent(getActivity(), SaleOrderTabActivity.class);
+				intent.putExtra(SaleOrderTabActivity.KEY_TYPE,SaleOrderTabActivity.VALUE_TYPE_DAISHOU);
+				startActivity(intent);
 			}
 		});
 	}

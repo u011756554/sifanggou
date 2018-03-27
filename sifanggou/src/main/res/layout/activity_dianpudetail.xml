@@ -204,9 +204,9 @@
     <LinearLayout
         android:id="@+id/ll_car"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/btn_height"
         android:orientation="horizontal"
-        android:layout_margin="@dimen/margin_small"
+        android:layout_margin="@dimen/margin_mini"
         android:layout_above="@id/view_bottom">
 
         <Button

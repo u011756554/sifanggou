@@ -859,7 +859,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                         CommonUtils.showToast("请输入商品名称");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_NAME,edtName.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_NAME+ businessCode,edtName.getText().toString());
                     }
                     if (puTongUrlList.size() <= 0) {
                         CommonUtils.showToast("请添加商品图片");
@@ -869,49 +869,49 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                         CommonUtils.showToast("请输入商品描述");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_DEC,edtDec.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_DEC+ businessCode,edtDec.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtPinPai.getText().toString())) {
                         CommonUtils.showToast("请输入商品品牌");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_PINPAI,edtPinPai.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_PINPAI+ businessCode,edtPinPai.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtTongJiPrice.getText().toString())) {
                         CommonUtils.showToast("请输入商品同级价格");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_TONGJI,edtTongJiPrice.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_TONGJI+ businessCode,edtTongJiPrice.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtXiaJiPrice.getText().toString())) {
                         CommonUtils.showToast("请输入商品下级价格");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_XIAJI,edtXiaJiPrice.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_XIAJI+ businessCode,edtXiaJiPrice.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtKuCun.getText().toString())) {
                         CommonUtils.showToast("请输入库存");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_KUCUN,edtKuCun.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_KUCUN+ businessCode,edtKuCun.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtChanDi.getText().toString())) {
                         CommonUtils.showToast("请输入产地");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_CHANDI,edtChanDi.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_CHANDI+ businessCode,edtChanDi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtGuiGe.getText().toString())) {
                         CommonUtils.showToast("请输入商品规格");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_GUIGE,edtGuiGe.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_GUIGE+ businessCode,edtGuiGe.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtZhiLiangDengJi.getText().toString())) {
                         CommonUtils.showToast("请输入商品质量等级");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_DENGJI,edtZhiLiangDengJi.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_DENGJI+ businessCode,edtZhiLiangDengJi.getText().toString());
                     }
                     if (TextUtils.isEmpty(firstNode.getCurId())
                             && TextUtils.isEmpty(secondNode.getCurId())
@@ -969,7 +969,7 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                         CommonUtils.showToast("请输入商品名称");
                         return;
                     }  else {
-                        PreManager.putString(getApplicationContext(),KEY_NAME_DAILI,edtNameDaiLi.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_NAME_DAILI+ businessCode,edtNameDaiLi.getText().toString());
                     }
                     if (daiLiUrlList.size() <= 0) {
                         CommonUtils.showToast("请添加商品图片");
@@ -983,49 +983,49 @@ public class AddProductActivity extends BaseActivity implements EasyPermissions.
                         CommonUtils.showToast("请输入商品描述");
                         return;
                     }  else {
-                        PreManager.putString(getApplicationContext(),KEY_DEC_DAILI,edtDecDaiLi.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_DEC_DAILI+ businessCode,edtDecDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtPinPaiDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品品牌");
                         return;
                     }  else {
-                        PreManager.putString(getApplicationContext(),KEY_PINPAI_DAILI,edtPinPaiDaiLi.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_PINPAI_DAILI+ businessCode,edtPinPaiDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtTongJiPriceDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品同级价格");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_TONGJI_DAILI,edtTongJiPriceDaiLi.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_TONGJI_DAILI+ businessCode,edtTongJiPriceDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtXiaJiPriceDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品下级价格");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_XIAJI_DAILI,edtXiaJiPriceDaiLi.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_XIAJI_DAILI+ businessCode,edtXiaJiPriceDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtKuCunDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入库存");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_KUCUN_DAILI,edtKuCunDaiLi.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_KUCUN_DAILI+ businessCode,edtKuCunDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtChanDiDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入产地");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_CHANDI_DAILI,edtChanDiDaiLi.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_CHANDI_DAILI+ businessCode,edtChanDiDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtGuiGeDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品规格");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_GUIGE_DAILI,edtGuiGeDaiLi.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_GUIGE_DAILI+ businessCode,edtGuiGeDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(edtZhiLiangDengJiDaiLi.getText().toString())) {
                         CommonUtils.showToast("请输入商品质量等级");
                         return;
                     } else {
-                        PreManager.putString(getApplicationContext(),KEY_DENGJI_DAILI,edtZhiLiangDengJiDaiLi.getText().toString());
+                        PreManager.putString(getApplicationContext(),KEY_DENGJI_DAILI+ businessCode,edtZhiLiangDengJiDaiLi.getText().toString());
                     }
                     if (TextUtils.isEmpty(firstDaiLiNode.getCurId())
                             && TextUtils.isEmpty(secondDaiLiNode.getCurId())
